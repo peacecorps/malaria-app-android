@@ -21,7 +21,7 @@ Also included in this repository for reference and background are two recent stu
 Included in this repository are files to help you get started:
 <ul>
 <li>Mock Up Version 8 (the latest mock up file) is included in pdf, png, and in the original Adobe Illustrator format.</li>
-<li>A reasearch folder containing a map of Malaria Prevalence, and additional information about Malaria fromt he Centers for Disease Control and Prevention.</li>
+<li>A research folder containing a map of Malaria Prevalence, and additional information about Malaria from the Centers for Disease Control and Prevention.</li>
 </ul>
 
 <h3>Contact Information:</h3>
