@@ -1,16 +1,18 @@
-<h1>Malaria App Project</h1>
+Malaria App for Android
+====
 
-The malaria-app-readme repository is intended to be the central repo for discussions, decision making, and feedback about the project goals and features so that the user experience across platforms is uniform. Comments and coding for a specific platform can happen at the repositories linked to below.
+This is the repo for the Android version of Malaria App. 
 
-<h3>Link to README Repo:</h3> https://github.com/PeaceCorps/malaria-app-readme
+> #### Malaria App README Repo: [malaria-app-readme](https://github.com/PeaceCorps/malaria-app-readme)
+
+> Please use Malaria App README for discussions, decision making, and feedback about project goals and features so that the user experience **across platforms** is uniform.
+
+> **Please keep all discussion regarding features that will be cross-platform on that repository, and code-specific discussion on this one.**
 
 
-Please keep all discussion regarding features that will be cross-platform on that repository, and code-specific discussion on this one.
 
 
-
-
-<h2>Application Description</h2>
+## Application Description
 
 Peace Corps is looking to build a mobile app that will aid the Volunteer in sustaining life-saving malaria prevention tactics over their 2+ years of service. Prevention is focused on sustained use of preventive medications, which are taken either daily or weekly, depending on the medicine. The application will feature a reminder system; an ability to indicate that medication was taken on time or missed; the ability for the volunteer to track their usage history; a trip indicator to help remind volunteers to pack certain supplies to prevent malaria if they leave their home village; and an Info Hub that will provide accurate information about Malaria and the medications they are taking. 
 
