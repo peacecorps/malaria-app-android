@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">PC Malaria Prevention</string>
+    <string name="app_homescreen_name">PC Malaria Home</string>
+    <string name="pcLogoDescription">Peace Corps Logo</string>
+    <string name="setupLabel" >Set\u0020\u0020Up</string>
+    <string name="drugTakeLabel">I \u0020Take</string>
+    <string name="timePickLabel">Remind \u0020me \u0020at:</string>
+    <string name="timePickButton">Pick Time</string>
+    <string name="ifForgetLabel">If \u0020I \u0020forget</string>
+    <string name="doneButton">DONE</string>
 
-    <string name="app_name">Malaria App</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+
+    <string name="btnClearRestart" >Clear Data and Exit App</string>
+    <string name="btnRestartWithout">Exit App (Do not Clear Data)</string>
+
+    <string-array name="drug_array">
+        <item>Malarone (Daily)</item>
+        <item>Doxycycline (Daily) </item>
+
+        <item>Mefloquine (Weekly)</item>
+
+    </string-array>
+
 
 </resources>
