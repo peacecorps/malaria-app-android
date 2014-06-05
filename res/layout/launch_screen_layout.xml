@@ -8,36 +8,27 @@
     <TextView android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:text=""
-              android:id="@+id/userSelectionLabel1"
+              android:id="@+id/medicationSelectedLabel"
               android:textStyle="bold"
-              android:textSize="20sp"
-            />
+              android:textSize="20sp" />
 
     <TextView android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:text=""
-              android:id="@+id/userSelectionLabel2"
+              android:id="@+id/reminderSelectedLabel"
               android:textStyle="bold"
-              android:textSize="20sp"
-            />
-
-
+              android:textSize="20sp" />
 
     <Button android:id="@+id/restartAndClearButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/btnClearRestart"
-            android:onClick="clearAndExitMethod"
-            />
+            android:onClick="clearAndExitMethod" />
 
     <Button android:id="@+id/restartWithoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/btnRestartWithout"
-            android:onClick="exitWithoutClearingMethod"
-            />
-
-
-
+            android:onClick="exitWithoutClearingMethod" />
 
 </LinearLayout>
