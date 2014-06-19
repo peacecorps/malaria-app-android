@@ -1,0 +1,76 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+		
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:layout_gravity="center"
+   
+    >
+
+
+  <android.support.v4.view.ViewPager
+        android:id="@+id/vPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+  
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/vIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:textColor="#2FB3E3"
+        app:footerIndicatorHeight="3dp"
+        app:footerIndicatorStyle="underline"
+        app:footerLineHeight="1dp"
+        app:selectedBold="true"
+        app:selectedColor="#FFFFFF" />
+    
+   <View 
+       android:layout_height="0.5dp"
+        android:layout_width="200dp"
+        android:background="#000"
+        android:layout_gravity="center_horizontal"
+        
+       />
+   
+    <LinearLayout
+                  android:orientation="horizontal"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_marginTop="30dp"
+                  android:paddingBottom="5dp"
+                  
+                  
+                  >
+           
+            <Button
+                    
+                    android:background="@drawable/home_icon_normal"
+                    android:layout_width="30dp"
+                       android:layout_height="30dp"
+                    android:adjustViewBounds="true"
+                    android:layout_marginRight="15dp"
+                   android:scaleType="fitCenter" 
+                     
+                    />
+
+
+        <Button
+               android:background="@drawable/info_hub_inactive_normal"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="15dp"
+                android:scaleType="fitCenter"
+ />
+
+        </LinearLayout>
+  
+
+</LinearLayout>

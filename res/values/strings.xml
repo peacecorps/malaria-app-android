@@ -2,21 +2,22 @@
 <resources>
     <string name="app_name">PC Malaria Prevention</string>
     <string name="app_homescreen_name">PC Malaria Home</string>
-    <string name="pcLogoDescription">Peace Corps Logo</string>
-    <string name="setupLabel" >Set\u0020\u0020Up</string>
-    <string name="drugTakeLabel">I \u0020Take</string>
-    <string name="timePickLabel">Remind \u0020me \u0020at:</string>
-    <string name="timePickButton">Pick Time</string>
-    <string name="ifForgetLabel">If \u0020I \u0020forget</string>
-    <string name="doneButton">DONE</string>
+    <string name="user_medicine_settings_activity_pc_logo">Peace Corps Logo</string>
+    <string name="user_medicine_settings_activity_setup_label">Set Up</string>
+    <string name="user_medicine_settings_activity_drug_take_label">I Take</string>
+    <string name="user_medicine_settings_activity_time_pick_label">Remind me at:</string>
+    <string name="user_medicine_settings_activity_time_pick_button">Pick Time</string>
+    <string name="user_medicine_settings_activity_if_forget_label">If I forget</string>
+    <string name="user_medicine_settings_activity_done_button">DONE</string>
+    <string name="second_analytic_screen_title">SECOND ANALYTIC SCREEN</string>
 
 
-    <string name="btnClearRestart" >Clear Data and Exit App</string>
+    <string name="btnClearRestart">Clear Data and Exit App</string>
     <string name="btnRestartWithout">Exit App (Do not Clear Data)</string>
 
-    <string-array name="drug_array">
+    <string-array name="user_medicine_settings_activity_drug_array">
         <item>Malarone (Daily)</item>
-        <item>Doxycycline (Daily) </item>
+        <item>Doxycycline (Daily)</item>
 
         <item>Mefloquine (Weekly)</item>
 

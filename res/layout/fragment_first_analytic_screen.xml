@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+                android:background="@drawable/background"
+                android:padding="2dp"
+                android:layout_gravity="center"
+        >
+
+  <Button
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_gravity="end"
+      android:layout_margin="5dp"
+      android:adjustViewBounds="true"
+      android:background="@drawable/settings_normal"
+      android:scaleType="fitCenter" />
+
+   
+       
+
+    <LinearLayout
+                  android:orientation="horizontal"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:padding="5dp"
+                    android:layout_gravity="left">
+
+            <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+          android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:background="@drawable/medication_last_normal"/>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medicine Last Taken"
+             
+                android:paddingLeft="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                />
+            
+          
+            
+    
+   
+    </LinearLayout>
+
+
+
+   
+    
+    <LinearLayout
+                  android:orientation="horizontal"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:padding="5dp"
+                  android:layout_gravity="left">"
+
+            <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:background="@drawable/doses_missing_image_normal" />
+        
+     <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Doses Missing since Last Check in"
+                android:paddingLeft="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                />
+            
+    
+   
+    </LinearLayout>
+    
+    
+    <LinearLayout
+                  android:orientation="horizontal"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:padding="5dp"
+                  android:layout_gravity="left">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@drawable/medicine_adhere_normal"
+                android:scaleType="fitCenter" />
+        
+    	 <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adherence to Medicine"
+                
+                android:paddingLeft="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                />
+            
+    
+   
+    </LinearLayout>
+
+    
+
+
+
+
+
+
+
+</LinearLayout>
