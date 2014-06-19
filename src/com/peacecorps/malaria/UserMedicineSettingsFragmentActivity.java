@@ -24,10 +24,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.example.viewpagertest.R;
+import com.peacecorps.malaria.R;
 
-public class UserMedicineSettingsFragment extends FragmentActivity implements
-		AdapterView.OnItemSelectedListener {
+public class UserMedicineSettingsFragmentActivity extends FragmentActivity
+		implements AdapterView.OnItemSelectedListener {
 
 	private static Button mDoneButton;
 
@@ -51,11 +51,11 @@ public class UserMedicineSettingsFragment extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.fragment_user_medicine_settings);
-		this.setTitle("PC Malaria Prevention");
+		this.setTitle(R.string.user_medicine_settings_fragment_activity_title);
 
 		mSharedPreferenceStore = new SharedPreferenceStore();
 
-		mFragmentContext = UserMedicineSettingsFragment.this
+		mFragmentContext = UserMedicineSettingsFragmentActivity.this
 				.getApplicationContext();
 		mDoneButton = (Button) findViewById(R.id.user_medicine_settings_activity_done_button);
 		mDoneButton.setOnClickListener(mDoneButtonClickListener);
@@ -129,7 +129,7 @@ public class UserMedicineSettingsFragment extends FragmentActivity implements
 			mSharedPreferenceStore.mEditor
 					.putBoolean("com.pc.isFirstRun", true).commit();
 
-			startActivity(new Intent(UserMedicineSettingsFragment.this,
+			startActivity(new Intent(UserMedicineSettingsFragmentActivity.this,
 					MainActivity.class));
 			finish();
 		}
@@ -151,11 +151,16 @@ public class UserMedicineSettingsFragment extends FragmentActivity implements
 
 	private void setLayoutColors() {
 		// Text Color settings for labels and button texts for the screen
-		mSetupLabel.setHintTextColor(Color.rgb(89, 43, 21));
-		mDoneButton.setHintTextColor(Color.rgb(89, 43, 21));
-		mDrugTakeLabel.setHintTextColor(Color.rgb(102, 74, 58));
-		mTimePickLabel.setHintTextColor(Color.rgb(102, 74, 58));
-		mIfForgetLabel.setHintTextColor(Color.rgb(102, 74, 58));
+		mSetupLabel.setHintTextColor(getResources().getColor(
+				R.color.user_medicine_first_text_color));
+		mDoneButton.setHintTextColor(getResources().getColor(
+				R.color.user_medicine_first_text_color));
+		mDrugTakeLabel.setHintTextColor(getResources().getColor(
+				R.color.user_medicine_second_text_color));
+		mTimePickLabel.setHintTextColor(getResources().getColor(
+				R.color.user_medicine_second_text_color));
+		mIfForgetLabel.setHintTextColor(getResources().getColor(
+				R.color.user_medicine_second_text_color));
 
 	}
 
@@ -263,7 +268,7 @@ public class UserMedicineSettingsFragment extends FragmentActivity implements
 
 			saveUserTimeAndMedicationPrefs();
 
-			startActivity(new Intent(UserMedicineSettingsFragment.this,
+			startActivity(new Intent(UserMedicineSettingsFragmentActivity.this,
 					MainActivity.class));
 			finish();
 
@@ -280,7 +285,7 @@ public class UserMedicineSettingsFragment extends FragmentActivity implements
 
 		if (position == 2) {
 			mSharedPreferenceStore.mEditor.putBoolean("com.pc.isWeekly", true);
-			mSharedPreferenceStore.mEditor.putLong("com.pc.WeeklyDate",
+			mSharedPreferenceStore.mEditor.putLong("com.pc.weeklyDate",
 					new Date().getTime()).commit();
 		} else {
 			mSharedPreferenceStore.mEditor.putBoolean("com.pc.isWeekly", false);

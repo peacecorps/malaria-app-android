@@ -10,24 +10,24 @@ public class AlarmService extends Service {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		
+
 		return null;
 	}
 
 	public void onStart(Intent intent, int startId) {
-		
+
 		alarmHandlerClass.setAlarm(AlarmService.this);
 	}
 
 	@Override
 	public void onCreate() {
-		
+
 		super.onCreate();
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		
+
 		alarmHandlerClass.setAlarm(AlarmService.this);
 		return START_STICKY;
 	}

@@ -25,7 +25,7 @@ public class AlarmHandlerClass extends BroadcastReceiver {
 		PowerManager.WakeLock wakeLock = powerManager.newWakeLock(
 				PowerManager.PARTIAL_WAKE_LOCK, "");
 		wakeLock.acquire();
-		
+
 		/** Opening the Alert Dialog Window */
 
 		intent = new Intent(context, AlertCallerFragmentActivity.class);
@@ -42,10 +42,10 @@ public class AlarmHandlerClass extends BroadcastReceiver {
 	}
 
 	public void setAlarm(Context context) {
-		
+
 		getSharedPreferences(context);
-		int hour = mSharedPreferenceStore.mPrefsStore.getInt("com.pc.AlarmHour",
-				-1);
+		int hour = mSharedPreferenceStore.mPrefsStore.getInt(
+				"com.pc.AlarmHour", -1);
 		int minute = mSharedPreferenceStore.mPrefsStore.getInt(
 				"com.pc.AlarmMinute", -1);
 		if ((hour != -1) && (minute != -1)) {
@@ -56,8 +56,8 @@ public class AlarmHandlerClass extends BroadcastReceiver {
 					"com.example.viewpagertest.START_ALARM");
 			PendingIntent pendingAlarm = PendingIntent.getBroadcast(context, 0,
 					alarmIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
-			if (mSharedPreferenceStore.mPrefsStore.getBoolean("com.pc.isWeekly",
-					false)) {
+			if (mSharedPreferenceStore.mPrefsStore.getBoolean(
+					"com.pc.isWeekly", false)) {
 				mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
 						mAlarmScheduleTime.getTimeInMillis(), INTERVAL_WEEK,
 						pendingAlarm);

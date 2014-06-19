@@ -4,16 +4,15 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
-import com.example.viewpagertest.R;
+import com.peacecorps.malaria.R;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.PageIndicator;
 
 public class MainActivity extends FragmentActivity {
-	
+
 	FragmentAdapter mAdapter;
 	ViewPager mPager;
 	PageIndicator mIndicator;
-	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

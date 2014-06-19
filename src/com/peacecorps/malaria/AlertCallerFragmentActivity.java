@@ -19,12 +19,13 @@ public class AlertCallerFragmentActivity extends FragmentActivity {
 			@Override
 			public void run() {
 				
+				String weeklyDate = "weeklyDate";
 				getSharedPreferences();
 				if (mSharedPreferenceStore.mPrefsStore.getBoolean(
 						"com.pc.isWeekly", false)) {
 
-					if (checkDrugTakenTimeInterval("WeeklyDate") == 0
-							|| checkDrugTakenTimeInterval("WeeklyDate") >= 7) {
+					if (checkDrugTakenTimeInterval(weeklyDate) == 0
+							|| checkDrugTakenTimeInterval(weeklyDate) >= 7) {
 						callAlarm();
 					} else {
 						finish();
@@ -39,7 +40,9 @@ public class AlertCallerFragmentActivity extends FragmentActivity {
 
 	public void callAlarm() {
 		AlertDialogFragment alert = new AlertDialogFragment();
-		alert.show(getSupportFragmentManager(), "AlertDemo");
+		
+		alert.show(getSupportFragmentManager(),"alertDemo" );
+	
 		alert.setCancelable(false);
 	}
 

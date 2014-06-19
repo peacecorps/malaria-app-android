@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">PC Malaria Prevention</string>
     <string name="app_homescreen_name">PC Malaria Home</string>
     <string name="user_medicine_settings_activity_pc_logo">Peace Corps Logo</string>
@@ -10,18 +11,18 @@
     <string name="user_medicine_settings_activity_if_forget_label">If I forget</string>
     <string name="user_medicine_settings_activity_done_button">DONE</string>
     <string name="second_analytic_screen_title">SECOND ANALYTIC SCREEN</string>
-
-
-    <string name="btnClearRestart">Clear Data and Exit App</string>
-    <string name="btnRestartWithout">Exit App (Do not Clear Data)</string>
+    <string name="first_analytic_screen_doses_missing_text">Doses Missing since Last Check in</string>
+    <string name="first_analytic_screen_medicine_last_taken_text">Medicine Last Taken</string>
+    <string name="first_analytic_screen_medicine_adherence_to_medicine_text">Adherence to Medicine</string>
+    <string name="alarm_auto_start_boot_completed_intent_check">android.intent.action.BOOT_COMPLETED</string>
+    <string name="alert_dialog_title">Malaria medication reminder</string>
+    <string name="alert_dialog_message">Have you taken your drug today ?</string>
+    <string name="user_medicine_settings_fragment_activity_title">PC Malaria Prevention</string>
 
     <string-array name="user_medicine_settings_activity_drug_array">
         <item>Malarone (Daily)</item>
         <item>Doxycycline (Daily)</item>
-
         <item>Mefloquine (Weekly)</item>
-
     </string-array>
-
 
 </resources>

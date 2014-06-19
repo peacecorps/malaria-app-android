@@ -36,10 +36,11 @@ public class AlertDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 		/** Setting title for the alert dialog */
-		builder.setTitle("Malaria medication reminder");
+		
+		builder.setTitle(R.string.alert_dialog_title);
 
 		/** Setting the content for the alert dialog */
-		builder.setMessage("Have you taken your drug today ?");
+		builder.setMessage(R.string.alert_dialog_message);
 
 		/** Defining an OK button event listener */
 		builder.setPositiveButton("Taken", new OnClickListener() {
@@ -130,14 +131,15 @@ public class AlertDialogFragment extends DialogFragment {
 		int minute = Calendar.getInstance().getTime().getMinutes() - 1;
 		getActivity().startService(
 				new Intent(getActivity(), AlarmService.class));
-		mSharedPreferenceStore.mEditor.putInt("com.pc.AlarmHour", hour).commit();
+		mSharedPreferenceStore.mEditor.putInt("com.pc.AlarmHour", hour)
+				.commit();
 		mSharedPreferenceStore.mEditor.putInt("com.pc.AlarmMinute", minute)
 				.commit();
 	}
 
 	public void saveUsersettings(Boolean state, Boolean isWeekly) {
 		if (isWeekly) {
-			mSharedPreferenceStore.mEditor.putLong("com.pc.WeeklyDate",
+			mSharedPreferenceStore.mEditor.putLong("com.pc.weeklyDate",
 					new Date().getTime()).commit();
 			mSharedPreferenceStore.mEditor.putBoolean(
 					"com.pc.isWeeklyDrugTaken", state).commit();
@@ -162,14 +164,15 @@ public class AlertDialogFragment extends DialogFragment {
 	}
 
 	public void getSharedPreferences() {
-		
-		mSharedPreferenceStore.mPrefsStore = getActivity().getSharedPreferences(
-				"com.pc.storeTimePicked", Context.MODE_PRIVATE);
+
+		mSharedPreferenceStore.mPrefsStore = getActivity()
+				.getSharedPreferences("com.pc.storeTimePicked",
+						Context.MODE_PRIVATE);
 		mSharedPreferenceStore.mEditor = mSharedPreferenceStore.mPrefsStore
 				.edit();
 	}
 
-	/** The application should be exit, if the user presses the back button */
+	/** The application exits, if the user presses the back button */
 	@Override
 	public void onDestroy() {
 		super.onDestroy();

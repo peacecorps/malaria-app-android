@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.viewpagertest.R;
+import com.peacecorps.malaria.R;
 
 public class HomeScreenFragment extends Fragment {
 
@@ -81,7 +81,7 @@ public class HomeScreenFragment extends Fragment {
 				mSharedPreferenceStore.mEditor.putBoolean(
 						"com.pc.hasUserSetPreference", false).commit();
 				startActivity(new Intent(getActivity(),
-						UserMedicineSettingsFragment.class));
+						UserMedicineSettingsFragmentActivity.class));
 				getActivity().finish();
 
 			}
@@ -170,7 +170,7 @@ public class HomeScreenFragment extends Fragment {
 
 	public void saveUsersettings(Boolean state, Boolean isWeekly) {
 		if (isWeekly) {
-			mSharedPreferenceStore.mEditor.putLong("com.pc.WeeklyDate",
+			mSharedPreferenceStore.mEditor.putLong("com.pc.weeklyDate",
 					new Date().getTime()).commit();
 			mSharedPreferenceStore.mEditor.putBoolean(
 					"com.pc.isWeeklyDrugTaken", state).commit();
@@ -206,7 +206,7 @@ public class HomeScreenFragment extends Fragment {
 	public void decideisDrugTakenUI() {
 		if (mSharedPreferenceStore.mPrefsStore.getBoolean("com.pc.isWeekly",
 				false)) {
-			if (checkDrugTakenTimeInterval("WeeklyDate") == 0) {
+			if (checkDrugTakenTimeInterval("weeklyDate") == 0) {
 				if ((mSharedPreferenceStore.mPrefsStore.getBoolean(
 						"com.pc.isWeeklyDrugTaken", false))) {
 					isDrugTakenUI();
@@ -214,8 +214,8 @@ public class HomeScreenFragment extends Fragment {
 					newDayUI();
 				}
 			} else {
-				if (checkDrugTakenTimeInterval("WeeklyDate") < 7
-						&& checkDrugTakenTimeInterval("WeeklyDate") > 0) {
+				if (checkDrugTakenTimeInterval("weeklyDate") < 7
+						&& checkDrugTakenTimeInterval("weeklyDate") > 0) {
 					if ((mSharedPreferenceStore.mPrefsStore.getBoolean(
 							"com.pc.isWeeklyDrugTaken", false))) {
 						isDrugTakenUI();
@@ -223,7 +223,7 @@ public class HomeScreenFragment extends Fragment {
 						missedWeekUI();
 						newDayUI();
 					}
-				} else if (checkDrugTakenTimeInterval("WeeklyDate") > 7) {
+				} else if (checkDrugTakenTimeInterval("weeklyDate") > 7) {
 					missedWeekUI();
 					newDayUI();
 				}
@@ -288,9 +288,9 @@ public class HomeScreenFragment extends Fragment {
 		if (isWeekly) {
 			mSharedPreferenceStore.mEditor.putBoolean(
 					"com.pc.isWeeklyDrugTaken", true).commit();
-			if (checkDrugTakenTimeInterval("WeeklyDate") == 0) {
+			if (checkDrugTakenTimeInterval("weeklyDate") == 0) {
 				isDrugTakenUI();
-			} else if (checkDrugTakenTimeInterval("WeeklyDate") > 1) {
+			} else if (checkDrugTakenTimeInterval("weeklyDate") > 1) {
 				isDrugTakenUI();
 				changeWeeklyAlarmTime();
 			}
@@ -317,7 +317,7 @@ public class HomeScreenFragment extends Fragment {
 	}
 
 	public String decideDayofWeek(int checkDay, String possibledays[]) {
-		String currentDayOfWeek = "";
+		String currentDayOfWeek = null;
 		switch (checkDay) {
 		case 1:
 			currentDayOfWeek = possibledays[0];

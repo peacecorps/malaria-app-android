@@ -1,6 +1,6 @@
 package com.peacecorps.malaria;
 
-import com.example.viewpagertest.R;
+import com.peacecorps.malaria.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
