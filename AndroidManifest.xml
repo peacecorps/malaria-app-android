@@ -32,8 +32,8 @@
             android:name="com.peacecorps.malaria.AlarmHandlerClass"
             android:exported="true" >
             <intent-filter>
-                <action android:name="com.example.viewpagertest.START_ALARM" >
-                </action>
+                <action android:name="com.example.viewpagertest.START_ALARM" />
+                
             </intent-filter>
         </receiver>
 
