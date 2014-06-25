@@ -26,6 +26,11 @@ Included in this repository are files to help you get started:
 <li>A research folder containing a map of Malaria Prevalence, and additional information about Malaria from the Centers for Disease Control and Prevention.</li>
 </ul>
 
+
+## Dependencies
+This project uses Jack Wharton's Android-ViewPagerIndicator for the Viewpager Swipe view.
+ <a href="https://github.com/chimdi2000/ViewPagerIndicator">Jake Wharton ViewPager Indicator project dependecy</a>
+
 <h3>Contact Information:</h3>
 
 
