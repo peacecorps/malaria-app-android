@@ -1,4 +1,4 @@
-package com.peacecorps.malaria;
+package com.example.viewpagertest;
 
 import android.content.Context;
 import android.content.SharedPreferences;

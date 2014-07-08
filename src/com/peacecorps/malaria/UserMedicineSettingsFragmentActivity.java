@@ -1,4 +1,4 @@
-package com.peacecorps.malaria;
+package com.example.viewpagertest;
 
 /**
  * Created by Chimdi on 6/2/2014.
@@ -24,7 +24,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.peacecorps.malaria.R;
+import com.example.viewpagertest.R;
 
 public class UserMedicineSettingsFragmentActivity extends FragmentActivity
 		implements AdapterView.OnItemSelectedListener {
@@ -289,6 +289,7 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
 					new Date().getTime()).commit();
 		} else {
 			mSharedPreferenceStore.mEditor.putBoolean("com.pc.isWeekly", false);
+			mSharedPreferenceStore.mEditor.putLong("com.pc.timeCounter", Calendar.getInstance().getTimeInMillis());
 		}
 
 	}
