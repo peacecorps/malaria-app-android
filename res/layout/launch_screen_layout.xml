@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text=""
+              android:id="@+id/medicationSelectedLabel"
+              android:textStyle="bold"
+              android:textSize="20sp" />
+
+    <TextView android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text=""
+              android:id="@+id/reminderSelectedLabel"
+              android:textStyle="bold"
+              android:textSize="20sp" />
+
+    <Button android:id="@+id/restartAndClearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/btnClearRestart"
+            android:onClick="clearAndExitMethod" />
+
+    <Button android:id="@+id/restartWithoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/btnRestartWithout"
+            android:onClick="exitWithoutClearingMethod" />
+
+</LinearLayout>
