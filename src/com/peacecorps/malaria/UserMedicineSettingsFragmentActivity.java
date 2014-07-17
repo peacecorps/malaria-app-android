@@ -1,4 +1,4 @@
-package com.example.viewpagertest;
+package com.peacecorps.malaria;
 
 /**
  * Created by Chimdi on 6/2/2014.
@@ -23,8 +23,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
-import com.example.viewpagertest.R;
+import com.peacecorps.malaria.R;
 
 public class UserMedicineSettingsFragmentActivity extends FragmentActivity
 		implements AdapterView.OnItemSelectedListener {
