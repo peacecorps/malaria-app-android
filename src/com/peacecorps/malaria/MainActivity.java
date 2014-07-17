@@ -1,4 +1,4 @@
-package com.example.viewpagertest;
+package com.peacecorps.malaria;
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.widget.Toast;
 
-import com.example.viewpagertest.R;
+import com.peacecorps.malaria;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.PageIndicator;
 
@@ -34,8 +34,9 @@ public class MainActivity extends FragmentActivity {
 
 			@Override
 			public void onPageSelected(int position) {
-				// TODO Auto-generated method stub
-				if (position == 1) {
+			
+				int checkViewPagerPosition = 1;
+				if (position == checkViewPagerPosition) {
 					if (FirstAnalyticFragment.checkMediLastTakenTime != null) {
 						FirstAnalyticFragment.checkMediLastTakenTime
 								.setText(SharedPreferenceStore.mPrefsStore
@@ -55,17 +56,7 @@ public class MainActivity extends FragmentActivity {
 				}
 			}
 
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
 
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
-
-			}
 		});
 
 	}
