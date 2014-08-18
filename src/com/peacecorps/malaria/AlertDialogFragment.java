@@ -15,168 +15,171 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.WindowManager.LayoutParams;
 
+
 public class AlertDialogFragment extends DialogFragment {
 
-	private static int mDrugAcceptedCount;
-	private static int mDrugRejectedCount;
-	static SharedPreferenceStore mSharedPreferenceStore;
+    private static int mDrugAcceptedCount;
+    private static int mDrugRejectedCount;
+    static SharedPreferenceStore mSharedPreferenceStore;
 
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-		/**
-		 * Turn Screen On and Unlock the keypad when this alert dialog is
-		 * displayed
-		 */
-		getActivity().getWindow().addFlags(
-				LayoutParams.FLAG_TURN_SCREEN_ON
-						| LayoutParams.FLAG_DISMISS_KEYGUARD);
+        /**
+         * Turn Screen On and Unlock the keypad when this alert dialog is
+         * displayed
+         */
+        getActivity().getWindow().addFlags(
+                LayoutParams.FLAG_TURN_SCREEN_ON
+                        | LayoutParams.FLAG_DISMISS_KEYGUARD);
 
-		/** Creating a alert dialog builder */
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        /** Creating a alert dialog builder */
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-		/** Setting title for the alert dialog */
-		
-		builder.setTitle(R.string.alert_dialog_title);
+        /** Setting title for the alert dialog */
 
-		/** Setting the content for the alert dialog */
-		builder.setMessage(R.string.alert_dialog_message);
+        builder.setTitle(R.string.alert_dialog_title);
 
-		/** Defining an OK button event listener */
-		builder.setPositiveButton("Taken", new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				getActivity().runOnUiThread(new Runnable() {
+        /** Setting the content for the alert dialog */
+        builder.setMessage(R.string.alert_dialog_message);
 
-					@Override
-					public void run() {
-						getSharedPreferences();
-						getSettings();
-						if (mSharedPreferenceStore.mPrefsStore.getBoolean(
-								"com.pc.isWeekly", false)) {
-							saveUsersettings(true, true);
-							changeWeeklyAlarmTime();
-						} else {
-							if (checkDrugTakenTimeInterval("dateDrugTaken") > 0) {
-								saveUsersettings(true, false);
-							}
-						}
-						getActivity().finish();
-					}
-				});
+        /** Defining an OK button event listener */
+        builder.setPositiveButton("Taken", new OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().runOnUiThread(new Runnable() {
 
-			}
-		}).setNegativeButton("Not Taken", new OnClickListener() {
+                    @Override
+                    public void run() {
+                        getSharedPreferences();
+                        getSettings();
+                        if (mSharedPreferenceStore.mPrefsStore.getBoolean(
+                                "com.pc.isWeekly", false)) {
+                            saveUsersettings(true, true);
+                            changeWeeklyAlarmTime();
+                        } else {
+                            if (checkDrugTakenTimeInterval("dateDrugTaken") > 0) {
+                                saveUsersettings(true, false);
+                            }
+                        }
+                        getActivity().finish();
+                    }
+                });
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				getActivity().runOnUiThread(new Runnable() {
+            }
+        }).setNegativeButton("Not Taken", new OnClickListener() {
 
-					@Override
-					public void run() {
-						getSharedPreferences();
-						getActivity().finish();
-					}
-				});
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().runOnUiThread(new Runnable() {
 
-			}
-		}).setNeutralButton("Snooze", new OnClickListener() {
+                    @Override
+                    public void run() {
+                        getSharedPreferences();
+                        getActivity().finish();
+                    }
+                });
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				snooze();
+            }
+        }).setNeutralButton("Snooze", new OnClickListener() {
 
-			}
-		}).setCancelable(false);
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                snooze();
 
-		/** Creating the alert dialog window */
-		return builder.create();
-	}
+            }
+        }).setCancelable(false);
 
-	public long checkDrugTakenTimeInterval(String time) {
-		long interval = 0;
-		long today = new Date().getTime();
-		long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.pc."
-				+ time, 0);
-		long oneDay = 1000 * 60 * 60 * 24;
-		interval = (today - takenDate) / oneDay;
-		return interval;
-	}
+        /** Creating the alert dialog window */
+        return builder.create();
+    }
 
-	public void snooze() {
-		getActivity().runOnUiThread(new Runnable() {
+    public long checkDrugTakenTimeInterval(String time) {
+        long interval = 0;
+        long today = new Date().getTime();
+        long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.pc."
+                + time, 0);
+        long oneDay = 1000 * 60 * 60 * 24;
+        interval = (today - takenDate) / oneDay;
+        return interval;
+    }
 
-			@Override
-			public void run() {
-				getSharedPreferences();
-				Intent intent = new Intent(getActivity(),
-						AlertCallerFragmentActivity.class);
-				PendingIntent pendingSnooze = PendingIntent.getActivity(
-						getActivity().getApplicationContext(), 0, intent,
-						PendingIntent.FLAG_UPDATE_CURRENT);
-				AlarmManager alarmManager = (AlarmManager) getActivity()
-						.getSystemService(getActivity().ALARM_SERVICE);
-				Calendar calender = Calendar.getInstance();
-				Date date = new Date();
-				calender.setTime(date);
-				calender.add(Calendar.MINUTE, 30);
-				alarmManager.set(AlarmManager.RTC_WAKEUP,
-						calender.getTimeInMillis(), pendingSnooze);
-			}
-		});
-	}
+    public void snooze() {
+        getActivity().runOnUiThread(new Runnable() {
 
-	public void changeWeeklyAlarmTime() {
-		int hour = Calendar.getInstance().getTime().getHours();
-		int minute = Calendar.getInstance().getTime().getMinutes() - 1;
-		getActivity().startService(
-				new Intent(getActivity(), AlarmService.class));
-		mSharedPreferenceStore.mEditor.putInt("com.pc.AlarmHour", hour)
-				.commit();
-		mSharedPreferenceStore.mEditor.putInt("com.pc.AlarmMinute", minute)
-				.commit();
-	}
+            @Override
+            public void run() {
+                getSharedPreferences();
+                Intent intent = new Intent(getActivity(),
+                        AlertCallerFragmentActivity.class);
+                PendingIntent pendingSnooze = PendingIntent.getActivity(
+                        getActivity().getApplicationContext(), 0, intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager = (AlarmManager) getActivity()
+                        .getSystemService(getActivity().ALARM_SERVICE);
+                Calendar calender = Calendar.getInstance();
+                Date date = new Date();
+                calender.setTime(date);
+                calender.add(Calendar.MINUTE, 30);
+                alarmManager.set(AlarmManager.RTC_WAKEUP,
+                        calender.getTimeInMillis(), pendingSnooze);
+            }
+        });
+    }
 
-	public void saveUsersettings(Boolean state, Boolean isWeekly) {
-		if (isWeekly) {
-			mSharedPreferenceStore.mEditor.putLong("com.pc.weeklyDate",
-					new Date().getTime()).commit();
-			mSharedPreferenceStore.mEditor.putBoolean(
-					"com.pc.isWeeklyDrugTaken", state).commit();
-		} else {
-			mSharedPreferenceStore.mEditor.putLong("com.pc.dateDrugTaken",
-					new Date().getTime()).commit();
-			mSharedPreferenceStore.mEditor.putBoolean("com.pc.isDrugTaken",
-					state).commit();
-		}
-		mSharedPreferenceStore.mEditor.putInt("com.pc.drugRejectedCount",
-				mDrugRejectedCount).commit();
-		mSharedPreferenceStore.mEditor.putInt("com.pc.drugAcceptedCount",
-				mDrugAcceptedCount).commit();
+    public void changeWeeklyAlarmTime() {
+        int hour = Calendar.getInstance().getTime().getHours();
+        int minute = Calendar.getInstance().getTime().getMinutes() - 1;
+        getActivity().startService(
+                new Intent(getActivity(), AlarmService.class));
+        mSharedPreferenceStore.mEditor.putInt("com.pc.AlarmHour", hour)
+                .commit();
+        mSharedPreferenceStore.mEditor.putInt("com.pc.AlarmMinute", minute)
+                .commit();
+    }
 
-	}
+    public void saveUsersettings(Boolean state, Boolean isWeekly) {
+        if (isWeekly) {
+            mSharedPreferenceStore.mEditor.putLong("com.pc.weeklyDate",
+                    new Date().getTime()).commit();
+            mSharedPreferenceStore.mEditor.putBoolean(
+                    "com.pc.isWeeklyDrugTaken", state).commit();
+        } else {
+            mSharedPreferenceStore.mEditor.putLong("com.pc.dateDrugTaken",
+                    new Date().getTime()).commit();
+            mSharedPreferenceStore.mEditor.putBoolean("com.pc.isDrugTaken",
+                    state).commit();
+        }
+        mSharedPreferenceStore.mEditor.putInt("com.pc.drugRejectedCount",
+                mDrugRejectedCount).commit();
+        mSharedPreferenceStore.mEditor.putInt("com.pc.drugAcceptedCount",
+                mDrugAcceptedCount).commit();
 
-	public void getSettings() {
-		mDrugAcceptedCount = mSharedPreferenceStore.mPrefsStore.getInt(
-				"com.pc.drugAcceptedCount", 0);
-		mDrugRejectedCount = mSharedPreferenceStore.mPrefsStore.getInt(
-				"com.pc.drugRejectedCount", 0);
-	}
+    }
 
-	public void getSharedPreferences() {
+    public void getSettings() {
+        mDrugAcceptedCount = mSharedPreferenceStore.mPrefsStore.getInt(
+                "com.pc.drugAcceptedCount", 0);
+        mDrugRejectedCount = mSharedPreferenceStore.mPrefsStore.getInt(
+                "com.pc.drugRejectedCount", 0);
+    }
 
-		mSharedPreferenceStore.mPrefsStore = getActivity()
-				.getSharedPreferences("com.pc.storeTimePicked",
-						Context.MODE_PRIVATE);
-		mSharedPreferenceStore.mEditor = mSharedPreferenceStore.mPrefsStore
-				.edit();
-	}
+    public void getSharedPreferences() {
 
-	/** The application exits, if the user presses the back button */
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		getActivity().finish();
-	}
+        mSharedPreferenceStore.mPrefsStore = getActivity()
+                .getSharedPreferences("com.pc.storeTimePicked",
+                        Context.MODE_PRIVATE);
+        mSharedPreferenceStore.mEditor = mSharedPreferenceStore.mPrefsStore
+                .edit();
+    }
+
+    /**
+     * The application exits, if the user presses the back button
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().finish();
+    }
 
 }
