@@ -1,12 +1,23 @@
 package com.peacecorps.malaria;
+<<<<<<< HEAD
+=======
+
+import java.util.Date;
+>>>>>>> origin/malaria-setup-screen
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+<<<<<<< HEAD
 import android.view.View;
 import android.widget.Button;
+=======
+import android.widget.Toast;
+
+import com.peacecorps.malaria;
+>>>>>>> origin/malaria-setup-screen
 import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.PageIndicator;
 
@@ -14,6 +25,7 @@ import java.util.Date;
 
 public class MainActivity extends FragmentActivity {
 
+<<<<<<< HEAD
     FragmentAdapter mAdapter;
     ViewPager mPager;
     PageIndicator mIndicator;
@@ -99,5 +111,63 @@ public class MainActivity extends FragmentActivity {
         interval = (today - takenDate) / oneDay;
         return interval + 1;
     }
+=======
+	FragmentAdapter mAdapter;
+	ViewPager mPager;
+	PageIndicator mIndicator;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		mAdapter = new FragmentAdapter(getSupportFragmentManager());
+
+		mPager = (ViewPager) findViewById(R.id.vPager);
+		mPager.setAdapter(mAdapter);
+
+		mIndicator = (CirclePageIndicator) findViewById(R.id.vIndicator);
+		mIndicator.setViewPager(mPager);
+		mIndicator.setOnPageChangeListener(new OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(int position) {
+			
+				int checkViewPagerPosition = 1;
+				if (position == checkViewPagerPosition) {
+					if (FirstAnalyticFragment.checkMediLastTakenTime != null) {
+						FirstAnalyticFragment.checkMediLastTakenTime
+								.setText(SharedPreferenceStore.mPrefsStore
+										.getString(
+												"com.pc.checkMediLastTakenTime",
+												"").toString());
+						FirstAnalyticFragment.doses.setText(""
+								+ SharedPreferenceStore.mPrefsStore.getInt(
+										"com.pc.AcceptedCount", 0));
+
+						long interval = checkDrugTakenTimeInterval("timeCounter");
+						int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.pc.drugAcceptedCount", 0);
+						double percentage = (takenCount/interval)* 100;
+						FirstAnalyticFragment.adherence.setText(""+percentage);
+					}
+
+				}
+			}
+
+
+		});
+
+	}
+
+	public long checkDrugTakenTimeInterval(String time) {
+		long interval = 0;
+		long today = new Date().getTime();
+		long takenDate = SharedPreferenceStore.mPrefsStore.getLong("com.pc."
+				+ time, 0);
+		long oneDay = 1000 * 60 * 60 * 24;
+		interval = (today - takenDate) / oneDay;
+		return interval+1;
+	}
+>>>>>>> origin/malaria-setup-screen
 
 }

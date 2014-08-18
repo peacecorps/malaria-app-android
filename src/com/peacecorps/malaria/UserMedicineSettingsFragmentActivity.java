@@ -13,10 +13,19 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
 import android.view.View;
+<<<<<<< HEAD
 import android.widget.*;
 
 import java.util.Calendar;
 import java.util.Date;
+=======
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
+>>>>>>> origin/malaria-setup-screen
 import com.peacecorps.malaria.R;
 
 public class UserMedicineSettingsFragmentActivity extends FragmentActivity
