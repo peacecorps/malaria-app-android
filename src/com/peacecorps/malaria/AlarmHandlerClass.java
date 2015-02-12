@@ -36,7 +36,7 @@ public class AlarmHandlerClass extends BroadcastReceiver {
 
 	public void getSharedPreferences(Context context) {
 		mSharedPreferenceStore.mPrefsStore = context.getSharedPreferences(
-				"com.pc.storeTimePicked", Context.MODE_PRIVATE);
+				"com.peacecorps.malaria.storeTimePicked", Context.MODE_PRIVATE);
 		mSharedPreferenceStore.mEditor = mSharedPreferenceStore.mPrefsStore
 				.edit();
 	}
@@ -45,9 +45,9 @@ public class AlarmHandlerClass extends BroadcastReceiver {
 
 		getSharedPreferences(context);
 		int hour = mSharedPreferenceStore.mPrefsStore.getInt(
-				"com.pc.AlarmHour", -1);
+				"com.peacecorps.malaria.AlarmHour", -1);
 		int minute = mSharedPreferenceStore.mPrefsStore.getInt(
-				"com.pc.AlarmMinute", -1);
+				"com.peacecorps.malaria.AlarmMinute", -1);
 		if ((hour != -1) && (minute != -1)) {
 			AlarmTime(context, hour, minute);
 			mAlarmManager = (AlarmManager) context
@@ -57,7 +57,7 @@ public class AlarmHandlerClass extends BroadcastReceiver {
 			PendingIntent pendingAlarm = PendingIntent.getBroadcast(context, 0,
 					alarmIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
 			if (mSharedPreferenceStore.mPrefsStore.getBoolean(
-					"com.pc.isWeekly", false)) {
+					"com.peacecorps.malaria.isWeekly", false)) {
 				mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
 						mAlarmScheduleTime.getTimeInMillis(), INTERVAL_WEEK,
 						pendingAlarm);
