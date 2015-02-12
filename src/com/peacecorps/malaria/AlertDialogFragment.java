@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.WindowManager.LayoutParams;
+import com.peacecorps.malaria.R;
 
 public class AlertDialogFragment extends DialogFragment {
 
