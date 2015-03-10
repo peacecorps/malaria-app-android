@@ -26,6 +26,7 @@ Included in this repository are files to help you get started:
 <li>A research folder containing a map of Malaria Prevalence, and additional information about Malaria from the Centers for Disease Control and Prevention.</li>
 </ul>
 
+<!--First of all < I just want to know that which features does peace corps need presently or from now,which one they need to be developed first-->
 
 ## Dependencies
 This project uses Jack Wharton's Android-ViewPagerIndicator for the Viewpager Swipe view.
