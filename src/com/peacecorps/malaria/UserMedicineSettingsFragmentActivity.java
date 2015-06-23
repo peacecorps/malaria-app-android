@@ -2,16 +2,19 @@ package com.peacecorps.malaria;
 
 /**
  * Created by Chimdi on 6/2/2014.
+ * Edited by Ankita
  */
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.DatabaseErrorHandler;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 
 import java.util.Calendar;
@@ -40,11 +43,12 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
     private static int mHour;
     private static int mMinute;
     private final static Calendar mCalendar = Calendar.getInstance();
-
+    private String TAGUMSFA="UserMedicineSettingsFragmentActivity";
     static SharedPreferenceStore mSharedPreferenceStore;
 
     public static Context mFragmentContext;
 
+    /*User Medicine Settings Fragment Activity is for the Setup Screen of the Malaria App*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +121,12 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
 
     }
 
+
+    /*Method for checking the Initial Application Install.
+     *It checks two parameters:-
+     * hasUserSetPreference----> BOOLEAN ----> whether user had done the settings in Initial Setup Screen or not.
+     * isFirstRun--------------> BOOLEAN ----> whether this is the first Time App is run or not.
+     */
     private void checkInitialAppInstall() {
 
         if (mSharedPreferenceStore.mPrefsStore.getBoolean(
@@ -134,6 +144,12 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
 
     }
 
+    /*Method is for working with the Spinner to make selection of drugs work
+     *It allows selection between three of the drugs-
+     * Malarone- Daily
+     * Doxycycline- Daily
+     * Melofquine- Weekly
+     */
     private void createDrugSelectionSpinner() {
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -147,7 +163,9 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         mDrugSelectSpinner.setOnItemSelectedListener(this);
     }
 
-
+    /*Method is for picking time for the Alarm Notifications
+     *If it's missed the current time will be saved as the alarm time. ==>NOT IMPLEMENTED
+     */
     public void addTimePickButtonClickListener() {
 
         timePickButton.setOnClickListener(new View.OnClickListener() {
@@ -161,6 +179,8 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
 
         });
     }
+
+    /*Class to manage the Time Picker Widget*/
 
     public static class TimePickerFragment extends DialogFragment implements
             TimePickerDialog.OnTimeSetListener {
@@ -189,9 +209,23 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
 
     }
 
+    /*Method to enable the done Button
+     *Done button is enabled if the user have setup a time
+     */
+
     public static void checkIfTimeSet(boolean isDoneButtonChecked) {
         mDoneButton.setEnabled(isDoneButtonChecked);
     }
+
+    /*Method for saving all the settings of the User\
+      What all it saves? Let's see-
+      AlarmHour-------->INTEGER---->The Hour at which Notification will pop-up in Mobile Screen
+      AlarmMinute------>INTEGER---->The Minute at which Notification will pop-up in Mobile Screen
+      dayTakingDrug---->INTEGER---->The day at which drug was taken
+      drugPicked------->STRING----->Which drug was picked up out of three.
+      isDrugTaken------>BOOLEAN---->Whether the drug was taken or not.
+      After setting related parameters it calls the Alarm Service to make notifications!
+     */
 
     public static void saveUserTimeAndMedicationPrefs() {
 
@@ -215,6 +249,8 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
     }
 
     // converts 24hr format to 12hr format with AM/PM values
+    /*Method is used for setting the selected time in the text field of Spinner.
+     */
     private static void updateTime(int hours, int mins) {
         String timeSet;
         if (hours > 12) {
@@ -243,6 +279,10 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
     }
 
     // Listeners
+    /*OnClicking the done button what all 'll happen?
+     * All the user settings will be saved.
+     * Start the Main Activity which shows the Home Screen
+     */
     private View.OnClickListener mDoneButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -256,6 +296,14 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         }
     };
 
+
+    /*Overrided Method called by the create Drug Selection Spinner to check which drug was chosen
+     *What all it sets?
+     * drug--------------->INTEGER------------>0-Malarone,1-Doxycycline,2-Melfoquine
+     * isWeekly----------->BOOLEAN------------>Tells whether the drug chosen was weekly or not
+     * weeklyDate--------->LONG--------------->App registers the weekly date of Melfoquine, now this will be reminded weekly.
+     * firstRunTime------->LONG--------------->First time the drug was taken.
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position,
                                long id) {
@@ -272,7 +320,10 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
             mSharedPreferenceStore.mEditor.putBoolean("com.peacecorps.malaria.isWeekly", false);
         }
         if(mSharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isFirstRun",true)){
-            mSharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime", Calendar.getInstance().getTimeInMillis());
+            long firstRunTime= new Date().getTime();
+            mSharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime", firstRunTime);
+            Log.d(TAGUMSFA,"First Run Time:"+mSharedPreferenceStore.mPrefsStore.getLong(
+                    "com.peacecorps.malaria.firstRunTime", 0));
         }
         mSharedPreferenceStore.mEditor.putBoolean("com.peacecorps.malaria.isFirstRun", false);
 

@@ -7,14 +7,10 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
-import com.peacecorps.malaria.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,52 +25,43 @@ import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 
 /**
- * Created by Chimdi on 7/18/14.
+ * Created by Ankita on 6/8/2015.
  */
+public class SideEffectsPCVFragmentActivity extends FragmentActivity {
 
-/**
- * Edited by Ankita on 6/8/2015.
- */
-public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
+    private TextView mSideEffectsPCVLabel;
 
-    private TextView mPeaceCorpsPolicyLabel;
-
-    private static String TAGPCP = PeaceCorpsPolicyFragmentActivity.class.getSimpleName();
+    private static String TAGSEP = SideEffectsPCVFragmentActivity.class.getSimpleName();
 
     private ProgressDialog progressDialog;
 
     //json object response url
-    private String urlJsonObj = "http://pc-web-dev.systers.org/api/posts/1/?format=json";
+    private String urlJsonObj = "http://pc-web-dev.systers.org/api/posts/3/?format=json";
 
     // temporary string to show the parsed response
     private String jsonResponse;
-
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.peace_corps_policy_fragment);
+        setContentView(R.layout.side_effects_pcv_fragment);
 
-        mPeaceCorpsPolicyLabel = (TextView) findViewById(R.id.peaceCorpsPolicyLabel);
+        mSideEffectsPCVLabel = (TextView) findViewById(R.id.sideEffectsPCVLabel);
+
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-        //mking json object Request
-        Log.i(TAGPCP, "INSIDE PEACE CORPS ACTIVITY");
-
-        /*HTTPAsyncTask conTask =new HTTPAsyncTask(this);
-        conTask.execute("http://pc-web-dev.systers.org");*/
-
+//mking json object Request
+        Log.i(TAGSEP, "INSIDE SIDE EFFECTS PCV");
         makeJsonObjectRequest();
 
     }
-
     private void makeJsonObjectRequest(){
-        Log.i(TAGPCP, "INSIDE JSON OBJECT REQUEST");
+        Log.i(TAGSEP, "INSIDE JSON OBJECT REQUEST");
         showpDialog(); //progress dialog shows loading...while the data is being fetched
 
         //making a JSON Object  Request below
@@ -82,10 +69,10 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
                 , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d(TAGPCP, response.toString());
+                Log.d(TAGSEP, response.toString());
 
                 try {
-                    Log.i(TAGPCP,"INSIDE JSON RESPONSE");
+                    Log.i(TAGSEP,"INSIDE JSON RESPONSE");
                     //parsing json object response
                     String name = response.getString("title_post");
                     String desc = response.getString("description_post");
@@ -95,14 +82,14 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
                     jsonResponse += /*"Description: \n" +*/ desc + "\n\n";
 
 
-                    mPeaceCorpsPolicyLabel.setText(jsonResponse);
+                    mSideEffectsPCVLabel.setText(jsonResponse);
 
-                    String content = mPeaceCorpsPolicyLabel.getText().toString();
+                    String content = mSideEffectsPCVLabel.getText().toString();
                     File file;
                     FileOutputStream outputStream;
                     try {
                         // file = File.createTempFile("MyCache", null, getCacheDir());
-                        file = new File(getCacheDir(), "PCPCache");
+                        file = new File(getCacheDir(), "SEPCache");
 
                         outputStream = new FileOutputStream(file);
                         outputStream.write(content.getBytes());
@@ -119,14 +106,14 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError verror) {
-                Log.d(TAGPCP, "Error Retreiving Data!" + verror.getMessage());
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAGSEP, "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(), "Error Retreiving Data! Loading from cache... ", Toast.LENGTH_LONG).show();
 
                 BufferedReader input = null;
                 File file = null;
                 try {
-                    file = new File(getCacheDir(), "PCPCache"); // Pass getFilesDir() and "MyFile" to read file
+                    file = new File(getCacheDir(), "SEPCache"); // Pass getFilesDir() and "MyFile" to read file
 
                     input = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
                     String line;
@@ -134,21 +121,16 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
                     while ((line = input.readLine()) != null) {
                         buffer.append(line);
                     }
-                    mPeaceCorpsPolicyLabel.setText(buffer.toString());
-                    Log.d(TAGPCP, buffer.toString());
+                    mSideEffectsPCVLabel.setText(buffer.toString());
+                    Log.d(TAGSEP, buffer.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 //hide progress dialog
                 hidepDialog();
             }
         });
 
-        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
-                2000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //Adding Request to request queue
         VolleyApplication.getInstance().addToRequestQueue(jsonObjReq);
     }
@@ -165,38 +147,4 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
         //for dismissing the loading animation in Activity
     }
 
-    /*public void getJSONDataFromWeb() {
-        DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
-        HttpPost httppost = new HttpPost("WEB LINK TO JSON FROM PEACE CORP WILL BE HERE");
-
-        httppost.setHeader("Content-type", "application/json");
-
-        InputStream inputStream = null;
-        String result = null;
-        try {
-            HttpResponse response = httpclient.execute(httppost);
-            HttpEntity entity = response.getEntity();
-
-            inputStream = entity.getContent();
-            // json is UTF-8 by default
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
-            StringBuilder sb = new StringBuilder();
-
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-            result = sb.toString();
-            mPeaceCorpsPolicyLabel.setText(result);
-            Toast.makeText(this, "" + result, Toast.LENGTH_LONG).show();
-
-        } catch (Exception e) {
-            Toast.makeText(this, "" + e.getCause(), Toast.LENGTH_LONG).show();
-        } finally {
-            try {
-                if (inputStream != null) inputStream.close();
-            } catch (Exception squish) {
-            }
-        }
-    }*/
 }

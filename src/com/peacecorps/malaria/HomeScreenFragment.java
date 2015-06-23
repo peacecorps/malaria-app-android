@@ -2,10 +2,12 @@ package com.peacecorps.malaria;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,7 @@ public class HomeScreenFragment extends Fragment {
     private String[] mPossibledays = {"Sunday", "Monday", "Tuesday",
             "Wednesday", "Thursday", "Friday", "Saturday"};
     private static View rootView;
+    private static String TAGHSF = "HomeScreenFragment";
 
     int checkDay = -1;
 
@@ -66,10 +69,10 @@ public class HomeScreenFragment extends Fragment {
 
     }
 
-    public double computeAdherenceRate() {
+    public static double computeAdherenceRate() {
         long interval = checkDrugTakenTimeInterval("firstRunTime") + 1;
         int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
-        double adherenceRate = (takenCount / interval) * 100;
+        double adherenceRate = ((double)takenCount / (double)interval) * 100;
         return adherenceRate;
     }
 
@@ -213,6 +216,7 @@ public class HomeScreenFragment extends Fragment {
     }
 
     public void decideisDrugTakenUI() {
+        //if drug is taken weekly//
         if (mSharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly",
                 false)) {
             if (checkDrugTakenTimeInterval("weeklyDate") == 0) {
@@ -239,7 +243,7 @@ public class HomeScreenFragment extends Fragment {
                     newDayUI();
                 }
             }
-        } else {
+        } else { //if drug is taken daily//
             if (checkDrugTakenTimeInterval("dateDrugTaken") == 0) {
                 if (mSharedPreferenceStore.mPrefsStore.getBoolean(
                         "com.peacecorps.malaria.isDrugTaken", false)) {
@@ -260,11 +264,12 @@ public class HomeScreenFragment extends Fragment {
         }
     }
 
-    public long checkDrugTakenTimeInterval(String time) {
+    public static long checkDrugTakenTimeInterval(String time) {
         long interval = 0;
         long today = new Date().getTime();
         long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
                 + time, 0);
+        Log.d(TAGHSF, time + ":" + takenDate);
         long oneDay = 1000 * 60 * 60 * 24;
         interval = (today - takenDate) / oneDay;
         return interval;
@@ -330,8 +335,8 @@ public class HomeScreenFragment extends Fragment {
     }
 
     public void changeWeeklyAlarmTime() {
-        int hour = Calendar.getInstance().getTime().getHours();
-        int minute = Calendar.getInstance().getTime().getMinutes() - 1;
+        int hour = Calendar.getInstance().get(Calendar.HOUR);
+        int minute = Calendar.getInstance().get(Calendar.MINUTE) - 1;
         getActivity().startService(
                 new Intent(getActivity(), AlarmService.class));
         mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.AlarmHour", hour)
@@ -370,5 +375,12 @@ public class HomeScreenFragment extends Fragment {
         return currentDayOfWeek;
     }
 
+
+    public void missedDayRecord(int day, int month, int year){
+
+        DatabaseSQLiteHelper sqLH = new DatabaseSQLiteHelper(getActivity());
+        sqLH.insertOrUpdateMissedMedicationEntry(day,month,year,computeAdherenceRate());
+
+    }
 
 }

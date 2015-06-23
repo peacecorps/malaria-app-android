@@ -1,10 +1,15 @@
 package com.peacecorps.malaria;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
 import com.peacecorps.malaria.R;
 
 /**
@@ -12,18 +17,37 @@ import com.peacecorps.malaria.R;
  */
 public class InfoHubFragmentActivity extends FragmentActivity {
 
-    Button homeIconButton, peaceCorpsPolicy;
+    Button homeIconButton, btnPeaceCorpsPolicy, btnPercentSideEffects, btnSideEffectsPCV,
+            btnSideEffectsNPCV, btnVolunteerAdherence, btnEffectiveness;
+
+    TextView internetIsConnected;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_hub_screen);
 
+        internetIsConnected = (TextView)findViewById(R.id.internetIsConnected);
+
+        // check if you are connected or not
+        if(isConnected()){
+            internetIsConnected.setBackgroundColor(0xFF00CC00);
+            internetIsConnected.setText("Internet Connected");
+        }
+        else{
+            internetIsConnected.setText("You are NOT connected");
+        }
 
         homeIconButton = (Button) findViewById(R.id.homeButton);
-        peaceCorpsPolicy = (Button) findViewById(R.id.peaceCorpsPolicy);
+        btnPeaceCorpsPolicy = (Button) findViewById(R.id.btnPeaceCorpsPolicy);
+        btnPercentSideEffects = (Button) findViewById(R.id.btnPercentSideEffects);
+        btnSideEffectsPCV = (Button) findViewById(R.id.btnSideEffectsPCV);
+        btnSideEffectsNPCV = (Button) findViewById(R.id.btnSideEffectsNPCV);
+        btnVolunteerAdherence = (Button) findViewById(R.id.btnVolunteerAdherence);
+        btnEffectiveness = (Button) findViewById(R.id.btnEffectiveness);
 
         addListeners();
+
     }
 
 
@@ -36,12 +60,58 @@ public class InfoHubFragmentActivity extends FragmentActivity {
             }
         });
 
-        peaceCorpsPolicy.setOnClickListener(new View.OnClickListener() {
+        btnPeaceCorpsPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplication().getApplicationContext(), PeaceCorpsPolicyFragmentActivity.class));
             }
         });
+
+        btnPercentSideEffects.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), PercentSideEffectsFragmentActivity.class));
+            }
+        });
+
+        btnSideEffectsPCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), SideEffectsPCVFragmentActivity.class));
+            }
+        });
+
+        btnSideEffectsNPCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), SideEffectsNPCVFragmentActivity.class));
+            }
+        });
+
+        btnVolunteerAdherence.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), VolunteerAdherenceFragmentActivity.class));
+            }
+        });
+
+        btnEffectiveness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), EffectivenessFragmentActivity.class));
+            }
+        });
+
+    }
+
+
+    public boolean isConnected(){
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected())
+            return true;
+        else
+            return false;
     }
 
 

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -21,6 +22,7 @@ public class MainActivity extends FragmentActivity {
     ViewPager mPager;
     PageIndicator mIndicator;
     Button mInfoButton;
+    String TAGMA="MainActivity";
 
 
     @Override
@@ -28,7 +30,9 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        /*Method opens the Info Hub
+        *Tiny 'i' symbol in the Setup Screen is Info Hub Button
+        */
         mInfoButton = (Button) findViewById(R.id.infoButton);
         mInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +75,13 @@ public class MainActivity extends FragmentActivity {
 
                         long interval = checkDrugTakenTimeInterval("firstRunTime");
                         int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
-                        double adherenceRate = (takenCount / interval) * 100;
+                        double adherenceRate;
+                        Log.d(TAGMA,""+ interval);
+                        Log.d(TAGMA,""+ takenCount);
+                        if(interval!=0)
+                        adherenceRate = ((double)takenCount / (double)interval) * 100;
+                        else
+                        adherenceRate = 100;
                         FirstAnalyticFragment.adherence.setText("" + adherenceRate + "%");
                     }
 
@@ -96,9 +106,12 @@ public class MainActivity extends FragmentActivity {
     public long checkDrugTakenTimeInterval(String time) {
         long interval = 0;
         long today = new Date().getTime();
+        Log.d(TAGMA,"today:"+ today);
         long takenDate = SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
                 + time, 0);
+        Log.d(TAGMA,"taken date:"+ takenDate);
         long oneDay = 1000 * 60 * 60 * 24;
+        Log.d(TAGMA,"one Day:"+ oneDay);
         interval = (today - takenDate) / oneDay;
         return interval + 1;
     }
