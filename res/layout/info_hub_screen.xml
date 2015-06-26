@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
                 <Button
                     android:id="@+id/info_hub_settings_button"
                     android:layout_width="24dp"
@@ -62,35 +63,35 @@
 
 
             <LinearLayout android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="110dp"
                 android:id="@+id/firstButtonSet"
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
 
                 >
                 <Button android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/peace_corps_policy"
-                    android:background="@color/light_red"
+                    android:background="@drawable/info_hub_button"
                     android:textColor="@color/white"
                     android:layout_weight="1"
                     android:padding="5dp"
-                    android:layout_margin="15dp"
                     android:id="@+id/btnPeaceCorpsPolicy"
-
-                    />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp" />
 
                 <Button android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/percentage_of_side_effects"
-                    android:background="@color/light_red"
+                    android:background="@drawable/info_hub_button"
                     android:textColor="@color/white"
                     android:layout_weight="1"
                     android:padding="5dp"
-                    android:layout_margin="15dp"
                     android:id="@+id/btnPercentSideEffects"
 
-                    />
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp" />
 
 
 
@@ -98,34 +99,34 @@
 
 
             <LinearLayout android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="110dp"
                 android:id="@+id/secondButtonSet"
                 android:orientation="horizontal"
-                android:layout_below="@+id/firstButtonSet"
-                android:layout_marginTop="5dp"
-                >
+                android:layout_below="@+id/firstButtonSet">
                 <Button android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/side_effects_reported_by_PCVs"
-                    android:background="@color/light_red"
+                    android:background="@drawable/info_hub_button"
                     android:textColor="@color/white"
                     android:layout_weight="1"
                     android:padding="5dp"
-                    android:layout_margin="15dp"
                     android:id="@+id/btnSideEffectsPCV"
-                    />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp" />
 
                 <Button android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/non_PCV_reported_side_effects"
-                    android:background="@color/light_red"
+                    android:background="@drawable/info_hub_button"
                     android:textColor="@color/white"
                     android:layout_weight="1"
                     android:padding="5dp"
-                    android:layout_margin="15dp"
                     android:id="@+id/btnSideEffectsNPCV"
 
-                    />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp" />
 
 
 
@@ -134,34 +135,34 @@
             </LinearLayout>
 
             <LinearLayout android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="110dp"
                 android:id="@+id/thirdButtonSet"
                 android:orientation="horizontal"
-                android:layout_below="@+id/secondButtonSet"
-                android:layout_marginTop="5dp"
-                >
+                android:layout_below="@+id/secondButtonSet">
                 <Button android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/volunteer_adherence_rates"
-                    android:background="@color/light_red"
+                    android:background="@drawable/info_hub_button"
                     android:textColor="@color/white"
                     android:layout_weight="1"
                     android:padding="5dp"
-                    android:layout_margin="15dp"
                     android:id="@+id/btnVolunteerAdherence"
-                    />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp" />
 
                 <Button android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/effectiveness_against_malaria"
-                    android:background="@color/light_red"
+                    android:background="@drawable/info_hub_button"
                     android:textColor="@color/white"
                     android:layout_weight="1"
                     android:padding="5dp"
-                    android:layout_margin="15dp"
                     android:id="@+id/btnEffectiveness"
 
-                    />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -175,18 +176,6 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/internetIsConnected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="#FF0000"
-            android:textColor="#FFF"
-            android:textSize="18dp"
-            android:layout_marginBottom="5dp"
-            android:text="Check Internet Connection" />
-
 
         <View
             android:layout_height="0.5dp"

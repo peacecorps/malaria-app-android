@@ -4,12 +4,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -82,7 +84,7 @@ public class DayFragmentActivity extends FragmentActivity {
         year=cal.get(Calendar.YEAR);
         curr_time=cal.getTimeInMillis();
 
-        date_header=String.valueOf(day)+"-"+mon+"-"+String.valueOf(year);
+        date_header=String.valueOf(day)+" "+mon+" "+String.valueOf(year);
         Log.d(TAGD, date_header);
         dayDB.setText(date_header);
 
@@ -158,7 +160,8 @@ public class DayFragmentActivity extends FragmentActivity {
             else {
                 //Toast.makeText(getApplicationContext(), "This is a date before medication even started, you can't edit it!", Toast.LENGTH_LONG).show();
                 Toast.makeText(getApplicationContext(), "I missed entering medicine!", Toast.LENGTH_LONG).show();
-                sqLite.insertOrUpdateMissedMedicationEntry(day, month, year, HomeScreenFragment.computeAdherenceRate());
+                sqLite.insertOrUpdateMissedMedicationEntry(day, month, year, 0);
+
             }
 
 
@@ -168,7 +171,7 @@ public class DayFragmentActivity extends FragmentActivity {
         }
 
         /*Implementing Editing Data Button for a Day Page*/
-        Button btnChangeData = (Button)findViewById(R.id.btnChangeData);
+        ImageButton btnChangeData = (ImageButton)findViewById(R.id.btnChangeData);
         btnChangeData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,14 +214,25 @@ public class DayFragmentActivity extends FragmentActivity {
                                 Log.d(TAGD,""+SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime",0));
                                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime",firstTime).apply();
                                 double prcntage = computeAdherenceRate(curr_time);
-                                Log.d(TAGD,"Adherence:"+prcntage);
+                                Log.d(TAGD,"Adherence when Yes:"+prcntage);
                                 sqLite.updateMedicationEntry(day, month, year, "yes",prcntage);
                                 indicator.setBackgroundResource(R.drawable.accept_medi_checked_);
 
                             }else if(ch.equalsIgnoreCase("no")) {
                                 Toast.makeText(con,
                                         btnRadButton.getText(), Toast.LENGTH_SHORT).show();
-                                sqLite.updateMedicationEntry(day, month, year, "no",0);
+                                long firstTime=sqLite.getFirstTime();
+                                Log.d(TAGD,""+SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime",0));
+                                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime",firstTime).apply();
+                                String st= sqLite.getStatus(day,month,year);
+                                if(st.equalsIgnoreCase("yes"))
+                                {
+                                    int accept_count=SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount",0)-1;
+                                    SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.drugAcceptedCount", accept_count).apply();
+                                }
+                                double prcntage = computeAdherenceRate(curr_time);
+                                Log.d(TAGD, "Adherence when No:" + prcntage);
+                                sqLite.updateMedicationEntry(day, month, year, "no",prcntage);
                                 indicator.setBackgroundResource(R.drawable.reject_medi_checked);
                             }
                               else

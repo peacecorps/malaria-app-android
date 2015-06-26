@@ -19,10 +19,11 @@
     <color name="lightgray">#e7e7e7</color>
     <color name="lightgray02">#bfbfbf</color>
     <color name="dark">#000015</color>
-    <color name="lightgreen">#336666</color>
-    <color name="orange">#e33d1b</color>
-    <color name="darkorange">#cc2303</color>
+    <color name="green">#ff136612</color>
+    <color name="red">#e33d1b</color>
+    <color name="dark_red">#cc2303</color>
     <color name="light_green">#B2FF59</color>
     <color name="lightest_red">#EF9A9A</color>
+    <color name="cream">#FFFDD0</color>
 
 </resources>

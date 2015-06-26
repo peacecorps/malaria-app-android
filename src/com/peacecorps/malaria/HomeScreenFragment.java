@@ -73,6 +73,7 @@ public class HomeScreenFragment extends Fragment {
         long interval = checkDrugTakenTimeInterval("firstRunTime") + 1;
         int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
         double adherenceRate = ((double)takenCount / (double)interval) * 100;
+        Log.d(TAGHSF,"adherence:"+adherenceRate);
         return adherenceRate;
     }
 

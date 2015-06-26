@@ -9,7 +9,6 @@
         android:id="@+id/buttonlayout"
         android:layout_width="fill_parent"
         android:layout_height="60sp"
-        android:background="@color/light_red"
         android:gravity="left|top"
         android:height="60sp"
         android:orientation="horizontal" >
@@ -31,7 +30,9 @@
             android:layout_weight="0.6"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FFFFFF" >
+            android:textColor="@color/golden_brown"
+            android:textSize="25dp"
+            android:textStyle="bold">
         </TextView>
 
         <ImageView
@@ -44,16 +45,6 @@
         </ImageView>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/selectedDayMonthYear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/calendar_top_header"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFFFFF" >
-    </Button>
 
     <LinearLayout
         android:layout_width="fill_parent"

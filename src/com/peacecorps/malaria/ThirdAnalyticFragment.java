@@ -38,7 +38,7 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
     private static final String tag = "ThirdAnalyticFragment";
     public final static String DATE_TAG = "com.peacecorps.malaria.thirdanalyticfragment.SELECTED_DATE";
     private TextView currentMonth;
-    private Button selectedDayMonthYearButton;
+    //private Button selectedDayMonthYearButton;
     private ImageView prevMonth;
     private ImageView nextMonth;
     private GridView calendarView;
@@ -89,9 +89,9 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
 
 
 
-        selectedDayMonthYearButton = (Button) this
+        /*selectedDayMonthYearButton = (Button) this
                 .findViewById(R.id.selectedDayMonthYear);
-        selectedDayMonthYearButton.setText("Selected: ");
+        selectedDayMonthYearButton.setText("Selected: ");*/
 
         prevMonth = (ImageView) this.findViewById(R.id.prevMonth);
         prevMonth.setOnClickListener(this);
@@ -409,39 +409,40 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
                 case 0:
                     dr = getResources().getDrawable(R.drawable.accept_medi_checked_tiny);
                     gridcell.setCompoundDrawablesWithIntrinsicBounds(null, dr, null, null);
-                    //gridcell.setBackgroundResource(R.color.light_green);
+                    gridcell.setTextColor(getResources().getColor(R.color.green));
                     break;
                 case 1:
                     dr = getResources().getDrawable(R.drawable.reject_medi_checked_tiny);
                     gridcell.setCompoundDrawablesWithIntrinsicBounds(null, dr, null, null);
-                    //gridcell.setBackgroundResource(R.color.lightest_red);
+                    gridcell.setTextColor(getResources().getColor(R.color.dark_red));
                     break;
                 case 2:
                     gridcell.setBackgroundResource(R.drawable.calendar_button_selector);
+                    gridcell.setTextColor(getResources().getColor(R.color.golden_brown));
                     break;
             }
 
             Log.d(tag, "Setting GridCell " + theday + "-" + themonth + "-"
                     + theyear);
 
-            if (day_color[1].equals("GREY")) {
+           /* if (day_color[1].equals("GREY")) {
                 gridcell.setTextColor(getResources()
-                        .getColor(R.color.lightgray));
+                        .getColor(R.color.golden_brown));
             }
             if (day_color[1].equals("WHITE")) {
                 gridcell.setTextColor(getResources().getColor(
                         R.color.lightgray02));
             }
             if (day_color[1].equals("BLUE")) {
-                gridcell.setTextColor(getResources().getColor(R.color.orange));
-            }
+                gridcell.setTextColor(getResources().getColor(R.color.blue));
+            }*/
             return row;
         }
 
         @Override
         public void onClick(View view) {
             String date_month_year = (String) view.getTag();
-            selectedDayMonthYearButton.setText(" " + date_month_year);
+            //selectedDayMonthYearButton.setText(" " + date_month_year);
             Log.e("Selected date", date_month_year);
             Date parsedDate=Calendar.getInstance().getTime();
             try {

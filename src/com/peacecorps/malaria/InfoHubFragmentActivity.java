@@ -20,14 +20,14 @@ public class InfoHubFragmentActivity extends FragmentActivity {
     Button homeIconButton, btnPeaceCorpsPolicy, btnPercentSideEffects, btnSideEffectsPCV,
             btnSideEffectsNPCV, btnVolunteerAdherence, btnEffectiveness;
 
-    TextView internetIsConnected;
+    //TextView internetIsConnected;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_hub_screen);
 
-        internetIsConnected = (TextView)findViewById(R.id.internetIsConnected);
+        /*internetIsConnected = (TextView)findViewById(R.id.internetIsConnected);
 
         // check if you are connected or not
         if(isConnected()){
@@ -36,7 +36,7 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         }
         else{
             internetIsConnected.setText("You are NOT connected");
-        }
+        }*/
 
         homeIconButton = (Button) findViewById(R.id.homeButton);
         btnPeaceCorpsPolicy = (Button) findViewById(R.id.btnPeaceCorpsPolicy);

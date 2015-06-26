@@ -244,21 +244,6 @@ public class SecondAnalyticFragment extends Fragment {
 
     public void SetupAndShowGraph() {
         GraphViewData graphViewData[] = new GraphViewData[DatabaseSQLiteHelper.date.size()];
-        /*SQLiteDatabase sqDB = getWritableDatabase();
-        String[] columns = {"Date", "Percentage"};
-        Cursor cursor = sqDB.query(userMedicationChoiceTable, columns, null, null, null, null, "Timestamp ASC LIMIT 1");
-
-        int idx0, idx1, index = 0;
-        int d;
-        double p;
-        while (cursor.moveToNext()) {
-            idx0 = cursor.getColumnIndex("Date");
-            d = cursor.getInt(idx0);
-            idx1 = cursor.getColumnIndex("Percentage");
-            p = cursor.getDouble(idx1);
-            graphViewData[index] = new GraphViewData(d, p);
-
-        }*/
 
         for (int index = 0; index < DatabaseSQLiteHelper.percentage.size(); index++) {
 

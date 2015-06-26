@@ -169,7 +169,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         Log.d(TAGDSH, "" + year);
         if(flag==0 && st.equalsIgnoreCase(""))
         {
-
             cv.put("Drug", SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drug", 0));
             cv.put("Choice", Choice);
             cv.put("Month", "" + month);
@@ -178,6 +177,40 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             cv.put("Percentage", percentage);
             cv.put("Timestamp", ts);
             sqDB.insert(userMedicationChoiceTable, "medicaton", cv);
+
+            String []col ={"Date"};
+            String []arg = {""+month,""+year};
+            Cursor crsr = sqDB.query(userMedicationChoiceTable,col,"Month =? AND Year =?",arg,null,null,"Date ASC");
+            int count=1,p,lim,ft=0;
+            while (cursor.moveToNext())
+            {
+                p = crsr.getInt(0);
+                count++;
+                if(count==1)
+                {
+                    ft=p;
+                }
+                if(count==2)
+                {
+                   lim=p-ft;
+                   for (int i=1;i<lim;i++)
+                   {   ts=""+year+"-"+month+"-"+(date+i);
+                       cv.put("Drug", SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drug", 0));
+                       cv.put("Choice", Choice);
+                       cv.put("Month", "" + month);
+                       cv.put("Year", "" + year);
+                       cv.put("Date", date+i);
+                       cv.put("Percentage", percentage);
+                       cv.put("Timestamp", ts);
+                       sqDB.insert(userMedicationChoiceTable, "medicaton", cv);
+                   }
+
+                }
+
+            }
+
+
+
         }
         sqDB.close();
 
@@ -235,6 +268,21 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         }
         sqDB.close();
         return firstRunTime;
+    }
+
+    public String getStatus(int date,int month,int year){
+
+        SQLiteDatabase sqDB = getWritableDatabase();
+        String []column = {"Status"};
+        String []selArgs = {""+date,""+month,""+year};
+        Cursor cursor= sqDB.query(userMedicationChoiceTable,column,"Date =? AND Month =? AND Year =?",selArgs,null,null,null,null);
+
+        while(cursor.moveToNext())
+        {
+            return cursor.getString(0);
+        }
+
+        return "miss";
     }
 
 }

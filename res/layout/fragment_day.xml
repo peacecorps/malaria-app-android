@@ -11,7 +11,6 @@
         android:id="@+id/heading_day"
         android:layout_width="fill_parent"
         android:layout_height="60sp"
-        android:background="@color/light_red"
         android:gravity="left|top"
         android:height="60sp"
         android:orientation="horizontal" >
@@ -23,7 +22,9 @@
             android:layout_weight="0.6"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FFFFFF" >
+            android:textColor="@color/golden_brown"
+            android:textStyle="bold"
+            android:textSize="25dp">
         </TextView>
 
         </LinearLayout>
@@ -66,8 +67,8 @@
             android:text="..."
             android:textSize="19sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:background="@drawable/placeholder_analytic_text"
+            android:textColor="@color/white"
+            android:background="@drawable/info_hub_button"
 
             />
 
@@ -125,11 +126,12 @@
         android:layout_height="0dip"
         android:layout_weight="0.29"
         android:gravity="center|bottom"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
-        <Button
+        <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:src="@drawable/edit_pure_white"
             android:background="@drawable/roundedbutton"
             android:layout_gravity="right"
             android:layout_marginBottom="20dp"

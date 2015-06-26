@@ -115,9 +115,10 @@ public class FirstAnalyticFragment extends Fragment {
             adherenceRate = ((double)takenCount / (double)interval) * 100;
         else
             adherenceRate = 100;
-       String ar = String.valueOf(adherenceRate);
-        String.format("%.4f",ar);
-       adherence.setText(""+adherenceRate);
+
+        String ar = String.format("%.4f %%",adherenceRate);
+        Log.d(TAGFAF,"Adherence Rate:"+ar);
+        adherence.setText(ar);
 
     }
 
