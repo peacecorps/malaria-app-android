@@ -180,17 +180,17 @@ public class DayFragmentActivity extends FragmentActivity {
                 dialog.setContentView(R.layout.day_dialog);
                 dialog.setTitle("Medicine Consumption");
 
-                ImageView drug = (ImageView)dialog.findViewById(R.id.image);
+                ImageView drug = (ImageView) dialog.findViewById(R.id.image);
                 drug.setBackgroundResource(R.drawable.drug_normal);
 
-                TextView tv = (TextView)dialog.findViewById(R.id.text);
+                TextView tv = (TextView) dialog.findViewById(R.id.text);
                 tv.setText("Added inaccurate data? Don't worry, you can change here.");
                 tv.setTextSize(15);
                 tv.setTextColor(getResources().getColor(R.color.golden_brown));
 
                 btnRadGroup = (RadioGroup) dialog.findViewById(R.id.radioGroup);
 
-                Button btnOK = (Button)dialog.findViewById(R.id.dialogButtonOK);
+                Button btnOK = (Button) dialog.findViewById(R.id.dialogButtonOK);
                 btnOK.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -201,52 +201,55 @@ public class DayFragmentActivity extends FragmentActivity {
                         btnRadButton = (RadioButton) dialog.findViewById(selectedId);
 
 
-
-                        ch=btnRadButton.getText().toString();
-                        if(flag==0) {
+                        ch = btnRadButton.getText().toString();
+                        Log.d(TAGD, "Radio Button Response-" + ch);
+                        if (flag == 0) {
+                            Log.d(TAGD, "Radio Button Response-" + ch);
                             if (ch.equalsIgnoreCase("yes")) {
                                 Toast.makeText(con,
                                         btnRadButton.getText(), Toast.LENGTH_SHORT).show();
-                                int accept_count=SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount",0)+1;
+                                int accept_count = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0) + 1;
                                 Log.d(TAGD, "accept count:" + accept_count);
                                 SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.drugAcceptedCount", accept_count).apply();
-                                long firstTime=sqLite.getFirstTime();
-                                Log.d(TAGD,""+SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime",0));
-                                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime",firstTime).apply();
+                                long firstTime = sqLite.getFirstTime();
+                                Log.d(TAGD, "" + SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime", 0));
+                                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime", firstTime).apply();
                                 double prcntage = computeAdherenceRate(curr_time);
-                                Log.d(TAGD,"Adherence when Yes:"+prcntage);
-                                sqLite.updateMedicationEntry(day, month, year, "yes",prcntage);
+                                Log.d(TAGD, "Adherence when Yes:" + prcntage);
+                                sqLite.updateMedicationEntry(day, month, year, "yes", prcntage);
+                                int dosesInaRow=sqLite.getDosesInaRow();
+                                Log.d(TAGD,"Doses in a Row:"+dosesInaRow);
+                                SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", dosesInaRow).apply();
                                 indicator.setBackgroundResource(R.drawable.accept_medi_checked_);
 
-                            }else if(ch.equalsIgnoreCase("no")) {
+                            } else if (ch.equalsIgnoreCase("no")) {
                                 Toast.makeText(con,
                                         btnRadButton.getText(), Toast.LENGTH_SHORT).show();
-                                long firstTime=sqLite.getFirstTime();
-                                Log.d(TAGD,""+SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime",0));
-                                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime",firstTime).apply();
-                                String st= sqLite.getStatus(day,month,year);
-                                if(st.equalsIgnoreCase("yes"))
-                                {
-                                    int accept_count=SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount",0)-1;
+                                long firstTime = sqLite.getFirstTime();
+                                Log.d(TAGD, "" + SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime", 0));
+                                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime", firstTime).apply();
+                                String st = sqLite.getStatus(day, month, year);
+                                if (st != null && st.equalsIgnoreCase("yes")) {
+                                    int accept_count = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0) - 1;
                                     SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.drugAcceptedCount", accept_count).apply();
                                 }
                                 double prcntage = computeAdherenceRate(curr_time);
                                 Log.d(TAGD, "Adherence when No:" + prcntage);
-                                sqLite.updateMedicationEntry(day, month, year, "no",prcntage);
+                                sqLite.updateMedicationEntry(day, month, year, "no", prcntage);
+                                int dosesInaRow = sqLite.getDosesInaRow();
+                                Log.d(TAGD, "Doses in a Row:" + dosesInaRow);
+                                SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", dosesInaRow).apply();
                                 indicator.setBackgroundResource(R.drawable.reject_medi_checked);
-                            }
-                              else
+                            } else
                                 dialog.dismiss();
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(getApplicationContext(), "You are not allowed to edit!", Toast.LENGTH_LONG).show();
                         }
                         dialog.dismiss();
 
                     }
                 });
-                Button btnCancel = (Button)dialog.findViewById(R.id.dialogButtonCancel);
+                Button btnCancel = (Button) dialog.findViewById(R.id.dialogButtonCancel);
                 btnCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -257,7 +260,6 @@ public class DayFragmentActivity extends FragmentActivity {
 
             }
         });
-
     }
 
     public static double computeAdherenceRate(long day_time) {

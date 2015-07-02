@@ -75,7 +75,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         Calendar cal;
         cal = Calendar.getInstance();
         cal.setTime(date);
-        String ts=""+cal.get(Calendar.YEAR)+"-"+cal.get(Calendar.MONTH)+""+cal.get(Calendar.DATE);
+        String ts=""+cal.get(Calendar.YEAR)+"-"+cal.get(Calendar.MONTH)+"-"+cal.get(Calendar.DATE);
 
 
         Log.d(TAGDSH,ts);
@@ -216,7 +216,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-
     /*Is Entered is Used for Getting the Style of Each Calendar Grid Cell According to the Medication*/
     public int isEntered(int date,int month, int year)
     {
@@ -243,7 +242,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
 
     }
-
 
     public long getFirstTime()
     {
@@ -283,6 +281,31 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         }
 
         return "miss";
+    }
+
+    public int getDosesInaRow()
+    {
+        SQLiteDatabase sqDB = getWritableDatabase();
+        String []column={"Status","Timestamp","Date"};
+        Cursor cursor= sqDB.query(userMedicationChoiceTable,column,null,null,null,null,"Timestamp DESC");
+        int dosesInaRow=0,prevDate=0,currDate=0;
+
+        //prevDate=cursor.getInt(cursor.getColumnIndex("Date"));
+        while(cursor!=null && cursor.moveToNext())
+        {
+
+
+                    if((cursor.getString(0))!=null)
+                    {
+                        if(cursor.getString(0).compareTo("yes")==0)
+                            dosesInaRow++;
+                        else
+                            break;
+                    }
+            Log.d(TAGDSH, cursor.getString(1) + "-" + cursor.getString(0));
+        }
+        sqDB.close();
+        return dosesInaRow;
     }
 
 }
