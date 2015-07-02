@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    >
+
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollSegmentTrip"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/upperLayout"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:id="@+id/trip_settings_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end"
+                    android:layout_margin="5dp"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/settings_normal"
+                    android:scaleType="fitCenter" />
+
+                <LinearLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <ImageView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/peace_corps_logo_normal"
+                        />
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/plan_my_trip_label"
+                        android:textColor="@color/golden_brown"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+
+                        />
+
+                </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/location_label"
+                        android:textColor="@color/golden_brown"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"/>
+
+
+                    <Spinner
+                       android:id="@+id/trip_location_select_spinner"
+                       android:layout_width="wrap_content"
+                       android:layout_height="40dp"
+                        android:background="@drawable/trip_spinner"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="30dp"
+                        android:paddingLeft="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="10dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/cream"
+                        android:tag="My Location"
+                        />
+
+
+             </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pack_label"
+                        android:textColor="@color/golden_brown"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"/>
+
+                    <Spinner
+                        android:id="@+id/trip_packing_item_select_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:background="@drawable/trip_spinner"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="30dp"
+                        android:paddingLeft="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="10dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/cream"
+                        android:tag="Items"
+                        />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/medication_label"
+                        android:textColor="@color/golden_brown"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"/>
+
+
+                    <Spinner
+                        android:id="@+id/trip_medication_select_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:background="@drawable/trip_spinner"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="30dp"
+                        android:paddingLeft="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="10dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/cream"
+                        android:tag="Drugs"
+                        />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cash_label"
+                        android:textColor="@color/golden_brown"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"/>
+
+
+                    <Spinner
+                        android:id="@+id/trip_cash_select_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:background="@drawable/trip_spinner"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="30dp"
+                        android:paddingLeft="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="10dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/cream"
+                        android:tag="Items"
+                        />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/remind_label"
+                        android:textColor="@color/golden_brown"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="40dp"/>
+
+
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+        </ScrollView>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_alignBottom="@id/scrollSegment"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_height="0.5dp"
+            android:layout_width="200dp"
+            android:background="#000000"
+            android:layout_gravity="center_horizontal"
+
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:paddingBottom="5dp"
+
+            >
+
+            <Button
+                android:id="@+id/homeButton"
+
+                android:background="@drawable/home_icon_inactive_normal"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:layout_marginRight="15dp"
+                android:scaleType="fitCenter"
+
+                />
+
+            <Button
+                android:background="@drawable/bus_icon_normal"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:scaleType="fitCenter"
+                android:id="@+id/tripButton"
+
+                />
+
+
+            <Button
+                android:background="@drawable/info_hub_inactive_normal"
+                android:id="@+id/infoButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="15dp"
+                android:scaleType="fitCenter"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
