@@ -92,11 +92,11 @@ public class DayFragmentActivity extends FragmentActivity {
         TextView drugID = (TextView)findViewById(R.id.drugID);
         drugPicked=SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.drugPicked",null);
         drugID.setText(drugPicked);
-        Log.d(TAGD, drugPicked);
+        //Log.d(TAGD, drugPicked);
 
         /*fetching information about the first time drug was taken*/
         long firstTime = SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime", 0);
-        Log.d(TAGD,String.valueOf(firstTime));
+        //Log.d(TAGD,String.valueOf(firstTime));
         cal.setTimeInMillis(firstTime);
         int firstDate=cal.get(Calendar.DATE);
         int firstMonth= cal.get(Calendar.MONTH);
@@ -226,7 +226,7 @@ public class DayFragmentActivity extends FragmentActivity {
                                 Toast.makeText(con,
                                         btnRadButton.getText(), Toast.LENGTH_SHORT).show();
                                 long firstTime = sqLite.getFirstTime();
-                                Log.d(TAGD, "" + SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime", 0));
+                                //Log.d(TAGD, "" + SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime", 0));
                                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime", firstTime).apply();
                                 String st = sqLite.getStatus(day, month, year);
                                 if (st != null && st.equalsIgnoreCase("yes")) {

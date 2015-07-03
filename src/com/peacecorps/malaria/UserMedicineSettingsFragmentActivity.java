@@ -46,6 +46,7 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
     private String TAGUMSFA="UserMedicineSettingsFragmentActivity";
     static SharedPreferenceStore mSharedPreferenceStore;
 
+
     public static Context mFragmentContext;
 
     /*User Medicine Settings Fragment Activity is for the Setup Screen of the Malaria App*/
@@ -105,6 +106,8 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
                 true)) {
             mSharedPreferenceStore.mEditor.putBoolean(
                     "com.peacecorps.malaria.hasUserSetPreference", true).commit();
+
+
         }
 
     }
@@ -128,6 +131,7 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
      * isFirstRun--------------> BOOLEAN ----> whether this is the first Time App is run or not.
      */
     private void checkInitialAppInstall() {
+
 
         if (mSharedPreferenceStore.mPrefsStore.getBoolean(
                 "com.peacecorps.malaria.hasUserSetPreference", false)) {

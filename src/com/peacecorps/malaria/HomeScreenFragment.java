@@ -257,7 +257,7 @@ public class HomeScreenFragment extends Fragment {
             } else {
 
                 if (checkDrugTakenTimeInterval("dateDrugTaken") > 1) {
-                    mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", 0);
+                    mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", 0).apply();
                 }
 
                 newDayUI();

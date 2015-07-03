@@ -18,7 +18,7 @@ import com.peacecorps.malaria.R;
 public class InfoHubFragmentActivity extends FragmentActivity {
 
     Button homeIconButton, btnPeaceCorpsPolicy, btnPercentSideEffects, btnSideEffectsPCV,
-            btnSideEffectsNPCV, btnVolunteerAdherence, btnEffectiveness;
+            btnSideEffectsNPCV, btnVolunteerAdherence, btnEffectiveness,btnTripIndicator;
 
     //TextView internetIsConnected;
 
@@ -39,6 +39,7 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         }*/
 
         homeIconButton = (Button) findViewById(R.id.homeButton);
+        btnTripIndicator = (Button) findViewById(R.id.tripButton);
         btnPeaceCorpsPolicy = (Button) findViewById(R.id.btnPeaceCorpsPolicy);
         btnPercentSideEffects = (Button) findViewById(R.id.btnPercentSideEffects);
         btnSideEffectsPCV = (Button) findViewById(R.id.btnSideEffectsPCV);
@@ -52,10 +53,20 @@ public class InfoHubFragmentActivity extends FragmentActivity {
 
 
     public void addListeners() {
+
+
         homeIconButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplication().getApplicationContext(), MainActivity.class));
+                finish();
+            }
+        });
+
+        btnTripIndicator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), TripIndicatorFragmentActivity.class));
                 finish();
             }
         });

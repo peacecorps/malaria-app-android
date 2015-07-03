@@ -382,7 +382,7 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
 
             // ACCOUNT FOR SPACING
 
-            Log.d(tag, "Current Day: " + getCurrentDayOfMonth());
+            //Log.d(tag, "Current Day: " + getCurrentDayOfMonth());
             String[] day_color = list.get(position).split("-");
             String theday = day_color[0];
             String themonth = day_color[2];

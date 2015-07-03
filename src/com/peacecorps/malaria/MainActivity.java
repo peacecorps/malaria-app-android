@@ -22,6 +22,7 @@ public class MainActivity extends FragmentActivity {
     ViewPager mPager;
     PageIndicator mIndicator;
     Button mInfoButton;
+    Button mTripButton;
     String TAGMA="MainActivity";
 
 
@@ -30,6 +31,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(this);
         /*Method opens the Info Hub
         *Tiny 'i' symbol in the Setup Screen is Info Hub Button
         */
@@ -42,37 +44,36 @@ public class MainActivity extends FragmentActivity {
 
             }
         });
+        Log.d(TAGMA, "Info Hub Button initialized");
+
+
+        mTripButton = (Button) findViewById(R.id.tripButton);
+        mTripButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(),TripIndicatorFragmentActivity.class));
+                finish();
+            }
+        });
 
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
 
         mPager = (ViewPager) findViewById(R.id.vPager);
         mPager.setAdapter(mAdapter);
-
+        Log.d(TAGMA, "Adapter Set");
         mIndicator = (CirclePageIndicator) findViewById(R.id.vIndicator);
         mIndicator.setViewPager(mPager);
         mIndicator.setOnPageChangeListener(new OnPageChangeListener() {
+
 
 
             @Override
             public void onPageSelected(int position) {
 
                 if (position == 1) {
-                    if (FirstAnalyticFragment.checkMediLastTakenTime != null) {
-                        FirstAnalyticFragment.checkMediLastTakenTime
-                                .setText(SharedPreferenceStore.mPrefsStore
-                                        .getString(
-                                                "com.peacecorps.malaria.checkMediLastTakenTime",
-                                                "").toString());
 
-                        int currentDose = 0;
-                        if (SharedPreferenceStore.mPrefsStore.getBoolean(
-                                "com.peacecorps.malaria.isWeekly", false)) {
-                            currentDose = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDose", 0);
-                        } else {
-                            currentDose = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.dailyDose", 0);
-                        }
-                        FirstAnalyticFragment.doses.setText("" + currentDose);
 
+                        Log.d(TAGMA, "Inside Page Selected");
                         long interval = checkDrugTakenTimeInterval("firstRunTime");
                         int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
                         double adherenceRate;
@@ -84,7 +85,21 @@ public class MainActivity extends FragmentActivity {
                         adherenceRate = 100;
                         String ar=String.format("%.4f ",adherenceRate);
                         FirstAnalyticFragment.adherence.setText("" + ar + "%");
+                    int currentDose = 0,dosesInaRow=0;
+                    if (SharedPreferenceStore.mPrefsStore.getBoolean(
+                            "com.peacecorps.malaria.isWeekly", false)) {
+                        currentDose = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDose", 0);
+                    } else {
+                        //currentDose = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.dailyDose", 0);
+                        dosesInaRow=sqLite.getDosesInaRow();
+                        SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose",dosesInaRow).apply();
+                        currentDose=dosesInaRow;
                     }
+                    FirstAnalyticFragment.doses.setText("" + currentDose);
+                    Log.d(TAGMA, "Doses in a Row:" + dosesInaRow);
+
+
+
 
                 }
             }

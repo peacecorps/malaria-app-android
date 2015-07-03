@@ -86,7 +86,6 @@ public class EffectivenessFragmentActivity extends FragmentActivity{
                     File file;
                     FileOutputStream outputStream;
                     try {
-                        // file = File.createTempFile("MyCache", null, getCacheDir());
                         file = new File(getCacheDir(), "ECache");
 
                         outputStream = new FileOutputStream(file);

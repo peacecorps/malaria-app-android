@@ -36,12 +36,6 @@ public class FirstAnalyticFragment extends Fragment {
         checkMediLastTakenTime = (TextView) rootView.findViewById(R.id.checkMediLastTakenTime);
         doses = (TextView) rootView.findViewById(R.id.doses);
         adherence = (TextView) rootView.findViewById(R.id.adherence);
-
-        if (checkMediLastTakenTime != null) {
-            checkMediLastTakenTime.setText(mSharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.checkMediLastTakenTime", "").toString());
-            doses.setText("" + mSharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.acceptedCount", 0));
-        }
-
         updateUI();
 
 
@@ -58,9 +52,16 @@ public class FirstAnalyticFragment extends Fragment {
 
     public void updateUI(){
 
+        updateMediLastTime();
+        Log.d(TAGFAF,"AFTER CHK MEDI LAST TIME");
+        updateDoses();
+        Log.d(TAGFAF, "AFTER UPDATE DOSES");
         updateAdherence();
+        Log.d(TAGFAF, "AFTER UPDATE ADHERENCE");
         getSharedPreferences();
+        Log.d(TAGFAF, "AFTER SHARED PREFS");
         addButtonListeners();
+        Log.d(TAGFAF, "AFTER BUTTON LISTENERS");
     }
 
 
@@ -122,4 +123,25 @@ public class FirstAnalyticFragment extends Fragment {
 
     }
 
+    public void updateDoses()
+    {   DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
+        Log.d(TAGFAF, "INSIDE updateDoses");
+        if(mSharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly",false)) {
+            doses.setText("" + mSharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDose", 0));
+        }
+        else
+            {
+                int d = sqLite.getDosesInaRow();
+                mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose",d).apply();
+                doses.setText("" + mSharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.dailyDose", 0));
+            }
+        }
+
+    public void updateMediLastTime() {
+        if (checkMediLastTakenTime != null) {
+            checkMediLastTakenTime.setText(mSharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.checkMediLastTakenTime", "").toString());
+        }
+    }
+
 }
+
