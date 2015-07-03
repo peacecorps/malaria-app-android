@@ -63,23 +63,33 @@
 
                     android:background="@drawable/home_icon_normal"
                     android:layout_width="30dp"
-                       android:layout_height="30dp"
+                    android:layout_height="30dp"
                     android:adjustViewBounds="true"
                     android:layout_marginRight="15dp"
                    android:scaleType="fitCenter" 
                      
                     />
 
+            <Button
+                android:background="@drawable/bus_icon_inactive_normal"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:scaleType="fitCenter"
+                android:id="@+id/tripButton"
 
-        <Button
-               android:background="@drawable/info_hub_inactive_normal"
-               android:id="@+id/infoButton"
+                    />
+
+            <Button
+                android:background="@drawable/info_hub_inactive_normal"
+                android:id="@+id/infoButton"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:adjustViewBounds="true"
                 android:layout_marginLeft="15dp"
                 android:scaleType="fitCenter"
- />
-
+                   />
         </LinearLayout>
     </LinearLayout>
