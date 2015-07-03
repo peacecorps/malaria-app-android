@@ -82,15 +82,15 @@
                        android:id="@+id/trip_location_select_spinner"
                        android:layout_width="0dp"
                        android:layout_height="40dp"
-                        android:background="@drawable/trip_spinner"
                         android:layout_marginTop="20dp"
                         android:paddingLeft="10dp"
                         android:layout_marginLeft="10dp"
                         android:textSize="10dp"
                         android:paddingBottom="5dp"
                         android:textColor="@color/cream"
-                        android:tag="My Location"
+                        android:prompt="@string/location_label"
                         android:layout_weight="1"
+                        android:background="@drawable/trip_spinner"
                         />
 
                      <ImageView
@@ -167,7 +167,8 @@
                         android:textSize="10dp"
                         android:paddingBottom="5dp"
                         android:textColor="@color/cream"
-                        android:tag="Drugs"
+                        android:entries="@array/user_medicine_settings_activity_drug_array"
+                        android:prompt="@string/medication_spinner_label"
                         />
 
 

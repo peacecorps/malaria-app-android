@@ -32,8 +32,9 @@
     <string name="medication_label">Medication:</string>
     <string name="remind_label">Remind Me On:</string>
     <string name="trip_button_label">Generate</string>
-
-
+    <string name="location_spinner_label">Choose Location</string>
+    <string name="medication_spinner_label">Choose Drug</string>
+    <string name="items_spinner_label">Pick Items</string>
 
     <string name="dump_test">
         Fetching.
@@ -59,6 +60,39 @@
         <item>October</item>
         <item>November</item>
         <item>December</item>
+    </string-array>
+
+
+    <string-array name="drug_array">
+        <item>Malarone</item>
+        <item>Doxycycline</item>
+        <item>Mefloquine</item>
+    </string-array>
+
+    <string-array name="location_array">
+        <item>Benin</item>
+        <item>Botswana</item>
+        <item>Burkina Faso</item>
+        <item>Cameroon</item>
+        <item>Ethiopia</item>
+        <item>Ghana</item>
+        <item>Guinea</item>
+        <item>Kenya</item>
+        <item>Liberia</item>
+        <item>Madagascar</item>
+        <item>Malawi</item>
+        <item>Mozambique</item>
+        <item>Namibia</item>
+        <item>Rwanda</item>
+        <item>Sierra Leone</item>
+        <item>Senegal</item>
+        <item>South Africa</item>
+        <item>Swaziland</item>
+        <item>Tanzania</item>
+        <item>The Gambia</item>
+        <item>Togo</item>
+        <item>Uganda</item>
+        <item>Zambia</item>
     </string-array>
 
 </resources>
