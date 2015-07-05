@@ -90,7 +90,8 @@
                         android:textColor="@color/cream"
                         android:prompt="@string/location_label"
                         android:layout_weight="1"
-                        android:background="@drawable/trip_spinner"
+                        android:background="@drawable/trip_spinner_bg"
+
                         />
 
                      <ImageView
@@ -118,25 +119,43 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="30dp"/>
+                        android:layout_marginTop="30dp"
+                        />
 
-                    <Spinner
-                        android:id="@+id/trip_packing_item_select_spinner"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="0dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/trip_spinner"
+                        android:background="@drawable/trip_cash_editext"
+                        android:id="@+id/tripItemSelector"
+                        android:layout_marginRight="20dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginRight="30dp"
-                        android:paddingLeft="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textSize="10dp"
-                        android:paddingBottom="5dp"
+                        android:layout_weight="1"
+                        >
+                    <TextView
+                        android:id  ="@+id/tripSelectBox"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:text="Add Packing Items"
                         android:textColor="@color/cream"
-                        android:tag="Items"
+                        android:textSize="12dp"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"
+
+                        />
+
+                    <Button android:id="@+id/tripCreate"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:background="@drawable/arrow_down"
+                        android:layout_gravity="bottom|right"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
                         />
 
 
-
+                </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -159,7 +178,7 @@
                         android:id="@+id/trip_medication_select_spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:background="@drawable/trip_spinner"
+                        android:background="@drawable/trip_spinner_bg"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="30dp"
                         android:paddingLeft="10dp"
@@ -169,6 +188,7 @@
                         android:textColor="@color/cream"
                         android:entries="@array/user_medicine_settings_activity_drug_array"
                         android:prompt="@string/medication_spinner_label"
+                        android:popupBackground="@color/light_green"
                         />
 
 
@@ -195,15 +215,16 @@
                         android:id="@+id/trip_cash_select_editext"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:background="@drawable/trip_spinner"
+                        android:background="@drawable/trip_cash_editext"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="30dp"
                         android:paddingLeft="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textSize="10dp"
+                        android:textSize="15dp"
                         android:paddingBottom="5dp"
                         android:textColor="@color/cream"
                         android:tag="Cash"
+                        android:text="Cash in $"
                         />
 
 

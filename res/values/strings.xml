@@ -35,10 +35,8 @@
     <string name="location_spinner_label">Choose Location</string>
     <string name="medication_spinner_label">Choose Drug</string>
     <string name="items_spinner_label">Pick Items</string>
-
-    <string name="dump_test">
-        Fetching.
-    </string>
+    <string name="trip_select_string">Add Packing Items</string>
+    <string name="dump_test">Fetching...</string>
 
 
     <string-array name="user_medicine_settings_activity_drug_array">
@@ -93,6 +91,13 @@
         <item>Togo</item>
         <item>Uganda</item>
         <item>Zambia</item>
+    </string-array>
+
+
+    <string-array name="item_array">
+        <item>Medication</item>
+        <item>Ointment</item>
+        <item>Mosquito Net</item>
     </string-array>
 
 </resources>

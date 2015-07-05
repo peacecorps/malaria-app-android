@@ -22,8 +22,9 @@
     <color name="green">#ff136612</color>
     <color name="red">#e33d1b</color>
     <color name="dark_red">#cc2303</color>
-    <color name="light_green">#B2FF59</color>
+    <color name="lighter_green">#B2FF59</color>
     <color name="lightest_red">#EF9A9A</color>
     <color name="cream">#FFFDD0</color>
+    <color name="light_green">#ff8fc24e</color>
 
 </resources>
