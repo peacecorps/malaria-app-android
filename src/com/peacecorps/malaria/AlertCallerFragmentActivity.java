@@ -39,14 +39,15 @@ public class AlertCallerFragmentActivity extends FragmentActivity {
     }
 
     public void callAlarm() {
+
         AlertDialogFragment alert = new AlertDialogFragment();
-
         alert.show(getSupportFragmentManager(), "alertDemo");
-
         alert.setCancelable(false);
+
     }
 
     public long checkDrugTakenTimeInterval(String time) {
+
         long interval = 0;
         long today = new Date().getTime();
         long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
@@ -54,6 +55,7 @@ public class AlertCallerFragmentActivity extends FragmentActivity {
         long oneDay = 1000 * 60 * 60 * 24;
         interval = (today - takenDate) / oneDay;
         return interval;
+
     }
 
     public void getSharedPreferences() {

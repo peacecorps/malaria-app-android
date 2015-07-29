@@ -1,15 +1,20 @@
 package com.peacecorps.malaria;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -34,10 +39,13 @@ public class HomeScreenFragment extends Fragment {
     private String[] mPossibledays = {"Sunday", "Monday", "Tuesday",
             "Wednesday", "Thursday", "Friday", "Saturday"};
     private static View rootView;
+    private static String TAGHSF = "HomeScreenFragment";
+    //public static TextView checkMediLastTakenTime = null;
 
     int checkDay = -1;
 
     static SharedPreferenceStore mSharedPreferenceStore;
+    private Dialog dialog = null;
 
 
     @Override
@@ -60,6 +68,7 @@ public class HomeScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home_screen, null);
+        //checkMediLastTakenTime = (TextView) rootView.findViewById(R.id.checkMediLastTakenTime);
 
         updateUI();
         return rootView;
@@ -67,9 +76,10 @@ public class HomeScreenFragment extends Fragment {
     }
 
     public double computeAdherenceRate() {
-        long interval = checkDrugTakenTimeInterval("firstRunTime") + 1;
+        long interval = checkDrugTakenTimeInterval("firstRunTime");
         int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
-        double adherenceRate = (takenCount / interval) * 100;
+        double adherenceRate = ((double)takenCount / (double)interval) * 100;
+        Log.d(TAGHSF, "adherence:" + adherenceRate);
         return adherenceRate;
     }
 
@@ -81,9 +91,7 @@ public class HomeScreenFragment extends Fragment {
 
                 mSharedPreferenceStore.mEditor.putBoolean(
                         "com.peacecorps.malaria.hasUserSetPreference", false).commit();
-                startActivity(new Intent(getActivity(),
-                        UserMedicineSettingsFragmentActivity.class));
-                getActivity().finish();
+                addDialog();
 
             }
         });
@@ -159,6 +167,8 @@ public class HomeScreenFragment extends Fragment {
         mCurrentDateLabel.setText(mGetCurrentDate);
         mCurrentDayOfweekLabel
                 .setText(decideDayofWeek(checkDay, mPossibledays));
+        //checkMediLastTakenTime = (TextView) rootView.findViewById(R.id.checkMediLastTakenTime);
+
     }
 
     public void updateUI() {
@@ -174,6 +184,7 @@ public class HomeScreenFragment extends Fragment {
         addButtonListeners();
         getSettings();
         decideisDrugTakenUI();
+       // updateMediLastTime();
     }
 
     public void saveUsersettings(Boolean state, Boolean isWeekly) {
@@ -213,6 +224,7 @@ public class HomeScreenFragment extends Fragment {
     }
 
     public void decideisDrugTakenUI() {
+        //if drug is taken weekly//
         if (mSharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly",
                 false)) {
             if (checkDrugTakenTimeInterval("weeklyDate") == 0) {
@@ -239,7 +251,7 @@ public class HomeScreenFragment extends Fragment {
                     newDayUI();
                 }
             }
-        } else {
+        } else { //if drug is taken daily//
             if (checkDrugTakenTimeInterval("dateDrugTaken") == 0) {
                 if (mSharedPreferenceStore.mPrefsStore.getBoolean(
                         "com.peacecorps.malaria.isDrugTaken", false)) {
@@ -252,7 +264,7 @@ public class HomeScreenFragment extends Fragment {
             } else {
 
                 if (checkDrugTakenTimeInterval("dateDrugTaken") > 1) {
-                    mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", 0);
+                    mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", 0).apply();
                 }
 
                 newDayUI();
@@ -261,13 +273,30 @@ public class HomeScreenFragment extends Fragment {
     }
 
     public long checkDrugTakenTimeInterval(String time) {
+
         long interval = 0;
         long today = new Date().getTime();
-        long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
-                + time, 0);
-        long oneDay = 1000 * 60 * 60 * 24;
-        interval = (today - takenDate) / oneDay;
-        return interval;
+        DatabaseSQLiteHelper sqLite= new DatabaseSQLiteHelper(getActivity());
+        long takenDate= sqLite.getFirstTime();
+        if(time.compareTo("firstRunTime")==0) {
+            if(takenDate!=0) {
+                Log.d(TAGHSF, "First Run Time at FAF->" + takenDate);
+                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
+                        + time, takenDate).apply();
+                long oneDay = 1000 * 60 * 60 * 24;
+                interval = (today - takenDate) / oneDay;
+                return interval;
+            }
+            else
+                return 1;
+        }
+        else {
+            takenDate=SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
+                    + time, takenDate);
+            long oneDay = 1000 * 60 * 60 * 24;
+            interval = (today - takenDate) / oneDay;
+            return interval;
+        }
     }
 
     public void newDayUI() {
@@ -330,8 +359,8 @@ public class HomeScreenFragment extends Fragment {
     }
 
     public void changeWeeklyAlarmTime() {
-        int hour = Calendar.getInstance().getTime().getHours();
-        int minute = Calendar.getInstance().getTime().getMinutes() - 1;
+        int hour = Calendar.getInstance().get(Calendar.HOUR);
+        int minute = Calendar.getInstance().get(Calendar.MINUTE) - 1;
         getActivity().startService(
                 new Intent(getActivity(), AlarmService.class));
         mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.AlarmHour", hour)
@@ -370,5 +399,67 @@ public class HomeScreenFragment extends Fragment {
         return currentDayOfWeek;
     }
 
+
+    public void missedDayRecord(int day, int month, int year){
+
+        DatabaseSQLiteHelper sqLH = new DatabaseSQLiteHelper(getActivity());
+        sqLH.insertOrUpdateMissedMedicationEntry(day,month,year,computeAdherenceRate());
+
+    }
+
+    public void addDialog()
+    {
+        dialog = new Dialog(this.getActivity());
+        dialog.setContentView(R.layout.resetdata_dialog);
+        dialog.setTitle("Reset Data");
+
+        final RadioGroup btnRadGroup = (RadioGroup) dialog.findViewById(R.id.radioGroupReset);
+        Button btnOK = (Button) dialog.findViewById(R.id.dialogButtonOKReset);
+
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // get selected radio button from radioGroup
+                int selectedId = btnRadGroup.getCheckedRadioButtonId();
+
+                // find the radiobutton by returned id
+                RadioButton btnRadButton = (RadioButton) dialog.findViewById(selectedId);
+
+                String ch = btnRadButton.getText().toString();
+
+                if(ch.equalsIgnoreCase("yes"))
+                {
+                    DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
+                    sqLite.resetDatabase();
+                    mSharedPreferenceStore.mEditor.clear().commit();
+                    startActivity(new Intent(getActivity(),
+                            UserMedicineSettingsFragmentActivity.class));
+                    getActivity().finish();
+                }
+                else
+                {
+                    dialog.dismiss();
+                }
+
+            }
+        });
+
+        Button btnCancel = (Button) dialog.findViewById(R.id.dialogButtonCancelReset);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
+    }
+
+    /*public void updateMediLastTime() {
+        if (FirstAnalyticFragment.checkMediLastTakenTime != null) {
+            FirstAnalyticFragment.checkMediLastTakenTime.setText(mSharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.checkMediLastTakenTime", "").toString());
+        }
+    }*/
 
 }
