@@ -3,10 +3,12 @@ package com.peacecorps.malaria;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,7 +21,17 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "MalariaDatabase";
     private static final String userMedicationChoiceTable = "userSettings";
+    private static final String appSettingTable = "appSettings";
+    private static final String locationTable = "locationSettings";
+    private static final String packingTable = "packingSettings";
     private static final String TAGDSH= "DatabaseSQLiteHelper";
+    public static final String LOCATION = "Location";
+    public static final String KEY_ROW_ID = "_id";
+
+    private final int[] daysOfMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30,
+            31, 30, 31 };
+    private final int[] daysOfMonthLeap = { 31, 29, 31, 30, 31, 30, 31, 31, 30,
+            31, 30, 31 };
 
     public DatabaseSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -28,6 +40,9 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL("CREATE TABLE " + userMedicationChoiceTable + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, Drug INTEGER,Choice VARCHAR, Month VARCHAR, Year VARCHAR,Status VARCHAR,Date INTEGER,Percentage DOUBLE, Timestamp VARCHAR);");
+        database.execSQL("CREATE TABLE " + appSettingTable + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, Drug VARCHAR, Choice VARCHAR, WeeklyDay INTEGER, FirstTime LONG, FreshInstall VARCHAR);");
+        database.execSQL("CREATE TABLE " + locationTable + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, Location VARCHAR, Times INTEGER);");
+        database.execSQL("CREATE TABLE " + packingTable + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, PackingItem VARCHAR, Quantity INTEGER);");
     }
 
     @Override
@@ -75,7 +90,16 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         Calendar cal;
         cal = Calendar.getInstance();
         cal.setTime(date);
-        String ts=""+cal.get(Calendar.YEAR)+"-"+cal.get(Calendar.MONTH)+"-"+cal.get(Calendar.DATE);
+        int d=cal.get(Calendar.DATE);
+        String ts="";
+        if(d>=10)
+        {
+            ts=""+cal.get(Calendar.YEAR)+"-"+cal.get(Calendar.MONTH)+"-"+cal.get(Calendar.DATE);
+        }
+        else {
+            ts=""+cal.get(Calendar.YEAR)+"-"+cal.get(Calendar.MONTH)+"-0"+cal.get(Calendar.DATE);
+        }
+        String []args={""+ts};
 
 
         Log.d(TAGDSH,ts);
@@ -90,6 +114,45 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         this.getWritableDatabase().insert(userMedicationChoiceTable, "medication", values);
         this.getWritableDatabase().close();
 
+    }
+
+    public void insertAppSettings(String drug, String choice, long date)
+    {
+        SQLiteDatabase sqDB= getWritableDatabase();
+        String [] column={"FirstInstall"};
+        ContentValues cv =new ContentValues(2);
+        Cursor cursor=sqDB.query(appSettingTable,column,null,null,null,null,"_id ASC LIMIT 1");
+        cursor.moveToNext();
+        try {
+
+            if (cursor.getString(0).compareTo("true")==0)
+            {
+                cv.put("Drug", drug);
+                cv.put("Choice", choice);
+                cv.put("FirstTime", date);
+                Calendar c =Calendar.getInstance();
+                c.setTimeInMillis(date);
+                int w=c.get(Calendar.DAY_OF_WEEK);
+                cv.put("WeeklyDay",w);
+                cv.put("FreshInstall","true");
+                String [] args={"1"};
+                sqDB.delete(appSettingTable,"_id = ?",args);
+                sqDB.insert(appSettingTable,"settings",cv);
+            }
+
+        }
+        catch(Exception e)
+        {   cv.put("Drug", drug);
+            cv.put("Choice", choice);
+            cv.put("FirstTime", date);
+            Calendar c =Calendar.getInstance();
+            c.setTimeInMillis(date);
+            int w=c.get(Calendar.DAY_OF_WEEK);
+            cv.put("WeeklyDay", w);
+            cv.put("FreshInstall", "true");
+            String [] args={"1"};
+            sqDB.insert(appSettingTable,"settings",cv);
+        }
     }
 
     public String getMedicationData(int date,int month, int year) {
@@ -148,12 +211,15 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase sqDB = this.getWritableDatabase();
         ContentValues cv = new ContentValues(2);
-        String Choice="";
+        String Choice="",ts="";
         if(SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly",false))
             Choice="weekly";
         else
             Choice="daily";
-        String ts=""+year+"-"+month+"-"+date;
+        if(date>=10)
+            ts=""+year+"-"+month+"-"+date;
+        else
+            ts=""+year+"-"+month+"-0"+date;
 
         String []columns={"Status"};
         String []selArgs= {""+date,""+month,""+year};
@@ -194,7 +260,10 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
                 {
                    lim=p-ft;
                    for (int i=1;i<lim;i++)
-                   {   ts=""+year+"-"+month+"-"+(date+i);
+                   {   if((date+i)>=10)
+                       ts=""+year+"-"+month+"-"+(date+i);
+                       else
+                       ts=""+year+"-"+month+"-0"+(date+i);
                        cv.put("Drug", SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drug", 0));
                        cv.put("Choice", Choice);
                        cv.put("Month", "" + month);
@@ -243,8 +312,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-    public long getFirstTime()
-    {
+    public long getFirstTime() {
         SQLiteDatabase sqDB = getWritableDatabase();
         String column[]={"Timestamp"};
         Cursor cursor = sqDB.query(userMedicationChoiceTable,column,null,null,null,null,"Timestamp ASC LIMIT 1");
@@ -283,29 +351,285 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         return "miss";
     }
 
-    public int getDosesInaRow()
+
+
+    public int getDosesInaRowDaily()
     {
         SQLiteDatabase sqDB = getWritableDatabase();
-        String []column={"Status","Timestamp","Date"};
+        String []column={"Status","Timestamp","Date","Month","Year","Choice"};
         Cursor cursor= sqDB.query(userMedicationChoiceTable,column,null,null,null,null,"Timestamp DESC");
-        int dosesInaRow=0,prevDate=0,currDate=0;
+        int dosesInaRow=0,prevDate=0,currDate=0,currDateMonth=0,prevDateMonth=0,prevDateYear=0,currDateYear=0;
+        String ts="";
+        if(cursor!=null) {
+            cursor.moveToNext();
+            if (cursor != null) {
+                try {
+                    ts = cursor.getString(cursor.getColumnIndex("Timestamp"));
+                    currDate = cursor.getInt(2);
+                    Log.d(TAGDSH, "curr date 1->" + ts);
+                } catch (Exception e) {
+                    return 0;
+                }
+                if (cursor.getString(0).compareTo("yes") == 0) {
+                    prevDate = cursor.getInt(2);
+                    prevDateMonth = cursor.getInt(3);
+                    if (Math.abs(currDate - prevDate) <= 1)
+                        dosesInaRow++;
+                }
 
-        //prevDate=cursor.getInt(cursor.getColumnIndex("Date"));
-        while(cursor!=null && cursor.moveToNext())
-        {
 
+                while (cursor != null && cursor.moveToNext()) {
+                    currDate = cursor.getInt(2);
+                    currDateMonth = cursor.getInt(3);
+                    currDateYear = cursor.getInt(4);
+                    ts = cursor.getString(cursor.getColumnIndex("Timestamp"));
+                    Log.d(TAGDSH, "curr date ->" + ts);
+                    int parameter = Math.abs(currDate - prevDate);
+                    if ((cursor.getString(0)) != null) {
+                        if (currDateMonth == prevDateMonth) {
+                            if (cursor.getString(0).compareTo("yes") == 0 && parameter == 1)
+                                dosesInaRow++;
+                            else
+                                break;
+                        } else {
+                            parameter = Math.abs(currDate - prevDate) % (getNumberofDaysinMonth(currDateMonth, currDateYear) - 1);
+                            if (cursor.getString(0).compareTo("yes") == 0 && parameter <= 1)
+                                dosesInaRow++;
+                            else
+                                break;
 
-                    if((cursor.getString(0))!=null)
-                    {
-                        if(cursor.getString(0).compareTo("yes")==0)
-                            dosesInaRow++;
-                        else
-                            break;
+                        }
                     }
-            Log.d(TAGDSH, cursor.getString(1) + "-" + cursor.getString(0));
+                    Log.d(TAGDSH, "Doses in Row->" + dosesInaRow);
+                    prevDate = currDate;
+                    prevDateMonth = currDateMonth;
+                }
+            }
         }
+        Log.d(TAGDSH, "Doses in Row->" + dosesInaRow);
         sqDB.close();
         return dosesInaRow;
     }
+
+    private int getNumberofDaysinMonth(int month,int year)
+    {
+        if(isLeapYear(year))
+        {
+            return daysOfMonthLeap[month];
+        }
+        else
+            return daysOfMonth[month];
+    }
+
+    private static boolean isLeapYear(int year) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        return cal.getActualMaximum(Calendar.DAY_OF_YEAR) > 365;
+    }
+
+    public int getDosesInaRowWeekly()
+    {
+        SQLiteDatabase sqDB = getWritableDatabase();
+        String []column={"Status","Timestamp","Date","Month","Year"};
+        Cursor cursor= sqDB.query(userMedicationChoiceTable,column,null,null,null,null,"Timestamp DESC");
+        int dosesInaRow=1,aMonth=0,pMonth=0;
+        Date ado,pdo;
+        int pPara=0;
+        long aPara=0;
+        int numDays=0;
+        String ats="",pts="";
+        if(cursor!=null) {
+            cursor.moveToNext();
+            if(cursor!=null) {
+
+                try {
+                    ats = cursor.getString(1);
+                }
+                catch (CursorIndexOutOfBoundsException e)
+                {
+                    return 0;
+                }
+
+                aMonth = cursor.getInt(3) + 1;
+                ats = getHumanDateFormat(ats, aMonth);
+                ado = getDateObject(ats);
+                while (cursor.moveToNext()) {
+                    pts = cursor.getString(1);
+                    pMonth = cursor.getInt(3) + 1;
+                    pts = getHumanDateFormat(pts, pMonth);
+                    pdo = getDateObject(pts);
+                    numDays = getDayofWeek(pdo);
+                    pPara = 7 - numDays + 7;
+                    aPara = getNumberOfDays(pdo, ado);
+                    if (aPara <= pPara)
+                        dosesInaRow++;
+                    else
+                        break;
+                    ats = pts;
+                    ado = pdo;
+                }
+            }
+        }
+        return dosesInaRow;
+
+
+    }
+
+    private Date getDateObject(String s)
+    {
+        Date dobj=null;
+
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            dobj= sdf.parse(s);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        return dobj;
+    }
+
+    private int getDayofWeek(Date d)
+    {
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(d);
+        int day=cal.get(Calendar.DAY_OF_WEEK);
+        return day;
+    }
+
+    private long getNumberOfDays(Date d1,Date d2) {
+        long interval = 0;
+        Calendar c= Calendar.getInstance();
+        c.setTime(d1);
+        long ld1 = c.getTimeInMillis();
+        c.setTime(d2);
+        long ld2=c.getTimeInMillis();
+        long oneDay = 1000 * 60 * 60 * 24;
+        interval = (ld2-ld1) / oneDay;
+        return interval;
+    }
+
+    private String getHumanDateFormat(String ats,int aMonth)
+    {
+        String aYear=ats.substring(0, 4);
+        String aDate=ats.substring(Math.max(ats.length() - 2, 0));
+        ats=aYear+"-"+aMonth+"-"+aDate;
+        return ats;
+    }
+
+    public String getMediLastTakenTime()
+    {
+        SQLiteDatabase sqDB=getWritableDatabase();
+        String [] column={"Date","Month","Year"};
+        String recentDate="";
+        Cursor cursor = sqDB.query(userMedicationChoiceTable, column, null, null, null, null, "Timestamp DESC LIMIT 1");
+        if(cursor!=null)
+        { cursor.moveToNext();
+            try
+            {
+                recentDate=cursor.getString(0)+"/"+cursor.getString(1);
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+        }      sqDB.close();
+        return recentDate;
+    }
+
+    public void resetDatabase()
+    {
+        SQLiteDatabase sqDB = getWritableDatabase();
+        sqDB.delete(userMedicationChoiceTable,null,null);
+        sqDB.delete(appSettingTable,null,null);
+        sqDB.delete(locationTable,null,null);
+        sqDB.delete(packingTable,null,null);
+        sqDB.close();
+    }
+
+    public void insertLocation(String location)
+    {
+        SQLiteDatabase sqDB = getWritableDatabase();
+        ContentValues cv =new ContentValues(2);
+        int a=0;
+        cv.put("Location", location);
+
+        String [] columns = {"Location","Times"};
+        String [] selArgs = {""+location};
+
+        Cursor cursor = sqDB.query(locationTable,columns,"Location = ?",selArgs,null,null,null);
+
+        while (cursor.moveToNext())
+        {
+            a= cursor.getInt(1);
+            a++;
+        }
+        cv.put("Times", a);
+
+        if(a==1)
+            sqDB.update(locationTable, cv, "Location= ?", selArgs);
+        else
+            sqDB.insert(locationTable, "location", cv);
+
+
+    }
+
+    public Cursor getLocation()
+    {
+
+        SQLiteDatabase sqDB = getWritableDatabase();
+        String []column={"_id","Location"};
+
+        return sqDB.query(locationTable, column,
+                null, null, null, null,
+                KEY_ROW_ID + " asc ");
+    }
+
+    public void insertPackingItem(String pItem,int quantity)
+    {
+        SQLiteDatabase sqDB = getWritableDatabase();
+        ContentValues cv =new ContentValues(2);
+        int flag=0,q=0;
+        cv.put("PackingItem",pItem);
+
+        String [] columns = {"PackingItem","Quantity"};
+        String [] selArgs = {""+pItem};
+
+        Cursor cursor = sqDB.query(packingTable,columns,"PackingItem = ?",selArgs,null,null,null);
+
+        while (cursor.moveToNext())
+        {
+           q= cursor.getInt(1);
+            flag++;
+            Log.d(TAGDSH,"Flag: "+flag);
+        }
+
+
+        if(flag==1) {
+
+            cv.put("Quantity", quantity);
+            sqDB.update(packingTable, cv, "PackingItem= ?", selArgs);
+        }
+        else {
+            cv.put("Quantity", quantity);
+            sqDB.insert(packingTable, "item", cv);
+        }
+
+
+    }
+
+    public Cursor getPackingItem()
+    {
+
+        SQLiteDatabase sqDB = getWritableDatabase();
+        String []column={"_id","PackingItem","Quantity"};
+
+        return sqDB.query(packingTable, column,
+                null, null, null, null,
+                KEY_ROW_ID + " asc ");
+    }
+
 
 }

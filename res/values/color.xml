@@ -24,7 +24,8 @@
     <color name="dark_red">#cc2303</color>
     <color name="lighter_green">#B2FF59</color>
     <color name="lightest_red">#EF9A9A</color>
-    <color name="cream">#FFFDD0</color>
+    <color name="cream">#fffff7bf</color>
     <color name="light_green">#ff8fc24e</color>
+    <color name="lightest_brown">#ffe0cf79</color>
 
 </resources>

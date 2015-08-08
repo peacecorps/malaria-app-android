@@ -1,6 +1,7 @@
 
 package com.peacecorps.malaria;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,8 +16,10 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.jjoe64.graphview.CustomLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.GraphViewStyle;
 import com.jjoe64.graphview.LineGraphView;
 
 import java.util.Calendar;
@@ -44,6 +47,7 @@ public class SecondAnalyticFragment extends Fragment {
     private GraphViewData[] graphViewData;
     private int date;
     private String choice;
+    private Dialog dialog = null;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -121,9 +125,7 @@ public class SecondAnalyticFragment extends Fragment {
 
                 mSharedPreferenceStore.mEditor.putBoolean(
                         "com.peacecorps.malaria.hasUserSetPreference", false).commit();
-                startActivity(new Intent(getActivity(),
-                        UserMedicineSettingsFragmentActivity.class));
-                getActivity().finish();
+                addDialog();
 
             }
         });
@@ -236,13 +238,45 @@ public class SecondAnalyticFragment extends Fragment {
     public void updateUI(String choice, int date) {
 
         updateProgressBar(choice, date);
-        SetupAndShowGraph();
+        DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
+        if (sqLite.getDosesInaRowDaily()!=0)
+        {
+            SetupAndShowGraph();
+        }
         getSharedPreferences();
         addButtonListeners();
 
     }
 
     public void SetupAndShowGraph() {
+
+
+        /*GraphView graph = (GraphView) rootView.findViewById(R.id.graphView);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+        graph.addSeries(series);
+
+        LineGraphSeries<DataPoint> series2 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(0, 3),
+                new DataPoint(1, 3),
+                new DataPoint(2, 6),
+                new DataPoint(3, 2),
+                new DataPoint(4, 5)
+        });
+        graph.addSeries(series2);
+
+        // legend
+        series.setTitle("foo");
+        series2.setTitle("bar");
+        graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.BOTTOM);*/
+
+
         GraphViewData graphViewData[] = new GraphViewData[DatabaseSQLiteHelper.date.size()];
 
         for (int index = 0; index < DatabaseSQLiteHelper.percentage.size(); index++) {
@@ -256,7 +290,13 @@ public class SecondAnalyticFragment extends Fragment {
         lineGraphView.getGraphViewStyle().setGridColor(getResources().getColor(R.color.golden_brown));
         lineGraphView.getGraphViewStyle().setHorizontalLabelsColor(getResources().getColor(R.color.golden_brown));
         lineGraphView.getGraphViewStyle().setVerticalLabelsColor(getResources().getColor(R.color.golden_brown));
-        lineGraphView.getGraphViewStyle().setTextSize(15.0F);
+        lineGraphView.setBackground(getResources().getDrawable(R.drawable.graph_bg));
+        lineGraphView.getGraphViewStyle().setTextSize(10.0F);
+        lineGraphView.getGraphViewStyle().setGridStyle(GraphViewStyle.GridStyle.BOTH);
+
+
+        //lineGraphView.getBac
+
         lineGraphView.setScrollable(true);
         lineGraphView.setScalable(true);
 
@@ -275,6 +315,52 @@ public class SecondAnalyticFragment extends Fragment {
         LinearLayout linearLayout = (LinearLayout) rootView.findViewById(R.id.graphView);
         linearLayout.addView(lineGraphView);
 
+
+    }
+
+    public void addDialog()
+    {
+        dialog = new Dialog(this.getActivity(),android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+        dialog.setContentView(R.layout.resetdata_dialog);
+        dialog.setTitle("Reset Data");
+
+        final RadioGroup btnRadGroup = (RadioGroup) dialog.findViewById(R.id.radioGroupReset);
+        Button btnOK = (Button) dialog.findViewById(R.id.dialogButtonOKReset);
+
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // get selected radio button from radioGroup
+                int selectedId = btnRadGroup.getCheckedRadioButtonId();
+
+                // find the radiobutton by returned id
+                RadioButton btnRadButton = (RadioButton) dialog.findViewById(selectedId);
+
+                String ch = btnRadButton.getText().toString();
+
+                if (ch.equalsIgnoreCase("yes")) {
+                    DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
+                    sqLite.resetDatabase();
+                    mSharedPreferenceStore.mEditor.clear().commit();
+                    startActivity(new Intent(getActivity(),
+                            UserMedicineSettingsFragmentActivity.class));
+                    getActivity().finish();
+                } else {
+                    dialog.dismiss();
+                }
+
+            }
+        });
+
+        Button btnCancel = (Button) dialog.findViewById(R.id.dialogButtonCancelReset);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
 
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PC Malaria Prevention</string>
+    <string name="app_name">Malaria Prevention</string>
     <string name="app_homescreen_name">PC Malaria Home</string>
     <string name="user_medicine_settings_activity_pc_logo">Peace Corps Logo</string>
     <string name="user_medicine_settings_activity_setup_label">Set Up</string>
@@ -15,7 +15,7 @@
     <string name="first_analytic_screen_medicine_last_taken_text">Medicine Last Taken</string>
     <string name="first_analytic_screen_medicine_adherence_to_medicine_text">Adherence to Medicine</string>
     <string name="alarm_auto_start_boot_completed_intent_check">android.intent.action.BOOT_COMPLETED</string>
-    <string name="alert_dialog_title">Malaria medication reminder</string>
+    <string name="alert_dialog_title">Malaria Medication Reminder</string>
     <string name="alert_dialog_message">Have you taken your drug today ?</string>
     <string name="user_medicine_settings_fragment_activity_title">PC Malaria Prevention</string>
     <string name="info_hub_title_label">Info Hub</string>

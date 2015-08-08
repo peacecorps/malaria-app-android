@@ -1,50 +1,77 @@
 package com.peacecorps.malaria;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.AlarmManager;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
+
 
 import com.peacecorps.malaria.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Ankita on 7/3/2015.
  */
-public class TripIndicatorFragmentActivity extends Activity {
+public class TripIndicatorFragmentActivity extends FragmentActivity {
 
-    private Button btnInfoHub, btnHome,btnGenerate;
-    private Spinner drugSpinner,locationSpinner,itemSpinner;
-    private String mDrugPicked,mLocationPicked,mItemPicked;
-    private EditText cashData,dateData,monthData,yearData;
+    public boolean sent;
+    private Button btnInfoHub, btnHome,btnGenerate,btnGear;
+    private String mDrugPicked,mLocationPicked;
+    public static String mItemPicked;
+    private TextView locationSpinner,dateData,monthData,yearData,DepartureDateData,DepartureMonthData,DepartureYearData;
     public static boolean[] checkSelected;
     private ArrayList<String> items;
     private PopupWindow pw;
-    private boolean expanded;
+    public boolean arriv,depar;
+    static SharedPreferenceStore mSharedPreferenceStore;
+    private Dialog dialog = null;
+    private ImageView loc_history;
+    private TextView packingSelect;
+    public static final String DRUG_TAG="com.peacecorps.malaria.TripIndicatorFragmentActivity.DRUG_TAG";
+    long num_drugs=0;
+    private String arrival_formattedate, departure_formattedate;
+    private String TAGTIFA="Trip Indicator Activity";
+    AlarmManager alarmManager;
+    private PendingIntent pendingIntent;
+    private int dep_year,dep_month,dep_day;
+    private static TripIndicatorFragmentActivity inst;
+    private int ALARM_HOUR=8, ALARM_MINUTE=0, ALARM_SECONDS=0;
+    private DatabaseSQLiteHelper sqLite;
 
 
+    public static TripIndicatorFragmentActivity instance(){
+        return inst;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        inst = this;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,25 +79,38 @@ public class TripIndicatorFragmentActivity extends Activity {
         setContentView(R.layout.tripindicator_layout);
         btnInfoHub=(Button)findViewById(R.id.infoButton);
         btnHome=(Button)findViewById(R.id.homeButton);
-        drugSpinner=(Spinner)findViewById(R.id.trip_medication_select_spinner);
-        locationSpinner=(Spinner)findViewById(R.id.trip_location_select_spinner);
-        //itemSpinner=(Spinner)findViewById(R.id.trip_packing_item_select_spinner);
+        locationSpinner=(EditText)findViewById(R.id.trip_location_select_editText);
         btnGenerate=(Button)findViewById(R.id.generateButton);
-        cashData=(EditText)findViewById(R.id.trip_cash_select_editext);
-        dateData=(EditText)findViewById(R.id.trip_date);
-        monthData=(EditText)findViewById(R.id.trip_month);
-        yearData=(EditText)findViewById(R.id.trip_year);
-
+        btnGear=(Button)findViewById(R.id.trip_settings_button);
+        packingSelect=(TextView)findViewById(R.id.tripSelectBox);
+        loc_history=(ImageView)findViewById(R.id.locationHistory);
+        alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+         sqLite = new DatabaseSQLiteHelper(this);
 
 
         addListeners();
         createSelectionSpinners();
-        initialize();
-        createOnItemSelectedListeners();
+
+        Intent intent = getIntent();
+
+        mLocationPicked=intent.getStringExtra(TripIndicatorDialogActivity.LOCATION_TAG);
+
+        if(mLocationPicked!=null)
+         locationSpinner.setText(mLocationPicked);
+
     }
 
 
     public void addListeners(){
+
+        btnGear.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                addDialog();
+            }
+        });
 
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,50 +119,124 @@ public class TripIndicatorFragmentActivity extends Activity {
             }
         });
 
-      btnInfoHub.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              startActivity(new Intent(getApplication().getApplicationContext(), InfoHubFragmentActivity.class));
-          }
-      });
+        btnInfoHub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), InfoHubFragmentActivity.class));
+            }
+        });
 
 
-      btnGenerate.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
+        btnGenerate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                /*Bundle b = getIntent().getExtras();
+                String[] resultArr = b.getStringArray("selectedItems");*/
 
-              String cash=cashData.getText().toString();
-              float cash_value=Float.parseFloat(cash);
-              SharedPreferenceStore.mEditor.putFloat("com.peacecorps.malaria.trip_cash_editext",cash_value).commit();
-              Log.d("TripIndicatorActivity", "Value for cash: " + cash_value);
-              String date_data=dateData.getText().toString();
-              int date=Integer.parseInt(date_data);
-              String month_data=monthData.getText().toString();
-              int month=Integer.parseInt(month_data);
-              String year_data=yearData.getText().toString();
-              int year=Integer.parseInt(year_data);
-              String formattedate=date_data+"/"+month_data+"/"+year_data;
-              SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_date", formattedate).commit();
-              String chklist="";
-              for(int i=0;i<items.size();i++)
-              {
-                if(checkSelected[i]==true)
+                String chklist="",item="";
+                int q=0;
+
+               /* for(int i=0;i<resultArr.length;i++)
+                    chklist=resultArr[i]+", ";*/
+
+                Cursor cursor = sqLite.getPackingItem();
+
+                while (cursor.moveToNext())
                 {
-                   chklist+=items.get(i)+" ";
+                    q=cursor.getInt(cursor.getColumnIndex("Quantity"));
+                    item=cursor.getString(cursor.getColumnIndex("PackingItem"));
+
+                    chklist+=q+" "+item+" ";
+
+                }
+                mLocationPicked=locationSpinner.getText().toString();
+                mItemPicked = "Trip to " + mLocationPicked + " is scheduled on " + departure_formattedate + " till " + arrival_formattedate + ". Please bring following items:- " + chklist  +"\n";
+
+                Calendar calendar = Calendar.getInstance();
+                Log.d(TAGTIFA, "Date:" + dep_year + " " + dep_month + " " + dep_day);
+                calendar.set(dep_year,dep_month,dep_day,ALARM_HOUR,ALARM_MINUTE,ALARM_SECONDS);
+                long deptime= calendar.getTimeInMillis();
+                long today= Calendar.getInstance().getTimeInMillis();
+                long interval=0;
+                if(deptime>today) {
+                    interval = getTimeInterval(deptime, today);
+
+                    long sevenDays = 7 * 24 * 60 * 60 * 1000;
+                    long oneDay = 24 * 60 * 60 * 1000;
+                    if (interval >= 7) {
+
+                        Intent myIntent = new Intent(TripIndicatorFragmentActivity.this, TripAlarmReceiver.class);
+                        pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 101, myIntent, 0);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - sevenDays, pendingIntent);
+
+                        pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 102, myIntent, 0);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - oneDay, pendingIntent);
+
+                        pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 103, myIntent, 0);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                    } else if (interval < 7 && interval > 1) {
+                        Intent myIntent = new Intent(TripIndicatorFragmentActivity.this, TripAlarmReceiver.class);
+                        pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 102, myIntent, 0);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - oneDay, pendingIntent);
+
+                        pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 103, myIntent, 0);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+                    } else {
+                        Intent myIntent = new Intent(TripIndicatorFragmentActivity.this, TripAlarmReceiver.class);
+                        pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 103, myIntent, 0);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                    }
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Enter future departure time.", Toast.LENGTH_LONG).show();
                 }
 
-              }
-              SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_packing_items",chklist).commit();
-              SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_drug",mDrugPicked).commit();
-              SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_location",mLocationPicked).commit();
+                Toast.makeText(getApplicationContext(), mItemPicked, Toast.LENGTH_LONG).show();
 
-              mItemPicked="Trip to "+mLocationPicked+" is scheduled on "+formattedate+". Please bring "+cash+" in cash and also the following items:- \n"+chklist;
+            }
+        });
 
-              Toast.makeText(getApplicationContext(),mItemPicked,Toast.LENGTH_LONG).show();
+        loc_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-          }
-      });
+                Intent intent = new Intent(getApplication(), TripIndicatorDialogActivity.class);
+
+                String loc = locationSpinner.getText().toString();
+
+                DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getApplicationContext());
+
+                sqLite.insertLocation(loc);
+
+                startActivity(intent);
+
+                //TripIndicatorFragmentActivity.this.finish();
+
+
+            }
+
+
+        });
+
+
+        packingSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplication(), TripIndicatorPackingActivity.class);
+
+                Log.d(TAGTIFA,departure_formattedate+"  "+arrival_formattedate);
+
+                setNumDrugs(departure_formattedate, arrival_formattedate);
+
+                intent.putExtra(DRUG_TAG, num_drugs);
+
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -134,171 +248,223 @@ public class TripIndicatorFragmentActivity extends Activity {
 
         drugAdapter.setDropDownViewResource(R.layout.trip_spinner_popup_item);
 
-        drugSpinner.setAdapter(drugAdapter);
-
-        ArrayAdapter<CharSequence> locationAdapter = ArrayAdapter.createFromResource(
-                this, R.array.location_array,
-                R.layout.trip_spinner_item);
-
-        locationAdapter.setDropDownViewResource(R.layout.trip_spinner_popup_item);
-
-        locationSpinner.setAdapter(locationAdapter);
-
-        /*ArrayAdapter<CharSequence> itemAdapter = ArrayAdapter.createFromResource(
-                this, R.array.item_array,
-                R.layout.trip_spinner_item);
-
-        itemAdapter.setDropDownViewResource(R.layout.trip_spinner_popup_item);
-
-        itemSpinner.setAdapter(itemAdapter);*/
-
 
     }
 
-    public void createOnItemSelectedListeners()
+    public void addDialog()
     {
-        drugSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        dialog = new Dialog(TripIndicatorFragmentActivity.this,android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+        dialog.setContentView(R.layout.resetdata_dialog);
+        //dialog.setTitle("Reset Data");
 
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                mDrugPicked = drugSpinner.getItemAtPosition(position).toString();
-                Log.d("TripIndicatorActivity", "Chosen ->" + mDrugPicked);
-                Toast.makeText(getApplicationContext(), mDrugPicked, Toast.LENGTH_SHORT).show();
+        final RadioGroup btnRadGroup = (RadioGroup) dialog.findViewById(R.id.radioGroupReset);
+        Button btnOK = (Button) dialog.findViewById(R.id.dialogButtonOKReset);
 
-            }
-
-            public void onNothingSelected(AdapterView<?> parentView) {
-
-            }
-        });
-
-        locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                mLocationPicked = locationSpinner.getItemAtPosition(position).toString();
-                Log.d("TripIndicatorActivity", "Chosen ->" + mLocationPicked);
-                Toast.makeText(getApplicationContext(), mLocationPicked, Toast.LENGTH_SHORT).show();
-
-            }
-
-            public void onNothingSelected(AdapterView<?> parentView) {
-
-            }
-        });
-
-
-        /*itemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                mItemPicked = itemSpinner.getItemAtPosition(position).toString();
-                Log.d("TripIndicatorActivity", "Chosen ->" + mItemPicked);
-                Toast.makeText(getApplicationContext(), mItemPicked, Toast.LENGTH_SHORT).show();
-
-            }
-
-            public void onNothingSelected(AdapterView<?> parentView) {
-
-            }
-        });*/
-
-
-
-    }
-
-    private void initialize(){
-
-        items = new ArrayList();
-        items.add("Drugs");
-        items.add("Mosquito Nets");
-        items.add("Ointments");
-
-        checkSelected = new boolean[items.size()];
-        for (int i = 0; i < checkSelected.length; i++) {
-            checkSelected[i] = false;
-        }
-        Log.d("TripIndicatorActivity", "Items Added, Check Selected Done");
-        LinearLayout layout1 = (LinearLayout)findViewById(R.id.tripItemSelector);
-        final TextView itemTV=(TextView)findViewById(R.id.tripSelectBox);
-        itemTV.setOnClickListener(new OnClickListener() {
-
-
+        btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Log.d("TripIndicatorActivity", "Inside itemTV On Click Listener");
-                if (!expanded) {
-                    //display all selected values
-                    String selected = "";
-                    int flag = 0;
-                    for (int i = 0; i < items.size(); i++) {
-                        if (checkSelected[i] == true) {
-                            selected += items.get(i);
-                            selected += ", ";
-                            flag = 1;
-                        }
-                    }
-                    if (flag == 1)
-                        itemTV.setText(selected);
-                    expanded = true;
+
+                // get selected radio button from radioGroup
+                int selectedId = btnRadGroup.getCheckedRadioButtonId();
+
+                // find the radiobutton by returned id
+                RadioButton btnRadButton = (RadioButton) dialog.findViewById(selectedId);
+
+                String ch = btnRadButton.getText().toString();
+
+                if (ch.equalsIgnoreCase("yes")) {
+                    DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getApplicationContext());
+                    sqLite.resetDatabase();
+                    mSharedPreferenceStore.mEditor.clear().commit();
+                    startActivity(new Intent(getApplication().getApplicationContext(),
+                            UserMedicineSettingsFragmentActivity.class));
+
                 } else {
-                    //display shortened representation of selected values
-                    itemTV.setText(DropDownListAdapter.getSelected());
-                    expanded = false;
+                    dialog.dismiss();
                 }
+
             }
         });
-        final Button btnItemDropdown=(Button)findViewById(R.id.tripCreate);
-        btnItemDropdown.setOnClickListener(new OnClickListener() {
 
+        Button btnCancel = (Button) dialog.findViewById(R.id.dialogButtonCancelReset);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                initiatePopUp(items,itemTV);
+                dialog.dismiss();
             }
         });
+        dialog.show();
 
     }
 
-    private void initiatePopUp(ArrayList<String> items, TextView tv){
-        LayoutInflater inflater = (LayoutInflater)TripIndicatorFragmentActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public void setNumDrugs(String depart,String arrive){
 
-        //get the pop-up window i.e.  drop-down layout
-        LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.trip_item_dropdown_list, (ViewGroup)findViewById(R.id.tripPackingItemPopUpView));
 
-        //get the view to which drop-down layout is to be anchored
-        LinearLayout layout1 = (LinearLayout)findViewById(R.id.tripItemSelector);
-        pw = new PopupWindow(layout, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, true);
 
-        //Pop-up window background cannot be null if we want the pop-up to listen touch events outside its window
-        pw.setBackgroundDrawable(new BitmapDrawable());
-        pw.setTouchable(true);
+        Date dep=getDateObj(depart);
+        Date arri=getDateObj(arrive);
+        if(dep!=null && arri!=null) {
+            long depl = dep.getTime();
 
-        //let pop-up be informed about touch events outside its window. This  should be done before setting the content of pop-up
-        pw.setOutsideTouchable(true);
-        pw.setHeight(LayoutParams.WRAP_CONTENT);
+            long arrl = arri.getTime();
 
-        //dismiss the pop-up i.e. drop-down when touched anywhere outside the pop-up
-        pw.setTouchInterceptor(new View.OnTouchListener() {
+            int oneDay = 24 * 60 * 60 * 1000;
 
-            public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
-                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                    pw.dismiss();
-                    return true;
-                }
-                return false;
-            }
-        });
+            num_drugs = ((arrl - depl) / oneDay)+1;
+        }
+        else
+        {
+            Log.d("TripIndicatorPacking","Date was not parsed properly!");
+        }
 
-        //provide the source layout for drop-down
-        pw.setContentView(layout);
+}
 
-        //anchor the drop-down to bottom-left corner of 'layout1'
-        pw.showAsDropDown(layout1);
+    private Date getDateObj(String s){
 
-        //populate the drop-down list
-        final ListView list = (ListView) layout.findViewById(R.id.tripPackingItemDropDownList);
-        DropDownListAdapter adapter = new DropDownListAdapter(this, items, tv);
-        list.setAdapter(adapter);
+
+        Date dobj=null;
+
+        SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            dobj= sdf.parse(s);
+        }
+        catch (ParseException e)
+        {
+            return null;
+
+            //e.printStackTrace();
+        }
+
+        return dobj;
     }
 
+    private void setDates()
+    {
+
+        String date_data=dateData.getText().toString();
+        String month_data=monthData.getText().toString();
+        String year_data=yearData.getText().toString();
+        arrival_formattedate=date_data+"/"+month_data+"/"+year_data;
+        SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_date", arrival_formattedate).commit();
+
+        String departure_date_data=DepartureDateData.getText().toString();
+        String departure_month_data=DepartureMonthData.getText().toString();
+        String departure_year_data=DepartureYearData.getText().toString();
+        departure_formattedate=departure_date_data+"/"+departure_month_data+"/"+departure_year_data;
+
+        SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.departure_trip_date", departure_formattedate).commit();
+        SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_drug",mDrugPicked).commit();
+        SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_location",mLocationPicked).commit();
+
+
+    }
+
+    public class DatePickerFragmentArrival extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            setTextFields(day,month+1,year);
+            arriv=true;
+
+            if (arriv && depar){
+
+                setDates();
+                setNumDrugs(departure_formattedate,arrival_formattedate);
+                Log.d(TAGTIFA,"Inside Arrival");
+            }
+        }
+
+        public void setTextFields(int date, int month,int year)
+        {
+            dateData=(TextView)findViewById(R.id.trip_date);
+            monthData=(TextView)findViewById(R.id.trip_month);
+            yearData=(TextView)findViewById(R.id.trip_year);
+
+            dateData.setText(""+date);
+            monthData.setText(""+month);
+            yearData.setText(""+(year-2000));
+
+
+
+        }
+    }
+
+    public void showDatePickerDialogArrival(View v) {
+        DialogFragment newFragment = new DatePickerFragmentArrival();
+        newFragment.show(getFragmentManager(), "Arrival Data");
+    }
+
+    public class DatePickerFragmentDeparture extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+             dep_year = c.get(Calendar.YEAR);
+             dep_month = c.get(Calendar.MONTH);
+             dep_day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, dep_year, dep_month, dep_day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            setTextFields(day,month+1,year);
+
+            depar=true;
+
+            if (arriv && depar){
+
+                setDates();
+                setNumDrugs(departure_formattedate,arrival_formattedate);
+                Log.d(TAGTIFA, "Inside Departure");
+
+            }
+
+
+        }
+
+        public void setTextFields(int date, int month,int year)
+        {
+            DepartureDateData=(TextView)findViewById(R.id.trip_date_departure);
+            DepartureMonthData=(TextView)findViewById(R.id.trip_month_departure);
+            DepartureYearData=(TextView)findViewById(R.id.trip_year_departure);
+
+            DepartureDateData.setText(""+date);
+            DepartureMonthData.setText(""+month);
+            DepartureYearData.setText(""+(year-2000));
+
+        }
+    }
+
+    public void showDatePickerDialogDeparture(View v) {
+        DialogFragment newFragment = new DatePickerFragmentDeparture();
+        newFragment.show(getFragmentManager(), "Departure Date");
+    }
+
+    public long getTimeInterval(long t1,long t2)
+    {
+        long interval;
+        long oneDay= 24*60*60*1000;
+        if(t1>=t2)
+            interval=(t1-t2)/oneDay;
+        else
+            interval=(t2-t1)/oneDay;
+
+        return  interval+1;
+    }
 
 }

@@ -65,7 +65,7 @@
             android:paddingTop="5dp"
             android:layout_margin="15dp"
             android:text="..."
-            android:textSize="19sp"
+            android:textSize="17sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:background="@drawable/info_hub_button"

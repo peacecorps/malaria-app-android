@@ -2,9 +2,12 @@ package com.peacecorps.malaria;
 
 import java.util.Date;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.Button;
 
 public class AlertCallerFragmentActivity extends FragmentActivity {
     static SharedPreferenceStore mSharedPreferenceStore;
@@ -39,14 +42,17 @@ public class AlertCallerFragmentActivity extends FragmentActivity {
     }
 
     public void callAlarm() {
+
         AlertDialogFragment alert = new AlertDialogFragment();
 
         alert.show(getSupportFragmentManager(), "alertDemo");
 
         alert.setCancelable(false);
+
     }
 
     public long checkDrugTakenTimeInterval(String time) {
+
         long interval = 0;
         long today = new Date().getTime();
         long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
@@ -54,6 +60,7 @@ public class AlertCallerFragmentActivity extends FragmentActivity {
         long oneDay = 1000 * 60 * 60 * 24;
         interval = (today - takenDate) / oneDay;
         return interval;
+
     }
 
     public void getSharedPreferences() {

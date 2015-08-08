@@ -1,0 +1,97 @@
+package com.peacecorps.malaria;
+
+/**
+ * Created by Ankita on 8/3/2015.
+ */
+import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+public class TripIndicatorDialogActivity extends ListActivity {
+
+    private DatabaseSQLiteHelper sqlite;
+    /** Items entered by the user is stored in this ArrayList variable */
+    ArrayList<String> list = new ArrayList<String>();
+
+    /** Declaring an ArrayAdapter to set items to ListView */
+    private SimpleCursorAdapter dataAdapter;
+
+    private String location="";
+
+    public final static String LOCATION_TAG = "com.peacecorps.malaria.tripIndicator.LOCATION";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.trip_location_dialog);
+
+        sqlite = new DatabaseSQLiteHelper(this);
+
+        Cursor cursor= sqlite.getLocation();
+
+        // The desired columns to be bound
+        String[] columns = {sqlite.KEY_ROW_ID,sqlite.LOCATION};
+
+        // the XML defined views which the data will be bound to
+        int[] to = new int[] {
+                R.id.locationListItemNumber,R.id.locationListItem
+        };
+
+        // create the adapter using the cursor pointing to the desired data
+        //as well as the layout information
+        dataAdapter = new SimpleCursorAdapter(
+                this, R.layout.trip_location_list_item,
+                cursor,
+                columns,
+                to,
+                1);
+
+        ListView listView = (ListView) findViewById(android.R.id.list);
+        // Assign adapter to ListView
+        listView.setAdapter(dataAdapter);
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> listView, View view,
+                                    int position, long id) {
+                // Get the cursor, positioned to the corresponding row in the result set
+                Cursor cursor = (Cursor) listView.getItemAtPosition(position);
+
+
+                location= cursor.getString(cursor.getColumnIndexOrThrow("Location"));
+                Toast.makeText(getApplicationContext(),
+                        location, Toast.LENGTH_SHORT).show();
+
+
+                Intent intent = new Intent(getApplication(),TripIndicatorFragmentActivity.class);
+
+                intent.putExtra(LOCATION_TAG, location);
+
+                startActivity(intent);
+
+
+                TripIndicatorDialogActivity.this.finish();
+
+            }
+        });
+
+
+
+
+    }
+
+}

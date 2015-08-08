@@ -13,7 +13,7 @@ public class SharedPreferenceStore {
 
     public void getSharedPreferences(Context context) {
 
-        mPrefsStore = context.getSharedPreferences("com.pc.storeTimePicked",
+        mPrefsStore = context.getSharedPreferences("com.peacecorps.malaria.storeTimePicked",
                 Context.MODE_PRIVATE);
         mEditor = mPrefsStore.edit();
     }

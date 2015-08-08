@@ -72,34 +72,48 @@ public class MainActivity extends FragmentActivity {
 
                 if (position == 1) {
 
+                    Log.d(TAGMA,"Keeping Date");
+                    if (FirstAnalyticFragment.checkMediLastTakenTime != null) {
+                        FirstAnalyticFragment.checkMediLastTakenTime
+                                .setText(SharedPreferenceStore.mPrefsStore
+                                        .getString(
+                                                "com.peacecorps.malaria.checkMediLastTakenTime",
+                                                "").toString());
 
-                        Log.d(TAGMA, "Inside Page Selected");
+                        Log.d(TAGMA,"Calculating Doses");
+                        int currentDose = 0,dosesInaRow=0;
+                        if (SharedPreferenceStore.mPrefsStore.getBoolean(
+                                "com.peacecorps.malaria.isWeekly", false)) {
+                            dosesInaRow=sqLite.getDosesInaRowDaily();
+                            SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.weeklyDose", dosesInaRow).apply();
+                            currentDose = dosesInaRow;
+                            Log.d(TAGMA, "Weekly");
+                        } else {
+                            //currentDose = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.dailyDose", 0);
+                            dosesInaRow=sqLite.getDosesInaRowDaily();
+                            SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose",dosesInaRow).apply();
+                            currentDose=dosesInaRow;
+                            Log.d(TAGMA, "Daily");
+                        }
+                        FirstAnalyticFragment.doses.setText("" + currentDose);
+                        Log.d(TAGMA, "Doses in a Row:" + dosesInaRow);
+
+                        Log.d(TAGMA,"Calculating Adherence");
                         long interval = checkDrugTakenTimeInterval("firstRunTime");
                         int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
                         double adherenceRate;
                         Log.d(TAGMA,""+ interval);
                         Log.d(TAGMA,""+ takenCount);
                         if(interval!=0)
-                        adherenceRate = ((double)takenCount / (double)interval) * 100;
+                            adherenceRate = ((double)takenCount / (double)interval) * 100;
                         else
-                        adherenceRate = 100;
-                        String ar=String.format("%.4f ",adherenceRate);
-                        FirstAnalyticFragment.adherence.setText("" + ar + "%");
-                    int currentDose = 0,dosesInaRow=0;
-                    if (SharedPreferenceStore.mPrefsStore.getBoolean(
-                            "com.peacecorps.malaria.isWeekly", false)) {
-                        currentDose = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDose", 0);
-                    } else {
-                        //currentDose = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.dailyDose", 0);
-                        dosesInaRow=sqLite.getDosesInaRow();
-                        SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose",dosesInaRow).apply();
-                        currentDose=dosesInaRow;
+                            adherenceRate = 100;
+                        String ar=String.format("%.2f ",adherenceRate);
+                        //FirstAnalyticFragment.adherence.setText("" + ar + "%");
+
+
+
                     }
-                    FirstAnalyticFragment.doses.setText("" + currentDose);
-                    Log.d(TAGMA, "Doses in a Row:" + dosesInaRow);
-
-
-
 
                 }
             }
@@ -120,16 +134,30 @@ public class MainActivity extends FragmentActivity {
     }
 
     public long checkDrugTakenTimeInterval(String time) {
+
         long interval = 0;
         long today = new Date().getTime();
-        Log.d(TAGMA,"today:"+ today);
-        long takenDate = SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
-                + time, 0);
-        Log.d(TAGMA,"taken date:"+ takenDate);
-        long oneDay = 1000 * 60 * 60 * 24;
-        Log.d(TAGMA,"one Day:"+ oneDay);
-        interval = (today - takenDate) / oneDay;
-        return interval + 1;
+        DatabaseSQLiteHelper sqLite= new DatabaseSQLiteHelper(this);
+        long takenDate= sqLite.getFirstTime();
+        if(time.compareTo("firstRunTime")==0) {
+            if(takenDate!=0) {
+                Log.d(TAGMA, "First Run Time at FAF->" + takenDate);
+                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
+                        + time, takenDate).apply();
+                long oneDay = 1000 * 60 * 60 * 24;
+                interval = (today - takenDate) / oneDay;
+                return interval;
+            }
+            else
+                return 1;
+        }
+        else {
+            takenDate=SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
+                    + time, takenDate);
+            long oneDay = 1000 * 60 * 60 * 24;
+            interval = (today - takenDate) / oneDay;
+            return interval;
+        }
     }
 
 

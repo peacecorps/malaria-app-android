@@ -176,7 +176,7 @@ public class DayFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-                final Dialog dialog = new Dialog(con);
+                final Dialog dialog = new Dialog(con,android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
                 dialog.setContentView(R.layout.day_dialog);
                 dialog.setTitle("Medicine Consumption");
 
@@ -185,7 +185,7 @@ public class DayFragmentActivity extends FragmentActivity {
 
                 TextView tv = (TextView) dialog.findViewById(R.id.text);
                 tv.setText("Added inaccurate data? Don't worry, you can change here.");
-                tv.setTextSize(15);
+                tv.setTextSize(17);
                 tv.setTextColor(getResources().getColor(R.color.golden_brown));
 
                 btnRadGroup = (RadioGroup) dialog.findViewById(R.id.radioGroup);
@@ -217,7 +217,7 @@ public class DayFragmentActivity extends FragmentActivity {
                                 double prcntage = computeAdherenceRate(curr_time);
                                 Log.d(TAGD, "Adherence when Yes:" + prcntage);
                                 sqLite.updateMedicationEntry(day, month, year, "yes", prcntage);
-                                int dosesInaRow=sqLite.getDosesInaRow();
+                                int dosesInaRow=sqLite.getDosesInaRowDaily();
                                 Log.d(TAGD,"Doses in a Row:"+dosesInaRow);
                                 SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", dosesInaRow).apply();
                                 indicator.setBackgroundResource(R.drawable.accept_medi_checked_);
@@ -236,7 +236,7 @@ public class DayFragmentActivity extends FragmentActivity {
                                 double prcntage = computeAdherenceRate(curr_time);
                                 Log.d(TAGD, "Adherence when No:" + prcntage);
                                 sqLite.updateMedicationEntry(day, month, year, "no", prcntage);
-                                int dosesInaRow = sqLite.getDosesInaRow();
+                                int dosesInaRow = sqLite.getDosesInaRowDaily();
                                 Log.d(TAGD, "Doses in a Row:" + dosesInaRow);
                                 SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", dosesInaRow).apply();
                                 indicator.setBackgroundResource(R.drawable.reject_medi_checked);
