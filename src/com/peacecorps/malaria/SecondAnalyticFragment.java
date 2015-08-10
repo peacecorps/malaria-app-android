@@ -200,6 +200,13 @@ public class SecondAnalyticFragment extends Fragment {
             progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
         else
             progressp = progress * 25;
+
+        if(progressp>=50)
+        {
+            firstMonthProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.saf_progress_bar_green));
+            firstMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
+
+        }
         firstMonthProgressBar.setProgress((int) progressp);
         firstMonthProgressPercent.setText("" + (int) progressp + "%");
 
@@ -209,6 +216,13 @@ public class SecondAnalyticFragment extends Fragment {
             progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
         else
             progressp = progress * 25;
+
+        if(progressp>=50)
+        {
+            secondMonthProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.saf_progress_bar_green));
+            secondMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
+
+        }
         secondMonthProgressBar.setProgress((int) progressp);
         secondMonthProgressPercent.setText("" + (int) progressp + "%");
 
@@ -218,8 +232,13 @@ public class SecondAnalyticFragment extends Fragment {
             progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
         else
             progressp = progress * 25;
-        thirdMonthProgressBar.setProgress((int) progressp);
-        thirdMonthProgressPercent.setText("" + (int) progressp + "%");
+
+        if(progressp>=50) {
+            thirdMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
+            thirdMonthProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.saf_progress_bar_green));
+        }
+            thirdMonthProgressBar.setProgress((int) progressp);
+            thirdMonthProgressPercent.setText("" + (int) progressp + "%");
 
         fourthMonthProgressLabel.setText(getMonth(date));
         progress = sqLH.getData(mdate, myear, choice);
@@ -231,6 +250,11 @@ public class SecondAnalyticFragment extends Fragment {
         Log.d(TAGSAF, "" + getNumberOfDaysInMonth(mdate));
         Log.d(TAGSAF, "" + progress);
         Log.d(TAGSAF, "" + progressp);
+
+        if(progressp>=50) {
+            fourthMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
+            fourthMonthProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.saf_progress_bar_green));
+        }
         fourthMonthProgressBar.setProgress((int) progressp);
         fourthMonthProgressPercent.setText("" + (int) progressp + "%");
     }
@@ -287,12 +311,14 @@ public class SecondAnalyticFragment extends Fragment {
 
         GraphView lineGraphView = new LineGraphView(getActivity(), "");
 
-        lineGraphView.getGraphViewStyle().setGridColor(getResources().getColor(R.color.golden_brown));
+        lineGraphView.getGraphViewStyle().setGridColor(getResources().getColor(R.color.lightest_brown));
+        lineGraphView.getGraphViewStyle().setGridStyle(GraphViewStyle.GridStyle.VERTICAL);
         lineGraphView.getGraphViewStyle().setHorizontalLabelsColor(getResources().getColor(R.color.golden_brown));
         lineGraphView.getGraphViewStyle().setVerticalLabelsColor(getResources().getColor(R.color.golden_brown));
         lineGraphView.setBackground(getResources().getDrawable(R.drawable.graph_bg));
         lineGraphView.getGraphViewStyle().setTextSize(10.0F);
-        lineGraphView.getGraphViewStyle().setGridStyle(GraphViewStyle.GridStyle.BOTH);
+
+        lineGraphView.setTitle("Adherence Rate vs Day");
 
 
         //lineGraphView.getBac
@@ -310,6 +336,11 @@ public class SecondAnalyticFragment extends Fragment {
         });
 
         ((LineGraphView) lineGraphView).setDrawBackground(true);
+        ((LineGraphView) lineGraphView).setDrawDataPoints(true);
+        ((LineGraphView) lineGraphView).setBackgroundColor(getResources().getColor(R.color.light_blue));
+         float r=(float)0.20;
+         ((LineGraphView) lineGraphView).setDataPointsRadius(r);
+
         lineGraphView.addSeries(drugGraphSeries);
 
         LinearLayout linearLayout = (LinearLayout) rootView.findViewById(R.id.graphView);

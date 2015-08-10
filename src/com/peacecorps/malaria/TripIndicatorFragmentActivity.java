@@ -59,7 +59,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     private PendingIntent pendingIntent;
     private int dep_year,dep_month,dep_day;
     private static TripIndicatorFragmentActivity inst;
-    private int ALARM_HOUR=8, ALARM_MINUTE=0, ALARM_SECONDS=0;
+    private int ALARM_HOUR=22, ALARM_MINUTE=0, ALARM_SECONDS=0;
     private DatabaseSQLiteHelper sqLite;
 
 
@@ -159,13 +159,16 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 long deptime= calendar.getTimeInMillis();
                 long today= Calendar.getInstance().getTimeInMillis();
                 long interval=0;
+                Log.d(TAGTIFA,"Dep Time:"+deptime);
+                Log.d(TAGTIFA,"Today: "+today);
                 if(deptime>today) {
                     interval = getTimeInterval(deptime, today);
 
-                    long sevenDays = 7 * 24 * 60 * 60 * 1000;
+                    long sevenDays = 6 * 24 * 60 * 60 * 1000;
                     long oneDay = 24 * 60 * 60 * 1000;
+                    Log.d(TAGTIFA,"Alarm Interval: "+interval);
                     if (interval >= 7) {
-
+                        Log.d(TAGTIFA,"Category 1 Alarm Set");
                         Intent myIntent = new Intent(TripIndicatorFragmentActivity.this, TripAlarmReceiver.class);
                         pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 101, myIntent, 0);
                         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - sevenDays, pendingIntent);
@@ -176,6 +179,8 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                         pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 103, myIntent, 0);
                         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                     } else if (interval < 7 && interval > 1) {
+
+                        Log.d(TAGTIFA,"Category 2 Alarm Set");
                         Intent myIntent = new Intent(TripIndicatorFragmentActivity.this, TripAlarmReceiver.class);
                         pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 102, myIntent, 0);
                         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - oneDay, pendingIntent);
@@ -184,6 +189,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
                     } else {
+                        Log.d(TAGTIFA,"Category 3 Alarm Set");
                         Intent myIntent = new Intent(TripIndicatorFragmentActivity.this, TripAlarmReceiver.class);
                         pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 103, myIntent, 0);
                         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);

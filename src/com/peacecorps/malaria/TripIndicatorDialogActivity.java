@@ -62,7 +62,7 @@ public class TripIndicatorDialogActivity extends ListActivity {
         // Assign adapter to ListView
         listView.setAdapter(dataAdapter);
 
-
+        listView.setDividerHeight(2);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
