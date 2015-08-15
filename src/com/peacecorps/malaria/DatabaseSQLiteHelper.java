@@ -26,6 +26,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String packingTable = "packingSettings";
     private static final String TAGDSH= "DatabaseSQLiteHelper";
     public static final String LOCATION = "Location";
+    public static final String PACKING_ITEM = "PackingItem";
     public static final String KEY_ROW_ID = "_id";
 
     private final int[] daysOfMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30,
@@ -42,7 +43,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         database.execSQL("CREATE TABLE " + userMedicationChoiceTable + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, Drug INTEGER,Choice VARCHAR, Month VARCHAR, Year VARCHAR,Status VARCHAR,Date INTEGER,Percentage DOUBLE, Timestamp VARCHAR);");
         database.execSQL("CREATE TABLE " + appSettingTable + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, Drug VARCHAR, Choice VARCHAR, WeeklyDay INTEGER, FirstTime LONG, FreshInstall VARCHAR);");
         database.execSQL("CREATE TABLE " + locationTable + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, Location VARCHAR, Times INTEGER);");
-        database.execSQL("CREATE TABLE " + packingTable + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, PackingItem VARCHAR, Quantity INTEGER);");
+        database.execSQL("CREATE TABLE " + packingTable + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, PackingItem VARCHAR, Quantity INTEGER, Status VARCHAR);");
     }
 
     @Override
@@ -119,7 +120,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     public void insertAppSettings(String drug, String choice, long date)
     {
         SQLiteDatabase sqDB= getWritableDatabase();
-        String [] column={"FirstInstall"};
+        String [] column={"FreshInstall"};
         ContentValues cv =new ContentValues(2);
         Cursor cursor=sqDB.query(appSettingTable,column,null,null,null,null,"_id ASC LIMIT 1");
         cursor.moveToNext();
@@ -328,6 +329,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            Log.d(TAGDSH,"First Time: "+selected_date);
             Calendar cal = Calendar.getInstance();
             cal.setTime(comp_date);
             firstRunTime=cal.getTimeInMillis();
@@ -553,7 +555,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase sqDB = getWritableDatabase();
         ContentValues cv =new ContentValues(2);
-        int a=0;
+        int a=0,flag=0;
         cv.put("Location", location);
 
         String [] columns = {"Location","Times"};
@@ -565,10 +567,11 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         {
             a= cursor.getInt(1);
             a++;
+            flag=1;
         }
         cv.put("Times", a);
 
-        if(a==1)
+        if(flag==1)
             sqDB.update(locationTable, cv, "Location= ?", selArgs);
         else
             sqDB.insert(locationTable, "location", cv);
@@ -587,14 +590,15 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
                 KEY_ROW_ID + " asc ");
     }
 
-    public void insertPackingItem(String pItem,int quantity)
+    public void insertPackingItem(String pItem,int quantity, String status)
     {
         SQLiteDatabase sqDB = getWritableDatabase();
         ContentValues cv =new ContentValues(2);
         int flag=0,q=0;
         cv.put("PackingItem",pItem);
+        cv.put("Status",status);
 
-        String [] columns = {"PackingItem","Quantity"};
+        String [] columns = {"PackingItem","Quantity","Status"};
         String [] selArgs = {""+pItem};
 
         Cursor cursor = sqDB.query(packingTable,columns,"PackingItem = ?",selArgs,null,null,null);
@@ -620,16 +624,210 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
     }
 
+    public Cursor getPackingItemChecked()
+    {
+
+        SQLiteDatabase sqDB = getWritableDatabase();
+        String []column={"_id","PackingItem","Quantity"};
+        String []selArgs={"yes"};
+        /*return sqDB.query(packingTable, column,
+                null, null, null, null,
+                KEY_ROW_ID + " asc ");*/
+
+
+        Cursor cursor = sqDB.query(packingTable,column,"Status= ?",selArgs,null,null,KEY_ROW_ID+" asc ");
+
+        return cursor;
+
+    }
+
     public Cursor getPackingItem()
     {
 
         SQLiteDatabase sqDB = getWritableDatabase();
         String []column={"_id","PackingItem","Quantity"};
-
         return sqDB.query(packingTable, column,
                 null, null, null, null,
                 KEY_ROW_ID + " asc ");
+
     }
+
+    public void refreshPackingItemStatus()
+    {
+        SQLiteDatabase sqDB = getWritableDatabase();
+        String []column={"_id","PackingItem"};
+        String pItem="";
+        String []selArgs={pItem};
+        ContentValues cv = new ContentValues(2);
+        cv.put("Status","no");
+        Cursor cursor= sqDB.query(packingTable, column,
+                null, null, null, null,
+                KEY_ROW_ID + " asc ");
+
+        while (cursor.moveToNext())
+        {
+            try {
+                selArgs[0]=cursor.getString(1);
+                sqDB.update(packingTable,cv,"PackingItem=?",selArgs);
+            }
+            catch (Exception e)
+            {
+                break;
+            }
+
+
+
+        }
+
+
+    }
+
+    public int getCountTaken()
+    {
+        SQLiteDatabase sqDB = getWritableDatabase();
+        String []column={"Status","Timestamp","Date","Month","Year","Choice"};
+        Cursor cursor= sqDB.query(userMedicationChoiceTable,column,null,null,null,null,"Timestamp ASC");
+        int count=0;
+        if(cursor!=null)
+        {
+            while (cursor.moveToNext())
+            {
+                try {
+                    if (cursor.getString(0).equalsIgnoreCase("yes") == true) {
+                        count++;
+                        Log.d(TAGDSH,"Counter :"+count);
+                    }
+                }
+                catch(NullPointerException npe)
+                {
+                    return 0;
+
+                }
+            }
+        }
+        sqDB.close();
+        return count;
+
+
+
+    }
+
+    public int getIntervalWeekly(Date s, Date e, int weekday)
+    {
+        Calendar startCal;
+        Calendar endCal;
+        startCal = Calendar.getInstance();
+        startCal.setTime(s);
+        endCal = Calendar.getInstance();
+        endCal.setTime(e);
+        int medDays = 0,flag=0;
+        //If working dates are same,then checking what is the day on that date.
+        if (startCal.getTimeInMillis() == endCal.getTimeInMillis()) {
+            if (startCal.get(Calendar.DAY_OF_WEEK) == weekday)
+            {
+                ++medDays;
+                return medDays;
+            }
+        }
+        /*If start date is coming after end date, Then shuffling Dates and storing dates
+        by incrementing upto end date in do-while part.*/
+        if (startCal.getTimeInMillis() > endCal.getTimeInMillis()) {
+            startCal.setTime(e);
+            endCal.setTime(s);
+        }
+
+        do {
+
+            if (startCal.get(Calendar.DAY_OF_WEEK)==weekday) {
+                ++medDays;
+            }
+            startCal.add(Calendar.DAY_OF_MONTH, 1);
+        } while (startCal.getTimeInMillis() <= endCal.getTimeInMillis());
+
+        if(startCal.get(Calendar.DAY_OF_WEEK)==endCal.get(Calendar.DAY_OF_WEEK) && (startCal.get(Calendar.DAY_OF_WEEK)==weekday))
+            ++medDays;
+
+        return medDays;
+    }
+
+    public int getIntervalDaily(Date s,Date e)
+    {
+        long sLong=s.getTime();
+        long eLong=e.getTime();
+
+        long oneDay=24*60*60*1000;
+
+        long interval=(eLong-sLong)/oneDay;
+
+        int interv=(int)interval+1;
+
+        return interv;
+
+    }
+
+
+    public int getCountTakenBetween(Date s,Date e)
+    {
+        SQLiteDatabase sqDB = getWritableDatabase();
+        String []column={"Status","Timestamp","Date","Month","Year","Choice"};
+        Cursor cursor= sqDB.query(userMedicationChoiceTable,column,null,null,null,null,"Timestamp ASC");
+        int count=0;
+
+        if(cursor!=null)
+        {
+            while (cursor.moveToNext())
+            {
+                try {
+
+                    String d= cursor.getString(1);
+                    Log.d(TAGDSH,"Curr Time:"+d);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Date curr= Calendar.getInstance().getTime();
+                    try{
+
+                        curr=sdf.parse(d);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                    Log.d(TAGDSH,e.toString());
+                    Log.d(TAGDSH,s.toString());
+                    long currt=curr.getTime();
+                    long endt=e.getTime();
+
+                    Calendar cal =Calendar.getInstance();
+                    cal.setTime(s);
+                    cal.add(Calendar.MONTH, 1);
+                    s=cal.getTime();
+                    long strt=s.getTime();
+
+                    Log.d(TAGDSH,"Current Long:"+currt);
+                    Log.d(TAGDSH,"End Long:"+endt);
+                    Log.d(TAGDSH,"Start Long:"+strt);
+
+                    if (cursor.getString(0).equalsIgnoreCase("yes") == true) {
+
+                        if(currt>=strt && currt<=endt)
+                            count++;
+                        else if(strt==endt)
+                        {
+                            count++;
+                        }
+                    }
+                }
+                catch(NullPointerException npe)
+                {
+                    return 0;
+
+                }
+            }
+        }
+        sqDB.close();
+        return count;
+
+
+    }
+
 
 
 }

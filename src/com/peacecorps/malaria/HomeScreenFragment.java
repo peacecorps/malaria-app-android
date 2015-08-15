@@ -77,7 +77,8 @@ public class HomeScreenFragment extends Fragment {
 
     public double computeAdherenceRate() {
         long interval = checkDrugTakenTimeInterval("firstRunTime");
-        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
+        DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(this.getActivity());
+        long takenCount = sqLite.getCountTaken();
         double adherenceRate = ((double)takenCount / (double)interval) * 100;
         Log.d(TAGHSF, "adherence:" + adherenceRate);
         return adherenceRate;
@@ -89,8 +90,6 @@ public class HomeScreenFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                /*mSharedPreferenceStore.mEditor.putBoolean(
-                        "com.peacecorps.malaria.hasUserSetPreference", false).commit();*/
                 addDialog();
 
             }
@@ -109,17 +108,22 @@ public class HomeScreenFragment extends Fragment {
                         value).commit();
                 if (mSharedPreferenceStore.mPrefsStore.getBoolean(
                         "com.peacecorps.malaria.isWeekly", false)) {
-                    int currentDose = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDose", 0) + 1;
-                    mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.weeklyDose", currentDose).commit();
+
                     decideDrugTakenUIBoolean(true, true);
                     DatabaseSQLiteHelper databaseSQLiteHelper = new DatabaseSQLiteHelper(getActivity());
                     databaseSQLiteHelper.getUserMedicationSelection(getActivity(), "weekly", Calendar.getInstance().getTime(), "yes", computeAdherenceRate());
+
+                    int currentDose = databaseSQLiteHelper.getDosesInaRowWeekly();
+                    mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.weeklyDose", currentDose).commit();
+
                 } else {
                     decideDrugTakenUIBoolean(false, true);
-                    int currentDose = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.dailyDose", 0) + 1;
-                    mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", currentDose).commit();
+
                     DatabaseSQLiteHelper databaseSQLiteHelper = new DatabaseSQLiteHelper(getActivity());
                     databaseSQLiteHelper.getUserMedicationSelection(getActivity(), "daily", Calendar.getInstance().getTime(), "yes", computeAdherenceRate());
+
+                    int currentDose = databaseSQLiteHelper.getDosesInaRowDaily();
+                    mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", currentDose).commit();
                 }
 
             }
@@ -281,10 +285,25 @@ public class HomeScreenFragment extends Fragment {
         if(time.compareTo("firstRunTime")==0) {
             if(takenDate!=0) {
                 Log.d(TAGHSF, "First Run Time at FAF->" + takenDate);
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(takenDate);
+                cal.add(Calendar.MONTH, 1);
+                Log.d(TAGHSF,"CURRENT : "+cal.get(Calendar.MONTH));
+                Date start= cal.getTime();
+                Date end= Calendar.getInstance().getTime();
+                end.setTime(today);
                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
                         + time, takenDate).apply();
-                long oneDay = 1000 * 60 * 60 * 24;
-                interval = (today - takenDate) / oneDay;
+                if(SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly",false)) {
+                    interval = sqLite.getIntervalWeekly(start,end,SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDay",1));
+                }
+                else
+                {
+                    interval = sqLite.getIntervalDaily(start,end);
+                }
+
+                /*long oneDay = 1000 * 60 * 60 * 24;
+                interval = (today - takenDate) / oneDay;*/
                 return interval;
             }
             else

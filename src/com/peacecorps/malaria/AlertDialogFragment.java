@@ -160,11 +160,38 @@ public class AlertDialogFragment extends DialogFragment {
     public long checkDrugTakenTimeInterval(String time) {
         long interval = 0;
         long today = new Date().getTime();
-        long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.pc."
-                + time, 0);
-        long oneDay = 1000 * 60 * 60 * 24;
-        interval = (today - takenDate) / oneDay;
-        return interval;
+        Date tdy= Calendar.getInstance().getTime();
+        tdy.setTime(today);
+        DatabaseSQLiteHelper sqLite= new DatabaseSQLiteHelper(getActivity());
+        long takenDate= sqLite.getFirstTime();
+        if(time.compareTo("firstRunTime")==0) {
+            if(takenDate!=0) {
+                Log.d(TAGADF, "First Run Time at ADF->" + takenDate);
+                Calendar cal=Calendar.getInstance();
+                cal.setTimeInMillis(takenDate);
+                cal.add(Calendar.MONTH, 1);
+                Date start=cal.getTime();
+                int weekDay=cal.get(Calendar.DAY_OF_WEEK);
+                if(SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly",false))
+                    interval=sqLite.getIntervalWeekly(start,tdy,weekDay);
+                else
+                    interval=sqLite.getIntervalDaily(start,tdy);
+                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
+                        + time, takenDate).apply();
+                /*long oneDay = 1000 * 60 * 60 * 24;
+                interval = (today - takenDate) / oneDay;*/
+                return interval;
+            }
+            else
+                return 1;
+        }
+        else {
+            takenDate=SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
+                    + time, takenDate);
+            long oneDay = 1000 * 60 * 60 * 24;
+            interval = (today - takenDate) / oneDay;
+            return interval;
+        }
     }
 
     public void snooze() {
@@ -287,7 +314,8 @@ public class AlertDialogFragment extends DialogFragment {
 
     public double computeAdherenceRate() {
         long interval = checkDrugTakenTimeInterval("firstRunTime");
-        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
+        DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
+        long takenCount = sqLite.getCountTaken();
         double adherenceRate = ((double)takenCount / (double)interval) * 100;
         Log.d(TAGADF, "adherence:" + adherenceRate);
         return adherenceRate;

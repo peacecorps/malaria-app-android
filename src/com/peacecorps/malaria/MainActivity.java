@@ -1,6 +1,7 @@
 package com.peacecorps.malaria;
 
 
+import java.util.Calendar;
 import java.util.Date;
 import android.content.Intent;
 import android.os.Bundle;
@@ -84,7 +85,7 @@ public class MainActivity extends FragmentActivity {
                         int currentDose = 0,dosesInaRow=0;
                         if (SharedPreferenceStore.mPrefsStore.getBoolean(
                                 "com.peacecorps.malaria.isWeekly", false)) {
-                            dosesInaRow=sqLite.getDosesInaRowDaily();
+                            dosesInaRow =sqLite.getDosesInaRowWeekly();
                             SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.weeklyDose", dosesInaRow).apply();
                             currentDose = dosesInaRow;
                             Log.d(TAGMA, "Weekly");
@@ -100,7 +101,7 @@ public class MainActivity extends FragmentActivity {
 
                         Log.d(TAGMA,"Calculating Adherence");
                         long interval = checkDrugTakenTimeInterval("firstRunTime");
-                        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
+                        int takenCount = sqLite.getCountTaken();
                         double adherenceRate;
                         Log.d(TAGMA,""+ interval);
                         Log.d(TAGMA,""+ takenCount);
@@ -109,10 +110,7 @@ public class MainActivity extends FragmentActivity {
                         else
                             adherenceRate = 100;
                         String ar=String.format("%.2f ",adherenceRate);
-                        //FirstAnalyticFragment.adherence.setText("" + ar + "%");
-
-
-
+                        FirstAnalyticFragment.adherence.setText("" + ar + "%");
                     }
 
                 }
@@ -137,15 +135,26 @@ public class MainActivity extends FragmentActivity {
 
         long interval = 0;
         long today = new Date().getTime();
+        Date tdy= Calendar.getInstance().getTime();
+        tdy.setTime(today);
         DatabaseSQLiteHelper sqLite= new DatabaseSQLiteHelper(this);
         long takenDate= sqLite.getFirstTime();
         if(time.compareTo("firstRunTime")==0) {
             if(takenDate!=0) {
                 Log.d(TAGMA, "First Run Time at FAF->" + takenDate);
+                Calendar cal=Calendar.getInstance();
+                cal.setTimeInMillis(takenDate);
+                cal.add(Calendar.MONTH, 1);
+                Date start=cal.getTime();
+                int weekDay=cal.get(Calendar.DAY_OF_WEEK);
+                if(SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly",false))
+                    interval=sqLite.getIntervalWeekly(start,tdy,weekDay);
+                else
+                    interval=sqLite.getIntervalDaily(start,tdy);
                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
                         + time, takenDate).apply();
-                long oneDay = 1000 * 60 * 60 * 24;
-                interval = (today - takenDate) / oneDay;
+                /*long oneDay = 1000 * 60 * 60 * 24;
+                interval = (today - takenDate) / oneDay;*/
                 return interval;
             }
             else

@@ -125,8 +125,6 @@ public class InfoHubFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-                //startActivity(new Intent(getApplication().getApplicationContext(), UserMedicineSettingsFragmentActivity.class));
-
                 addDialog();
             }
         });
@@ -134,14 +132,14 @@ public class InfoHubFragmentActivity extends FragmentActivity {
     }
 
 
-    public boolean isConnected(){
+    /*public boolean isConnected(){
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected())
             return true;
         else
             return false;
-    }
+    }*/
 
     public void addDialog()
     {

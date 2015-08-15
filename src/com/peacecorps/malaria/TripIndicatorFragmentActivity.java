@@ -6,11 +6,14 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,6 +25,7 @@ import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 
@@ -42,15 +46,15 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     private Button btnInfoHub, btnHome,btnGenerate,btnGear;
     private String mDrugPicked,mLocationPicked;
     public static String mItemPicked;
-    private TextView locationSpinner,dateData,monthData,yearData,DepartureDateData,DepartureMonthData,DepartureYearData;
+    private TextView dateData,monthData,yearData,DepartureDateData,DepartureMonthData,DepartureYearData;
+    public static TextView locationSpinner;
     public static boolean[] checkSelected;
     private ArrayList<String> items;
-    private PopupWindow pw;
     public boolean arriv,depar;
     static SharedPreferenceStore mSharedPreferenceStore;
     private Dialog dialog = null;
     private ImageView loc_history;
-    private TextView packingSelect;
+    public static TextView packingSelect;
     public static final String DRUG_TAG="com.peacecorps.malaria.TripIndicatorFragmentActivity.DRUG_TAG";
     long num_drugs=0;
     private String arrival_formattedate, departure_formattedate;
@@ -60,7 +64,9 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     private int dep_year,dep_month,dep_day;
     private static TripIndicatorFragmentActivity inst;
     private int ALARM_HOUR=22, ALARM_MINUTE=0, ALARM_SECONDS=0;
+    private TextView tripTime;
     private DatabaseSQLiteHelper sqLite;
+    private String loc="";
 
 
     public static TripIndicatorFragmentActivity instance(){
@@ -85,8 +91,12 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         packingSelect=(TextView)findViewById(R.id.tripSelectBox);
         loc_history=(ImageView)findViewById(R.id.locationHistory);
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        tripTime = (TextView)findViewById(R.id.trip_time);
+
          sqLite = new DatabaseSQLiteHelper(this);
 
+        mSharedPreferenceStore = new SharedPreferenceStore();
+        mSharedPreferenceStore.getSharedPreferences(this);
 
         addListeners();
         createSelectionSpinners();
@@ -95,8 +105,57 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
         mLocationPicked=intent.getStringExtra(TripIndicatorDialogActivity.LOCATION_TAG);
 
-        if(mLocationPicked!=null)
-         locationSpinner.setText(mLocationPicked);
+
+        try
+        {
+            mLocationPicked=SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.TRIP_LOCATION","");
+            //locationSpinner.setText(mLocationPicked);
+        }
+        catch(Exception e)
+        {
+           // locationSpinner.setText("");
+            Log.d(TAGTIFA,"Setting in onCreate");
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+        if (SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.TRIP_LOCATION",mLocationPicked)
+                !=null) {
+            SharedPreferenceStore.mPrefsStore.getString(
+                    "com.peacecorps.malaria.TRIP_LOCATION",mLocationPicked);
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.TRIP_LOCATION",
+                mLocationPicked)!=null) {
+            SharedPreferenceStore.mPrefsStore.getString(
+                    "com.peacecorps.malaria.TRIP_LOCATION", mLocationPicked);
+          //  locationSpinner.setText(mLocationPicked);
+            Log.d(TAGTIFA, "Setting in onResume");
+
+
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+        if (SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.TRIP_LOCATION",
+                mLocationPicked)!=null) {
+            SharedPreferenceStore.mPrefsStore.getString(
+                    "com.peacecorps.malaria.TRIP_LOCATION",mLocationPicked);
+        }
 
     }
 
@@ -116,6 +175,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplication().getApplicationContext(), MainActivity.class));
+                finish();
             }
         });
 
@@ -123,6 +183,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplication().getApplicationContext(), InfoHubFragmentActivity.class));
+                finish();
             }
         });
 
@@ -140,7 +201,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                /* for(int i=0;i<resultArr.length;i++)
                     chklist=resultArr[i]+", ";*/
 
-                Cursor cursor = sqLite.getPackingItem();
+                Cursor cursor = sqLite.getPackingItemChecked();
 
                 while (cursor.moveToNext())
                 {
@@ -160,7 +221,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 long today= Calendar.getInstance().getTimeInMillis();
                 long interval=0;
                 Log.d(TAGTIFA,"Dep Time:"+deptime);
-                Log.d(TAGTIFA,"Today: "+today);
+                Log.d(TAGTIFA, "Today: " + today);
                 if(deptime>today) {
                     interval = getTimeInterval(deptime, today);
 
@@ -202,6 +263,13 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
                 Toast.makeText(getApplicationContext(), mItemPicked, Toast.LENGTH_LONG).show();
 
+                loc = locationSpinner.getText().toString();
+                sqLite.insertLocation(loc);
+
+                sqLite.refreshPackingItemStatus();
+
+
+
             }
         });
 
@@ -211,11 +279,9 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
                 Intent intent = new Intent(getApplication(), TripIndicatorDialogActivity.class);
 
-                String loc = locationSpinner.getText().toString();
-
                 DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getApplicationContext());
 
-                sqLite.insertLocation(loc);
+
 
                 startActivity(intent);
 
@@ -241,6 +307,8 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 intent.putExtra(DRUG_TAG, num_drugs);
 
                 startActivity(intent);
+
+                packingSelect.setText(TripIndicatorPackingActivity.tripDrugName);
             }
         });
 
@@ -360,7 +428,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.departure_trip_date", departure_formattedate).commit();
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_drug",mDrugPicked).commit();
-        SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_location",mLocationPicked).commit();
+        //SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.TRIP_LOCATION",mLocationPicked).commit();
 
 
     }
@@ -471,6 +539,44 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
             interval=(t2-t1)/oneDay;
 
         return  interval+1;
+    }
+
+    public void getSharedPreferences() {
+        mSharedPreferenceStore.mPrefsStore = getApplication()
+                .getSharedPreferences("com.peacecorps.malaria.storeTimePicked",
+                        Context.MODE_PRIVATE);
+        mSharedPreferenceStore.mEditor = mSharedPreferenceStore.mPrefsStore
+                .edit();
+    }
+
+
+    public class TimePickerDialogDeparture extends DialogFragment implements TimePickerDialog.OnTimeSetListener
+    {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar c = Calendar.getInstance();
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+            return new TimePickerDialog(getActivity(), this, hour, minute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+            ALARM_HOUR=hourOfDay;
+            ALARM_MINUTE=minute;
+
+            tripTime.setText(""+hourOfDay+":"+minute);
+        }
+
+
+    }
+
+    public void showTimePickerDialogDeparture(View v)
+    {
+        DialogFragment newFragment = new TimePickerDialogDeparture();
+        newFragment.show(getFragmentManager(),"Departure Time");
     }
 
 }

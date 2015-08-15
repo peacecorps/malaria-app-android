@@ -123,8 +123,6 @@ public class SecondAnalyticFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                mSharedPreferenceStore.mEditor.putBoolean(
-                        "com.peacecorps.malaria.hasUserSetPreference", false).commit();
                 addDialog();
 
             }

@@ -30,12 +30,17 @@ public class TripIndicatorDialogActivity extends ListActivity {
 
     public final static String LOCATION_TAG = "com.peacecorps.malaria.tripIndicator.LOCATION";
 
+    static SharedPreferenceStore mSharedPreferenceStore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.trip_location_dialog);
+
+        mSharedPreferenceStore = new SharedPreferenceStore();
+        mSharedPreferenceStore.getSharedPreferences(this);
 
         sqlite = new DatabaseSQLiteHelper(this);
 
@@ -61,7 +66,7 @@ public class TripIndicatorDialogActivity extends ListActivity {
         ListView listView = (ListView) findViewById(android.R.id.list);
         // Assign adapter to ListView
         listView.setAdapter(dataAdapter);
-
+        listView.setMinimumHeight(30);
         listView.setDividerHeight(2);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,18 +76,20 @@ public class TripIndicatorDialogActivity extends ListActivity {
                 // Get the cursor, positioned to the corresponding row in the result set
                 Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
-
                 location= cursor.getString(cursor.getColumnIndexOrThrow("Location"));
+
                 Toast.makeText(getApplicationContext(),
                         location, Toast.LENGTH_SHORT).show();
 
+                mSharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.TRIP_LOCATION", location).commit();
+
+                TripIndicatorFragmentActivity.locationSpinner.setText(location);
 
                 Intent intent = new Intent(getApplication(),TripIndicatorFragmentActivity.class);
 
                 intent.putExtra(LOCATION_TAG, location);
 
                 startActivity(intent);
-
 
                 TripIndicatorDialogActivity.this.finish();
 
@@ -93,5 +100,8 @@ public class TripIndicatorDialogActivity extends ListActivity {
 
 
     }
+
+
+
 
 }

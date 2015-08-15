@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    >
-
-    <TextView
-        android:id="@+id/packingListItem"
-        android:background="@color/cream"
-        android:textColor="@color/golden_brown"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:padding="2dp"
-        xmlns:android="http://schemas.android.com/apk/res/android" />
-
-
-</LinearLayout>
+<CheckedTextView
+    android:id="@+id/packingListItem"
+    android:layout_width="fill_parent"
+    android:textSize="20sp"
+    android:padding="2dp"
+    android:layout_height="?android:attr/listPreferredItemHeightSmall"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+    android:gravity="center_vertical"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_marginLeft="20dp"
+    android:background="@color/light_green"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

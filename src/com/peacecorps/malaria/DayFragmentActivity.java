@@ -46,6 +46,7 @@ public class DayFragmentActivity extends FragmentActivity {
     private String ch="";
     private int flag=0;
     private long curr_time=0;
+    private static DatabaseSQLiteHelper sqLite;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -59,8 +60,8 @@ public class DayFragmentActivity extends FragmentActivity {
                 .getApplicationContext();
         mSharedPreferenceStore.getSharedPreferences(this);
 
-        /*declaring variables for accessing Database*/
-        final DatabaseSQLiteHelper sqLite= new DatabaseSQLiteHelper(this);
+        /*defining variables for accessing Database*/
+        sqLite= new DatabaseSQLiteHelper(this);
 
         /*displaying clicked date on the Day Fragment*/
         Intent intent = getIntent();
@@ -123,10 +124,10 @@ public class DayFragmentActivity extends FragmentActivity {
         {   Log.d(TAGD,"Inside Missed Drug Entry");
 
             selected_date=SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.checkMediLastTakenTime","");
-            SimpleDateFormat dateF = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat dateF = new SimpleDateFormat("dd/MM");
             Date cd=Calendar.getInstance().getTime();
             try {
-                cd   = dateFormatter.parse(selected_date);
+                cd   = dateF.parse(selected_date);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -214,9 +215,15 @@ public class DayFragmentActivity extends FragmentActivity {
                                 long firstTime = sqLite.getFirstTime();
                                 Log.d(TAGD, "" + SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime", 0));
                                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime", firstTime).apply();
-                                double prcntage = computeAdherenceRate(curr_time);
+
+                                double prcntage = 0.0;
                                 Log.d(TAGD, "Adherence when Yes:" + prcntage);
                                 sqLite.updateMedicationEntry(day, month, year, "yes", prcntage);
+
+                                Log.d(TAGD, "Getting count:" + sqLite.getCountTaken());
+                                prcntage=computeAdherenceRate(curr_time);
+                                sqLite.updateMedicationEntry(day, month, year, "yes", prcntage);
+
                                 int dosesInaRow=sqLite.getDosesInaRowDaily();
                                 Log.d(TAGD,"Doses in a Row:"+dosesInaRow);
                                 SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", dosesInaRow).apply();
@@ -262,20 +269,52 @@ public class DayFragmentActivity extends FragmentActivity {
         });
     }
 
-    public static double computeAdherenceRate(long day_time) {
-        long interval = checkDrugTakenTimeInterval("firstRunTime",day_time) + 1;
-        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
+    public double computeAdherenceRate(long day_time) {
+        long interval = checkDrugTakenTimeInterval("firstRunTime", day_time);
+        //DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(this.getApplicationContext());
+        Date e=new Date();
+        e.setTime(day_time);
+
+        Date s=new Date();
+        s.setTime(sqLite.getFirstTime());
+
+        long takenCount = sqLite.getCountTakenBetween(s,e);
+        Log.d(TAGD,"Taken Count while computing adherence :"+takenCount);
         double adherenceRate = ((double)takenCount /(double) interval) * 100;
         return adherenceRate;
     }
 
-    public static long checkDrugTakenTimeInterval(String time,long day_time) {
+    public  long checkDrugTakenTimeInterval(String time,long day_time) {
         long interval = 0;
-        long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
-                + time, 0);
-        Log.d(TAGD, time + ":" + takenDate);
-        long oneDay = 1000 * 60 * 60 * 24;
-        interval = (day_time - takenDate) / oneDay;
+        //DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(this.getApplicationContext());
+        long takenDate = sqLite.getFirstTime();
+        if(takenDate!=0) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(day_time);
+            cal.add(Calendar.MONTH, 1);
+            Calendar calt = Calendar.getInstance();
+            calt.setTimeInMillis(takenDate);
+            Log.d(TAGD, "First :" + calt.get(Calendar.MONTH));
+            calt.add(Calendar.MONTH, 2);
+            Date start = calt.getTime();
+            Date end = cal.getTime();
+            SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
+                    + time, takenDate).apply();
+            if (SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly", false)) {
+                interval = sqLite.getIntervalWeekly(start, end, SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDay", 1));
+            } else {
+                interval = sqLite.getIntervalDaily(start, end);
+            }
+            Log.d(TAGD,"First Date :"+ calt.get(Calendar.DATE));
+            Log.d(TAGD, "Current Date :" + cal.get(Calendar.DATE));
+            Log.d(TAGD,"First :"+ calt.get(Calendar.MONTH));
+            Log.d(TAGD, "Current :" + cal.get(Calendar.MONTH));
+            Log.d(TAGD, "Interval :" + interval);
+            Log.d(TAGD, time + ":" + takenDate);
+        }
+        else
+             interval=1;
+
         return interval;
     }
 
