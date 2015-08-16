@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -171,6 +172,12 @@ public class HomeScreenFragment extends Fragment {
         mCurrentDateLabel.setText(mGetCurrentDate);
         mCurrentDayOfweekLabel
                 .setText(decideDayofWeek(checkDay, mPossibledays));
+
+        Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/garreg.ttf");
+        mCurrentDayOfweekLabel.setTypeface(custom_font);
+        mCurrentDateLabel.setTypeface(custom_font);
+        mCurrentDayOfweekLabel.setTextSize(50);
+        mCurrentDateLabel.setTextSize(20);
         //checkMediLastTakenTime = (TextView) rootView.findViewById(R.id.checkMediLastTakenTime);
 
     }

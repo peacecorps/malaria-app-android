@@ -3,6 +3,7 @@ package com.peacecorps.malaria;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -30,6 +31,7 @@ public class FirstAnalyticFragment extends Fragment {
     private Button mSettingsButton;
     private String TAGFAF = "FirstAnalyticFragment";
     private Dialog dialog = null;
+    private TextView mlt,dinr,atm;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +45,15 @@ public class FirstAnalyticFragment extends Fragment {
         doses = (TextView) rootView.findViewById(R.id.doses);
         adherence = (TextView) rootView.findViewById(R.id.adherence);
         updateUI();
+        mlt=(TextView)rootView.findViewById(R.id.mlt);
+        dinr=(TextView)rootView.findViewById(R.id.dinr);
+        atm=(TextView)rootView.findViewById(R.id.atm);
+
+        Typeface cf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/garreg.ttf");
+        Typeface cfb = Typeface.createFromAsset(getActivity().getAssets(), "fonts/garbold.ttf");
+        mlt.setTypeface(cf);
+        dinr.setTypeface(cf);
+        atm.setTypeface(cf);
 
 
         return rootView;

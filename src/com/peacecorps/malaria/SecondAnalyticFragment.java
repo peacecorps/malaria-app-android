@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -48,6 +49,8 @@ public class SecondAnalyticFragment extends Fragment {
     private int date;
     private String choice;
     private Dialog dialog = null;
+
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -191,7 +194,9 @@ public class SecondAnalyticFragment extends Fragment {
 
     public void updateProgressBar(String choice, int date) {
         DatabaseSQLiteHelper sqLH = new DatabaseSQLiteHelper(getActivity());
+        Typeface cf = Typeface.createFromAsset(getActivity().getAssets(),"fonts/garreg.ttf");
         firstMonthProgressLabel.setText(getMonth(date - 3));
+        firstMonthProgressLabel.setTypeface(cf);
         int progress = sqLH.getData(mdate, myear, choice);
         float progressp = 0;
         if (choice.equalsIgnoreCase("daily"))
@@ -207,8 +212,10 @@ public class SecondAnalyticFragment extends Fragment {
         }
         firstMonthProgressBar.setProgress((int) progressp);
         firstMonthProgressPercent.setText("" + (int) progressp + "%");
+        firstMonthProgressPercent.setTypeface(cf);
 
         secondMonthProgressLabel.setText(getMonth(date - 2));
+        secondMonthProgressLabel.setTypeface(cf);
         progress = sqLH.getData(mdate, myear, choice);
         if (choice.equalsIgnoreCase("daily"))
             progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
@@ -223,8 +230,10 @@ public class SecondAnalyticFragment extends Fragment {
         }
         secondMonthProgressBar.setProgress((int) progressp);
         secondMonthProgressPercent.setText("" + (int) progressp + "%");
+        secondMonthProgressPercent.setTypeface(cf);
 
         thirdMonthProgressLabel.setText(getMonth(date - 1));
+        thirdMonthProgressLabel.setTypeface(cf);
         progress = sqLH.getData(mdate, myear, choice);
         if (choice.equalsIgnoreCase("daily"))
             progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
@@ -237,8 +246,10 @@ public class SecondAnalyticFragment extends Fragment {
         }
             thirdMonthProgressBar.setProgress((int) progressp);
             thirdMonthProgressPercent.setText("" + (int) progressp + "%");
+        thirdMonthProgressPercent.setTypeface(cf);
 
         fourthMonthProgressLabel.setText(getMonth(date));
+        fourthMonthProgressLabel.setTypeface(cf);
         progress = sqLH.getData(mdate, myear, choice);
         Log.d(TAGSAF, "Query Return: " + progress);
         if (choice.equalsIgnoreCase("daily"))
@@ -255,6 +266,7 @@ public class SecondAnalyticFragment extends Fragment {
         }
         fourthMonthProgressBar.setProgress((int) progressp);
         fourthMonthProgressPercent.setText("" + (int) progressp + "%");
+        fourthMonthProgressPercent.setTypeface(cf);
     }
 
     public void updateUI(String choice, int date) {
@@ -300,6 +312,7 @@ public class SecondAnalyticFragment extends Fragment {
 
 
         GraphViewData graphViewData[] = new GraphViewData[DatabaseSQLiteHelper.date.size()];
+        String verLabels[]={"100%","50%","25%","0%"};
 
         for (int index = 0; index < DatabaseSQLiteHelper.percentage.size(); index++) {
 
@@ -310,13 +323,15 @@ public class SecondAnalyticFragment extends Fragment {
         GraphView lineGraphView = new LineGraphView(getActivity(), "");
 
         lineGraphView.getGraphViewStyle().setGridColor(getResources().getColor(R.color.lightest_brown));
-        lineGraphView.getGraphViewStyle().setGridStyle(GraphViewStyle.GridStyle.VERTICAL);
+        lineGraphView.getGraphViewStyle().setGridStyle(GraphViewStyle.GridStyle.BOTH);
         lineGraphView.getGraphViewStyle().setHorizontalLabelsColor(getResources().getColor(R.color.golden_brown));
         lineGraphView.getGraphViewStyle().setVerticalLabelsColor(getResources().getColor(R.color.golden_brown));
         lineGraphView.setBackground(getResources().getDrawable(R.drawable.graph_bg));
-        lineGraphView.getGraphViewStyle().setTextSize(10.0F);
+        lineGraphView.getGraphViewStyle().setTextSize(8.0F);
+        lineGraphView.setVerticalLabels(verLabels);
 
         lineGraphView.setTitle("Adherence Rate vs Day");
+
 
 
         //lineGraphView.getBac

@@ -109,7 +109,7 @@ public class MainActivity extends FragmentActivity {
                             adherenceRate = ((double)takenCount / (double)interval) * 100;
                         else
                             adherenceRate = 100;
-                        String ar=String.format("%.2f ",adherenceRate);
+                        String ar=String.format("%.1f ",adherenceRate);
                         FirstAnalyticFragment.adherence.setText("" + ar + "%");
                     }
 

@@ -3,6 +3,7 @@ package com.peacecorps.malaria;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ public class InfoHubFragmentActivity extends FragmentActivity {
 
     Button homeIconButton, btnPeaceCorpsPolicy, btnPercentSideEffects, btnSideEffectsPCV,
             btnSideEffectsNPCV, btnVolunteerAdherence, btnEffectiveness,btnTripIndicator,btnSettings;
+    TextView ihLabel;
 
         private Dialog dialog = null;
     static SharedPreferenceStore mSharedPreferenceStore;
@@ -44,7 +46,7 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         else{
             internetIsConnected.setText("You are NOT connected");
         }*/
-
+        ihLabel= (TextView)findViewById(R.id.ih);
         homeIconButton = (Button) findViewById(R.id.homeButton);
         btnTripIndicator = (Button) findViewById(R.id.tripButton);
         btnPeaceCorpsPolicy = (Button) findViewById(R.id.btnPeaceCorpsPolicy);
@@ -54,6 +56,9 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         btnVolunteerAdherence = (Button) findViewById(R.id.btnVolunteerAdherence);
         btnEffectiveness = (Button) findViewById(R.id.btnEffectiveness);
         btnSettings = (Button)findViewById(R.id.info_hub_settings_button);
+
+        Typeface cf = Typeface.createFromAsset(getAssets(),"fonts/garreg.ttf");
+        ihLabel.setTypeface(cf);
 
         addListeners();
 

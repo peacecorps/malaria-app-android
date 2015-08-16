@@ -18,7 +18,7 @@
     <color name="gray">#808080</color>
     <color name="lightgray">#e7e7e7</color>
     <color name="lightgray02">#bfbfbf</color>
-    <color name="light_blue">#ff00eeec</color>
+    <color name="light_blue">#7700eeec</color>
     <color name="dark">#000015</color>
     <color name="green">#ff136612</color>
     <color name="red">#e33d1b</color>
@@ -28,5 +28,6 @@
     <color name="cream">#fffff7bf</color>
     <color name="light_green">#ff8fc24e</color>
     <color name="lightest_brown">#ffe0cf79</color>
+    <color name="transparent_cream">#89fffefa</color>
 
 </resources>

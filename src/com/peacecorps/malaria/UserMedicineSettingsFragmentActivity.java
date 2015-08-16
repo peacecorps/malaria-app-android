@@ -15,6 +15,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import java.util.Calendar;
@@ -45,7 +46,8 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
     private final static Calendar mCalendar = Calendar.getInstance();
     private String TAGUMSFA="UserMedicineSettingsFragmentActivity";
     static SharedPreferenceStore mSharedPreferenceStore;
-
+    private static View v;
+    private static TimePicker tp;
 
     public static Context mFragmentContext;
 
@@ -195,8 +197,16 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
             int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
             int minute = mCalendar.get(Calendar.MINUTE);
 
-            return new TimePickerDialog(getActivity(), this, hour, minute,
+            TimePickerDialog view = new TimePickerDialog(getActivity(), R.style.MyTimePicker ,this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
+
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            v=inflater.inflate(R.layout.time_picker_style_setting, null);
+
+            view.setView(v);
+            tp=(TimePicker)v.findViewById(R.id.tpUser);
+
+            return view;
         }
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
@@ -206,7 +216,11 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
             mHour = hourOfDay;
             mMinute = minutes;
 
-            updateTime(hourOfDay, minutes);
+            mHour = tp.getCurrentHour();
+            mMinute = tp.getCurrentMinute();
+
+            //updateTime(hourOfDay, minutes);
+            updateTime(mHour, mMinute);
             checkIfTimeSet(isDoneButtonChecked);
 
         }

@@ -10,16 +10,20 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
@@ -67,7 +71,9 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     private TextView tripTime;
     private DatabaseSQLiteHelper sqLite;
     private String loc="";
-
+    private TimePicker tp;
+    private View v;
+    private TextView pmtLabel;
 
     public static TripIndicatorFragmentActivity instance(){
         return inst;
@@ -92,6 +98,10 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         loc_history=(ImageView)findViewById(R.id.locationHistory);
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
         tripTime = (TextView)findViewById(R.id.trip_time);
+        pmtLabel = (TextView)findViewById(R.id.pmt);
+
+        Typeface cf = Typeface.createFromAsset(getAssets(),"fonts/garreg.ttf");
+        pmtLabel.setTypeface(cf);
 
          sqLite = new DatabaseSQLiteHelper(this);
 
@@ -445,7 +455,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
             int day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
+            return new DatePickerDialog(getActivity(), R.style.MyDatePicker , this, year, month, day);
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -492,7 +502,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
              dep_day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, dep_year, dep_month, dep_day);
+            return new DatePickerDialog(getActivity(),R.style.MyDatePicker ,this, dep_year, dep_month, dep_day);
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -557,17 +567,30 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
             final Calendar c = Calendar.getInstance();
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
-
-            return new TimePickerDialog(getActivity(), this, hour, minute,
+            TimePickerDialog view= new TimePickerDialog(getActivity(), R.style.MyTimePicker , this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
+
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            v=inflater.inflate(R.layout.time_picker_style, null);
+
+            view.setView(v);
+            tp=(TimePicker)v.findViewById(R.id.tpTrip);
+            return view;
         }
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
+
+
             ALARM_HOUR=hourOfDay;
             ALARM_MINUTE=minute;
 
-            tripTime.setText(""+hourOfDay+":"+minute);
+
+            ALARM_HOUR=tp.getCurrentHour();
+            ALARM_MINUTE=tp.getCurrentMinute();
+
+            tripTime.setText("" + ALARM_HOUR + ":" + ALARM_MINUTE);
+
         }
 
 

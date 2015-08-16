@@ -51,6 +51,7 @@
                         android:textColor="@color/golden_brown"
                         android:textSize="30sp"
                         android:textStyle="bold"
+                        android:id="@+id/pmt"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
 
