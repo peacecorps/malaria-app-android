@@ -1,7 +1,10 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
+<<<<<<< HEAD
 import android.graphics.Typeface;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -27,7 +30,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Authenticator;
+<<<<<<< HEAD
 import java.net.FileNameMap;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 import java.net.PasswordAuthentication;
 
 /**
@@ -53,6 +59,18 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
 
 
 
+    private static String TAGPCP = PeaceCorpsPolicyFragmentActivity.class.getSimpleName();
+
+    private ProgressDialog progressDialog;
+
+    //json object response url
+    private String urlJsonObj = "http://pc-web-dev.systers.org/api/posts/1/?format=json";
+
+    // temporary string to show the parsed response
+    private String jsonResponse;
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +78,10 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
         setContentView(R.layout.peace_corps_policy_fragment);
 
         mPeaceCorpsPolicyLabel = (TextView) findViewById(R.id.peaceCorpsPolicyLabel);
+<<<<<<< HEAD
         pcp = (TextView) findViewById(R.id.pcp);
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
@@ -69,9 +90,12 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
         //mking json object Request
         Log.i(TAGPCP, "INSIDE PEACE CORPS ACTIVITY");
 
+<<<<<<< HEAD
         mPeaceCorpsPolicyLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
         pcp.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
 
+=======
+>>>>>>> ankita-gsoc-gradlebuild
         /*HTTPAsyncTask conTask =new HTTPAsyncTask(this);
         conTask.execute("http://pc-web-dev.systers.org");*/
 

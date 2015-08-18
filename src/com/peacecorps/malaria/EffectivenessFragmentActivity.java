@@ -1,7 +1,10 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
+<<<<<<< HEAD
 import android.graphics.Typeface;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -30,7 +33,11 @@ import java.net.PasswordAuthentication;
  */
 public class EffectivenessFragmentActivity extends FragmentActivity{
 
+<<<<<<< HEAD
     private TextView mEffectivenessLabel,mETitle;
+=======
+    private TextView mEffectivenessLabel;
+>>>>>>> ankita-gsoc-gradlebuild
 
     private static String TAGE = EffectivenessFragmentActivity.class.getSimpleName();
 
@@ -50,7 +57,10 @@ public class EffectivenessFragmentActivity extends FragmentActivity{
         setContentView(R.layout.effectiveness_fragment);
 
         mEffectivenessLabel = (TextView) findViewById(R.id.effectivenessLabel);
+<<<<<<< HEAD
         mETitle = (TextView)findViewById(R.id.eam);
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
@@ -58,8 +68,11 @@ public class EffectivenessFragmentActivity extends FragmentActivity{
 
 //mking json object Request
         Log.i(TAGE, "INSIDE EFFECTIVENESS");
+<<<<<<< HEAD
         mEffectivenessLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
         mETitle.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
+=======
+>>>>>>> ankita-gsoc-gradlebuild
         makeJsonObjectRequest();
     }
     private void makeJsonObjectRequest(){

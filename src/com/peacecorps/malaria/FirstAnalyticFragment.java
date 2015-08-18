@@ -16,7 +16,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import com.peacecorps.malaria.R;
 
+<<<<<<< HEAD
 import java.util.Calendar;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 import java.util.Date;
 
 
@@ -31,7 +34,10 @@ public class FirstAnalyticFragment extends Fragment {
     private Button mSettingsButton;
     private String TAGFAF = "FirstAnalyticFragment";
     private Dialog dialog = null;
+<<<<<<< HEAD
     private TextView mlt,dinr,atm;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +51,7 @@ public class FirstAnalyticFragment extends Fragment {
         doses = (TextView) rootView.findViewById(R.id.doses);
         adherence = (TextView) rootView.findViewById(R.id.adherence);
         updateUI();
+<<<<<<< HEAD
         mlt=(TextView)rootView.findViewById(R.id.mlt);
         dinr=(TextView)rootView.findViewById(R.id.dinr);
         atm=(TextView)rootView.findViewById(R.id.atm);
@@ -55,10 +62,13 @@ public class FirstAnalyticFragment extends Fragment {
         dinr.setTypeface(cf);
         atm.setTypeface(cf);
 
+=======
+
 
         return rootView;
 
     }
+>>>>>>> ankita-gsoc-gradlebuild
 
     @Override
     public void onResume(){
@@ -67,6 +77,16 @@ public class FirstAnalyticFragment extends Fragment {
 
     }
 
+<<<<<<< HEAD
+    @Override
+    public void onResume(){
+        updateUI();
+        super.onResume();
+
+    }
+
+=======
+>>>>>>> ankita-gsoc-gradlebuild
     public void updateUI(){
 
 
@@ -90,6 +110,11 @@ public class FirstAnalyticFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+<<<<<<< HEAD
+=======
+                mSharedPreferenceStore.mEditor.putBoolean(
+                        "com.peacecorps.malaria.hasUserSetPreference", false).commit();
+>>>>>>> ankita-gsoc-gradlebuild
                 addDialog();
 
             }
@@ -110,13 +135,17 @@ public class FirstAnalyticFragment extends Fragment {
 
         long interval = 0;
         long today = new Date().getTime();
+<<<<<<< HEAD
         Date tdy= Calendar.getInstance().getTime();
         tdy.setTime(today);
+=======
+>>>>>>> ankita-gsoc-gradlebuild
         DatabaseSQLiteHelper sqLite= new DatabaseSQLiteHelper(getActivity());
         long takenDate= sqLite.getFirstTime();
         if(time.compareTo("firstRunTime")==0) {
             if(takenDate!=0) {
                 Log.d(TAGFAF, "First Run Time at FAF->" + takenDate);
+<<<<<<< HEAD
                 Calendar cal=Calendar.getInstance();
                 cal.setTimeInMillis(takenDate);
                 cal.add(Calendar.MONTH, 1);
@@ -130,6 +159,15 @@ public class FirstAnalyticFragment extends Fragment {
                         + time, takenDate).apply();
                 /*long oneDay = 1000 * 60 * 60 * 24;
                 interval = (today - takenDate) / oneDay;*/
+=======
+                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
+                        + time, takenDate).apply();
+                long oneDay = 1000 * 60 * 60 * 24;
+                interval = (today - takenDate) / oneDay;
+                Log.d(TAGFAF, "TODAY:" + today);
+                Log.d(TAGFAF,"TAKEN DATE"+takenDate);
+                Log.d(TAGFAF,"INTERVAL:"+interval);
+>>>>>>> ankita-gsoc-gradlebuild
                 return interval;
             }
             else
@@ -147,11 +185,18 @@ public class FirstAnalyticFragment extends Fragment {
     public void updateAdherence(){
 
         long interval = checkDrugTakenTimeInterval("firstRunTime");
+<<<<<<< HEAD
         DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
         long takenCount = sqLite.getCountTaken();
         double adherenceRate;
         Log.d(TAGFAF,"taken Count:"+takenCount);
         //Log.d(TAGMA,""+ interval);
+=======
+        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
+        double adherenceRate;
+        Log.d(TAGFAF,"taken Count:"+takenCount);
+        Log.d(TAGFAF,"INTERVAL:"+ interval);
+>>>>>>> ankita-gsoc-gradlebuild
         //Log.d(TAGMA,""+ takenCount);
         if(interval!=1)
             adherenceRate = ((double)takenCount / (double)interval) * 100;
@@ -160,7 +205,11 @@ public class FirstAnalyticFragment extends Fragment {
 
         String ar = String.format("%.2f %%", adherenceRate);
         Log.d(TAGFAF,"Adherence Rate:"+ar);
+<<<<<<< HEAD
         //adherence.setText(ar);
+=======
+        adherence.setText(ar);
+>>>>>>> ankita-gsoc-gradlebuild
 
     }
 
@@ -170,7 +219,11 @@ public class FirstAnalyticFragment extends Fragment {
         if(mSharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly",false)) {
             int d = sqLite.getDosesInaRowWeekly();
             mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.weeklyDose", d).apply();
+<<<<<<< HEAD
             doses.setText("" + d/*mSharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDose", 0)*/);
+=======
+            doses.setText("" + mSharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDose", 0));
+>>>>>>> ankita-gsoc-gradlebuild
         }
         else
         {
@@ -188,7 +241,11 @@ public class FirstAnalyticFragment extends Fragment {
 
     public void addDialog()
     {
+<<<<<<< HEAD
         dialog = new Dialog(this.getActivity(),android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+=======
+        dialog = new Dialog(this.getActivity());
+>>>>>>> ankita-gsoc-gradlebuild
         dialog.setContentView(R.layout.resetdata_dialog);
         dialog.setTitle("Reset Data");
 

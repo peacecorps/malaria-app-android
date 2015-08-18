@@ -19,7 +19,11 @@
               android:textSize="25sp"
               android:gravity="center"
               android:textStyle="bold"
+<<<<<<< HEAD
               android:id="@+id/pcp"
+=======
+
+>>>>>>> ankita-gsoc-gradlebuild
 
             />
     <View android:layout_width="match_parent"
@@ -39,7 +43,10 @@
               android:padding="5dp"
               android:text="@string/dump_test"
               android:textColor="@color/black"
+<<<<<<< HEAD
               android:textSize="20sp"
+=======
+>>>>>>> ankita-gsoc-gradlebuild
               android:layout_height="wrap_content"
               android:id="@+id/peaceCorpsPolicyLabel"
             />

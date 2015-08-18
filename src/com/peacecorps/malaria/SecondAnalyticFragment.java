@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+<<<<<<< HEAD
 import android.graphics.Typeface;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -49,8 +52,11 @@ public class SecondAnalyticFragment extends Fragment {
     private int date;
     private String choice;
     private Dialog dialog = null;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -126,6 +132,11 @@ public class SecondAnalyticFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+<<<<<<< HEAD
+=======
+                mSharedPreferenceStore.mEditor.putBoolean(
+                        "com.peacecorps.malaria.hasUserSetPreference", false).commit();
+>>>>>>> ankita-gsoc-gradlebuild
                 addDialog();
 
             }
@@ -194,15 +205,20 @@ public class SecondAnalyticFragment extends Fragment {
 
     public void updateProgressBar(String choice, int date) {
         DatabaseSQLiteHelper sqLH = new DatabaseSQLiteHelper(getActivity());
+<<<<<<< HEAD
         Typeface cf = Typeface.createFromAsset(getActivity().getAssets(),"fonts/garreg.ttf");
         firstMonthProgressLabel.setText(getMonth(date - 3));
         firstMonthProgressLabel.setTypeface(cf);
+=======
+        firstMonthProgressLabel.setText(getMonth(date - 3));
+>>>>>>> ankita-gsoc-gradlebuild
         int progress = sqLH.getData(mdate, myear, choice);
         float progressp = 0;
         if (choice.equalsIgnoreCase("daily"))
             progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
         else
             progressp = progress * 25;
+<<<<<<< HEAD
 
         if(progressp>=50)
         {
@@ -216,11 +232,18 @@ public class SecondAnalyticFragment extends Fragment {
 
         secondMonthProgressLabel.setText(getMonth(date - 2));
         secondMonthProgressLabel.setTypeface(cf);
+=======
+        firstMonthProgressBar.setProgress((int) progressp);
+        firstMonthProgressPercent.setText("" + (int) progressp + "%");
+
+        secondMonthProgressLabel.setText(getMonth(date - 2));
+>>>>>>> ankita-gsoc-gradlebuild
         progress = sqLH.getData(mdate, myear, choice);
         if (choice.equalsIgnoreCase("daily"))
             progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
         else
             progressp = progress * 25;
+<<<<<<< HEAD
 
         if(progressp>=50)
         {
@@ -234,11 +257,18 @@ public class SecondAnalyticFragment extends Fragment {
 
         thirdMonthProgressLabel.setText(getMonth(date - 1));
         thirdMonthProgressLabel.setTypeface(cf);
+=======
+        secondMonthProgressBar.setProgress((int) progressp);
+        secondMonthProgressPercent.setText("" + (int) progressp + "%");
+
+        thirdMonthProgressLabel.setText(getMonth(date - 1));
+>>>>>>> ankita-gsoc-gradlebuild
         progress = sqLH.getData(mdate, myear, choice);
         if (choice.equalsIgnoreCase("daily"))
             progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
         else
             progressp = progress * 25;
+<<<<<<< HEAD
 
         if(progressp>=50) {
             thirdMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
@@ -250,6 +280,12 @@ public class SecondAnalyticFragment extends Fragment {
 
         fourthMonthProgressLabel.setText(getMonth(date));
         fourthMonthProgressLabel.setTypeface(cf);
+=======
+        thirdMonthProgressBar.setProgress((int) progressp);
+        thirdMonthProgressPercent.setText("" + (int) progressp + "%");
+
+        fourthMonthProgressLabel.setText(getMonth(date));
+>>>>>>> ankita-gsoc-gradlebuild
         progress = sqLH.getData(mdate, myear, choice);
         Log.d(TAGSAF, "Query Return: " + progress);
         if (choice.equalsIgnoreCase("daily"))
@@ -259,6 +295,7 @@ public class SecondAnalyticFragment extends Fragment {
         Log.d(TAGSAF, "" + getNumberOfDaysInMonth(mdate));
         Log.d(TAGSAF, "" + progress);
         Log.d(TAGSAF, "" + progressp);
+<<<<<<< HEAD
 
         if(progressp>=50) {
             fourthMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
@@ -267,6 +304,10 @@ public class SecondAnalyticFragment extends Fragment {
         fourthMonthProgressBar.setProgress((int) progressp);
         fourthMonthProgressPercent.setText("" + (int) progressp + "%");
         fourthMonthProgressPercent.setTypeface(cf);
+=======
+        fourthMonthProgressBar.setProgress((int) progressp);
+        fourthMonthProgressPercent.setText("" + (int) progressp + "%");
+>>>>>>> ankita-gsoc-gradlebuild
     }
 
     public void updateUI(String choice, int date) {
@@ -283,6 +324,7 @@ public class SecondAnalyticFragment extends Fragment {
     }
 
     public void SetupAndShowGraph() {
+<<<<<<< HEAD
 
 
         /*GraphView graph = (GraphView) rootView.findViewById(R.id.graphView);
@@ -313,6 +355,9 @@ public class SecondAnalyticFragment extends Fragment {
 
         GraphViewData graphViewData[] = new GraphViewData[DatabaseSQLiteHelper.date.size()];
         String verLabels[]={"100%","50%","25%","0%"};
+=======
+        GraphViewData graphViewData[] = new GraphViewData[DatabaseSQLiteHelper.date.size()];
+>>>>>>> ankita-gsoc-gradlebuild
 
         for (int index = 0; index < DatabaseSQLiteHelper.percentage.size(); index++) {
 
@@ -364,7 +409,11 @@ public class SecondAnalyticFragment extends Fragment {
 
     public void addDialog()
     {
+<<<<<<< HEAD
         dialog = new Dialog(this.getActivity(),android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+=======
+        dialog = new Dialog(this.getActivity());
+>>>>>>> ankita-gsoc-gradlebuild
         dialog.setContentView(R.layout.resetdata_dialog);
         dialog.setTitle("Reset Data");
 

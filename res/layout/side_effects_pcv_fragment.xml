@@ -19,7 +19,11 @@
         android:textSize="25sp"
         android:gravity="center"
         android:textStyle="bold"
+<<<<<<< HEAD
         android:id="@+id/sep"
+=======
+
+>>>>>>> ankita-gsoc-gradlebuild
 
         />
     <View android:layout_width="match_parent"
@@ -41,7 +45,10 @@
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
                 android:id="@+id/sideEffectsPCVLabel"
+<<<<<<< HEAD
                 android:textSize="20sp"
+=======
+>>>>>>> ankita-gsoc-gradlebuild
                 />
         </LinearLayout>
     </ScrollView>

@@ -12,16 +12,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+<<<<<<< HEAD
 import android.graphics.Color;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+<<<<<<< HEAD
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
+=======
+import android.view.WindowManager.LayoutParams;
+>>>>>>> ankita-gsoc-gradlebuild
 import android.widget.Toast;
 
 
@@ -89,7 +96,10 @@ public class AlertDialogFragment extends DialogFragment {
                         else {
                             if (flag == 1) {
                                 Toast.makeText(getActivity(), "You have already taken medicine", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
                                 alarmNotificationManager.cancelAll();
+=======
+>>>>>>> ankita-gsoc-gradlebuild
                             } else {
                                 Toast.makeText(getActivity(), "You have not taken medicine. Modify later, if you have taken.", Toast.LENGTH_SHORT).show();
                                 snooze();
@@ -128,7 +138,10 @@ public class AlertDialogFragment extends DialogFragment {
                         } else {
                             if (flag == 1) {
                                 Toast.makeText(getActivity(), "You have taken the medicine. Modify it later, if you have not taken it.", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
                                 alarmNotificationManager.cancelAll();
+=======
+>>>>>>> ankita-gsoc-gradlebuild
                             } else {
                                 Toast.makeText(getActivity(), "You have not taken the medicine.", Toast.LENGTH_SHORT).show();
                                 snooze();
@@ -148,7 +161,10 @@ public class AlertDialogFragment extends DialogFragment {
                     snooze();
                 } else {
                     Toast.makeText(getActivity(),"You have already taken medicine, no need to snooze.",Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
                     alarmNotificationManager.cancelAll();
+=======
+>>>>>>> ankita-gsoc-gradlebuild
                 }
             }
         }).setCancelable(false);
@@ -314,8 +330,12 @@ public class AlertDialogFragment extends DialogFragment {
 
     public double computeAdherenceRate() {
         long interval = checkDrugTakenTimeInterval("firstRunTime");
+<<<<<<< HEAD
         DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
         long takenCount = sqLite.getCountTaken();
+=======
+        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
+>>>>>>> ankita-gsoc-gradlebuild
         double adherenceRate = ((double)takenCount / (double)interval) * 100;
         Log.d(TAGADF, "adherence:" + adherenceRate);
         return adherenceRate;

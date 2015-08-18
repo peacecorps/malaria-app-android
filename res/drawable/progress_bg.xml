@@ -5,7 +5,11 @@
         <shape>
             <corners android:radius="5dip" />
 
+<<<<<<< HEAD
             <solid android:color="#fff9e2ce" />
+=======
+            <solid android:color="#fff9b9a8" />
+>>>>>>> ankita-gsoc-gradlebuild
         </shape>
     </item>
 </selector>

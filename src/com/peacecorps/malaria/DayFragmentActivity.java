@@ -46,7 +46,10 @@ public class DayFragmentActivity extends FragmentActivity {
     private String ch="";
     private int flag=0;
     private long curr_time=0;
+<<<<<<< HEAD
     private static DatabaseSQLiteHelper sqLite;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -60,8 +63,13 @@ public class DayFragmentActivity extends FragmentActivity {
                 .getApplicationContext();
         mSharedPreferenceStore.getSharedPreferences(this);
 
+<<<<<<< HEAD
         /*defining variables for accessing Database*/
         sqLite= new DatabaseSQLiteHelper(this);
+=======
+        /*declaring variables for accessing Database*/
+        final DatabaseSQLiteHelper sqLite= new DatabaseSQLiteHelper(this);
+>>>>>>> ankita-gsoc-gradlebuild
 
         /*displaying clicked date on the Day Fragment*/
         Intent intent = getIntent();
@@ -124,10 +132,17 @@ public class DayFragmentActivity extends FragmentActivity {
         {   Log.d(TAGD,"Inside Missed Drug Entry");
 
             selected_date=SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.checkMediLastTakenTime","");
+<<<<<<< HEAD
             SimpleDateFormat dateF = new SimpleDateFormat("dd/MM");
             Date cd=Calendar.getInstance().getTime();
             try {
                 cd   = dateF.parse(selected_date);
+=======
+            SimpleDateFormat dateF = new SimpleDateFormat("dd/MM/yyyy");
+            Date cd=Calendar.getInstance().getTime();
+            try {
+                cd   = dateFormatter.parse(selected_date);
+>>>>>>> ankita-gsoc-gradlebuild
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -177,7 +192,11 @@ public class DayFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
+<<<<<<< HEAD
                 final Dialog dialog = new Dialog(con,android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+=======
+                final Dialog dialog = new Dialog(con);
+>>>>>>> ankita-gsoc-gradlebuild
                 dialog.setContentView(R.layout.day_dialog);
                 dialog.setTitle("Medicine Consumption");
 
@@ -215,6 +234,7 @@ public class DayFragmentActivity extends FragmentActivity {
                                 long firstTime = sqLite.getFirstTime();
                                 Log.d(TAGD, "" + SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime", 0));
                                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime", firstTime).apply();
+<<<<<<< HEAD
 
                                 double prcntage = 0.0;
                                 Log.d(TAGD, "Adherence when Yes:" + prcntage);
@@ -224,6 +244,11 @@ public class DayFragmentActivity extends FragmentActivity {
                                 prcntage=computeAdherenceRate(curr_time);
                                 sqLite.updateMedicationEntry(day, month, year, "yes", prcntage);
 
+=======
+                                double prcntage = computeAdherenceRate(curr_time);
+                                Log.d(TAGD, "Adherence when Yes:" + prcntage);
+                                sqLite.updateMedicationEntry(day, month, year, "yes", prcntage);
+>>>>>>> ankita-gsoc-gradlebuild
                                 int dosesInaRow=sqLite.getDosesInaRowDaily();
                                 Log.d(TAGD,"Doses in a Row:"+dosesInaRow);
                                 SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", dosesInaRow).apply();
@@ -269,6 +294,7 @@ public class DayFragmentActivity extends FragmentActivity {
         });
     }
 
+<<<<<<< HEAD
     public double computeAdherenceRate(long day_time) {
         long interval = checkDrugTakenTimeInterval("firstRunTime", day_time);
         //DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(this.getApplicationContext());
@@ -316,6 +342,65 @@ public class DayFragmentActivity extends FragmentActivity {
              interval=1;
 
         return interval;
+=======
+    public  double computeAdherenceRate(long day_time) {
+        /*long interval = checkDrugTakenTimeInterval("firstRunTime",day_time) + 1;
+        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
+        double adherenceRate = ((double)takenCount /(double) interval) * 100;
+        return adherenceRate;*/
+
+        long interval = checkDrugTakenTimeInterval("firstRunTime");
+        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
+        double adherenceRate;
+        Log.d(TAGD,"taken Count:"+takenCount);
+        Log.d(TAGD,"INTERVAL:"+ interval);
+        //Log.d(TAGMA,""+ takenCount);
+        if(interval!=1)
+            adherenceRate = ((double)takenCount / (double)interval) * 100;
+        else
+            adherenceRate = 100;
+        Log.d(TAGD,"ADHERENCE RATE:"+adherenceRate);
+
+        return adherenceRate;
+    }
+
+    public  long checkDrugTakenTimeInterval(String time) {
+        /*long interval = 0;
+        long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
+                + time, 0);
+        Log.d(TAGD, time + ":" + takenDate);
+        long oneDay = 1000 * 60 * 60 * 24;
+        interval = (day_time - takenDate) / oneDay;
+        return interval;*/
+
+
+        long interval = 0;
+        long today = new Date().getTime();
+        DatabaseSQLiteHelper sqLite= new DatabaseSQLiteHelper(con);
+        long takenDate= sqLite.getFirstTime();
+        if(time.compareTo("firstRunTime")==0) {
+            if(takenDate!=0) {
+                Log.d(TAGD, "First Run Time at FAF->" + takenDate);
+                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
+                        + time, takenDate).apply();
+                long oneDay = 1000 * 60 * 60 * 24;
+                interval = (today - takenDate) / oneDay;
+                Log.d(TAGD, "TODAY:" + today);
+                Log.d(TAGD,"TAKEN DATE"+takenDate);
+                Log.d(TAGD,"INTERVAL:"+interval);
+                return interval;
+            }
+            else
+                return 1;
+        }
+        else {
+            takenDate=SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
+                    + time, takenDate);
+            long oneDay = 1000 * 60 * 60 * 24;
+            interval = (today - takenDate) / oneDay;
+            return interval;
+        }
+>>>>>>> ankita-gsoc-gradlebuild
     }
 
 

@@ -10,13 +10,19 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DatabaseErrorHandler;
+<<<<<<< HEAD
 import android.graphics.Typeface;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
+<<<<<<< HEAD
 import android.view.LayoutInflater;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 import android.view.View;
 
 import java.util.Calendar;
@@ -49,6 +55,7 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
     static SharedPreferenceStore mSharedPreferenceStore;
     private static View v;
     private static TimePicker tp;
+
 
     public static Context mFragmentContext;
 

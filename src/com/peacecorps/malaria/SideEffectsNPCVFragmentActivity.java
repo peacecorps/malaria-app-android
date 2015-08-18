@@ -1,7 +1,10 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
+<<<<<<< HEAD
 import android.graphics.Typeface;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -30,7 +33,11 @@ import java.net.PasswordAuthentication;
  */
 public class SideEffectsNPCVFragmentActivity extends FragmentActivity {
 
+<<<<<<< HEAD
     private TextView mSideEffectsNPCVLabel,sen;
+=======
+    private TextView mSideEffectsNPCVLabel;
+>>>>>>> ankita-gsoc-gradlebuild
 
     private static String TAGSEN = SideEffectsNPCVFragmentActivity.class.getSimpleName();
 
@@ -50,7 +57,11 @@ public class SideEffectsNPCVFragmentActivity extends FragmentActivity {
         setContentView(R.layout.side_effects_npcv_fragment);
 
         mSideEffectsNPCVLabel = (TextView) findViewById(R.id.sideEffectsNPCVLabel);
+<<<<<<< HEAD
         sen = (TextView) findViewById(R.id.sen);
+=======
+
+>>>>>>> ankita-gsoc-gradlebuild
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
@@ -59,8 +70,11 @@ public class SideEffectsNPCVFragmentActivity extends FragmentActivity {
         Log.i(TAGSEN, "INSIDE SIDE EFFECTS NPCV");
         makeJsonObjectRequest();
 
+<<<<<<< HEAD
         mSideEffectsNPCVLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
         sen.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
+=======
+>>>>>>> ankita-gsoc-gradlebuild
     }
     private void makeJsonObjectRequest(){
         Log.i(TAGSEN, "INSIDE JSON OBJECT REQUEST");

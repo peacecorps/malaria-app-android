@@ -18,7 +18,10 @@
     <color name="gray">#808080</color>
     <color name="lightgray">#e7e7e7</color>
     <color name="lightgray02">#bfbfbf</color>
+<<<<<<< HEAD
     <color name="light_blue">#7700eeec</color>
+=======
+>>>>>>> ankita-gsoc-gradlebuild
     <color name="dark">#000015</color>
     <color name="green">#ff136612</color>
     <color name="red">#e33d1b</color>
@@ -27,7 +30,10 @@
     <color name="lightest_red">#EF9A9A</color>
     <color name="cream">#fffff7bf</color>
     <color name="light_green">#ff8fc24e</color>
+<<<<<<< HEAD
     <color name="lightest_brown">#ffe0cf79</color>
     <color name="transparent_cream">#89fffefa</color>
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 
 </resources>

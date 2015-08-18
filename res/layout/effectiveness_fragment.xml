@@ -19,7 +19,11 @@
         android:textSize="25sp"
         android:gravity="center"
         android:textStyle="bold"
+<<<<<<< HEAD
         android:id="@+id/eam"
+=======
+
+>>>>>>> ankita-gsoc-gradlebuild
 
         />
     <View android:layout_width="match_parent"
@@ -40,8 +44,12 @@
                 android:text="@string/dump_test"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:id="@+id/effectivenessLabel"
                 android:textSize="20sp"/>
+=======
+                android:id="@+id/effectivenessLabel"/>
+>>>>>>> ankita-gsoc-gradlebuild
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

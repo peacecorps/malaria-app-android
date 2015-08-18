@@ -1,7 +1,10 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
+<<<<<<< HEAD
 import android.graphics.Typeface;
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -30,7 +33,11 @@ import java.net.PasswordAuthentication;
  */
 public class VolunteerAdherenceFragmentActivity extends FragmentActivity {
 
+<<<<<<< HEAD
     private TextView mVolunteerAdherenceLabel,vaf;
+=======
+    private TextView mVolunteerAdherenceLabel;
+>>>>>>> ankita-gsoc-gradlebuild
 
     private static String TAGVA = VolunteerAdherenceFragmentActivity.class.getSimpleName();
 
@@ -50,17 +57,24 @@ public class VolunteerAdherenceFragmentActivity extends FragmentActivity {
         setContentView(R.layout.volunteer_adherence_fragment);
 
         mVolunteerAdherenceLabel = (TextView) findViewById(R.id.volunteerAdherenceLabel);
+<<<<<<< HEAD
         vaf=  (TextView) findViewById(R.id.var);
+=======
+
+>>>>>>> ankita-gsoc-gradlebuild
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
 //mking json object Request
         Log.i(TAGVA, "INSIDE VOLUNTEER ADHERENCE");
+<<<<<<< HEAD
 
         mVolunteerAdherenceLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
         vaf.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
 
+=======
+>>>>>>> ankita-gsoc-gradlebuild
         makeJsonObjectRequest();
 
     }

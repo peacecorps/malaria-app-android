@@ -42,11 +42,14 @@ public class AlertCallerFragmentActivity extends FragmentActivity {
     }
 
     public void callAlarm() {
+<<<<<<< HEAD
 
         AlertDialogFragment alert = new AlertDialogFragment();
+=======
+>>>>>>> ankita-gsoc-gradlebuild
 
+        AlertDialogFragment alert = new AlertDialogFragment();
         alert.show(getSupportFragmentManager(), "alertDemo");
-
         alert.setCancelable(false);
 
     }

@@ -71,6 +71,7 @@
         <activity android:name="com.peacecorps.malaria.EffectivenessFragmentActivity"/>
         <activity android:name="com.peacecorps.malaria.ThirdAnalyticFragment"/>
         <activity android:name="com.peacecorps.malaria.DayFragmentActivity"/>
+<<<<<<< HEAD
         <activity android:name="com.peacecorps.malaria.TripIndicatorFragmentActivity"
                   android:launchMode="singleTask"
                   />
@@ -91,6 +92,9 @@
 
 
 
+=======
+        <activity android:name="com.peacecorps.malaria.TripIndicatorFragmentActivity"/>
+>>>>>>> ankita-gsoc-gradlebuild
     </application>
 
 </manifest>
