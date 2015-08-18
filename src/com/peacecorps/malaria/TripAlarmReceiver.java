@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.PowerManager;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
 
@@ -19,6 +20,12 @@ public class TripAlarmReceiver extends WakefulBroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         //this will update the UI with message
         TripIndicatorFragmentActivity inst = TripIndicatorFragmentActivity.instance();
+
+        PowerManager powerManager = (PowerManager) context
+                .getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(
+                PowerManager.PARTIAL_WAKE_LOCK, "");
+        wakeLock.acquire();
 
         //this will sound the alarm tone
         //this will sound the alarm once, if you wish to
@@ -33,8 +40,13 @@ public class TripAlarmReceiver extends WakefulBroadcastReceiver {
         //this will send a notification message
         ComponentName comp = new ComponentName(context.getPackageName(),
                 TripAlarmService.class.getName());
+
+
         startWakefulService(context, (intent.setComponent(comp)));
         setResultCode(Activity.RESULT_OK);
+
+        wakeLock.release();
+
         Log.d("TripAlarmReceiver","Set the service");
 
     }

@@ -1,6 +1,7 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -30,7 +31,7 @@ import java.net.PasswordAuthentication;
 public class PercentSideEffectsFragmentActivity extends FragmentActivity {
 
 
-    private TextView mPercentSideEffectsLabel;
+    private TextView mPercentSideEffectsLabel,pse;
 
     private static String TAGPSE = PercentSideEffectsFragmentActivity.class.getSimpleName();
 
@@ -49,7 +50,7 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
         setContentView(R.layout.side_effects_percentage_fragment);
 
         mPercentSideEffectsLabel = (TextView) findViewById(R.id.percentSideEffectsLabel);
-
+        pse=(TextView)findViewById(R.id.pse);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
@@ -57,6 +58,8 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
         //mking json object Request
         Log.i(TAGPSE, "INSIDE PERCENTAGE SIDE EFECTS");
 
+        mPercentSideEffectsLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
+        pse.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
 
         makeJsonObjectRequest();
 

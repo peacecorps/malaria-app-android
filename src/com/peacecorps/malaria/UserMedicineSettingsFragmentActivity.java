@@ -10,6 +10,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DatabaseErrorHandler;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -77,6 +78,14 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
 
         mSharedPreferenceStore.getSharedPreferences(this);
 
+        Typeface cb = Typeface.createFromAsset(getAssets(),"fonts/garbold.ttf");
+        mSetupLabel.setTypeface(cb);
+
+        Typeface cf = Typeface.createFromAsset(getAssets(),"fonts/garreg.ttf");
+        timePickButton.setTypeface(cf);
+        mIfForgetLabel.setTypeface(cb);
+        mTimePickLabel.setTypeface(cb);
+        mDrugTakeLabel.setTypeface(cb);
 
         checkInitialAppInstall();
 
@@ -158,12 +167,15 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
      */
     private void createDrugSelectionSpinner() {
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+       /* ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this, R.array.user_medicine_settings_activity_drug_array,
-                android.R.layout.simple_spinner_item);
+                android.R.layout.simple_spinner_item);*/
+        String[] listContent = {"Malarone","Doxycycline","Mefloquine"};
+        Integer[] imageID = {R.drawable.mal,R.drawable.doxy,R.drawable.mef};
+
+        DrugArrayAdapter adapter = new DrugArrayAdapter(this,listContent,imageID);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         mDrugSelectSpinner.setAdapter(adapter);
 
         mDrugSelectSpinner.setOnItemSelectedListener(this);

@@ -1,6 +1,7 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -26,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Authenticator;
+import java.net.FileNameMap;
 import java.net.PasswordAuthentication;
 
 /**
@@ -37,7 +39,7 @@ import java.net.PasswordAuthentication;
  */
 public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
 
-    private TextView mPeaceCorpsPolicyLabel;
+    private TextView mPeaceCorpsPolicyLabel,pcp;
 
     private static String TAGPCP = PeaceCorpsPolicyFragmentActivity.class.getSimpleName();
 
@@ -58,6 +60,7 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
         setContentView(R.layout.peace_corps_policy_fragment);
 
         mPeaceCorpsPolicyLabel = (TextView) findViewById(R.id.peaceCorpsPolicyLabel);
+        pcp = (TextView) findViewById(R.id.pcp);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
@@ -65,6 +68,9 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
 
         //mking json object Request
         Log.i(TAGPCP, "INSIDE PEACE CORPS ACTIVITY");
+
+        mPeaceCorpsPolicyLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
+        pcp.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
 
         /*HTTPAsyncTask conTask =new HTTPAsyncTask(this);
         conTask.execute("http://pc-web-dev.systers.org");*/

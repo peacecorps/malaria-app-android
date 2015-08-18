@@ -28,6 +28,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     public static final String LOCATION = "Location";
     public static final String PACKING_ITEM = "PackingItem";
     public static final String KEY_ROW_ID = "_id";
+    public static final String QUANTITY = "Quantity";
 
     private final int[] daysOfMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30,
             31, 30, 31 };

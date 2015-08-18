@@ -48,7 +48,7 @@ android:id="@+id/dialogReset">
             android:layout_height="wrap_content"
             android:background="@color/cream"
             android:divider="@color/golden_brown"
-            android:dividerHeight="2dp"
+            android:dividerHeight="1dp"
             android:headerDividersEnabled="true"
             >
         </ListView>

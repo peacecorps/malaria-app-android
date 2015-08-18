@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:headerDividersEnabled="true"
             android:divider="#ff988455"
-            android:dividerHeight="2dp"
+            android:dividerHeight="1dp"
             />
 
 

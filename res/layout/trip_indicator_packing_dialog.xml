@@ -49,7 +49,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Malarone"
+                android:text="Select Pill"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:textColor="@color/golden_brown"

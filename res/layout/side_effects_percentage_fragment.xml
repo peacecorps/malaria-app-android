@@ -17,8 +17,7 @@
         android:textSize="25sp"
         android:gravity="center"
         android:textStyle="bold"
-
-
+        android:id="@+id/pse"
         />
     <View android:layout_width="match_parent"
         android:layout_height="0.2dp"
@@ -39,6 +38,7 @@
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
                 android:id="@+id/percentSideEffectsLabel"
+                android:textSize="20sp"
                 />
         </LinearLayout>
     </ScrollView>

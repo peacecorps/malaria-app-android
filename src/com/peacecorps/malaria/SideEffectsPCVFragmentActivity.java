@@ -1,6 +1,7 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -29,7 +30,7 @@ import java.net.PasswordAuthentication;
  */
 public class SideEffectsPCVFragmentActivity extends FragmentActivity {
 
-    private TextView mSideEffectsPCVLabel;
+    private TextView mSideEffectsPCVLabel,sep;
 
     private static String TAGSEP = SideEffectsPCVFragmentActivity.class.getSimpleName();
 
@@ -49,7 +50,7 @@ public class SideEffectsPCVFragmentActivity extends FragmentActivity {
         setContentView(R.layout.side_effects_pcv_fragment);
 
         mSideEffectsPCVLabel = (TextView) findViewById(R.id.sideEffectsPCVLabel);
-
+        sep = (TextView) findViewById(R.id.sep);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
@@ -57,6 +58,9 @@ public class SideEffectsPCVFragmentActivity extends FragmentActivity {
 
 //mking json object Request
         Log.i(TAGSEP, "INSIDE SIDE EFFECTS PCV");
+
+        mSideEffectsPCVLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
+        sep.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
         makeJsonObjectRequest();
 
     }

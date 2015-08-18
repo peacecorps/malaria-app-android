@@ -1,6 +1,7 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -29,7 +30,7 @@ import java.net.PasswordAuthentication;
  */
 public class VolunteerAdherenceFragmentActivity extends FragmentActivity {
 
-    private TextView mVolunteerAdherenceLabel;
+    private TextView mVolunteerAdherenceLabel,vaf;
 
     private static String TAGVA = VolunteerAdherenceFragmentActivity.class.getSimpleName();
 
@@ -49,13 +50,17 @@ public class VolunteerAdherenceFragmentActivity extends FragmentActivity {
         setContentView(R.layout.volunteer_adherence_fragment);
 
         mVolunteerAdherenceLabel = (TextView) findViewById(R.id.volunteerAdherenceLabel);
-
+        vaf=  (TextView) findViewById(R.id.var);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
 //mking json object Request
         Log.i(TAGVA, "INSIDE VOLUNTEER ADHERENCE");
+
+        mVolunteerAdherenceLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
+        vaf.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
+
         makeJsonObjectRequest();
 
     }

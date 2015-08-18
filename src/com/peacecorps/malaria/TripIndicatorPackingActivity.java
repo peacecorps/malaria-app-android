@@ -199,7 +199,7 @@ public class TripIndicatorPackingActivity extends Activity {
         numDrugs = (TextView)findViewById(R.id.quantity);
         whichDrug = (TextView)findViewById(R.id.drugName);
         numDrugs.setText("" + mNumDrugs);
-        sqLite.insertPackingItem("Drug", (int) mNumDrugs, "yes");
+        sqLite.insertPackingItem("Pills", (int) mNumDrugs, "yes");
 
         /** Drug Selection **/
         whichDrug.setOnClickListener(new View.OnClickListener() {

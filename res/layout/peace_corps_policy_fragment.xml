@@ -19,7 +19,7 @@
               android:textSize="25sp"
               android:gravity="center"
               android:textStyle="bold"
-
+              android:id="@+id/pcp"
 
             />
     <View android:layout_width="match_parent"
@@ -39,6 +39,7 @@
               android:padding="5dp"
               android:text="@string/dump_test"
               android:textColor="@color/black"
+              android:textSize="20sp"
               android:layout_height="wrap_content"
               android:id="@+id/peaceCorpsPolicyLabel"
             />
