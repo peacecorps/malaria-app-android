@@ -31,10 +31,7 @@
             android:id="@+id/firstMonthProgressLabel"
             android:textStyle="bold"
             android:textColor="@color/golden_brown"
-<<<<<<< HEAD
             android:textSize="18sp"
-=======
->>>>>>> ankita-gsoc-gradlebuild
 
 
             />
@@ -77,10 +74,7 @@
             android:id="@+id/secondMonthProgressLabel"
             android:textStyle="bold"
             android:textColor="@color/golden_brown"
-<<<<<<< HEAD
             android:textSize="18sp"
-=======
->>>>>>> ankita-gsoc-gradlebuild
 
             />
 
@@ -105,10 +99,7 @@
             android:id="@+id/secondMonthProgressPercent"
             android:textStyle="bold"
             android:textColor="@color/golden_brown"
-<<<<<<< HEAD
             android:textSize="18sp"
-=======
->>>>>>> ankita-gsoc-gradlebuild
             />
 
     </LinearLayout>
@@ -126,10 +117,7 @@
             android:id="@+id/thirdMonthProgressLabel"
             android:textStyle="bold"
             android:textColor="@color/golden_brown"
-<<<<<<< HEAD
             android:textSize="18sp"
-=======
->>>>>>> ankita-gsoc-gradlebuild
 
             />
 
@@ -153,10 +141,7 @@
             android:id="@+id/thirdMonthProgressPercent"
             android:textStyle="bold"
             android:textColor="@color/golden_brown"
-<<<<<<< HEAD
             android:textSize="18sp"
-=======
->>>>>>> ankita-gsoc-gradlebuild
             />
 
     </LinearLayout>
@@ -173,29 +158,18 @@
             android:id="@+id/fourthMonthProgressLabel"
             android:textStyle="bold"
             android:textColor="@color/golden_brown"
-<<<<<<< HEAD
             android:textSize="18sp"
-=======
->>>>>>> ankita-gsoc-gradlebuild
 
             />
 
         <ProgressBar android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:progress="80"
-<<<<<<< HEAD
             android:progressDrawable="@drawable/saf_progress_bar"
             android:layout_weight="1"
             style="?android:attr/progressBarStyleHorizontal"
             android:id="@+id/fourthMonthProgressBar"
             android:background="@drawable/progress_bg"
-=======
-            android:progressDrawable="@drawable/saf_progress_bar_green"
-            android:layout_weight="1"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:id="@+id/fourthMonthProgressBar"
-            android:background="@drawable/progress_bg_green"
->>>>>>> ankita-gsoc-gradlebuild
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:onClick="sendMonth"
@@ -209,10 +183,7 @@
             android:id="@+id/fourthMonthProgressPercent"
             android:textStyle="bold"
             android:textColor="@color/golden_brown"
-<<<<<<< HEAD
             android:textSize="18sp"
-=======
->>>>>>> ankita-gsoc-gradlebuild
             />
 
     </LinearLayout>
@@ -222,10 +193,7 @@
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-<<<<<<< HEAD
         android:background="@drawable/graph_bg"
-=======
->>>>>>> ankita-gsoc-gradlebuild
         android:id="@+id/graphView"
         >
 

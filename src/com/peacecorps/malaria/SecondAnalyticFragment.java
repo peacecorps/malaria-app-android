@@ -6,10 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-<<<<<<< HEAD
 import android.graphics.Typeface;
-=======
->>>>>>> ankita-gsoc-gradlebuild
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -28,7 +25,9 @@ import com.jjoe64.graphview.LineGraphView;
 
 import java.util.Calendar;
 import java.util.Locale;
-
+/**Second Analytic Fragment
+ * It shows the Progress Bars and Graph
+ * **/
 public class SecondAnalyticFragment extends Fragment {
 
     private TextView firstMonthProgressLabel, secondMonthProgressLabel, thirdMonthProgressLabel, fourthMonthProgressLabel;
@@ -52,14 +51,12 @@ public class SecondAnalyticFragment extends Fragment {
     private int date;
     private String choice;
     private Dialog dialog = null;
-<<<<<<< HEAD
 
 
-=======
->>>>>>> ankita-gsoc-gradlebuild
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Declaring the Views
         rootView = inflater.inflate(R.layout.fragment_second_analytic_screen,
                 null);
 
@@ -84,7 +81,7 @@ public class SecondAnalyticFragment extends Fragment {
         Calendar cal = Calendar.getInstance();
 
         date = Calendar.getInstance().get(Calendar.MONTH);
-        //choice;
+        //checking choic of pill whether weekly or daily
         if (mSharedPreferenceStore.mPrefsStore.getBoolean(
                 "com.peacecorps.malaria.isWeekly", false)) {
             choice = "weekly";
@@ -109,6 +106,7 @@ public class SecondAnalyticFragment extends Fragment {
     int mdate;
     int myear;
 
+    //finding month from its integer
     public String getMonth(int date) {
         String month[] = getResources().getStringArray(R.array.month);
         if (date == 0) {
@@ -125,23 +123,18 @@ public class SecondAnalyticFragment extends Fragment {
         mdate = date;
         return month[date];
     }
-
+    /*Opening Dialog on Clicking Gear Icon*/
     public void addButtonListeners() {
         mSettingsButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-<<<<<<< HEAD
-=======
-                mSharedPreferenceStore.mEditor.putBoolean(
-                        "com.peacecorps.malaria.hasUserSetPreference", false).commit();
->>>>>>> ankita-gsoc-gradlebuild
                 addDialog();
 
             }
         });
-
+        /*On Clicking the Progress Bars Opens Calendar of that Specific Month*/
         firstMonthProgressBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,7 +182,7 @@ public class SecondAnalyticFragment extends Fragment {
             }
         });
     }
-
+    /*Fetching the Details and Settings from Shared Preferences*/
     public void getSharedPreferences() {
 
         mSharedPreferenceStore.mPrefsStore = getActivity()
@@ -199,26 +192,26 @@ public class SecondAnalyticFragment extends Fragment {
                 .edit();
     }
 
+    /*Finding No. of Days in Month*/
     public int getNumberOfDaysInMonth(int month) {
         return daysOfMonth[month];
     }
 
+    /*Updating the Progress Bars
+    * On the basis of drugs taken or not
+    * Also on the basis of status of each day modified later in the calendar
+    * */
     public void updateProgressBar(String choice, int date) {
         DatabaseSQLiteHelper sqLH = new DatabaseSQLiteHelper(getActivity());
-<<<<<<< HEAD
         Typeface cf = Typeface.createFromAsset(getActivity().getAssets(),"fonts/garreg.ttf");
         firstMonthProgressLabel.setText(getMonth(date - 3));
         firstMonthProgressLabel.setTypeface(cf);
-=======
-        firstMonthProgressLabel.setText(getMonth(date - 3));
->>>>>>> ankita-gsoc-gradlebuild
         int progress = sqLH.getData(mdate, myear, choice);
         float progressp = 0;
         if (choice.equalsIgnoreCase("daily"))
             progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
         else
             progressp = progress * 25;
-<<<<<<< HEAD
 
         if(progressp>=50)
         {
@@ -232,18 +225,11 @@ public class SecondAnalyticFragment extends Fragment {
 
         secondMonthProgressLabel.setText(getMonth(date - 2));
         secondMonthProgressLabel.setTypeface(cf);
-=======
-        firstMonthProgressBar.setProgress((int) progressp);
-        firstMonthProgressPercent.setText("" + (int) progressp + "%");
-
-        secondMonthProgressLabel.setText(getMonth(date - 2));
->>>>>>> ankita-gsoc-gradlebuild
         progress = sqLH.getData(mdate, myear, choice);
         if (choice.equalsIgnoreCase("daily"))
             progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
         else
             progressp = progress * 25;
-<<<<<<< HEAD
 
         if(progressp>=50)
         {
@@ -257,18 +243,11 @@ public class SecondAnalyticFragment extends Fragment {
 
         thirdMonthProgressLabel.setText(getMonth(date - 1));
         thirdMonthProgressLabel.setTypeface(cf);
-=======
-        secondMonthProgressBar.setProgress((int) progressp);
-        secondMonthProgressPercent.setText("" + (int) progressp + "%");
-
-        thirdMonthProgressLabel.setText(getMonth(date - 1));
->>>>>>> ankita-gsoc-gradlebuild
         progress = sqLH.getData(mdate, myear, choice);
         if (choice.equalsIgnoreCase("daily"))
             progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
         else
             progressp = progress * 25;
-<<<<<<< HEAD
 
         if(progressp>=50) {
             thirdMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
@@ -280,12 +259,6 @@ public class SecondAnalyticFragment extends Fragment {
 
         fourthMonthProgressLabel.setText(getMonth(date));
         fourthMonthProgressLabel.setTypeface(cf);
-=======
-        thirdMonthProgressBar.setProgress((int) progressp);
-        thirdMonthProgressPercent.setText("" + (int) progressp + "%");
-
-        fourthMonthProgressLabel.setText(getMonth(date));
->>>>>>> ankita-gsoc-gradlebuild
         progress = sqLH.getData(mdate, myear, choice);
         Log.d(TAGSAF, "Query Return: " + progress);
         if (choice.equalsIgnoreCase("daily"))
@@ -295,7 +268,6 @@ public class SecondAnalyticFragment extends Fragment {
         Log.d(TAGSAF, "" + getNumberOfDaysInMonth(mdate));
         Log.d(TAGSAF, "" + progress);
         Log.d(TAGSAF, "" + progressp);
-<<<<<<< HEAD
 
         if(progressp>=50) {
             fourthMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
@@ -304,12 +276,9 @@ public class SecondAnalyticFragment extends Fragment {
         fourthMonthProgressBar.setProgress((int) progressp);
         fourthMonthProgressPercent.setText("" + (int) progressp + "%");
         fourthMonthProgressPercent.setTypeface(cf);
-=======
-        fourthMonthProgressBar.setProgress((int) progressp);
-        fourthMonthProgressPercent.setText("" + (int) progressp + "%");
->>>>>>> ankita-gsoc-gradlebuild
     }
 
+    /**Update UI is called on resume to Update the Graph and Progress Bars**/
     public void updateUI(String choice, int date) {
 
         updateProgressBar(choice, date);
@@ -322,43 +291,13 @@ public class SecondAnalyticFragment extends Fragment {
         addButtonListeners();
 
     }
-
+    /**Setting Up Graph**/
     public void SetupAndShowGraph() {
-<<<<<<< HEAD
-
-
-        /*GraphView graph = (GraphView) rootView.findViewById(R.id.graphView);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
-        });
-        graph.addSeries(series);
-
-        LineGraphSeries<DataPoint> series2 = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, 3),
-                new DataPoint(1, 3),
-                new DataPoint(2, 6),
-                new DataPoint(3, 2),
-                new DataPoint(4, 5)
-        });
-        graph.addSeries(series2);
-
-        // legend
-        series.setTitle("foo");
-        series2.setTitle("bar");
-        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.BOTTOM);*/
 
 
         GraphViewData graphViewData[] = new GraphViewData[DatabaseSQLiteHelper.date.size()];
         String verLabels[]={"100%","50%","25%","0%"};
-=======
-        GraphViewData graphViewData[] = new GraphViewData[DatabaseSQLiteHelper.date.size()];
->>>>>>> ankita-gsoc-gradlebuild
-
+        //adding data
         for (int index = 0; index < DatabaseSQLiteHelper.percentage.size(); index++) {
 
             graphViewData[index] = new GraphViewData(DatabaseSQLiteHelper.date.get(index), Double.parseDouble("" + DatabaseSQLiteHelper.percentage.get(index)));
@@ -366,7 +305,7 @@ public class SecondAnalyticFragment extends Fragment {
         drugGraphSeries = new GraphViewSeries(graphViewData);
 
         GraphView lineGraphView = new LineGraphView(getActivity(), "");
-
+         //styling graph
         lineGraphView.getGraphViewStyle().setGridColor(getResources().getColor(R.color.lightest_brown));
         lineGraphView.getGraphViewStyle().setGridStyle(GraphViewStyle.GridStyle.BOTH);
         lineGraphView.getGraphViewStyle().setHorizontalLabelsColor(getResources().getColor(R.color.golden_brown));
@@ -377,9 +316,6 @@ public class SecondAnalyticFragment extends Fragment {
 
         lineGraphView.setTitle("Adherence Rate vs Day");
 
-
-
-        //lineGraphView.getBac
 
         lineGraphView.setScrollable(true);
         lineGraphView.setScalable(true);
@@ -398,22 +334,18 @@ public class SecondAnalyticFragment extends Fragment {
         ((LineGraphView) lineGraphView).setBackgroundColor(getResources().getColor(R.color.light_blue));
          float r=(float)0.20;
          ((LineGraphView) lineGraphView).setDataPointsRadius(r);
-
+        //plotting data
         lineGraphView.addSeries(drugGraphSeries);
-
+        //showing graph
         LinearLayout linearLayout = (LinearLayout) rootView.findViewById(R.id.graphView);
         linearLayout.addView(lineGraphView);
 
 
     }
-
+    /**Reset Dailog**/
     public void addDialog()
-    {
-<<<<<<< HEAD
+    {    //opening the reset Dialog
         dialog = new Dialog(this.getActivity(),android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
-=======
-        dialog = new Dialog(this.getActivity());
->>>>>>> ankita-gsoc-gradlebuild
         dialog.setContentView(R.layout.resetdata_dialog);
         dialog.setTitle("Reset Data");
 

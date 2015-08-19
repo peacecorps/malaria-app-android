@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+/**Usd for creating sliding Fragment Screen after the the Home Screen**/
+
 public class FragmentAdapter extends FragmentStatePagerAdapter implements
         IconPagerAdapter {
 
@@ -22,7 +24,7 @@ public class FragmentAdapter extends FragmentStatePagerAdapter implements
 
     @Override
     public Fragment getItem(int position) {
-
+        //Deciding the fragment on the basis of position no.
         Fragment fragment = new HomeScreenFragment();
         switch (position) {
             case 0:
@@ -42,7 +44,7 @@ public class FragmentAdapter extends FragmentStatePagerAdapter implements
 
     @Override
     public int getCount() {
-
+        //total no. of fragments
         return 3;
     }
 

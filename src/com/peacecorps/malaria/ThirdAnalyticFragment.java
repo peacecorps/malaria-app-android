@@ -82,16 +82,11 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
         cal_head.set(Calendar.MONTH,intmon);
 
 
-       /** In above snippet, Calendar is set by Ankita for Specific Month, not just the current month **/
+       /** In above snippet, Calendar is set for Specific Month, not just the current month **/
 
         Log.d(tag, "Calendar Instance:= " + "Month: " + month + " " + "Year: "
                 + year);
 
-
-
-        /*selectedDayMonthYearButton = (Button) this
-                .findViewById(R.id.selectedDayMonthYear);
-        selectedDayMonthYearButton.setText("Selected: ");*/
 
         prevMonth = (ImageView) this.findViewById(R.id.prevMonth);
         prevMonth.setOnClickListener(this);
@@ -118,6 +113,7 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
      * @param year
      */
 
+    /**Setting Adapter to each Grid Cell of Calendar**/
     private void setGridCellAdapterToDate(int month, int year) {
         adapter = new GridCellAdapter(getApplicationContext(),
                 R.id.calendar_day_gridcell, month, year);
@@ -345,7 +341,7 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
         }
 
         /**
-         * NOTE: YOU NEED TO IMPLEMENT THIS PART Given the YEAR, MONTH, retrieve
+         *  Given the YEAR, MONTH, retrieve
          * ALL entries from a SQLite database for that month. Iterate over the
          * List of All entries, and get the dateCreated, which is converted into
          * day.
@@ -366,6 +362,14 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
             return position;
         }
 
+        /**Setting Up the View
+         * View is Set up accoeding to the SQLite Database Entries
+         *
+         * @param position
+         * @param convertView
+         * @param parent
+         * @return
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View row = convertView;
@@ -404,6 +408,7 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
             int status;
             status=dbSQLH.isEntered(Integer.parseInt(theday),getMonthNumber(themonth),Integer.parseInt(theyear));
             Drawable dr;
+            //Setting the Drawables according to Taken or Not Taken
             switch (status)
             {
                 case 0:
@@ -475,6 +480,9 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
             return currentWeekDay;
         }
 
+        /*
+         Getting the number of Month from the Progress Bars in Second Analaytic Fragment
+         */
         public int getMonthNumber(String month)
         {
             SimpleDateFormat sdf=  new SimpleDateFormat("MMMM");

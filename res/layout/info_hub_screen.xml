@@ -49,10 +49,7 @@
                     <TextView android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/info_hub_title_label"
-<<<<<<< HEAD
                         android:id="@+id/ih"
-=======
->>>>>>> ankita-gsoc-gradlebuild
                         android:textColor="@color/golden_brown"
                         android:textSize="25sp"
                         android:textStyle="bold"

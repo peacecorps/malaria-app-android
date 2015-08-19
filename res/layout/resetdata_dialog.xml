@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-<<<<<<< HEAD
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_background"
     android:id="@+id/dialogReset">
@@ -44,26 +43,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_weight="0.96">
-=======
-    android:layout_height="200dp"
-    android:background="@drawable/background"
-    android:id="@+id/dialogReset">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
->>>>>>> ankita-gsoc-gradlebuild
 
                 <ImageView
                     android:id="@+id/imageReset"
@@ -86,13 +65,8 @@
 
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-=======
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
->>>>>>> ankita-gsoc-gradlebuild
                 android:orientation="vertical" >
 
                 <RadioGroup
@@ -105,19 +79,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Yes"
-<<<<<<< HEAD
                         android:checked="true"
                         android:tint="@color/light_red"
                         android:textColor="@color/black"/>
-=======
-                        android:checked="true" />
->>>>>>> ankita-gsoc-gradlebuild
 
                     <RadioButton
                         android:id="@+id/radioNoReset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-<<<<<<< HEAD
                         android:text="No"
                         android:tint="@color/light_red"
                         android:textColor="@color/black"/>
@@ -169,60 +138,5 @@
             </LinearLayout>
         </LinearLayout>
 
-=======
-                        android:text="No" />
-
-                </RadioGroup>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_below="@+id/scrollView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="78dp"
-        android:layout_marginStart="78dp"
-        android:id="@+id/gridLayout">
-
-
-
-    <Button
-        android:id="@+id/dialogButtonOKReset"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="OK"
-        android:background="@color/light_red"
-        android:textColor="@color/white"
-        android:layout_weight="1"
-        android:layout_gravity="center_horizontal"
-        android:layout_columnSpan="8"
-        android:layout_alignTop="@+id/dialogButtonCancel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:id="@+id/dialogButtonCancelReset"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:background="@color/light_red"
-        android:textColor="@color/white"
-        android:layout_weight="1"
-        android:layout_gravity="center_horizontal"
-        android:layout_row="0"
-        android:layout_column="11"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    </GridLayout>
->>>>>>> ankita-gsoc-gradlebuild
 
 </RelativeLayout>

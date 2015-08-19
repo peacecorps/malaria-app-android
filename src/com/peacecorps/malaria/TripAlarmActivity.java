@@ -28,15 +28,13 @@ public class TripAlarmActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //views
         setContentView(R.layout.trip_alarm_layout);
-
-
         TextView textView = (TextView)findViewById(R.id.tripRemindingItems);
-
-
         Button btnOK = (Button)findViewById(R.id.reminderOK);
         Button btnCancel = (Button)findViewById(R.id.reminderCancel);
+
+        //intent to get the Alarm ID
         Intent intent=this.getIntent();
         final int id=intent.getIntExtra("AlarmID",0);
 
@@ -44,6 +42,7 @@ public class TripAlarmActivity extends Activity {
 
         String msg= "Your Luggage should contain following items:-";
 
+        //setting fonts
         textView.setText(msg);
         Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/garreg.ttf");
         textView.setTypeface(tf);
@@ -52,7 +51,7 @@ public class TripAlarmActivity extends Activity {
 
         Cursor cursor= sqlite.getPackingItemChecked();
 
-        /** Columns to be Shown in The List **/
+        /** Columns to be Shown in The ListView **/
         String[] columns = {sqlite.KEY_ROW_ID,sqlite.PACKING_ITEM};
 
         /**XML Bound Views according to the Column**/
@@ -60,8 +59,8 @@ public class TripAlarmActivity extends Activity {
                 R.id.reminderListItemNumber,R.id.reminderListItem
         };
 
-        /** Create the adapter using the cursor pointing to the desired data
-        as well as the layout information**/
+        /** Create the adapter using the cursor pointing to the desired row in query
+         * made to database ,as well as the layout information**/
         dataAdapter = new SimpleCursorAdapter(
                 this, R.layout.trip_reminder_list_item,
                 cursor,
@@ -104,7 +103,7 @@ public class TripAlarmActivity extends Activity {
 
             }
         });
-
+        /**Cancel Listener**/
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

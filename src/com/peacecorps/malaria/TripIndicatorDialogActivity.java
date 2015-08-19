@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * This Dialog is the Location History Dialog
+ */
 public class TripIndicatorDialogActivity extends ListActivity {
 
     private DatabaseSQLiteHelper sqlite;
@@ -36,26 +39,25 @@ public class TripIndicatorDialogActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.trip_location_dialog);
 
         mSharedPreferenceStore = new SharedPreferenceStore();
         mSharedPreferenceStore.getSharedPreferences(this);
 
         sqlite = new DatabaseSQLiteHelper(this);
-
+         //fetching location for location history
         Cursor cursor= sqlite.getLocation();
 
-        // The desired columns to be bound
+        /** Columns to be Shown in The ListView **/
         String[] columns = {sqlite.KEY_ROW_ID,sqlite.LOCATION};
 
-        // the XML defined views which the data will be bound to
+        /**XML Bound Views according to the Column**/
         int[] to = new int[] {
                 R.id.locationListItemNumber,R.id.locationListItem
         };
 
-        // create the adapter using the cursor pointing to the desired data
-        //as well as the layout information
+        /** Create the adapter using the cursor pointing to the desired row in query
+         * made to database ,as well as the layout information**/
         dataAdapter = new SimpleCursorAdapter(
                 this, R.layout.trip_location_list_item,
                 cursor,

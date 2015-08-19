@@ -1,10 +1,7 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
-<<<<<<< HEAD
 import android.graphics.Typeface;
-=======
->>>>>>> ankita-gsoc-gradlebuild
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -33,11 +30,7 @@ import java.net.PasswordAuthentication;
  */
 public class VolunteerAdherenceFragmentActivity extends FragmentActivity {
 
-<<<<<<< HEAD
     private TextView mVolunteerAdherenceLabel,vaf;
-=======
-    private TextView mVolunteerAdherenceLabel;
->>>>>>> ankita-gsoc-gradlebuild
 
     private static String TAGVA = VolunteerAdherenceFragmentActivity.class.getSimpleName();
 
@@ -53,28 +46,21 @@ public class VolunteerAdherenceFragmentActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+     //views
         setContentView(R.layout.volunteer_adherence_fragment);
 
         mVolunteerAdherenceLabel = (TextView) findViewById(R.id.volunteerAdherenceLabel);
-<<<<<<< HEAD
         vaf=  (TextView) findViewById(R.id.var);
-=======
-
->>>>>>> ankita-gsoc-gradlebuild
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-//mking json object Request
+//mking authenticated json object Request
         Log.i(TAGVA, "INSIDE VOLUNTEER ADHERENCE");
-<<<<<<< HEAD
 
         mVolunteerAdherenceLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
         vaf.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
 
-=======
->>>>>>> ankita-gsoc-gradlebuild
         makeJsonObjectRequest();
 
     }
@@ -83,7 +69,7 @@ public class VolunteerAdherenceFragmentActivity extends FragmentActivity {
         Log.i(TAGVA, "INSIDE JSON OBJECT REQUEST");
         showpDialog(); //progress dialog shows loading...while the data is being fetched
 
-        //making a JSON Object  Request below
+        //making an authenticated JSON Object  Request below
         AuthJSONObjectRequest jsonObjReq = new AuthJSONObjectRequest(Request.Method.GET, urlJsonObj, null
                 , new Response.Listener<JSONObject>() {
             @Override
@@ -102,7 +88,7 @@ public class VolunteerAdherenceFragmentActivity extends FragmentActivity {
 
 
                     mVolunteerAdherenceLabel.setText(jsonResponse);
-
+                    //reading from cache, if no connectivity
                     String content = mVolunteerAdherenceLabel.getText().toString();
                     File file;
                     FileOutputStream outputStream;
@@ -128,7 +114,7 @@ public class VolunteerAdherenceFragmentActivity extends FragmentActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAGVA, "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(), "Error Retreiving Data! Loading from cache... ", Toast.LENGTH_LONG).show();
-
+                //offline cache
                 BufferedReader input = null;
                 File file = null;
                 try {

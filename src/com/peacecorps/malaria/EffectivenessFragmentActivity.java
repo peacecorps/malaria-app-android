@@ -1,10 +1,7 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
-<<<<<<< HEAD
 import android.graphics.Typeface;
-=======
->>>>>>> ankita-gsoc-gradlebuild
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -33,11 +30,7 @@ import java.net.PasswordAuthentication;
  */
 public class EffectivenessFragmentActivity extends FragmentActivity{
 
-<<<<<<< HEAD
     private TextView mEffectivenessLabel,mETitle;
-=======
-    private TextView mEffectivenessLabel;
->>>>>>> ankita-gsoc-gradlebuild
 
     private static String TAGE = EffectivenessFragmentActivity.class.getSimpleName();
 
@@ -57,29 +50,23 @@ public class EffectivenessFragmentActivity extends FragmentActivity{
         setContentView(R.layout.effectiveness_fragment);
 
         mEffectivenessLabel = (TextView) findViewById(R.id.effectivenessLabel);
-<<<<<<< HEAD
         mETitle = (TextView)findViewById(R.id.eam);
-=======
->>>>>>> ankita-gsoc-gradlebuild
-
+        //"Please Wait..." Progress Dialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-//mking json object Request
+        //mking json object Request
         Log.i(TAGE, "INSIDE EFFECTIVENESS");
-<<<<<<< HEAD
         mEffectivenessLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
         mETitle.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
-=======
->>>>>>> ankita-gsoc-gradlebuild
         makeJsonObjectRequest();
     }
     private void makeJsonObjectRequest(){
         Log.i(TAGE, "INSIDE JSON OBJECT REQUEST");
         showpDialog(); //progress dialog shows loading...while the data is being fetched
 
-        //making a JSON Object  Request below
+        //making a authenticated JSON Object  Request below
         AuthJSONObjectRequest jsonObjReq = new AuthJSONObjectRequest(Request.Method.GET, urlJsonObj, null
                 , new Response.Listener<JSONObject>() {
             @Override
@@ -123,7 +110,7 @@ public class EffectivenessFragmentActivity extends FragmentActivity{
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAGE, "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(), "Error Retreiving Data! Loading from cache... ", Toast.LENGTH_LONG).show();
-
+                //cache implementation
                 BufferedReader input = null;
                 File file = null;
                 try {

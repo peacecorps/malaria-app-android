@@ -12,6 +12,8 @@ import android.os.PowerManager;
 
 public class AlarmHandlerClass extends BroadcastReceiver {
 
+    /**Class is for Handling the Alarm**/
+
     public static Calendar mAlarmScheduleTime;
     final int INTERVAL_WEEK = 604800000;
     public static AlarmManager mAlarmManager;
@@ -20,13 +22,15 @@ public class AlarmHandlerClass extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        /**On Receiving the call for Alarm, it sets one on the date and time specified. **/
         PowerManager powerManager = (PowerManager) context
                 .getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(
                 PowerManager.PARTIAL_WAKE_LOCK, "");
         wakeLock.acquire();
 
-        /** Opening the Alert Dialog Window */
+        /** Opening the Alert Dialog Window On Clicking Notification*/
 
         intent = new Intent(context, AlertCallerFragmentActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -35,6 +39,7 @@ public class AlarmHandlerClass extends BroadcastReceiver {
     }
 
     public void getSharedPreferences(Context context) {
+        /**Initializing the Shared Preferences for Storing Details**/
         mSharedPreferenceStore.mPrefsStore = context.getSharedPreferences(
                 "com.peacecorps.malaria.storeTimePicked", Context.MODE_PRIVATE);
         mSharedPreferenceStore.mEditor = mSharedPreferenceStore.mPrefsStore
@@ -44,12 +49,14 @@ public class AlarmHandlerClass extends BroadcastReceiver {
     public void setAlarm(Context context) {
 
         getSharedPreferences(context);
+        /**Getting the Time**/
         int hour = mSharedPreferenceStore.mPrefsStore.getInt(
                 "com.peacecorps.malaria.AlarmHour", -1);
         int minute = mSharedPreferenceStore.mPrefsStore.getInt(
                 "com.peacecorps.malaria.AlarmMinute", -1);
         if ((hour != -1) && (minute != -1)) {
             AlarmTime(context, hour, minute);
+            /**Setting Alarm**/
             mAlarmManager = (AlarmManager) context
                     .getSystemService(Context.ALARM_SERVICE);
             Intent alarmIntent = new Intent(
@@ -58,10 +65,12 @@ public class AlarmHandlerClass extends BroadcastReceiver {
                     alarmIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
             if (mSharedPreferenceStore.mPrefsStore.getBoolean(
                     "com.peacecorps.malaria.isWeekly", false)) {
+                /**Weekly Alarm**/
                 mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
                         mAlarmScheduleTime.getTimeInMillis(), INTERVAL_WEEK,
                         pendingAlarm);
             } else {
+                /**Daily Alarm**/
                 mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
                         mAlarmScheduleTime.getTimeInMillis(),
                         AlarmManager.INTERVAL_DAY, pendingAlarm);
@@ -71,7 +80,7 @@ public class AlarmHandlerClass extends BroadcastReceiver {
     }
 
     public void AlarmTime(Context context, int hour, int minute) {
-
+        /**Setting The Alarm Time **/
         Date date = new Date();
         mAlarmScheduleTime = Calendar.getInstance();
         mAlarmScheduleTime.setTime(date);

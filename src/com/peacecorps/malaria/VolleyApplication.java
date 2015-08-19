@@ -10,6 +10,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+/**
+ * Volley Application
+ *
+ * Class for using volley library for making JSON Object Requests
+ * Volley is a light weight library
+ * Will be useful in future, if images and graphs also have to be plotted
+ */
 public class VolleyApplication extends Application {
 
     public static final String TAG = VolleyApplication.class.getSimpleName();

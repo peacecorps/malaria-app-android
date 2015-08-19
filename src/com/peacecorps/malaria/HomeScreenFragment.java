@@ -78,12 +78,8 @@ public class HomeScreenFragment extends Fragment {
 
     public double computeAdherenceRate() {
         long interval = checkDrugTakenTimeInterval("firstRunTime");
-<<<<<<< HEAD
         DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(this.getActivity());
         long takenCount = sqLite.getCountTaken();
-=======
-        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
->>>>>>> ankita-gsoc-gradlebuild
         double adherenceRate = ((double)takenCount / (double)interval) * 100;
         Log.d(TAGHSF, "adherence:" + adherenceRate);
         return adherenceRate;
@@ -95,11 +91,6 @@ public class HomeScreenFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-<<<<<<< HEAD
-=======
-                mSharedPreferenceStore.mEditor.putBoolean(
-                        "com.peacecorps.malaria.hasUserSetPreference", false).commit();
->>>>>>> ankita-gsoc-gradlebuild
                 addDialog();
 
             }
@@ -181,15 +172,12 @@ public class HomeScreenFragment extends Fragment {
         mCurrentDateLabel.setText(mGetCurrentDate);
         mCurrentDayOfweekLabel
                 .setText(decideDayofWeek(checkDay, mPossibledays));
-<<<<<<< HEAD
 
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/garreg.ttf");
         mCurrentDayOfweekLabel.setTypeface(custom_font);
         mCurrentDateLabel.setTypeface(custom_font);
         mCurrentDayOfweekLabel.setTextSize(50);
         mCurrentDateLabel.setTextSize(20);
-=======
->>>>>>> ankita-gsoc-gradlebuild
         //checkMediLastTakenTime = (TextView) rootView.findViewById(R.id.checkMediLastTakenTime);
 
     }
@@ -304,7 +292,6 @@ public class HomeScreenFragment extends Fragment {
         if(time.compareTo("firstRunTime")==0) {
             if(takenDate!=0) {
                 Log.d(TAGHSF, "First Run Time at FAF->" + takenDate);
-<<<<<<< HEAD
                 Calendar cal = Calendar.getInstance();
                 cal.setTimeInMillis(takenDate);
                 cal.add(Calendar.MONTH, 1);
@@ -324,12 +311,6 @@ public class HomeScreenFragment extends Fragment {
 
                 /*long oneDay = 1000 * 60 * 60 * 24;
                 interval = (today - takenDate) / oneDay;*/
-=======
-                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
-                        + time, takenDate).apply();
-                long oneDay = 1000 * 60 * 60 * 24;
-                interval = (today - takenDate) / oneDay;
->>>>>>> ankita-gsoc-gradlebuild
                 return interval;
             }
             else
@@ -454,11 +435,7 @@ public class HomeScreenFragment extends Fragment {
 
     public void addDialog()
     {
-<<<<<<< HEAD
         dialog = new Dialog(this.getActivity(),android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
-=======
-        dialog = new Dialog(this.getActivity());
->>>>>>> ankita-gsoc-gradlebuild
         dialog.setContentView(R.layout.resetdata_dialog);
         dialog.setTitle("Reset Data");
 

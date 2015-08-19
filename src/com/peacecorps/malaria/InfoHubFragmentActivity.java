@@ -3,10 +3,7 @@ package com.peacecorps.malaria;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.graphics.Typeface;
-=======
->>>>>>> ankita-gsoc-gradlebuild
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -27,10 +24,7 @@ public class InfoHubFragmentActivity extends FragmentActivity {
 
     Button homeIconButton, btnPeaceCorpsPolicy, btnPercentSideEffects, btnSideEffectsPCV,
             btnSideEffectsNPCV, btnVolunteerAdherence, btnEffectiveness,btnTripIndicator,btnSettings;
-<<<<<<< HEAD
     TextView ihLabel;
-=======
->>>>>>> ankita-gsoc-gradlebuild
 
         private Dialog dialog = null;
     static SharedPreferenceStore mSharedPreferenceStore;
@@ -43,8 +37,6 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         setContentView(R.layout.info_hub_screen);
 
         /*internetIsConnected = (TextView)findViewById(R.id.internetIsConnected);
-<<<<<<< HEAD
-=======
 
         // check if you are connected or not
         if(isConnected()){
@@ -54,16 +46,8 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         else{
             internetIsConnected.setText("You are NOT connected");
         }*/
->>>>>>> ankita-gsoc-gradlebuild
 
-        // check if you are connected or not
-        if(isConnected()){
-            internetIsConnected.setBackgroundColor(0xFF00CC00);
-            internetIsConnected.setText("Internet Connected");
-        }
-        else{
-            internetIsConnected.setText("You are NOT connected");
-        }*/
+        /**Declaring Views**/
         ihLabel= (TextView)findViewById(R.id.ih);
         homeIconButton = (Button) findViewById(R.id.homeButton);
         btnTripIndicator = (Button) findViewById(R.id.tripButton);
@@ -74,12 +58,10 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         btnVolunteerAdherence = (Button) findViewById(R.id.btnVolunteerAdherence);
         btnEffectiveness = (Button) findViewById(R.id.btnEffectiveness);
         btnSettings = (Button)findViewById(R.id.info_hub_settings_button);
-<<<<<<< HEAD
 
+        /**Setting fonts**/
         Typeface cf = Typeface.createFromAsset(getAssets(),"fonts/garreg.ttf");
         ihLabel.setTypeface(cf);
-=======
->>>>>>> ankita-gsoc-gradlebuild
 
         addListeners();
 
@@ -88,7 +70,7 @@ public class InfoHubFragmentActivity extends FragmentActivity {
 
     public void addListeners() {
 
-
+        /**Calling Each of the Posts by 6 different buttons**/
         homeIconButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,37 +133,13 @@ public class InfoHubFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-<<<<<<< HEAD
-=======
-                //startActivity(new Intent(getApplication().getApplicationContext(), UserMedicineSettingsFragmentActivity.class));
-
->>>>>>> ankita-gsoc-gradlebuild
                 addDialog();
             }
         });
 
-<<<<<<< HEAD
-=======
     }
 
 
-    public boolean isConnected(){
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected())
-            return true;
-        else
-            return false;
->>>>>>> ankita-gsoc-gradlebuild
-    }
-
-    public void addDialog()
-    {
-        dialog = new Dialog(InfoHubFragmentActivity.this);
-        dialog.setContentView(R.layout.resetdata_dialog);
-        dialog.setTitle("Reset Data");
-
-<<<<<<< HEAD
     /*public boolean isConnected(){
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -193,12 +151,11 @@ public class InfoHubFragmentActivity extends FragmentActivity {
 
     public void addDialog()
     {
+        /**Reset Dialog**/
         dialog = new Dialog(InfoHubFragmentActivity.this,android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
         dialog.setContentView(R.layout.resetdata_dialog);
         dialog.setTitle("Reset Data");
 
-=======
->>>>>>> ankita-gsoc-gradlebuild
         final RadioGroup btnRadGroup = (RadioGroup) dialog.findViewById(R.id.radioGroupReset);
         Button btnOK = (Button) dialog.findViewById(R.id.dialogButtonOKReset);
 

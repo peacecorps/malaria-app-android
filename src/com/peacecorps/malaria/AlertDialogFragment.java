@@ -1,5 +1,7 @@
 package com.peacecorps.malaria;
-
+/*
+Edited By Ankita
+ */
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,23 +14,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.graphics.Color;
-=======
->>>>>>> ankita-gsoc-gradlebuild
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-<<<<<<< HEAD
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
-=======
-import android.view.WindowManager.LayoutParams;
->>>>>>> ankita-gsoc-gradlebuild
 import android.widget.Toast;
 
 
@@ -78,12 +73,14 @@ public class AlertDialogFragment extends DialogFragment {
                         if (flag == 0) {
                             if (mSharedPreferenceStore.mPrefsStore.getBoolean(
                                     "com.peacecorps.malaria.isWeekly", false)) {
+                                /**Updates the date when weekly drug was taken and set the alarm for nex weekly Date**/
                                 saveUsersettings(true, true);
                                 DatabaseSQLiteHelper databaseSQLiteHelper = new DatabaseSQLiteHelper(getActivity());
                                 databaseSQLiteHelper.getUserMedicationSelection(getActivity(), "weekly", Calendar.getInstance().getTime(), "yes", computeAdherenceRate());
                                 changeWeeklyAlarmTime();
                                 alarmNotificationManager.cancelAll();
                             } else {
+                                /**Updating the Daily Alarm and Cancelling today's notification because Drug is already Taken**/
                                 if (checkDrugTakenTimeInterval("dateDrugTaken") > 0) {
                                     saveUsersettings(true, false);
                                     DatabaseSQLiteHelper databaseSQLiteHelper = new DatabaseSQLiteHelper(getActivity());
@@ -96,10 +93,7 @@ public class AlertDialogFragment extends DialogFragment {
                         else {
                             if (flag == 1) {
                                 Toast.makeText(getActivity(), "You have already taken medicine", Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
                                 alarmNotificationManager.cancelAll();
-=======
->>>>>>> ankita-gsoc-gradlebuild
                             } else {
                                 Toast.makeText(getActivity(), "You have not taken medicine. Modify later, if you have taken.", Toast.LENGTH_SHORT).show();
                                 snooze();
@@ -123,6 +117,7 @@ public class AlertDialogFragment extends DialogFragment {
                             if (mSharedPreferenceStore.mPrefsStore.getBoolean(
                                     "com.peacecorps.malaria.isWeekly", false)) {
                                 saveUsersettings(true, false);
+                                /**Marked as Not Taken. No reminders now,it ll be for next time now.**/
                                 DatabaseSQLiteHelper databaseSQLiteHelper = new DatabaseSQLiteHelper(getActivity());
                                 databaseSQLiteHelper.getUserMedicationSelection(getActivity(), "weekly", Calendar.getInstance().getTime(), "no", computeAdherenceRate());
                                 changeWeeklyAlarmTime();
@@ -138,10 +133,7 @@ public class AlertDialogFragment extends DialogFragment {
                         } else {
                             if (flag == 1) {
                                 Toast.makeText(getActivity(), "You have taken the medicine. Modify it later, if you have not taken it.", Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
                                 alarmNotificationManager.cancelAll();
-=======
->>>>>>> ankita-gsoc-gradlebuild
                             } else {
                                 Toast.makeText(getActivity(), "You have not taken the medicine.", Toast.LENGTH_SHORT).show();
                                 snooze();
@@ -161,10 +153,7 @@ public class AlertDialogFragment extends DialogFragment {
                     snooze();
                 } else {
                     Toast.makeText(getActivity(),"You have already taken medicine, no need to snooze.",Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
                     alarmNotificationManager.cancelAll();
-=======
->>>>>>> ankita-gsoc-gradlebuild
                 }
             }
         }).setCancelable(false);
@@ -175,6 +164,8 @@ public class AlertDialogFragment extends DialogFragment {
 
     public long checkDrugTakenTimeInterval(String time) {
         long interval = 0;
+
+        /**Calculating the Interval**/
         long today = new Date().getTime();
         Date tdy= Calendar.getInstance().getTime();
         tdy.setTime(today);
@@ -194,8 +185,7 @@ public class AlertDialogFragment extends DialogFragment {
                     interval=sqLite.getIntervalDaily(start,tdy);
                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
                         + time, takenDate).apply();
-                /*long oneDay = 1000 * 60 * 60 * 24;
-                interval = (today - takenDate) / oneDay;*/
+
                 return interval;
             }
             else
@@ -211,6 +201,7 @@ public class AlertDialogFragment extends DialogFragment {
     }
 
     public void snooze() {
+        /**Snoozing The Alarm**/
         getActivity().runOnUiThread(new Runnable() {
 
             @Override
@@ -234,6 +225,7 @@ public class AlertDialogFragment extends DialogFragment {
     }
 
     public void changeWeeklyAlarmTime() {
+        /**Function to set the alarm for next week**/
         int hour = Calendar.getInstance().get(Calendar.HOUR);
         int minute = Calendar.getInstance().get(Calendar.MINUTE) - 1;
         getActivity().startService(
@@ -246,6 +238,7 @@ public class AlertDialogFragment extends DialogFragment {
 
     public void saveUsersettings(Boolean state, Boolean isWeekly) {
         if (isWeekly) {
+            /**Storing the Dates**/
             mSharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.weeklyDate",
                     new Date().getTime()).commit();
             mSharedPreferenceStore.mEditor.putBoolean(
@@ -264,6 +257,8 @@ public class AlertDialogFragment extends DialogFragment {
     }
 
     public void getSettings() {
+
+        /**Setting the reminder according to setting**/
         mDrugAcceptedCount = mSharedPreferenceStore.mPrefsStore.getInt(
                 "com.peacecorps.malaria.drugAcceptedCount", 0);
         mDrugRejectedCount = mSharedPreferenceStore.mPrefsStore.getInt(
@@ -308,6 +303,8 @@ public class AlertDialogFragment extends DialogFragment {
     public void showNotification(String msg)
     {
         Log.d("AlarmService", "Preparing to send notification...: " + msg);
+
+        /**Setting Up Alarm**/
         alarmNotificationManager = (NotificationManager) getActivity()
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -315,7 +312,7 @@ public class AlertDialogFragment extends DialogFragment {
                 new Intent(getActivity(), AlertCallerFragmentActivity.class), 0);
 
         Uri sound = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.soundsmedication);
-
+        /**Building Notifications**/
         NotificationCompat.Builder alamNotificationBuilder = new NotificationCompat.Builder(
                 getActivity()).setContentTitle("Malaria Prevention").setSmallIcon(R.drawable.appicon_themed)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
@@ -329,13 +326,10 @@ public class AlertDialogFragment extends DialogFragment {
     }
 
     public double computeAdherenceRate() {
+        /**calculating Adherence Rate**/
         long interval = checkDrugTakenTimeInterval("firstRunTime");
-<<<<<<< HEAD
         DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
         long takenCount = sqLite.getCountTaken();
-=======
-        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
->>>>>>> ankita-gsoc-gradlebuild
         double adherenceRate = ((double)takenCount / (double)interval) * 100;
         Log.d(TAGADF, "adherence:" + adherenceRate);
         return adherenceRate;

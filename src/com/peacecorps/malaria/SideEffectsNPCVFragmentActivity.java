@@ -1,10 +1,7 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
-<<<<<<< HEAD
 import android.graphics.Typeface;
-=======
->>>>>>> ankita-gsoc-gradlebuild
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -33,11 +30,7 @@ import java.net.PasswordAuthentication;
  */
 public class SideEffectsNPCVFragmentActivity extends FragmentActivity {
 
-<<<<<<< HEAD
     private TextView mSideEffectsNPCVLabel,sen;
-=======
-    private TextView mSideEffectsNPCVLabel;
->>>>>>> ankita-gsoc-gradlebuild
 
     private static String TAGSEN = SideEffectsNPCVFragmentActivity.class.getSimpleName();
 
@@ -53,34 +46,27 @@ public class SideEffectsNPCVFragmentActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //views
         setContentView(R.layout.side_effects_npcv_fragment);
 
         mSideEffectsNPCVLabel = (TextView) findViewById(R.id.sideEffectsNPCVLabel);
-<<<<<<< HEAD
         sen = (TextView) findViewById(R.id.sen);
-=======
-
->>>>>>> ankita-gsoc-gradlebuild
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-//mking json object Request
+       //mking authenticated json object Request
         Log.i(TAGSEN, "INSIDE SIDE EFFECTS NPCV");
         makeJsonObjectRequest();
-
-<<<<<<< HEAD
+        //setting fonts
         mSideEffectsNPCVLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
         sen.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
-=======
->>>>>>> ankita-gsoc-gradlebuild
     }
     private void makeJsonObjectRequest(){
         Log.i(TAGSEN, "INSIDE JSON OBJECT REQUEST");
         showpDialog(); //progress dialog shows loading...while the data is being fetched
 
-        //making a JSON Object  Request below
+        //making an authenticated JSON Object  Request below
         AuthJSONObjectRequest jsonObjReq = new AuthJSONObjectRequest(Request.Method.GET, urlJsonObj, null
                 , new Response.Listener<JSONObject>() {
             @Override
@@ -99,6 +85,7 @@ public class SideEffectsNPCVFragmentActivity extends FragmentActivity {
 
 
                     mSideEffectsNPCVLabel.setText(jsonResponse);
+                    //reading from cache if no connectivity
 
                     String content = mSideEffectsNPCVLabel.getText().toString();
                     File file;
@@ -126,7 +113,7 @@ public class SideEffectsNPCVFragmentActivity extends FragmentActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAGSEN, "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(), "Error Retreiving Data! Loading from cache... ", Toast.LENGTH_LONG).show();
-
+                //offline cache
                 BufferedReader input = null;
                 File file = null;
                 try {

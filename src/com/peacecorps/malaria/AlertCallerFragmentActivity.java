@@ -11,7 +11,7 @@ import android.widget.Button;
 
 public class AlertCallerFragmentActivity extends FragmentActivity {
     static SharedPreferenceStore mSharedPreferenceStore;
-
+    /**Calls the Alert Dialog as fragment of Home Screen**/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,7 @@ public class AlertCallerFragmentActivity extends FragmentActivity {
                 getSharedPreferences();
                 if (mSharedPreferenceStore.mPrefsStore.getBoolean(
                         "com.peacecorps.malaria.isWeekly", false)) {
-
+                    /**Weekly Day has reached, now Alarm will remind for Pill**/
                     if (checkDrugTakenTimeInterval(weeklyDate) == 0
                             || checkDrugTakenTimeInterval(weeklyDate) >= 7) {
                         callAlarm();
@@ -42,20 +42,20 @@ public class AlertCallerFragmentActivity extends FragmentActivity {
     }
 
     public void callAlarm() {
-<<<<<<< HEAD
+
+        /**Shows the Alert Dialog with Taken, Snooze and Not Taken Button**/
 
         AlertDialogFragment alert = new AlertDialogFragment();
-=======
->>>>>>> ankita-gsoc-gradlebuild
 
-        AlertDialogFragment alert = new AlertDialogFragment();
         alert.show(getSupportFragmentManager(), "alertDemo");
+
         alert.setCancelable(false);
 
     }
 
     public long checkDrugTakenTimeInterval(String time) {
 
+        /**Finding the interval between Date when last drug was taken and Today.**/
         long interval = 0;
         long today = new Date().getTime();
         long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
@@ -67,8 +67,7 @@ public class AlertCallerFragmentActivity extends FragmentActivity {
     }
 
     public void getSharedPreferences() {
-        // reading the application SharedPreferences for storing of time and
-        // drug selected
+        /**reading the application SharedPreferences for storing of time and drug selected**/
         mSharedPreferenceStore.mPrefsStore = getSharedPreferences(
                 "com.peacecorps.malaria.storeTimePicked", Context.MODE_PRIVATE);
         mSharedPreferenceStore.mEditor = mSharedPreferenceStore.mPrefsStore

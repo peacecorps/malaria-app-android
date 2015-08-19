@@ -1,10 +1,7 @@
 package com.peacecorps.malaria;
 
 import android.app.ProgressDialog;
-<<<<<<< HEAD
 import android.graphics.Typeface;
-=======
->>>>>>> ankita-gsoc-gradlebuild
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -33,12 +30,8 @@ import java.net.PasswordAuthentication;
  */
 public class PercentSideEffectsFragmentActivity extends FragmentActivity {
 
-
-<<<<<<< HEAD
+    //views and dialogs
     private TextView mPercentSideEffectsLabel,pse;
-=======
-    private TextView mPercentSideEffectsLabel;
->>>>>>> ankita-gsoc-gradlebuild
 
     private static String TAGPSE = PercentSideEffectsFragmentActivity.class.getSimpleName();
 
@@ -53,15 +46,13 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //views
         setContentView(R.layout.side_effects_percentage_fragment);
 
         mPercentSideEffectsLabel = (TextView) findViewById(R.id.percentSideEffectsLabel);
-<<<<<<< HEAD
         pse=(TextView)findViewById(R.id.pse);
-=======
 
->>>>>>> ankita-gsoc-gradlebuild
+        //"Please Wait" progress Dialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
@@ -69,11 +60,9 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
         //mking json object Request
         Log.i(TAGPSE, "INSIDE PERCENTAGE SIDE EFECTS");
 
-<<<<<<< HEAD
+        //setting fonts
         mPercentSideEffectsLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
         pse.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
-=======
->>>>>>> ankita-gsoc-gradlebuild
 
         makeJsonObjectRequest();
 
@@ -126,7 +115,7 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("Error: ",error.getMessage());
                 Toast.makeText(getApplicationContext(), "Error Retreiving Data! Loading from cache... ", Toast.LENGTH_LONG).show();
-
+                //offline caching
                 BufferedReader input = null;
                 File file = null;
                 try {

@@ -47,7 +47,9 @@ public class MainActivity extends FragmentActivity {
         });
         Log.d(TAGMA, "Info Hub Button initialized");
 
-
+        /*Method opens the Plan My Trip
+        *Tiny 'bus' symbol in the Setup Screen is Plan My Trip Button
+        */
         mTripButton = (Button) findViewById(R.id.tripButton);
         mTripButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +60,7 @@ public class MainActivity extends FragmentActivity {
         });
 
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
-
+        /**Setting the Fragments**/
         mPager = (ViewPager) findViewById(R.id.vPager);
         mPager.setAdapter(mAdapter);
         Log.d(TAGMA, "Adapter Set");
@@ -70,7 +72,11 @@ public class MainActivity extends FragmentActivity {
 
             @Override
             public void onPageSelected(int position) {
-
+                /**Setting the Values according to the User Input
+                 * Medication Last Time
+                 * Doses in A Row
+                 * Adherence
+                 * **/
                 if (position == 1) {
 
                     Log.d(TAGMA,"Keeping Date");
@@ -85,11 +91,7 @@ public class MainActivity extends FragmentActivity {
                         int currentDose = 0,dosesInaRow=0;
                         if (SharedPreferenceStore.mPrefsStore.getBoolean(
                                 "com.peacecorps.malaria.isWeekly", false)) {
-<<<<<<< HEAD
                             dosesInaRow =sqLite.getDosesInaRowWeekly();
-=======
-                            dosesInaRow=sqLite.getDosesInaRowDaily();
->>>>>>> ankita-gsoc-gradlebuild
                             SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.weeklyDose", dosesInaRow).apply();
                             currentDose = dosesInaRow;
                             Log.d(TAGMA, "Weekly");
@@ -105,31 +107,16 @@ public class MainActivity extends FragmentActivity {
 
                         Log.d(TAGMA,"Calculating Adherence");
                         long interval = checkDrugTakenTimeInterval("firstRunTime");
-<<<<<<< HEAD
                         int takenCount = sqLite.getCountTaken();
                         double adherenceRate;
                         Log.d(TAGMA,""+ interval);
                         Log.d(TAGMA,""+ takenCount);
-=======
-                        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
-                        double adherenceRate;
-                        Log.d(TAGMA,"INTERVAL:"+ interval);
-                        Log.d(TAGMA,"TAKEN COUNT:"+ takenCount);
->>>>>>> ankita-gsoc-gradlebuild
                         if(interval!=0)
                             adherenceRate = ((double)takenCount / (double)interval) * 100;
                         else
                             adherenceRate = 100;
-<<<<<<< HEAD
                         String ar=String.format("%.1f ",adherenceRate);
                         FirstAnalyticFragment.adherence.setText("" + ar + "%");
-=======
-                        String ar=String.format("%.2f ",adherenceRate);
-                        //FirstAnalyticFragment.adherence.setText("" + ar + "%");
-
-
-
->>>>>>> ankita-gsoc-gradlebuild
                     }
 
                 }
@@ -149,22 +136,18 @@ public class MainActivity extends FragmentActivity {
         });
 
     }
-
+    /*Calculating Interval between two time*/
     public long checkDrugTakenTimeInterval(String time) {
 
         long interval = 0;
         long today = new Date().getTime();
-<<<<<<< HEAD
         Date tdy= Calendar.getInstance().getTime();
         tdy.setTime(today);
-=======
->>>>>>> ankita-gsoc-gradlebuild
         DatabaseSQLiteHelper sqLite= new DatabaseSQLiteHelper(this);
         long takenDate= sqLite.getFirstTime();
         if(time.compareTo("firstRunTime")==0) {
             if(takenDate!=0) {
                 Log.d(TAGMA, "First Run Time at FAF->" + takenDate);
-<<<<<<< HEAD
                 Calendar cal=Calendar.getInstance();
                 cal.setTimeInMillis(takenDate);
                 cal.add(Calendar.MONTH, 1);
@@ -178,14 +161,6 @@ public class MainActivity extends FragmentActivity {
                         + time, takenDate).apply();
                 /*long oneDay = 1000 * 60 * 60 * 24;
                 interval = (today - takenDate) / oneDay;*/
-=======
-                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
-                        + time, takenDate).apply();
-                long oneDay = 1000 * 60 * 60 * 24;
-                Log.d(TAGMA,"TODAY:"+today);
-                Log.d(TAGMA,"TAKEN DATE"+takenDate);
-                interval = (today - takenDate) / oneDay;
->>>>>>> ankita-gsoc-gradlebuild
                 return interval;
             }
             else

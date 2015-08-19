@@ -14,6 +14,11 @@ import android.os.PowerManager;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
 
+/**
+ * On receiving the calarm call from Alarm Service,
+ * it sets the parameter for ring alarm
+ */
+
 public class TripAlarmReceiver extends WakefulBroadcastReceiver {
 
     @Override

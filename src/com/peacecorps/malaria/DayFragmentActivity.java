@@ -46,10 +46,7 @@ public class DayFragmentActivity extends FragmentActivity {
     private String ch="";
     private int flag=0;
     private long curr_time=0;
-<<<<<<< HEAD
     private static DatabaseSQLiteHelper sqLite;
-=======
->>>>>>> ankita-gsoc-gradlebuild
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -63,13 +60,8 @@ public class DayFragmentActivity extends FragmentActivity {
                 .getApplicationContext();
         mSharedPreferenceStore.getSharedPreferences(this);
 
-<<<<<<< HEAD
         /*defining variables for accessing Database*/
         sqLite= new DatabaseSQLiteHelper(this);
-=======
-        /*declaring variables for accessing Database*/
-        final DatabaseSQLiteHelper sqLite= new DatabaseSQLiteHelper(this);
->>>>>>> ankita-gsoc-gradlebuild
 
         /*displaying clicked date on the Day Fragment*/
         Intent intent = getIntent();
@@ -132,17 +124,10 @@ public class DayFragmentActivity extends FragmentActivity {
         {   Log.d(TAGD,"Inside Missed Drug Entry");
 
             selected_date=SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.checkMediLastTakenTime","");
-<<<<<<< HEAD
             SimpleDateFormat dateF = new SimpleDateFormat("dd/MM");
             Date cd=Calendar.getInstance().getTime();
             try {
                 cd   = dateF.parse(selected_date);
-=======
-            SimpleDateFormat dateF = new SimpleDateFormat("dd/MM/yyyy");
-            Date cd=Calendar.getInstance().getTime();
-            try {
-                cd   = dateFormatter.parse(selected_date);
->>>>>>> ankita-gsoc-gradlebuild
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -192,11 +177,7 @@ public class DayFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-<<<<<<< HEAD
                 final Dialog dialog = new Dialog(con,android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
-=======
-                final Dialog dialog = new Dialog(con);
->>>>>>> ankita-gsoc-gradlebuild
                 dialog.setContentView(R.layout.day_dialog);
                 dialog.setTitle("Medicine Consumption");
 
@@ -220,7 +201,7 @@ public class DayFragmentActivity extends FragmentActivity {
                         // find the radiobutton by returned id
                         btnRadButton = (RadioButton) dialog.findViewById(selectedId);
 
-
+                        //acting according to the radio button response
                         ch = btnRadButton.getText().toString();
                         Log.d(TAGD, "Radio Button Response-" + ch);
                         if (flag == 0) {
@@ -234,8 +215,7 @@ public class DayFragmentActivity extends FragmentActivity {
                                 long firstTime = sqLite.getFirstTime();
                                 Log.d(TAGD, "" + SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria.firstRunTime", 0));
                                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.firstRunTime", firstTime).apply();
-<<<<<<< HEAD
-
+                                //updating adherence
                                 double prcntage = 0.0;
                                 Log.d(TAGD, "Adherence when Yes:" + prcntage);
                                 sqLite.updateMedicationEntry(day, month, year, "yes", prcntage);
@@ -243,13 +223,13 @@ public class DayFragmentActivity extends FragmentActivity {
                                 Log.d(TAGD, "Getting count:" + sqLite.getCountTaken());
                                 prcntage=computeAdherenceRate(curr_time);
                                 sqLite.updateMedicationEntry(day, month, year, "yes", prcntage);
-
-=======
-                                double prcntage = computeAdherenceRate(curr_time);
-                                Log.d(TAGD, "Adherence when Yes:" + prcntage);
-                                sqLite.updateMedicationEntry(day, month, year, "yes", prcntage);
->>>>>>> ankita-gsoc-gradlebuild
-                                int dosesInaRow=sqLite.getDosesInaRowDaily();
+                                //updating doses in a row
+                                int dosesInaRow = 0;
+                                if (SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly", false)) {
+                                    dosesInaRow = sqLite.getDosesInaRowWeekly();
+                                } else {
+                                    dosesInaRow = sqLite.getDosesInaRowDaily();
+                                }
                                 Log.d(TAGD,"Doses in a Row:"+dosesInaRow);
                                 SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", dosesInaRow).apply();
                                 indicator.setBackgroundResource(R.drawable.accept_medi_checked_);
@@ -265,16 +245,25 @@ public class DayFragmentActivity extends FragmentActivity {
                                     int accept_count = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0) - 1;
                                     SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.drugAcceptedCount", accept_count).apply();
                                 }
+                                //updating adherence
                                 double prcntage = computeAdherenceRate(curr_time);
                                 Log.d(TAGD, "Adherence when No:" + prcntage);
                                 sqLite.updateMedicationEntry(day, month, year, "no", prcntage);
-                                int dosesInaRow = sqLite.getDosesInaRowDaily();
+
+                                //upating doses in a row
+                                int dosesInaRow = 0;
+                                if (SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly", false)) {
+                                    dosesInaRow = sqLite.getDosesInaRowWeekly();
+                                } else {
+                                    dosesInaRow = sqLite.getDosesInaRowDaily();
+                                }
                                 Log.d(TAGD, "Doses in a Row:" + dosesInaRow);
                                 SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", dosesInaRow).apply();
                                 indicator.setBackgroundResource(R.drawable.reject_medi_checked);
                             } else
                                 dialog.dismiss();
                         } else {
+                            //Future Date is not allowed to Edit
                             Toast.makeText(getApplicationContext(), "You are not allowed to edit!", Toast.LENGTH_LONG).show();
                         }
                         dialog.dismiss();
@@ -294,10 +283,10 @@ public class DayFragmentActivity extends FragmentActivity {
         });
     }
 
-<<<<<<< HEAD
+    /**Computing the Adherence Rate for selected Date**/
     public double computeAdherenceRate(long day_time) {
         long interval = checkDrugTakenTimeInterval("firstRunTime", day_time);
-        //DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(this.getApplicationContext());
+
         Date e=new Date();
         e.setTime(day_time);
 
@@ -310,9 +299,11 @@ public class DayFragmentActivity extends FragmentActivity {
         return adherenceRate;
     }
 
+
+    /**Finding the Time Interval between two dates**/
     public  long checkDrugTakenTimeInterval(String time,long day_time) {
         long interval = 0;
-        //DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(this.getApplicationContext());
+
         long takenDate = sqLite.getFirstTime();
         if(takenDate!=0) {
             Calendar cal = Calendar.getInstance();
@@ -342,177 +333,7 @@ public class DayFragmentActivity extends FragmentActivity {
              interval=1;
 
         return interval;
-=======
-    public  double computeAdherenceRate(long day_time) {
-        /*long interval = checkDrugTakenTimeInterval("firstRunTime",day_time) + 1;
-        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
-        double adherenceRate = ((double)takenCount /(double) interval) * 100;
-        return adherenceRate;*/
-
-        long interval = checkDrugTakenTimeInterval("firstRunTime");
-        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
-        double adherenceRate;
-        Log.d(TAGD,"taken Count:"+takenCount);
-        Log.d(TAGD,"INTERVAL:"+ interval);
-        //Log.d(TAGMA,""+ takenCount);
-        if(interval!=1)
-            adherenceRate = ((double)takenCount / (double)interval) * 100;
-        else
-            adherenceRate = 100;
-        Log.d(TAGD,"ADHERENCE RATE:"+adherenceRate);
-
-        return adherenceRate;
     }
-
-    public  long checkDrugTakenTimeInterval(String time) {
-        /*long interval = 0;
-        long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
-                + time, 0);
-        Log.d(TAGD, time + ":" + takenDate);
-        long oneDay = 1000 * 60 * 60 * 24;
-        interval = (day_time - takenDate) / oneDay;
-        return interval;*/
-
-
-        long interval = 0;
-        long today = new Date().getTime();
-        DatabaseSQLiteHelper sqLite= new DatabaseSQLiteHelper(con);
-        long takenDate= sqLite.getFirstTime();
-        if(time.compareTo("firstRunTime")==0) {
-            if(takenDate!=0) {
-                Log.d(TAGD, "First Run Time at FAF->" + takenDate);
-                SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
-                        + time, takenDate).apply();
-                long oneDay = 1000 * 60 * 60 * 24;
-                interval = (today - takenDate) / oneDay;
-                Log.d(TAGD, "TODAY:" + today);
-                Log.d(TAGD,"TAKEN DATE"+takenDate);
-                Log.d(TAGD,"INTERVAL:"+interval);
-                return interval;
-            }
-            else
-                return 1;
-        }
-        else {
-            takenDate=SharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
-                    + time, takenDate);
-            long oneDay = 1000 * 60 * 60 * 24;
-            interval = (today - takenDate) / oneDay;
-            return interval;
-        }
->>>>>>> ankita-gsoc-gradlebuild
-    }
-
-
-    /*public void getSharedPreferences() {
-
-        mSharedPreferenceStore.mPrefsStore = getActivity()
-                .getSharedPreferences("com.peacecorps.malaria.storeTimePicked",
-                        Context.MODE_PRIVATE);
-        mSharedPreferenceStore.mEditor = mSharedPreferenceStore.mPrefsStore
-                .edit();
-    }
-
-    public static double computeAdherenceRate() {
-        long interval = checkDrugTakenTimeInterval("firstRunTime") + 1;
-        int takenCount = SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.drugAcceptedCount", 0);
-        double adherenceRate = (takenCount / interval) * 100;
-        return adherenceRate;
-    }
-
-    public void saveUsersettings(Boolean state, Boolean isWeekly) {
-        if (isWeekly) {
-            mSharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.weeklyDate",
-                    new Date().getTime()).commit();
-            mSharedPreferenceStore.mEditor.putBoolean(
-                    "com.peacecorps.malaria.isWeeklyDrugTaken", state).commit();
-        } else {
-            mSharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria.dateDrugTaken",
-                    new Date().getTime()).commit();
-            mSharedPreferenceStore.mEditor.putBoolean("com.peacecorps.malaria.isDrugTaken",
-                    state).commit();
-        }
-        mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.drugRejectedCount",
-                drugRejectedCount).commit();
-        mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.drugAcceptedCount",
-                mDrugAcceptedCount).commit();
-
-    }
-
-    public void getSettings() {
-        checkDay = mCalendar.get(Calendar.DAY_OF_WEEK);
-        mGetCurrentDate = new SimpleDateFormat("dd/MM/yyyy",
-                Locale.getDefault()).format(mCalendar.getTime());
-        mDrugAcceptedCount = mSharedPreferenceStore.mPrefsStore.getInt(
-                "com.peacecorps.malaria.drugAcceptedCount", 0);
-        drugRejectedCount = mSharedPreferenceStore.mPrefsStore.getInt(
-                "com.peacecorps.malaria.drugRejectedCount", 0);
-        decideDayofWeek(checkDay, mPossibledays);
-    }
-
-    public static long checkDrugTakenTimeInterval(String time) {
-        long interval = 0;
-        long today = new Date().getTime();
-        long takenDate = mSharedPreferenceStore.mPrefsStore.getLong("com.peacecorps.malaria."
-                + time, 0);
-        Log.d(TAGHSF, time + ":" + takenDate);
-        long oneDay = 1000 * 60 * 60 * 24;
-        interval = (today - takenDate) / oneDay;
-        return interval;
-    }
-
-    public void storeMediTimeLastChecked() {
-        CharSequence lastMedicationCheckedTime = "";
-        Calendar c = Calendar.getInstance();
-        lastMedicationCheckedTime = new SimpleDateFormat("dd/MM",
-                Locale.getDefault()).format(c.getTime());
-
-        mSharedPreferenceStore.mEditor.putString(
-                "com.peacecorps.malaria.checkMediLastTakenTime",
-                lastMedicationCheckedTime.toString()).commit();
-    }
-
-    public void changeWeeklyAlarmTime() {
-        int hour = Calendar.getInstance().get(Calendar.HOUR);
-        int minute = Calendar.getInstance().get(Calendar.MINUTE) - 1;
-        getActivity().startService(
-                new Intent(getActivity(), AlarmService.class));
-        mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.AlarmHour", hour)
-                .commit();
-        mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.AlarmMinute", minute)
-                .commit();
-    }
-
-
-    public String decideDayofWeek(int checkDay, String possibleDays[]) {
-        String currentDayOfWeek = null;
-        switch (checkDay) {
-            case 1:
-                currentDayOfWeek = possibleDays[0];
-                break;
-            case 2:
-                currentDayOfWeek = possibleDays[1];
-                break;
-            case 3:
-                currentDayOfWeek = possibleDays[2];
-                break;
-            case 4:
-                currentDayOfWeek = possibleDays[3];
-                break;
-            case 5:
-                currentDayOfWeek = possibleDays[4];
-                break;
-            case 6:
-                currentDayOfWeek = possibleDays[5];
-                break;
-            case 7:
-                currentDayOfWeek = possibleDays[6];
-                break;
-
-        }
-        return currentDayOfWeek;
-    }*/
-
 
 
 }

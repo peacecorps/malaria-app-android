@@ -134,7 +134,9 @@ public class TripIndicatorPackingActivity extends Activity {
 
         /** Setting the event listener for the add button **/
         btnDelete.setOnClickListener(listenerDelete);
-
+        /**Setting the Growing List
+         * And adding entries to the database
+         */
         View.OnClickListener listenerSubmit = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,7 +151,7 @@ public class TripIndicatorPackingActivity extends Activity {
                 }
 
                 outputStrArr = new String[selectedItems.size()];
-
+                //adding to database
                 for (int i = 0; i < selectedItems.size(); i++) {
                     outputStrArr[i] = selectedItems.get(i);
                     sqLite.insertPackingItem(outputStrArr[i],1,"yes");
@@ -162,11 +164,11 @@ public class TripIndicatorPackingActivity extends Activity {
                 for(int i=0;i<outputStrArr.length;i++)
                     mSharedPreferenceStore.mEditor.putString(outputStrArr + "_" + i, outputStrArr[i]).commit();
 
-                // Create a bundle object
+                /** Create a bundle object**/
                 Bundle b = new Bundle();
                 b.putStringArray("selectedItems", outputStrArr);
 
-                // Add the bundle to the intent.
+                /**Add the bundle to the intent.**/
                 bkIntent.putExtras(b);
                 //.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
@@ -193,7 +195,7 @@ public class TripIndicatorPackingActivity extends Activity {
         btnSubmit.setOnClickListener(listenerSubmit);
 
 
-
+        /**Getting the Identity of Pill**/
         Intent intent = getIntent();
         mNumDrugs=intent.getLongExtra(TripIndicatorFragmentActivity.DRUG_TAG,0);
         numDrugs = (TextView)findViewById(R.id.quantity);
@@ -227,7 +229,7 @@ public class TripIndicatorPackingActivity extends Activity {
 
     @Override
     protected Dialog onCreateDialog(int id) {
-
+         /**Dialog for Selecting the Drug**/
         final Dialog dialog=new Dialog(TripIndicatorPackingActivity.this,android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
         dialog.setContentView(R.layout.trip_item_dropdown_list);
         dialog.setTitle("Select Drugs");
@@ -239,6 +241,7 @@ public class TripIndicatorPackingActivity extends Activity {
         dialog_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //setting the text to the drug selected
                 whichDrug.setText(parent.getItemAtPosition(position).toString());
                 tripDrugName=parent.getItemAtPosition(position).toString();
                 TripIndicatorFragmentActivity.packingSelect.setText(mNumDrugs + " " + tripDrugName + " etc.");

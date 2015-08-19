@@ -18,6 +18,10 @@ import java.net.URL;
 /**
  * Created by Ankita on 6/12/2015.
  */
+
+/*
+* Will be used for checking continuous connectivity of Info Hub with Internet
+* */
 public class HTTPAsyncTask extends AsyncTask<String, Void, String> {
 
     Context syncontext;
@@ -27,12 +31,6 @@ public class HTTPAsyncTask extends AsyncTask<String, Void, String> {
         this.syncontext=syncontext;
     }
 
-
-    /*protected void onPreExecute(String res)
-    {
-        Log.i(TAGHAT,"INSIDE ON POST EXECUTE");
-        Log.i("Status : ",result);
-    }*/
     @Override
     protected String doInBackground(String... urls) {
        Log.i(TAGHAT, "INSIDE DO IN BACKGROUND");

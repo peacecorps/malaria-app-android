@@ -19,11 +19,7 @@
         android:textSize="25sp"
         android:gravity="center"
         android:textStyle="bold"
-<<<<<<< HEAD
         android:id="@+id/var"
-=======
-
->>>>>>> ankita-gsoc-gradlebuild
         />
     <View android:layout_width="match_parent"
         android:layout_height="0.2dp"
@@ -43,12 +39,8 @@
                 android:text="@string/dump_test"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-<<<<<<< HEAD
                 android:id="@+id/volunteerAdherenceLabel"
                 android:textSize="20sp"/>
-=======
-                android:id="@+id/volunteerAdherenceLabel"/>
->>>>>>> ankita-gsoc-gradlebuild
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DrugArrayAdapter extends ArrayAdapter<String>{
-
+    /**Customized List Adapter with an Image View on Left and Text View on Right**/
     private final Activity context;
     private final String[] dname;
     private final Integer[] imageId;
@@ -27,6 +27,7 @@ public class DrugArrayAdapter extends ArrayAdapter<String>{
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
+        //inflating the customized view
         View rowView= inflater.inflate(R.layout.trip_drug_item, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.drugItem);
 
