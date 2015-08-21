@@ -31,6 +31,8 @@ Included in this repository are files to help you get started:
 This project uses Jack Wharton's Android-ViewPagerIndicator for the Viewpager Swipe view.
  <a href="https://github.com/chimdi2000/ViewPagerIndicator">Jake Wharton ViewPager Indicator project dependecy</a>
 
+<h4> <a href="https://drive.google.com/file/d/0B0E0_9za8pF1RDg5QkVPNzh6Vjg/view?usp=sharing"> Download Current Malaria APK File here </a> </h4>
+
 <h3>Contact Information:</h3>
 
 

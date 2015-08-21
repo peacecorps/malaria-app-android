@@ -46,12 +46,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp">
 
         <Button
                 android:id="@+id/fragment_home_screen__reject_medication_button"
                 android:layout_width="70dp"
-                android:layout_height="50dp"
+                android:layout_height="70dp"
                 android:layout_marginRight="20dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/reject_medi_normal" />
@@ -59,7 +60,7 @@
         <Button
                 android:id="@+id/fragment_home_screen_accept_medication_button"
                 android:layout_width="70dp"
-                android:layout_height="50dp"
+                android:layout_height="70dp"
                 android:layout_marginLeft="20dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/accept_medi_normal"

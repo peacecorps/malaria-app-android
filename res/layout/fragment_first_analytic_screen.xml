@@ -35,25 +35,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
                 android:text="@string/first_analytic_screen_medicine_last_taken_text"
-                android:textSize="13sp"
-                android:textStyle="bold"
+                android:textSize="18sp"
                 android:textColor="@color/golden_brown"
+                android:id="@+id/mlt"
                 />
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:id="@+id/checkMediLastTakenTime"
-                  android:text=""
-                  android:background="@color/light_red"
+                  android:text="15/07"
+                  android:background="@drawable/info_hub_button"
                   android:textColor="@color/white"
-                  android:textSize="20sp"
-                  android:textStyle="bold"
+                  android:textSize="17sp"
                   android:layout_gravity="center_vertical"
 
                 />
+
+            />
 
     </LinearLayout>
 
@@ -75,22 +76,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
                 android:text="@string/first_analytic_screen_doses_missing_text"
-                android:textSize="13sp"
-                android:textStyle="bold"
+                android:textSize="18sp"
                 android:textColor="@color/golden_brown"
+            android:id="@+id/dinr"
                 />
 
         <TextView
             android:id="@+id/doses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_red"
+            android:background="@drawable/info_hub_button"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:textSize="17sp"
             android:layout_gravity="center_vertical"
                 />
 
@@ -114,22 +114,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
                 android:text="@string/first_analytic_screen_medicine_adherence_to_medicine_text"
-                android:textSize="13sp"
-                android:textStyle="bold"
+                android:textSize="18sp"
                 android:textColor="@color/golden_brown"
+            android:id="@+id/atm"
                 />
 
         <TextView
             android:id="@+id/adherence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_red"
+            android:background="@drawable/info_hub_button"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:textSize="17sp"
             android:layout_gravity="center_vertical" />
 
     </LinearLayout>
