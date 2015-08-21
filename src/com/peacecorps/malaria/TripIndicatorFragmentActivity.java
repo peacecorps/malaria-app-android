@@ -266,6 +266,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                         myIntent3.putExtra("AlarmID",103);
                         pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 103, myIntent3, PendingIntent.FLAG_UPDATE_CURRENT );
                         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                        Toast.makeText(getApplicationContext(), "Reminders are Set!", Toast.LENGTH_LONG).show();
                     } else if (interval < 7 && interval > 1) {
 
                         Log.d(TAGTIFA,"Category 2 Alarm Set");
@@ -277,6 +278,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                         myIntent2.putExtra("AlarmID",103);
                         pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 103, myIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
                         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                        Toast.makeText(getApplicationContext(), "Reminders are Set!", Toast.LENGTH_LONG).show();
 
                     } else {
                         Log.d(TAGTIFA,"Category 3 Alarm Set");
@@ -284,6 +286,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                         myIntent.putExtra("AlarmID",103);
                         pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 103, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                        Toast.makeText(getApplicationContext(), "Reminders are Set!", Toast.LENGTH_LONG).show();
                     }
                 }
                 else
@@ -291,7 +294,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                     Toast.makeText(getApplicationContext(),"Enter future departure time.", Toast.LENGTH_LONG).show();
                 }
 
-                Toast.makeText(getApplicationContext(), "Reminders are Set!", Toast.LENGTH_LONG).show();
+
 
                 loc = locationSpinner.getText().toString();
                 sqLite.insertLocation(loc);
@@ -378,6 +381,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                     DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getApplicationContext());
                     sqLite.resetDatabase();
                     mSharedPreferenceStore.mEditor.clear().commit();
+                    SharedPreferenceStore.mEditor.clear().commit();
                     startActivity(new Intent(getApplication().getApplicationContext(),
                             UserMedicineSettingsFragmentActivity.class));
 
@@ -447,13 +451,13 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         String date_data=dateData.getText().toString();
         String month_data=monthData.getText().toString();
         String year_data=yearData.getText().toString();
-        arrival_formattedate=date_data+"/"+month_data+"/"+year_data;
+        arrival_formattedate=month_data+"/"+date_data+"/"+year_data;
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_date", arrival_formattedate).commit();
 
         String departure_date_data=DepartureDateData.getText().toString();
         String departure_month_data=DepartureMonthData.getText().toString();
         String departure_year_data=DepartureYearData.getText().toString();
-        departure_formattedate=departure_date_data+"/"+departure_month_data+"/"+departure_year_data;
+        departure_formattedate=departure_month_data+"/"+departure_date_data+"/"+departure_year_data;
 
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.departure_trip_date", departure_formattedate).commit();
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_drug",mDrugPicked).commit();

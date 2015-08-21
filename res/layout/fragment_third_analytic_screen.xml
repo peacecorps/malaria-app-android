@@ -56,8 +56,63 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/calendar_days" >
+            android:src="@drawable/calendar_header_vectorized" >
         </ImageView>
+
+        <!--TableLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/weektable">
+
+            <TableRow
+                android:layout_height="wrap_content"
+                android:id="@+id/tableRow"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:text="Sun"
+                    android:gravity="center_horizontal"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="40dp"></TextView>
+                <TextView
+                    android:text="Mon"
+                    android:id="@+id/textView2"
+                    android:gravity="center_horizontal"
+                    android:textSize="20sp"></TextView>
+                <TextView
+                    android:text="Tue"
+                    android:id="@+id/textView3"
+                    android:gravity="center_horizontal"
+                    android:textSize="20sp"></TextView>
+                <TextView
+                    android:text="Wed"
+                    android:id="@+id/textView4"
+                    android:gravity="center_horizontal"
+                    android:textSize="20sp"></TextView>
+                <TextView
+                    android:text="Thu"
+                    android:id="@+id/textView5"
+                    android:gravity="center_horizontal"
+                    android:textSize="20sp"></TextView>
+                <TextView
+                    android:text="Fri"
+                    android:id="@+id/textView6"
+                    android:gravity="center_horizontal"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:text="Sat"
+                    android:id="@+id/textView7"
+                    android:gravity="center_horizontal"
+                    android:textSize="20sp"/>
+            </TableRow>
+
+
+        </TableLayout-->
+
+
+
+
     </LinearLayout>
 
     <GridView

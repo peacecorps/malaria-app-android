@@ -336,6 +336,7 @@ public class SecondAnalyticFragment extends Fragment {
          ((LineGraphView) lineGraphView).setDataPointsRadius(r);
         //plotting data
         lineGraphView.addSeries(drugGraphSeries);
+
         //showing graph
         LinearLayout linearLayout = (LinearLayout) rootView.findViewById(R.id.graphView);
         linearLayout.addView(lineGraphView);

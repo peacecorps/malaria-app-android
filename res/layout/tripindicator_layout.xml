@@ -131,7 +131,7 @@
                 <TextView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:hint="DD"
+                    android:hint="MM"
                     android:layout_marginTop="20dp"
                     android:paddingLeft="6dp"
                     android:layout_marginLeft="10dp"
@@ -140,7 +140,7 @@
                     android:paddingBottom="5dp"
                     android:textColor="@color/white"
                     android:background="@drawable/trip_cash_editext"
-                    android:id="@+id/trip_date_departure"
+                    android:id="@+id/trip_month_departure"
                     android:layout_marginRight="2dp"
                     android:clickable="true"
                     android:onClick="showDatePickerDialogDeparture"
@@ -159,7 +159,7 @@
                 <TextView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:hint="MM"
+                    android:hint="DD"
                     android:layout_marginTop="20dp"
                     android:paddingLeft="6dp"
                     android:paddingTop="10dp"
@@ -169,7 +169,7 @@
                     android:layout_marginRight="2dp"
                     android:textColor="@color/white"
                     android:background="@drawable/trip_cash_editext"
-                    android:id="@+id/trip_month_departure"
+                    android:id="@+id/trip_date_departure"
                     android:clickable="true"
                     android:onClick="showDatePickerDialogDeparture"
                     />
@@ -226,7 +226,7 @@
                 <TextView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:hint="DD"
+                    android:hint="MM"
                     android:layout_marginTop="20dp"
                     android:paddingLeft="6dp"
                     android:layout_marginLeft="10dp"
@@ -235,7 +235,7 @@
                     android:paddingBottom="5dp"
                     android:textColor="@color/white"
                     android:background="@drawable/trip_cash_editext"
-                    android:id="@+id/trip_date"
+                    android:id="@+id/trip_month"
                     android:layout_marginRight="2dp"
                     android:clickable="true"
                     android:onClick="showDatePickerDialogArrival"
@@ -254,7 +254,7 @@
                 <TextView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:hint="MM"
+                    android:hint="DD"
                     android:layout_marginTop="20dp"
                     android:paddingLeft="6dp"
                     android:layout_marginLeft="2dp"
@@ -264,7 +264,7 @@
                     android:layout_marginRight="2dp"
                     android:textColor="@color/white"
                     android:background="@drawable/trip_cash_editext"
-                    android:id="@+id/trip_month"
+                    android:id="@+id/trip_date"
                     android:clickable="true"
                     android:onClick="showDatePickerDialogArrival"
                     />

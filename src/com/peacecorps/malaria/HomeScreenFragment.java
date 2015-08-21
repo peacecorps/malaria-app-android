@@ -219,7 +219,7 @@ public class HomeScreenFragment extends Fragment {
 
     public void getSettings() {
         checkDay = mCalendar.get(Calendar.DAY_OF_WEEK);
-        mGetCurrentDate = new SimpleDateFormat("dd/MM/yyyy",
+        mGetCurrentDate = new SimpleDateFormat("MM/dd/yyyy",
                 Locale.getDefault()).format(mCalendar.getTime());
         mDrugAcceptedCount = mSharedPreferenceStore.mPrefsStore.getInt(
                 "com.peacecorps.malaria.drugAcceptedCount", 0);
@@ -459,6 +459,7 @@ public class HomeScreenFragment extends Fragment {
                     DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
                     sqLite.resetDatabase();
                     mSharedPreferenceStore.mEditor.clear().commit();
+                    SharedPreferenceStore.mEditor.clear().commit();
                     startActivity(new Intent(getActivity(),
                             UserMedicineSettingsFragmentActivity.class));
                     getActivity().finish();
