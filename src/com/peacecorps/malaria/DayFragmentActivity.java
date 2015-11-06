@@ -63,6 +63,9 @@ public class DayFragmentActivity extends FragmentActivity {
         /*defining variables for accessing Database*/
         sqLite= new DatabaseSQLiteHelper(this);
 
+        ImageButton btnChangeData = (ImageButton)findViewById(R.id.btnChangeData);
+        final ImageView indicator = (ImageView)findViewById(R.id.medi_indicator);
+
         /*displaying clicked date on the Day Fragment*/
         Intent intent = getIntent();
         String selected_date = intent.getStringExtra(ThirdAnalyticFragment.DATE_TAG);
@@ -109,70 +112,8 @@ public class DayFragmentActivity extends FragmentActivity {
         String data=sqLite.getMedicationData(day, month, year);
         Log.d(TAGD, "++++++" + data + "++++++");
 
-        /*Setting the Indicator according to the Result*/
-        final ImageView indicator = (ImageView)findViewById(R.id.medi_indicator);
-        if(data.compareTo("yes")==0)
-        {
-            Toast.makeText(getApplicationContext(),"I took medicine!",Toast.LENGTH_LONG).show();
-            indicator.setBackgroundResource(R.drawable.accept_medi_checked_);
-        }
-        else if(data.compareTo("no")==0) {
-            indicator.setBackgroundResource(R.drawable.reject_medi_checked);
-            Toast.makeText(getApplicationContext(), "I didn't take medicine!", Toast.LENGTH_LONG).show();
-        }
-        else
-        {   Log.d(TAGD,"Inside Missed Drug Entry");
-
-            selected_date=SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.checkMediLastTakenTime","");
-            SimpleDateFormat dateF = new SimpleDateFormat("dd/MM");
-            Date cd=Calendar.getInstance().getTime();
-            try {
-                cd   = dateF.parse(selected_date);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            cal.setTime(cd);
-
-            Log.d(TAGD,"Medication Last Taken Time");
-            Log.d(TAGD, "" + cal.get(Calendar.DATE));
-            Log.d(TAGD, "" + cal.get(Calendar.MONTH));
-            Log.d(TAGD, "" + cal.get(Calendar.YEAR));
-
-            long queried_date=comp_date.getTime();
-            long last_medication_date = cd.getTime();
-
-            Calendar c= Calendar.getInstance();
-            long current_date= c.getTimeInMillis();
-
-
-            if(queried_date>=firstTime)
-            {
-                if(queried_date<=current_date)
-                {
-                    Toast.makeText(getApplicationContext(), "I missed entering medicine!", Toast.LENGTH_LONG).show();
-                    sqLite.insertOrUpdateMissedMedicationEntry(day, month, year, 0);
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(), "This is a future date, you cannot edit it!", Toast.LENGTH_LONG).show();
-                    flag=1;
-                }
-            }
-            else {
-                //Toast.makeText(getApplicationContext(), "This is a date before medication even started, you can't edit it!", Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(), "I missed entering medicine!", Toast.LENGTH_LONG).show();
-                sqLite.insertOrUpdateMissedMedicationEntry(day, month, year, 0);
-
-            }
-
-
-
-
-
-        }
 
         /*Implementing Editing Data Button for a Day Page*/
-        ImageButton btnChangeData = (ImageButton)findViewById(R.id.btnChangeData);
         btnChangeData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -281,6 +222,73 @@ public class DayFragmentActivity extends FragmentActivity {
 
             }
         });
+
+        /*Setting the Indicator according to the Result*/
+
+        if(data.compareTo("yes")==0)
+        {
+            Toast.makeText(getApplicationContext(),"I took medicine!",Toast.LENGTH_LONG).show();
+            indicator.setBackgroundResource(R.drawable.accept_medi_checked_);
+        }
+        else if(data.compareTo("no")==0) {
+            indicator.setBackgroundResource(R.drawable.reject_medi_checked);
+            Toast.makeText(getApplicationContext(), "I didn't take medicine!", Toast.LENGTH_LONG).show();
+        }
+        else
+        {   Log.d(TAGD,"Inside Missed Drug Entry");
+
+            selected_date=SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.checkMediLastTakenTime","");
+            SimpleDateFormat dateF = new SimpleDateFormat("dd/MM");
+            Date cd=Calendar.getInstance().getTime();
+            try {
+                cd   = dateF.parse(selected_date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            cal.setTime(cd);
+
+            Log.d(TAGD,"Medication Last Taken Time");
+            Log.d(TAGD, "" + cal.get(Calendar.DATE));
+            Log.d(TAGD, "" + cal.get(Calendar.MONTH));
+            Log.d(TAGD, "" + cal.get(Calendar.YEAR));
+
+            long queried_date=comp_date.getTime();
+            long last_medication_date = cd.getTime();
+
+            Calendar c= Calendar.getInstance();
+            long current_date= c.getTimeInMillis();
+
+
+            if(queried_date>=firstTime)
+            {
+                if(queried_date<=current_date)
+                {
+                    Toast.makeText(getApplicationContext(), "I missed entering medicine!", Toast.LENGTH_LONG).show();
+                    sqLite.insertOrUpdateMissedMedicationEntry(day, month, year, 0);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "This is a future date, you cannot edit it!", Toast.LENGTH_LONG).show();
+                    btnChangeData.setBackgroundResource(R.drawable.roundedbutton_grey);
+                    btnChangeData.setClickable(false);
+                    flag=1;
+                }
+            }
+            else {
+                //Toast.makeText(getApplicationContext(), "This is a date before medication even started, you can't edit it!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "I missed entering medicine!", Toast.LENGTH_LONG).show();
+                sqLite.insertOrUpdateMissedMedicationEntry(day, month, year, 0);
+
+            }
+
+
+
+
+
+        }
+
+
+
     }
 
     /**Computing the Adherence Rate for selected Date**/
