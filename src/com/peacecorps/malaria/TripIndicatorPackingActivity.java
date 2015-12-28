@@ -236,7 +236,7 @@ public class TripIndicatorPackingActivity extends Activity {
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         dialog_listView=(ListView)dialog.findViewById(R.id.tripDrugDialogList);
-        DrugArrayAdapter adapter = new DrugArrayAdapter(this,listContent,imageId);
+        DrugArrayAdapter adapter = new DrugArrayAdapter(this,listContent,imageId,null);
         dialog_listView.setAdapter(adapter);
         dialog_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
