@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +30,7 @@ public class TripIndicatorPackingActivity extends Activity {
     private long mNumDrugs=0;
     TextView numDrugs;
     ListView listView;
-    EditText cash;
+    EditText cash,edit;
     TextView whichDrug;
     public static String tripDrugName;
 
@@ -71,6 +72,10 @@ public class TripIndicatorPackingActivity extends Activity {
         /** List View **/
         listView = (ListView)findViewById(R.id.listV);
 
+        /**Description of the new item added**/
+        edit = (EditText) findViewById(R.id.packing_et);
+
+
         /**Populating the List **/
         Cursor cursor = sqLite.getPackingItem();
         String item="";
@@ -101,11 +106,21 @@ public class TripIndicatorPackingActivity extends Activity {
         View.OnClickListener listenerAdd = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText edit = (EditText) findViewById(R.id.packing_et);
-                list.add(edit.getText().toString());
-                sqLite.insertPackingItem(edit.getText().toString(),1,"no");
-                edit.setText("");
-                adapter.notifyDataSetChanged();
+                String s=edit.getText().toString();
+
+                if(s.equals(""))
+                {
+                    Toast.makeText(getApplicationContext(), "Enter item name ", Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                {
+                    list.add(edit.getText().toString());
+                    sqLite.insertPackingItem(edit.getText().toString(),1,"no");
+                    edit.setText("");
+                    adapter.notifyDataSetChanged();
+
+                }
             }
         };
 
@@ -200,7 +215,6 @@ public class TripIndicatorPackingActivity extends Activity {
         mNumDrugs=intent.getLongExtra(TripIndicatorFragmentActivity.DRUG_TAG,0);
         numDrugs = (TextView)findViewById(R.id.quantity);
         whichDrug = (TextView)findViewById(R.id.drugName);
-        numDrugs.setText("" + mNumDrugs);
         sqLite.insertPackingItem("Pills", (int) mNumDrugs, "yes");
 
         /** Drug Selection **/
@@ -244,11 +258,37 @@ public class TripIndicatorPackingActivity extends Activity {
                 //setting the text to the drug selected
                 whichDrug.setText(parent.getItemAtPosition(position).toString());
                 tripDrugName=parent.getItemAtPosition(position).toString();
+                setNumberOfDrugs();
                 TripIndicatorFragmentActivity.packingSelect.setText(mNumDrugs + " " + tripDrugName + " etc.");
                 dialog.dismiss();
             }
         });
             return dialog;
+
+    }
+
+    protected void  setNumberOfDrugs()
+    {
+        if(tripDrugName.equals("Malarone"))
+        {
+            numDrugs.setText("" + mNumDrugs);
+        }
+        else if(tripDrugName.equals("Doxycycline") || tripDrugName.equals("Mefloquine"))
+        {   if(mNumDrugs%7==0)
+        {
+            numDrugs.setText("" + mNumDrugs/7);
+        }
+        else
+        {
+            numDrugs.setText("" +(( mNumDrugs/7)+1));
+        }
+
+
+        }
+        else
+        {
+            numDrugs.setText("");
+        }
 
     }
 
