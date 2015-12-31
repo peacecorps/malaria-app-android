@@ -30,7 +30,7 @@ public class TripIndicatorPackingActivity extends Activity {
     private long mNumDrugs=0;
     TextView numDrugs;
     ListView listView;
-    EditText cash,edit;
+    EditText cash;
     TextView whichDrug;
     public static String tripDrugName;
 
@@ -72,10 +72,6 @@ public class TripIndicatorPackingActivity extends Activity {
         /** List View **/
         listView = (ListView)findViewById(R.id.listV);
 
-        /**Description of the new item added**/
-        edit = (EditText) findViewById(R.id.packing_et);
-
-
         /**Populating the List **/
         Cursor cursor = sqLite.getPackingItem();
         String item="";
@@ -106,21 +102,12 @@ public class TripIndicatorPackingActivity extends Activity {
         View.OnClickListener listenerAdd = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String s=edit.getText().toString();
+                EditText edit = (EditText) findViewById(R.id.packing_et);
+-                list.add(edit.getText().toString());
+-                sqLite.insertPackingItem(edit.getText().toString(),1,"no");
+-                edit.setText("");
+-                adapter.notifyDataSetChanged();
 
-                if(s.equals(""))
-                {
-                    Toast.makeText(getApplicationContext(), "Enter item name ", Toast.LENGTH_SHORT).show();
-
-                }
-                else
-                {
-                    list.add(edit.getText().toString());
-                    sqLite.insertPackingItem(edit.getText().toString(),1,"no");
-                    edit.setText("");
-                    adapter.notifyDataSetChanged();
-
-                }
             }
         };
 
