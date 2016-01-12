@@ -79,7 +79,7 @@
                         />
 
 
-                    <EditText
+                    <AutoCompleteTextView
                         android:id="@+id/trip_location_select_editText"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
@@ -93,6 +93,7 @@
                         android:paddingTop="5dp"
                         android:textColor="@color/cream"
                         android:layout_weight="1"
+			android:completionThreshold="1"
 
 
 
