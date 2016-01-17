@@ -1,12 +1,19 @@
 package com.peacecorps.malaria;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.net.URI;
 
 /**
  * Created by DELL on 1/16/2016.
@@ -17,6 +24,9 @@ public class RemainderToneActivity extends Activity implements View.OnClickListe
     EditText path;
     Button btnOK ;
     Button btnCancel;
+    Ringtone ringtone;
+    String MP3Path;
+    Uri audioFileUri;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +53,15 @@ public class RemainderToneActivity extends Activity implements View.OnClickListe
                 break;
 
             case R.id.dialogButtonOKReminder:
+                SharedPreferences.Editor editor = getSharedPreferences("ringtone", MODE_PRIVATE).edit();
+                editor.putString("toneUri", audioFileUri.toString());
+                editor.commit();
+                Toast.makeText(getApplicationContext(), "Reminder Tone Set", Toast.LENGTH_SHORT).show();
+                this.finish();
                 break;
+
             case R.id.dialogButtonCancelReminder:
+                this.finish();
                 break;
         }
     }
@@ -53,9 +70,11 @@ public class RemainderToneActivity extends Activity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
-                Uri audioFileUri = data.getData();
-                String MP3Path = audioFileUri.getPath();
+                audioFileUri = data.getData();
+                MP3Path = audioFileUri.getPath();
                 path.setText(MP3Path);
+
+
             }
         }
     }
