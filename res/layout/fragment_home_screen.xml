@@ -14,8 +14,8 @@
 
        <Button
            android:id="@+id/fragment_home_screen_set_tone_button"
-           android:layout_width="32dp"
-           android:layout_height="32dp"
+           android:layout_width="24dp"
+           android:layout_height="24dp"
            android:layout_margin="5dp"
            android:adjustViewBounds="true"
            android:background="@drawable/ic_action_volume_on"
