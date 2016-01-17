@@ -53,7 +53,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     public boolean sent;
     private Button btnInfoHub, btnHome,btnGenerate,btnGear;
     private String mDrugPicked,mLocationPicked;
-    public static String mItemPicked;
+    public static String mDatesPicked;
     private TextView dateData,monthData,yearData,DepartureDateData,DepartureMonthData,DepartureYearData;
     public static TextView locationSpinner;
     public static boolean[] checkSelected;
@@ -230,7 +230,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
                 }
                 mLocationPicked=locationSpinner.getText().toString();
-                mItemPicked = "Trip to " + mLocationPicked + " is scheduled on " + departure_formattedate + " till " + arrival_formattedate + ". Please bring following items:- " + chklist  +"\n";
+                mDatesPicked = "Trip to " + mLocationPicked + " is scheduled for " + departure_formattedate + ".\n" +"Stay safe, don't forget to take your pills.";
 
                 Calendar calendar = Calendar.getInstance();
                 Log.d(TAGTIFA, "Date:" + dep_year + " " + dep_month + " " + dep_day);

@@ -20,7 +20,7 @@ public class TripAlarmService extends IntentService {
 
     @Override
     public void onHandleIntent(Intent intent) {
-        sendNotification("Get Ready to Pack your Bags for Trip!" + "\n" + TripIndicatorFragmentActivity.mItemPicked, intent);
+        sendNotification("Get Ready to Pack your Bags!" + "\n" + TripIndicatorFragmentActivity.mDatesPicked, intent);
 
     }
 
@@ -37,12 +37,13 @@ public class TripAlarmService extends IntentService {
                 activIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder alamNotificationBuilder = new NotificationCompat.Builder(
-                this).setContentTitle("Reminder for Trip").setSmallIcon(R.drawable.appicon_themed)
+                this).setContentTitle("Upcoming Trip Reminder").setSmallIcon(R.drawable.appicon_themed)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                .setContentText(msg);
+                .setContentText(msg)
+                .addAction(R.drawable.checked, "Trip Checklist", contentIntent);
 
 
-        alamNotificationBuilder.setContentIntent(contentIntent);
+        //alamNotificationBuilder.setContentIntent(contentIntent);
         alarmNotificationManager.notify(1, alamNotificationBuilder.build());
         Log.d("TripAlarmService", "Notification sent.");
     }

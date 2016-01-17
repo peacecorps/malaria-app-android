@@ -3,12 +3,15 @@ package com.peacecorps.malaria;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -40,7 +43,11 @@ public class TripAlarmActivity extends Activity {
 
         Log.d("TAA", "AlarmID: " + intent.getIntExtra("AlarmID", 0));
 
-        String msg= "Your Luggage should contain following items:-";
+        String return_date = getApplication()
+                .getSharedPreferences("com.peacecorps.malaria.storeTimePicked", Context.MODE_PRIVATE)
+                .getString("com.peacecorps.malaria.trip_date", null);
+
+        String msg= "Trip return date is : " + return_date + ".\n\n" + "Your Luggage should contain following items:-";
 
         //setting fonts
         textView.setText(msg);
@@ -51,22 +58,25 @@ public class TripAlarmActivity extends Activity {
 
         Cursor cursor= sqlite.getPackingItemChecked();
 
-        /** Columns to be Shown in The ListView **/
-        String[] columns = {sqlite.KEY_ROW_ID,sqlite.PACKING_ITEM};
+        /** Create the adapter using the cursor going through each row,
+         * and concatenating the item name to the quantity **/
 
-        /**XML Bound Views according to the Column**/
-        int[] to = new int[] {
-                R.id.reminderListItemNumber,R.id.reminderListItem
-        };
+        String[] items_with_quantities = new String[cursor.getCount()];
 
-        /** Create the adapter using the cursor pointing to the desired row in query
-         * made to database ,as well as the layout information**/
-        dataAdapter = new SimpleCursorAdapter(
-                this, R.layout.trip_reminder_list_item,
-                cursor,
-                columns,
-                to,
-                1);
+        int current_index = 0;
+
+        while (cursor.moveToNext())
+        {
+            String item = cursor.getString(cursor.getColumnIndex("PackingItem"));
+            String quantity = cursor.getString(cursor.getColumnIndex("Quantity"));
+            items_with_quantities[current_index] = item + "-" + quantity;
+            current_index++;
+        }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(
+                this,
+                R.layout.trip_reminder_list_item,
+                items_with_quantities);
 
         ListView listView = (ListView) findViewById(android.R.id.list);
         /** Assign adapter to ListView **/
