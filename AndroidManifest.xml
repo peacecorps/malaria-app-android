@@ -77,6 +77,8 @@
 
         <activity android:name="com.peacecorps.malaria.TripIndicatorDialogActivity"
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
+        <activity android:name="com.peacecorps.malaria.RemainderToneActivity"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
         <activity android:name="com.peacecorps.malaria.TripIndicatorPackingActivity"
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
 

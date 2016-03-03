@@ -6,15 +6,30 @@
               android:orientation="vertical"
               android:padding="2dp" >
 
-    <Button
-            android:id="@+id/fragment_home_screen_settings_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="end"
-            android:layout_margin="5dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/settings_normal"
-            android:scaleType="fitCenter" />
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="end"
+       android:paddingRight="2dp">
+
+       <Button
+           android:id="@+id/fragment_home_screen_set_tone_button"
+           android:layout_width="24dp"
+           android:layout_height="24dp"
+           android:layout_margin="5dp"
+           android:adjustViewBounds="true"
+           android:background="@drawable/ic_action_volume_on"
+           android:scaleType="fitCenter" />
+
+       <Button
+           android:id="@+id/fragment_home_screen_settings_button"
+           android:layout_width="24dp"
+           android:layout_height="24dp"
+           android:layout_margin="5dp"
+           android:adjustViewBounds="true"
+           android:background="@drawable/settings_normal"
+           android:scaleType="fitCenter" />
+       </LinearLayout>
 
     <TextView
             android:id="@+id/fragment_home_screen_current_day_of_week"
