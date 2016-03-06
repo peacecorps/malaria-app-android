@@ -100,12 +100,18 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         btnGenerate=(Button)findViewById(R.id.generateButton);
         btnGear=(Button)findViewById(R.id.trip_settings_button);
         packingSelect=(TextView)findViewById(R.id.tripSelectBox);
+        ((TextView)findViewById(R.id.tripSelectBox)).requestFocus();
         loc_history=(ImageView)findViewById(R.id.locationHistory);
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
         tripTime = (TextView)findViewById(R.id.trip_time);
+        ((TextView)findViewById(R.id.trip_time)).requestFocus();
+
+
         pmtLabel = (TextView)findViewById(R.id.pmt);
         departureMonth=(TextView)findViewById(R.id.trip_month_departure);
+        ((TextView)findViewById(R.id.trip_month_departure)).requestFocus();
         arrivalMonth=(TextView)findViewById(R.id.trip_month);
+        ((TextView)findViewById(R.id.trip_month)).requestFocus();
 
         //setting fonts
         Typeface cf = Typeface.createFromAsset(getAssets(),"fonts/garreg.ttf");
@@ -214,6 +220,10 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
                 /*Bundle b = getIntent().getExtras();
                 String[] resultArr = b.getStringArray("selectedItems");*/
+                departureMonth.setError(null);
+                arrivalMonth.setError(null);
+                packingSelect.setError(null);
+                tripTime.setError(null);
 
                if(locationSpinner.getText().toString().equals(""))
                {
@@ -235,6 +245,15 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                {
                    Toast.makeText(getApplicationContext()," Arrival Date Missing ",Toast.LENGTH_SHORT).show();
                }
+                else if(packingSelect.getText().toString().equals(""))
+               {
+                   packingSelect.setError("Field cannot be left blank.");
+               }
+               else if(tripTime.getText().toString().equals(""))
+               {
+                   tripTime.setError("Field cannot be left blank.");
+               }
+
                 else
                {
                    String chklist="",item="";
