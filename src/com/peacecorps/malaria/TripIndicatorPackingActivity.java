@@ -213,7 +213,7 @@ public class TripIndicatorPackingActivity extends Activity {
         mNumDrugs=intent.getLongExtra(TripIndicatorFragmentActivity.DRUG_TAG,0);
         numDrugs = (TextView)findViewById(R.id.quantity);
         whichDrug = (TextView)findViewById(R.id.drugName);
-
+        numDrugs.setText("" + mNumDrugs);
         sqLite.insertPackingItem("Pills", (int) mNumDrugs, "yes");
 
         /** Drug Selection **/
@@ -257,37 +257,11 @@ public class TripIndicatorPackingActivity extends Activity {
                 //setting the text to the drug selected
                 whichDrug.setText(parent.getItemAtPosition(position).toString());
                 tripDrugName=parent.getItemAtPosition(position).toString();
-                setNumberOfDrugs();
                 TripIndicatorFragmentActivity.packingSelect.setText(mNumDrugs + " " + tripDrugName + " etc.");
                 dialog.dismiss();
             }
         });
             return dialog;
-
-    }
-
-    protected void  setNumberOfDrugs()
-    {
-        if(tripDrugName.equals("Malarone"))
-        {
-            numDrugs.setText("" + mNumDrugs);
-        }
-        else if(tripDrugName.equals("Doxycycline") || tripDrugName.equals("Mefloquine"))
-        {   if(mNumDrugs%7==0)
-        {
-            numDrugs.setText("" + mNumDrugs/7);
-        }
-        else
-        {
-            numDrugs.setText("" +(( mNumDrugs/7)+1));
-        }
-
-
-        }
-        else
-        {
-            numDrugs.setText("");
-        }
 
     }
 

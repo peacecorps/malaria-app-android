@@ -489,13 +489,13 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         String date_data=dateData.getText().toString();
         String month_data=monthData.getText().toString();
         String year_data=yearData.getText().toString();
-        arrival_formattedate=date_data+"/"+month_data+"/"+year_data;
+        arrival_formattedate=month_data+"/"+date_data+"/"+year_data;
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_date", arrival_formattedate).commit();
 
         String departure_date_data=DepartureDateData.getText().toString();
         String departure_month_data=DepartureMonthData.getText().toString();
         String departure_year_data=DepartureYearData.getText().toString();
-        departure_formattedate=departure_date_data+"/"+departure_month_data+"/"+departure_year_data;
+        departure_formattedate=departure_month_data+"/"+departure_date_data+"/"+departure_year_data;
 
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.departure_trip_date", departure_formattedate).commit();
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_drug",mDrugPicked).commit();
