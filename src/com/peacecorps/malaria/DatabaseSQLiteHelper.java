@@ -721,6 +721,36 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     }
 
 
+    /**Finding the Last Date the Drug was taken**/
+    public String getLastTaken()
+    {
+        SQLiteDatabase sqDB = getWritableDatabase();
+        String []column={"Status","Timestamp","Date","Month","Year","Choice"};
+        Cursor cursor= sqDB.query(userMedicationChoiceTable,column,null,null,null,null,"Timestamp ASC");
+        String lastDate="";
+        if(cursor!=null)
+        {
+            while (cursor.moveToNext())
+            {
+                try {
+                    if (cursor.getString(0).equalsIgnoreCase("yes") == true) {
+                        lastDate=cursor.getString(1);
+                    }
+                }
+                catch(NullPointerException npe)
+                {
+                    return "";
+
+                }
+            }
+        }
+        sqDB.close();
+        return lastDate;
+
+
+
+    }
+
     /**Finding the No. of Drugs**/
     public int getCountTaken()
     {
