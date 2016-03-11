@@ -185,15 +185,10 @@ public class FirstAnalyticFragment extends Fragment {
        /* if (checkMediLastTakenTime != null) {
             checkMediLastTakenTime.setText(mSharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.checkMediLastTakenTime", "").toString());
         }*/
-        //Log.d("LastTaken-------------------------: ",lastTaken);
-        if(checkMediLastTakenTime!=null)
-        {
-            DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
-            String  lastTaken= sqLite.getLastTaken();
-            checkMediLastTakenTime.setText(lastTaken);
-            Log.d("LastTaken-------------------------: ",lastTaken);
-        }
-
+        DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
+        String  lastTaken= sqLite.getLastTaken();
+      checkMediLastTakenTime.setText(lastTaken);
+        Log.d("LastTaken-------------------------: ",lastTaken);
 
     }
 
