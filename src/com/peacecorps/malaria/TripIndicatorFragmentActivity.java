@@ -100,12 +100,18 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         btnGenerate=(Button)findViewById(R.id.generateButton);
         btnGear=(Button)findViewById(R.id.trip_settings_button);
         packingSelect=(TextView)findViewById(R.id.tripSelectBox);
+        ((TextView)findViewById(R.id.tripSelectBox)).requestFocus();
         loc_history=(ImageView)findViewById(R.id.locationHistory);
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
         tripTime = (TextView)findViewById(R.id.trip_time);
+        ((TextView)findViewById(R.id.trip_time)).requestFocus();
+
+
         pmtLabel = (TextView)findViewById(R.id.pmt);
         departureMonth=(TextView)findViewById(R.id.trip_month_departure);
+        ((TextView)findViewById(R.id.trip_month_departure)).requestFocus();
         arrivalMonth=(TextView)findViewById(R.id.trip_month);
+        ((TextView)findViewById(R.id.trip_month)).requestFocus();
 
         //setting fonts
         Typeface cf = Typeface.createFromAsset(getAssets(),"fonts/garreg.ttf");
@@ -214,6 +220,10 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
                 /*Bundle b = getIntent().getExtras();
                 String[] resultArr = b.getStringArray("selectedItems");*/
+                departureMonth.setError(null);
+                arrivalMonth.setError(null);
+                packingSelect.setError(null);
+                tripTime.setError(null);
 
                if(locationSpinner.getText().toString().equals(""))
                {
@@ -235,6 +245,15 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                {
                    Toast.makeText(getApplicationContext()," Arrival Date Missing ",Toast.LENGTH_SHORT).show();
                }
+                else if(packingSelect.getText().toString().equals(""))
+               {
+                   packingSelect.setError("Field cannot be left blank.");
+               }
+               else if(tripTime.getText().toString().equals(""))
+               {
+                   tripTime.setError("Field cannot be left blank.");
+               }
+
                 else
                {
                    String chklist="",item="";
@@ -489,13 +508,13 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         String date_data=dateData.getText().toString();
         String month_data=monthData.getText().toString();
         String year_data=yearData.getText().toString();
-        arrival_formattedate=month_data+"/"+date_data+"/"+year_data;
+        arrival_formattedate=date_data+"/"+month_data+"/"+year_data;
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_date", arrival_formattedate).commit();
 
         String departure_date_data=DepartureDateData.getText().toString();
         String departure_month_data=DepartureMonthData.getText().toString();
         String departure_year_data=DepartureYearData.getText().toString();
-        departure_formattedate=departure_month_data+"/"+departure_date_data+"/"+departure_year_data;
+        departure_formattedate=departure_date_data+"/"+departure_month_data+"/"+departure_year_data;
 
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.departure_trip_date", departure_formattedate).commit();
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_drug",mDrugPicked).commit();
