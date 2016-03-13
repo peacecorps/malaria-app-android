@@ -125,6 +125,7 @@ public class VolunteerAdherenceFragmentActivity extends FragmentActivity {
                     StringBuffer buffer = new StringBuffer();
                     while ((line = input.readLine()) != null) {
                         buffer.append(line);
+			buffer.append("\n");
                     }
                     mVolunteerAdherenceLabel.setText(buffer.toString());
                     Log.d(TAGVA, buffer.toString());
