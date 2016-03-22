@@ -4,30 +4,34 @@ package com.peacecorps.malaria;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.jjoe64.graphview.CustomLabelFormatter;
 import com.jjoe64.graphview.GraphView;
-
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.GraphViewStyle;
 import com.jjoe64.graphview.LineGraphView;
 
 import java.util.Calendar;
-import java.util.Locale;
-/**Second Analytic Fragment
+
+/**
+ * Second Analytic Fragment
  * It shows the Progress Bars and Graph
- * **/
+ **/
 public class SecondAnalyticFragment extends Fragment {
 
     private TextView firstMonthProgressLabel, secondMonthProgressLabel, thirdMonthProgressLabel, fourthMonthProgressLabel;
@@ -51,7 +55,6 @@ public class SecondAnalyticFragment extends Fragment {
     private int date;
     private String choice;
     private Dialog dialog = null;
-
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -123,6 +126,7 @@ public class SecondAnalyticFragment extends Fragment {
         mdate = date;
         return month[date];
     }
+
     /*Opening Dialog on Clicking Gear Icon*/
     public void addButtonListeners() {
         mSettingsButton.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +186,7 @@ public class SecondAnalyticFragment extends Fragment {
             }
         });
     }
+
     /*Fetching the Details and Settings from Shared Preferences*/
     public void getSharedPreferences() {
 
@@ -203,7 +208,7 @@ public class SecondAnalyticFragment extends Fragment {
     * */
     public void updateProgressBar(String choice, int date) {
         DatabaseSQLiteHelper sqLH = new DatabaseSQLiteHelper(getActivity());
-        Typeface cf = Typeface.createFromAsset(getActivity().getAssets(),"fonts/garreg.ttf");
+        Typeface cf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/garreg.ttf");
         firstMonthProgressLabel.setText(getMonth(date - 3));
         firstMonthProgressLabel.setTypeface(cf);
         int progress = sqLH.getData(mdate, myear, choice);
@@ -213,8 +218,7 @@ public class SecondAnalyticFragment extends Fragment {
         else
             progressp = progress * 25;
 
-        if(progressp>=50)
-        {
+        if (progressp >= 50) {
             firstMonthProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.saf_progress_bar_green));
             firstMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
 
@@ -231,8 +235,7 @@ public class SecondAnalyticFragment extends Fragment {
         else
             progressp = progress * 25;
 
-        if(progressp>=50)
-        {
+        if (progressp >= 50) {
             secondMonthProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.saf_progress_bar_green));
             secondMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
 
@@ -249,12 +252,12 @@ public class SecondAnalyticFragment extends Fragment {
         else
             progressp = progress * 25;
 
-        if(progressp>=50) {
+        if (progressp >= 50) {
             thirdMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
             thirdMonthProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.saf_progress_bar_green));
         }
-            thirdMonthProgressBar.setProgress((int) progressp);
-            thirdMonthProgressPercent.setText("" + (int) progressp + "%");
+        thirdMonthProgressBar.setProgress((int) progressp);
+        thirdMonthProgressPercent.setText("" + (int) progressp + "%");
         thirdMonthProgressPercent.setTypeface(cf);
 
         fourthMonthProgressLabel.setText(getMonth(date));
@@ -269,7 +272,7 @@ public class SecondAnalyticFragment extends Fragment {
         Log.d(TAGSAF, "" + progress);
         Log.d(TAGSAF, "" + progressp);
 
-        if(progressp>=50) {
+        if (progressp >= 50) {
             fourthMonthProgressBar.setBackground(getResources().getDrawable(R.drawable.progress_bg_green));
             fourthMonthProgressBar.setProgressDrawable(getResources().getDrawable(R.drawable.saf_progress_bar_green));
         }
@@ -278,25 +281,29 @@ public class SecondAnalyticFragment extends Fragment {
         fourthMonthProgressPercent.setTypeface(cf);
     }
 
-    /**Update UI is called on resume to Update the Graph and Progress Bars**/
+    /**
+     * Update UI is called on resume to Update the Graph and Progress Bars
+     **/
     public void updateUI(String choice, int date) {
 
         updateProgressBar(choice, date);
         DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
-        if (sqLite.getDosesInaRowDaily()!=0)
-        {
+        if (sqLite.getDosesInaRowDaily() != 0) {
             SetupAndShowGraph();
         }
         getSharedPreferences();
         addButtonListeners();
 
     }
-    /**Setting Up Graph**/
+
+    /**
+     * Setting Up Graph
+     **/
     public void SetupAndShowGraph() {
 
 
         GraphViewData graphViewData[] = new GraphViewData[DatabaseSQLiteHelper.date.size()];
-        String verLabels[]={"100%","50%","25%","0%"};
+        String verLabels[] = {"100%", "50%", "25%", "0%"};
         //adding data
         for (int index = 0; index < DatabaseSQLiteHelper.percentage.size(); index++) {
 
@@ -305,7 +312,7 @@ public class SecondAnalyticFragment extends Fragment {
         drugGraphSeries = new GraphViewSeries(graphViewData);
 
         GraphView lineGraphView = new LineGraphView(getActivity(), "");
-         //styling graph
+        //styling graph
         lineGraphView.getGraphViewStyle().setGridColor(getResources().getColor(R.color.lightest_brown));
         lineGraphView.getGraphViewStyle().setGridStyle(GraphViewStyle.GridStyle.BOTH);
         lineGraphView.getGraphViewStyle().setHorizontalLabelsColor(getResources().getColor(R.color.golden_brown));
@@ -332,8 +339,8 @@ public class SecondAnalyticFragment extends Fragment {
         ((LineGraphView) lineGraphView).setDrawBackground(true);
         ((LineGraphView) lineGraphView).setDrawDataPoints(true);
         ((LineGraphView) lineGraphView).setBackgroundColor(getResources().getColor(R.color.light_blue));
-         float r=(float)0.20;
-         ((LineGraphView) lineGraphView).setDataPointsRadius(r);
+        float r = (float) 0.20;
+        ((LineGraphView) lineGraphView).setDataPointsRadius(r);
         //plotting data
         lineGraphView.addSeries(drugGraphSeries);
 
@@ -343,10 +350,12 @@ public class SecondAnalyticFragment extends Fragment {
 
 
     }
-    /**Reset Dailog**/
-    public void addDialog()
-    {    //opening the reset Dialog
-        dialog = new Dialog(this.getActivity(),android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+
+    /**
+     * Reset Dailog
+     **/
+    public void addDialog() {    //opening the reset Dialog
+        dialog = new Dialog(this.getActivity(), android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
         dialog.setContentView(R.layout.resetdata_dialog);
         dialog.setTitle("Reset Data");
 

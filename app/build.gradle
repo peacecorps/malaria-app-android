@@ -20,7 +20,6 @@ android {
 
 dependencies {
     compile files('libs/GraphView-3.1.2.jar')
-    compile files('libs/GraphView-4.0.1.jar')
     compile files('libs/volleylib.jar')
     compile project(':viewPagerIndicator')
 }
