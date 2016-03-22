@@ -52,16 +52,13 @@ public class SecondAnalyticFragment extends Fragment {
 
     GraphViewSeries drugGraphSeries;
     private GraphViewData[] graphViewData;
-    private int date;
+    private int currentMonth;
     private String choice;
     private Dialog dialog = null;
 
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        //Declaring the Views
-        rootView = inflater.inflate(R.layout.fragment_second_analytic_screen,
-                null);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.fragment_second_analytic_screen, null);
 
         mSettingsButton = (Button) rootView.findViewById(R.id.fragment_second_screen_settings_button);
 
@@ -80,11 +77,9 @@ public class SecondAnalyticFragment extends Fragment {
         thirdMonthProgressBar = (ProgressBar) rootView.findViewById(R.id.thirdMonthProgressBar);
         fourthMonthProgressBar = (ProgressBar) rootView.findViewById(R.id.fourthMonthProgressBar);
 
+        currentMonth = Calendar.getInstance().get(Calendar.MONTH);
 
-        Calendar cal = Calendar.getInstance();
-
-        date = Calendar.getInstance().get(Calendar.MONTH);
-        //checking choic of pill whether weekly or daily
+        //checking choice of pill whether weekly or daily
         if (mSharedPreferenceStore.mPrefsStore.getBoolean(
                 "com.peacecorps.malaria.isWeekly", false)) {
             choice = "weekly";
@@ -92,8 +87,7 @@ public class SecondAnalyticFragment extends Fragment {
             choice = "daily";
         }
 
-        updateUI(choice, date);
-
+        updateUI();
 
         return rootView;
     }
@@ -102,29 +96,30 @@ public class SecondAnalyticFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        updateUI(choice, date);
+        updateUI();
 
     }
 
-    int mdate;
+    int mMonth;
     int myear;
 
     //finding month from its integer
-    public String getMonth(int date) {
-        String month[] = getResources().getStringArray(R.array.month);
-        if (date == 0) {
-            date = 12;
+    public String getMonth(int month) {
+        String months[] = getResources().getStringArray(R.array.month);
+        if (month == 0) {
+            mMonth = 0;
+            myear = Calendar.getInstance().get(Calendar.YEAR);
+        } else if (month == -1) {
+            mMonth = 11;
             myear = Calendar.getInstance().get(Calendar.YEAR) - 1;
-        } else if (date == -1) {
-            date = 11;
+        } else if (month == -2) {
+            mMonth = 10;
             myear = Calendar.getInstance().get(Calendar.YEAR) - 1;
-        } else if (date == -2) {
-            date = 10;
-            myear = Calendar.getInstance().get(Calendar.YEAR) - 1;
+        } else {
+            mMonth = month;
+            myear = Calendar.getInstance().get(Calendar.YEAR);
         }
-        myear = Calendar.getInstance().get(Calendar.YEAR);
-        mdate = date;
-        return month[date];
+        return months[mMonth];
     }
 
     /*Opening Dialog on Clicking Gear Icon*/
@@ -206,15 +201,15 @@ public class SecondAnalyticFragment extends Fragment {
     * On the basis of drugs taken or not
     * Also on the basis of status of each day modified later in the calendar
     * */
-    public void updateProgressBar(String choice, int date) {
+    public void updateProgressBars() {
         DatabaseSQLiteHelper sqLH = new DatabaseSQLiteHelper(getActivity());
         Typeface cf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/garreg.ttf");
-        firstMonthProgressLabel.setText(getMonth(date - 3));
+        firstMonthProgressLabel.setText(getMonth(currentMonth - 3));
         firstMonthProgressLabel.setTypeface(cf);
-        int progress = sqLH.getData(mdate, myear, choice);
+        int progress = sqLH.getData(mMonth, myear, choice);
         float progressp = 0;
         if (choice.equalsIgnoreCase("daily"))
-            progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
+            progressp = (float) progress / getNumberOfDaysInMonth(mMonth) * 100;
         else
             progressp = progress * 25;
 
@@ -227,11 +222,11 @@ public class SecondAnalyticFragment extends Fragment {
         firstMonthProgressPercent.setText("" + (int) progressp + "%");
         firstMonthProgressPercent.setTypeface(cf);
 
-        secondMonthProgressLabel.setText(getMonth(date - 2));
+        secondMonthProgressLabel.setText(getMonth(currentMonth - 2));
         secondMonthProgressLabel.setTypeface(cf);
-        progress = sqLH.getData(mdate, myear, choice);
+        progress = sqLH.getData(mMonth, myear, choice);
         if (choice.equalsIgnoreCase("daily"))
-            progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
+            progressp = (float) progress / getNumberOfDaysInMonth(mMonth) * 100;
         else
             progressp = progress * 25;
 
@@ -244,11 +239,11 @@ public class SecondAnalyticFragment extends Fragment {
         secondMonthProgressPercent.setText("" + (int) progressp + "%");
         secondMonthProgressPercent.setTypeface(cf);
 
-        thirdMonthProgressLabel.setText(getMonth(date - 1));
+        thirdMonthProgressLabel.setText(getMonth(currentMonth - 1));
         thirdMonthProgressLabel.setTypeface(cf);
-        progress = sqLH.getData(mdate, myear, choice);
+        progress = sqLH.getData(mMonth, myear, choice);
         if (choice.equalsIgnoreCase("daily"))
-            progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
+            progressp = (float) progress / getNumberOfDaysInMonth(mMonth) * 100;
         else
             progressp = progress * 25;
 
@@ -260,15 +255,15 @@ public class SecondAnalyticFragment extends Fragment {
         thirdMonthProgressPercent.setText("" + (int) progressp + "%");
         thirdMonthProgressPercent.setTypeface(cf);
 
-        fourthMonthProgressLabel.setText(getMonth(date));
+        fourthMonthProgressLabel.setText(getMonth(currentMonth));
         fourthMonthProgressLabel.setTypeface(cf);
-        progress = sqLH.getData(mdate, myear, choice);
+        progress = sqLH.getData(mMonth, myear, choice);
         Log.d(TAGSAF, "Query Return: " + progress);
         if (choice.equalsIgnoreCase("daily"))
-            progressp = (float) progress / getNumberOfDaysInMonth(mdate) * 100;
+            progressp = (float) progress / getNumberOfDaysInMonth(mMonth) * 100;
         else
             progressp = progress * 25;
-        Log.d(TAGSAF, "" + getNumberOfDaysInMonth(mdate));
+        Log.d(TAGSAF, "" + getNumberOfDaysInMonth(mMonth));
         Log.d(TAGSAF, "" + progress);
         Log.d(TAGSAF, "" + progressp);
 
@@ -284,24 +279,20 @@ public class SecondAnalyticFragment extends Fragment {
     /**
      * Update UI is called on resume to Update the Graph and Progress Bars
      **/
-    public void updateUI(String choice, int date) {
-
-        updateProgressBar(choice, date);
+    public void updateUI() {
+        updateProgressBars();
         DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
         if (sqLite.getDosesInaRowDaily() != 0) {
             SetupAndShowGraph();
         }
         getSharedPreferences();
         addButtonListeners();
-
     }
 
     /**
      * Setting Up Graph
      **/
     public void SetupAndShowGraph() {
-
-
         GraphViewData graphViewData[] = new GraphViewData[DatabaseSQLiteHelper.date.size()];
         String verLabels[] = {"100%", "50%", "25%", "0%"};
         //adding data
