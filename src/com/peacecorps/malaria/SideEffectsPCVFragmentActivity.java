@@ -125,6 +125,7 @@ public class SideEffectsPCVFragmentActivity extends FragmentActivity {
                     StringBuffer buffer = new StringBuffer();
                     while ((line = input.readLine()) != null) {
                         buffer.append(line);
+			buffer.append("\n");
                     }
                     mSideEffectsPCVLabel.setText(buffer.toString());
                     Log.d(TAGSEP, buffer.toString());
