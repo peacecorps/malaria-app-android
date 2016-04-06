@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -35,10 +36,19 @@ public class TripAlarmReceiver extends WakefulBroadcastReceiver {
         //this will sound the alarm tone
         //this will sound the alarm once, if you wish to
         //raise alarm in loop continuously then use MediaPlayer and setLooping(true)
+        SharedPreferences prefs = context.getSharedPreferences("ringtone", 0);
+        String restoredText = prefs.getString("toneUri", null);
+
         Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         if (alarmUri == null) {
             alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         }
+        // if shared preference is not empty then the user selected tone will be played
+        if(restoredText!=null)
+        {
+            alarmUri= Uri.parse(restoredText);
+        }
+
         Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
         ringtone.play();
 

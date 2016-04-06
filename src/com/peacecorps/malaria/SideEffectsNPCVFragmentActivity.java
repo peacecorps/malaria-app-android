@@ -124,6 +124,7 @@ public class SideEffectsNPCVFragmentActivity extends FragmentActivity {
                     StringBuffer buffer = new StringBuffer();
                     while ((line = input.readLine()) != null) {
                         buffer.append(line);
+			buffer.append("\n");
                     }
                     mSideEffectsNPCVLabel.setText(buffer.toString());
                     Log.d(TAGSEN, buffer.toString());

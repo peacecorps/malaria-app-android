@@ -126,6 +126,7 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
                     StringBuffer buffer = new StringBuffer();
                     while ((line = input.readLine()) != null) {
                         buffer.append(line);
+			buffer.append("\n");
                     }
                     mPercentSideEffectsLabel.setText(buffer.toString());
                     Log.d(TAGPSE, buffer.toString());

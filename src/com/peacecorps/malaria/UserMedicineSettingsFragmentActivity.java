@@ -212,6 +212,8 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
 
             int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
             int minute = mCalendar.get(Calendar.MINUTE);
+            int month= mCalendar.get(Calendar.MONTH);
+            Log.d("Month",Integer.toString(month));
 
             TimePickerDialog view = new TimePickerDialog(getActivity(), R.style.MyTimePicker ,this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
@@ -264,11 +266,16 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
     public static void saveUserTimeAndMedicationPrefs() {
 
         int checkDay = mCalendar.get(Calendar.DAY_OF_WEEK);
-
+        int month= mCalendar.get(Calendar.MONTH);
+        int year = mCalendar.get(Calendar.YEAR);
 
         mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.AlarmHour", mHour)
                 .commit();
         mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.AlarmMinute", mMinute)
+                .commit();
+        mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.SetupMonth", month)
+                .commit();
+        mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.SetupYear", year)
                 .commit();
         mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dayTakingDrug", checkDay);
 
@@ -279,6 +286,10 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         mSharedPreferenceStore.mEditor.commit();
         mFragmentContext.startService(new Intent(mFragmentContext,
                 AlarmService.class));
+
+        int check=mSharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.SetupYear",-1);
+        //int ah=mSharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.AlarmHour",-1);
+        Log.d("check year",Integer.toString(check));
 
     }
 

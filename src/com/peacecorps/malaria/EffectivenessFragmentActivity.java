@@ -121,6 +121,7 @@ public class EffectivenessFragmentActivity extends FragmentActivity{
                     StringBuffer buffer = new StringBuffer();
                     while ((line = input.readLine()) != null) {
                         buffer.append(line);
+                        buffer.append("\n");
                     }
                     mEffectivenessLabel.setText(buffer.toString());
                     Log.d(TAGE, buffer.toString());
