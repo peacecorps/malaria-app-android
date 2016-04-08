@@ -4,27 +4,29 @@ package com.peacecorps.malaria;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.jjoe64.graphview.CustomLabelFormatter;
 import com.jjoe64.graphview.GraphView;
-
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.GraphViewStyle;
 import com.jjoe64.graphview.LineGraphView;
 
 import java.util.Calendar;
-import java.util.Locale;
 /**Second Analytic Fragment
  * It shows the Progress Bars and Graph
  * **/
@@ -109,16 +111,19 @@ public class SecondAnalyticFragment extends Fragment {
     //finding month from its integer
     public String getMonth(int date) {
         String month[] = getResources().getStringArray(R.array.month);
-        if (date == 0) {
-            date = 12;
-            myear = Calendar.getInstance().get(Calendar.YEAR) - 1;
-        } else if (date == -1) {
+       if (date == -1) {
             date = 11;
             myear = Calendar.getInstance().get(Calendar.YEAR) - 1;
         } else if (date == -2) {
             date = 10;
             myear = Calendar.getInstance().get(Calendar.YEAR) - 1;
-        }
+        } else if (date == -3) {
+                       date = 9;
+                     myear = Calendar.getInstance().get(Calendar.YEAR) - 1;
+       } else {
+           myear = Calendar.getInstance().get(Calendar.YEAR);
+           mdate = date;
+       }
         myear = Calendar.getInstance().get(Calendar.YEAR);
         mdate = date;
         return month[date];

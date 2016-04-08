@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -53,9 +55,9 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     public boolean sent;
     private Button btnInfoHub, btnHome,btnGenerate,btnGear;
     private String mDrugPicked,mLocationPicked;
-    public static String mItemPicked;
+    public static String mDatesPicked;
     private TextView dateData,monthData,yearData,DepartureDateData,DepartureMonthData,DepartureYearData;
-    public static TextView locationSpinner;
+    public static AutoCompleteTextView locationSpinner;
     public static boolean[] checkSelected;
     private ArrayList<String> items;
     public boolean arriv,depar;
@@ -73,7 +75,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     private static TripIndicatorFragmentActivity inst;
     private int ALARM_HOUR=22, ALARM_MINUTE=0, ALARM_SECONDS=0;
     private TextView tripTime;
-    private DatabaseSQLiteHelper sqLite;
+    private DatabaseSQLiteHelper sqLite, location_sqLite;
     private String loc="";
     private TimePicker tp;
     private View v;
@@ -96,7 +98,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         setContentView(R.layout.tripindicator_layout);
         btnInfoHub=(Button)findViewById(R.id.infoButton);
         btnHome=(Button)findViewById(R.id.homeButton);
-        locationSpinner=(EditText)findViewById(R.id.trip_location_select_editText);
+        locationSpinner=(AutoCompleteTextView)findViewById(R.id.trip_location_select_editText);
         btnGenerate=(Button)findViewById(R.id.generateButton);
         btnGear=(Button)findViewById(R.id.trip_settings_button);
         packingSelect=(TextView)findViewById(R.id.tripSelectBox);
@@ -230,7 +232,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
                 }
                 mLocationPicked=locationSpinner.getText().toString();
-                mItemPicked = "Trip to " + mLocationPicked + " is scheduled on " + departure_formattedate + " till " + arrival_formattedate + ". Please bring following items:- " + chklist  +"\n";
+                mDatesPicked = "Trip to " + mLocationPicked + " is scheduled for " + departure_formattedate + ".\n" +"Stay safe, don't forget to take your pills.";
 
                 Calendar calendar = Calendar.getInstance();
                 Log.d(TAGTIFA, "Date:" + dep_year + " " + dep_month + " " + dep_day);
@@ -313,7 +315,6 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getApplicationContext());
 
 
-
                 startActivity(intent);
 
                 //TripIndicatorFragmentActivity.this.finish();
@@ -353,6 +354,29 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
         drugAdapter.setDropDownViewResource(R.layout.trip_spinner_popup_item);
 
+        //Creating the autocomplete location spinner
+        location_sqLite = new DatabaseSQLiteHelper(this);
+
+        //Store all previously visited locations in a String array
+        Cursor cursor = location_sqLite.getLocation();
+
+        String[] location_names = new String[cursor.getCount()];
+
+        int current_index = 0;
+
+        while (cursor.moveToNext())
+        {
+            String location = cursor.getString(cursor.getColumnIndex("Location"));
+            location_names[current_index] = location;
+            current_index++;
+        }
+
+        ArrayAdapter<String> locationAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                location_names);
+
+        locationSpinner.setAdapter(locationAdapter);
 
     }
      //opening the reset dialog

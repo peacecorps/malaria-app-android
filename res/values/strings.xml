@@ -2,6 +2,9 @@
 <resources>
 
     <string name="app_name">Malaria Prevention</string>
+    <string name="mal">"Malarone"</string>
+    <string name="doxy">"Doxycycline"</string>
+    <string name="mef">"Mefloquine"</string>
     <string name="app_homescreen_name">PC Malaria Home</string>
     <string name="user_medicine_settings_activity_pc_logo">Peace Corps Logo</string>
     <string name="user_medicine_settings_activity_setup_label">Set Up</string>
@@ -67,6 +70,9 @@
         -Some side effects of drug: stomach pain, headache, muscle ache, tiredness, vomiting\n
         -Visit http://www.drugs.com/cdi/mefloquine.html for more information\n
     </string>
+    <string name="linkmal">"http://www.drugs.com/malarone.html"</string>
+    <string name="linkdoxy">"http://www.drugs.com/doxycycline.html"</string>
+    <string name="linkmef">"http://www.drugs.com/cdi/mefloquine.html"</string>
 
     <string-array name="user_medicine_settings_activity_drug_array">
         <item>Malarone (Daily)</item>
