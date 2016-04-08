@@ -8,10 +8,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -67,96 +63,13 @@ public class DrugArrayAdapter extends ArrayAdapter<String>{
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int[] layoutid={R.layout.malarone,R.layout.doxycycline,R.layout.mefloquine};
-                int[] textViewid={R.id.textViewmal,R.id.textViewdoxy,R.id.textViewmef};
-                String[] linkadd={"http://www.drugs.com/malarone.html","http://www.drugs.com/doxycycline.html","http://www.drugs.com/cdi/mefloquine.html"};
-                AlertDialog.Builder builder  = new AlertDialog.Builder(context);
-
-
-
-
-
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-                View layout = inflater.inflate(layoutid[position], null);
-
-                TextView textView = (TextView) layout.findViewById(textViewid[position]);
-                String text=textView.getText().toString();
-                String add=linkadd[position];
-                int start = text.indexOf(linkadd[position]);
-                int end = start + add.length();
-
-                SpannableString spannableString = new SpannableString(text);
-
-                if(position==0)
-                {
-                    spannableString.setSpan(new GoToMal(), start, end, 0);
-                }
-                else
-                if(position==1)
-                {
-                    spannableString.setSpan(new GoToDoxy(), start, end, 0);
-                }
-                else
-                {
-                    spannableString.setSpan(new GoToMef(), start, end, 0);
-                }
-                textView.setText(spannableString);
-
-                textView.setMovementMethod(new LinkMovementMethod());
-
-
-                builder.setView(layout);
-                builder.setCancelable(true);
-
-
-
-                builder.create().show();
+                AlertDialog.Builder dialogAlert  = new AlertDialog.Builder(context);
+                dialogAlert.setMessage(drugDescriptions[position]);
+                dialogAlert.setTitle(dname[position]);
+                dialogAlert.setPositiveButton("OK", null);
+                dialogAlert.setCancelable(true);
+                dialogAlert.create().show();
             }
         });
     }
-    private static class GoToMal extends ClickableSpan {
-        @Override
-        public void onClick(View view) {
-
-
-
-            String url = "http://www.drugs.com/malarone.html";
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-
-            view.getContext().startActivity(i);
-        }
-    }
-
-    private static class GoToDoxy extends ClickableSpan {
-        @Override
-        public void onClick(View view) {
-
-
-
-            String url = "http://www.drugs.com/doxycycline.html";
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-
-            view.getContext().startActivity(i);
-        }
-    }
-
-
-    private static class GoToMef extends ClickableSpan {
-        @Override
-        public void onClick(View view) {
-
-
-
-            String url = "http://www.drugs.com/cdi/mefloquine.html";
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-
-            view.getContext().startActivity(i);
-        }
-    }
-
 }
-
-
