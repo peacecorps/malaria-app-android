@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -78,6 +79,8 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     private TimePicker tp;
     private View v;
     private TextView pmtLabel;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     public static TripIndicatorFragmentActivity instance(){
         return inst;
@@ -121,6 +124,10 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
         mSharedPreferenceStore = new SharedPreferenceStore();
         mSharedPreferenceStore.getSharedPreferences(this);
+
+        //shared preference for viewing upcoming reminders
+        preferences = getSharedPreferences("WidgetReminder", Context.MODE_PRIVATE);
+        editor = preferences.edit();
 
         addListeners();
         createSelectionSpinners();
@@ -274,6 +281,10 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                    }
                    mLocationPicked=locationSpinner.getText().toString();
                    mItemPicked = "Trip to " + mLocationPicked + " is scheduled on " + departure_formattedate + " till " + arrival_formattedate + ". Please bring following items:- " + chklist  +"\n";
+
+                   //save mItemPicked to view reminder
+                   editor.putString("view_upcoming_reminder",mItemPicked);
+                   editor.apply();
 
                    Calendar calendar = Calendar.getInstance();
                    Log.d(TAGTIFA, "Date:" + dep_year + " " + dep_month + " " + dep_day);

@@ -90,7 +90,13 @@
             android:enabled="true" />
         <receiver android:name="com.peacecorps.malaria.TripAlarmReceiver" />
 
-
+        <receiver android:name="TripAppWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_info" />
+        </receiver>
 
 
     </application>
