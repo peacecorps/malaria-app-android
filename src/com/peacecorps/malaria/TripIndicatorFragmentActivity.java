@@ -307,7 +307,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                        long oneDay = 24 * 60 * 60 * 1000;
                        Log.d(TAGTIFA,"Alarm Interval: "+interval);
                        if (interval >= 7) {
-                           Log.d(TAGTIFA,"Category 1 Alarm Set");
+                           Log.d(TAGTIFA, "Category 1 Alarm Set");
                            Intent myIntent1 = new Intent(TripIndicatorFragmentActivity.this, TripAlarmReceiver.class);
                            myIntent1.putExtra("AlarmID",101);
                            pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 101, myIntent1, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -323,6 +323,8 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                            pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 103, myIntent3, PendingIntent.FLAG_UPDATE_CURRENT );
                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                            Toast.makeText(getApplicationContext(), "Reminders are Set!", Toast.LENGTH_LONG).show();
+                           startActivity(new Intent(getApplication().getApplicationContext(), MainActivity.class));
+                           finish();
                        } else if (interval < 7 && interval > 1) {
 
                            Log.d(TAGTIFA,"Category 2 Alarm Set");
@@ -335,6 +337,8 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                            pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 103, myIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                            Toast.makeText(getApplicationContext(), "Reminders are Set!", Toast.LENGTH_LONG).show();
+                           startActivity(new Intent(getApplication().getApplicationContext(), MainActivity.class));
+                           finish();
 
                        } else {
                            Log.d(TAGTIFA,"Category 3 Alarm Set");
@@ -343,6 +347,8 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                            pendingIntent = PendingIntent.getBroadcast(TripIndicatorFragmentActivity.this, 103, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                            Toast.makeText(getApplicationContext(), "Reminders are Set!", Toast.LENGTH_LONG).show();
+                           startActivity(new Intent(getApplication().getApplicationContext(), MainActivity.class));
+                           finish();
                        }
                    }
                    else
