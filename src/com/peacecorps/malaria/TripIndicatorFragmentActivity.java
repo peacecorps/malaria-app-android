@@ -159,7 +159,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         if (SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.TRIP_LOCATION",mLocationPicked)
                 !=null) {
             SharedPreferenceStore.mPrefsStore.getString(
-                    "com.peacecorps.malaria.TRIP_LOCATION",mLocationPicked);
+                    "com.peacecorps.malaria.TRIP_LOCATION", mLocationPicked);
         }
 
     }
@@ -398,17 +398,20 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 }
                else
                 {
-                    Intent intent = new Intent(getApplication(), TripIndicatorPackingActivity.class);
+                    Date departure=getDateObj(departure_formattedate);
+                    Date arrival=getDateObj(arrival_formattedate);
+                    long departurel = departure.getTime();
+                    long arrivall = arrival.getTime();
 
-                    Log.d(TAGTIFA,departure_formattedate+"  "+arrival_formattedate);
-
-                    setNumDrugs(departure_formattedate, arrival_formattedate);
-
-                    intent.putExtra(DRUG_TAG, num_drugs);
-
-                    startActivity(intent);
-
-                    packingSelect.setText(TripIndicatorPackingActivity.tripDrugName);
+                    if(arrivall>=departurel) {
+                        Intent intent = new Intent(getApplication(), TripIndicatorPackingActivity.class);
+                        setNumDrugs(departure_formattedate, arrival_formattedate);
+                        intent.putExtra(DRUG_TAG, num_drugs);
+                        startActivity(intent);
+                        packingSelect.setText(TripIndicatorPackingActivity.tripDrugName);
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Arrival date cannot be before the Departure date.",Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
