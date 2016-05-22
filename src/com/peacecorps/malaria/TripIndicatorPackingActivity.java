@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -128,6 +129,9 @@ public class TripIndicatorPackingActivity extends Activity {
         /** Setting the adapter to the ListView */
         listView.setAdapter(adapter);
 
+		/** Setting the event listeners for the list view */
+        addListViewListeners();
+
         View.OnClickListener listenerDelete = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -230,6 +234,42 @@ public class TripIndicatorPackingActivity extends Activity {
 
     }
 
+    private void addListViewListeners() {
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            //Update on a scroll, as viewable children may change
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                updateChildBackgrounds();
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //Update on an item click, as colours change
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                updateChildBackgrounds();
+            }
+        });
+    }
+
+    //Updates in view checked items to green, and unchecked items to red
+    private void updateChildBackgrounds() {
+        SparseBooleanArray checkedItemPositions = listView.getCheckedItemPositions();
+        for (int i = 0 ; i < listView.getChildCount() ; i++) {
+            int actualPosition = listView.getFirstVisiblePosition() + i;
+            if (checkedItemPositions.get(actualPosition)) {
+                listView.getChildAt(i).setBackgroundResource(R.color.light_green);
+            } else {
+                listView.getChildAt(i).setBackgroundResource(R.color.light_red);
+            }
+        }
+    }
+
     private void getSharedPreferences() {
         // reading the application SharedPreferences for storing of time and
         // drug selected
@@ -249,7 +289,7 @@ public class TripIndicatorPackingActivity extends Activity {
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         dialog_listView=(ListView)dialog.findViewById(R.id.tripDrugDialogList);
-        DrugArrayAdapter adapter = new DrugArrayAdapter(this,listContent,imageId);
+        DrugArrayAdapter adapter = new DrugArrayAdapter(this,listContent,imageId,null);
         dialog_listView.setAdapter(adapter);
         dialog_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

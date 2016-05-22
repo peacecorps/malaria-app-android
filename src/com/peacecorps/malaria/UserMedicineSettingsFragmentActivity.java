@@ -172,8 +172,12 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
                 android.R.layout.simple_spinner_item);*/
         String[] listContent = {"Malarone","Doxycycline","Mefloquine"};
         Integer[] imageID = {R.drawable.mal,R.drawable.doxy,R.drawable.mef};
-
-        DrugArrayAdapter adapter = new DrugArrayAdapter(this,listContent,imageID);
+        String[] descriptions = {
+                getString(R.string.mal_description),
+                getString(R.string.doxy_description),
+                getString(R.string.mef_description),
+        };
+        DrugArrayAdapter adapter = new DrugArrayAdapter(this, listContent, imageID, descriptions);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mDrugSelectSpinner.setAdapter(adapter);

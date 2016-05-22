@@ -137,6 +137,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+		android:maxWidth="110dp"
                 android:hint="Add Items"
                 android:id="@+id/packing_et"
                 android:layout_marginLeft="15dp"
