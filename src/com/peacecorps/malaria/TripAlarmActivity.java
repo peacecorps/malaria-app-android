@@ -2,11 +2,13 @@ package com.peacecorps.malaria;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.media.Ringtone;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -36,6 +38,8 @@ public class TripAlarmActivity extends Activity {
         TextView textView = (TextView)findViewById(R.id.tripRemindingItems);
         Button btnOK = (Button)findViewById(R.id.reminderOK);
         Button btnCancel = (Button)findViewById(R.id.reminderCancel);
+        NotificationManager mgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        mgr.cancel(1);
 
         //intent to get the Alarm ID
         Intent intent=this.getIntent();
@@ -95,7 +99,7 @@ public class TripAlarmActivity extends Activity {
         final Calendar calender = Calendar.getInstance();
         Date date = new Date();
         calender.setTime(date);
-        calender.add(Calendar.MINUTE, 5);
+        calender.add(Calendar.MINUTE, 1);
 
 
         /**Ok Listener **/
@@ -123,6 +127,8 @@ public class TripAlarmActivity extends Activity {
                 if(id==103) {
                     alarmManager.set(AlarmManager.RTC_WAKEUP,
                             calender.getTimeInMillis(), pendingSnooze);
+                    Ringtone ringtone=TripAlarmReceiver.ringtone;
+                    ringtone.stop();
                     Toast.makeText(getApplicationContext(),"Alarm Snoozed",Toast.LENGTH_LONG);
 
                 }

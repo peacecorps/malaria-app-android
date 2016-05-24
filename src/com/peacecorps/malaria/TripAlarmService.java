@@ -8,6 +8,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -20,7 +21,8 @@ public class TripAlarmService extends IntentService {
 
     @Override
     public void onHandleIntent(Intent intent) {
-        sendNotification("Get Ready to Pack your Bags!" + "\n" + TripIndicatorFragmentActivity.mDatesPicked, intent);
+        SharedPreferences preferences = getSharedPreferences("WidgetReminder", Context.MODE_PRIVATE);
+        sendNotification("Get Ready to Pack your Bags!" + "\n" + preferences.getString("view_upcoming_reminder",""), intent);
 
     }
 
@@ -40,7 +42,8 @@ public class TripAlarmService extends IntentService {
                 this).setContentTitle("Upcoming Trip Reminder").setSmallIcon(R.drawable.appicon_themed)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .setContentText(msg)
-                .addAction(R.drawable.checked, "Trip Checklist", contentIntent);
+                .addAction(R.drawable.checked, "Trip Checklist", contentIntent)
+                .setOngoing(true);
 
 
         //alamNotificationBuilder.setContentIntent(contentIntent);

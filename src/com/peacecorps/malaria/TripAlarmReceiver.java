@@ -22,6 +22,7 @@ import android.util.Log;
 
 public class TripAlarmReceiver extends WakefulBroadcastReceiver {
 
+    public static Ringtone ringtone;
     @Override
     public void onReceive(final Context context, Intent intent) {
         //this will update the UI with message
@@ -41,7 +42,7 @@ public class TripAlarmReceiver extends WakefulBroadcastReceiver {
 
         Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         if (alarmUri == null) {
-            alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
         }
         // if shared preference is not empty then the user selected tone will be played
         if(restoredText!=null)
@@ -49,8 +50,9 @@ public class TripAlarmReceiver extends WakefulBroadcastReceiver {
             alarmUri= Uri.parse(restoredText);
         }
 
-        Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
+        ringtone = RingtoneManager.getRingtone(context, alarmUri);
         ringtone.play();
+
 
         //this will send a notification message
         ComponentName comp = new ComponentName(context.getPackageName(),
