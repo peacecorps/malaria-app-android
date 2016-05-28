@@ -10,6 +10,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -167,7 +168,7 @@ public class SecondAnalyticFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ThirdAnalyticFragment.class);
                 String mon = thirdMonthProgressLabel.getText().toString();
                 intent.putExtra(MONTH_REQ, mon); //transfering the month Information for displaying Calendar of Specific Month
-                startActivity(intent);
+                startActivityForResult(intent, 3);
                 Toast.makeText(getActivity(), "Third progress", Toast.LENGTH_SHORT).show();
             }
         });
@@ -178,10 +179,25 @@ public class SecondAnalyticFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ThirdAnalyticFragment.class);
                 String mon = fourthMonthProgressLabel.getText().toString();
                 intent.putExtra(MONTH_REQ, mon); //transfering the month Information for displaying Calendar of Specific Month
-                startActivity(intent);
+                startActivityForResult(intent,2);
                 Toast.makeText(getActivity(), "Fourth progress", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode==2 || requestCode==3)
+        {
+            ViewPager vp=(ViewPager)getActivity().findViewById(R.id.vPager);
+            vp.getAdapter().notifyDataSetChanged();
+        }
+
     }
     /*Fetching the Details and Settings from Shared Preferences*/
     public void getSharedPreferences() {
@@ -348,8 +364,10 @@ public class SecondAnalyticFragment extends Fragment {
         ((LineGraphView) lineGraphView).setDrawDataPoints(true);
         ((LineGraphView) lineGraphView).setBackgroundColor(getResources().getColor(R.color.light_blue));
          float r=(float)0.20;
-         ((LineGraphView) lineGraphView).setDataPointsRadius(r);
+        ((LineGraphView) lineGraphView).setDataPointsRadius(r);
         //plotting data
+        Log.d("Length"," " +graphViewData.length);
+
         lineGraphView.addSeries(drugGraphSeries);
 
         //showing graph
