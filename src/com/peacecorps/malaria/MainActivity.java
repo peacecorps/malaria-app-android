@@ -59,6 +59,15 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
+        //Temporary button, will be moved
+        Button tempButton =(Button)findViewById(R.id.tempButton);
+        tempButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),NewHomeActivity.class));
+            }
+        });
+
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
         /**Setting the Fragments**/
         mPager = (ViewPager) findViewById(R.id.vPager);

@@ -29,5 +29,6 @@
     <color name="light_green">#ff8fc24e</color>
     <color name="lightest_brown">#ffe0cf79</color>
     <color name="transparent_cream">#89fffefa</color>
+    <color name="transparent">#00FFFFFF</color>
 
 </resources>

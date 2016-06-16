@@ -91,5 +91,14 @@
             android:layout_marginLeft="15dp"
             android:scaleType="fitCenter"
             />
+        <Button
+            android:background="@drawable/cal_right_arrow_brown"
+            android:id="@+id/tempButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="15dp"
+            android:scaleType="fitCenter"
+            />
     </LinearLayout>
 </LinearLayout>

@@ -4,12 +4,14 @@ import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -140,7 +142,13 @@ public class HomeScreenFragment extends Fragment {
                     int currentDose = databaseSQLiteHelper.getDosesInaRowDaily();
                     mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", currentDose).commit();
                 }
-
+                //yatna
+                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+                int score=sharedPreferences.getInt("userScore",0);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putInt("userScore",score+1);
+                editor.commit();
+                Log.d("check","score updated");
             }
         });
 

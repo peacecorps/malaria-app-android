@@ -71,6 +71,11 @@
         <activity android:name="com.peacecorps.malaria.EffectivenessFragmentActivity"/>
         <activity android:name="com.peacecorps.malaria.ThirdAnalyticFragment"/>
         <activity android:name="com.peacecorps.malaria.DayFragmentActivity"/>
+        <activity android:name="com.peacecorps.malaria.BadgeRoom"/>
+        <activity android:name="com.peacecorps.malaria.MythFactGame"/>
+        <activity android:name="com.peacecorps.malaria.RapidFireGame"/>
+        <activity android:name="com.peacecorps.malaria.MedicineStore"/>
+        <activity android:name="com.peacecorps.malaria.NewHomeActivity"/>
         <activity android:name="com.peacecorps.malaria.TripIndicatorFragmentActivity"
                   android:launchMode="singleTask"
                   />

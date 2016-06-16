@@ -9,9 +9,11 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.DatabaseErrorHandler;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateFormat;
@@ -75,6 +77,7 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         mTimePickLabel = (TextView) findViewById(R.id.user_medicine_settings_activity_time_pick_label);
         mIfForgetLabel = (TextView) findViewById(R.id.user_medicine_settings_activity_if_forget_label);
         mDrugSelectSpinner = (Spinner) findViewById(R.id.user_medicine_settings_activity_drug_select_spinner);
+
 
         mSharedPreferenceStore.getSharedPreferences(this);
 
@@ -333,6 +336,8 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         public void onClick(View view) {
 
             saveUserTimeAndMedicationPrefs();
+            //yatna
+            createUserScoreVariable();
 
             startActivity(new Intent(UserMedicineSettingsFragmentActivity.this,
                     MainActivity.class));
@@ -373,7 +378,14 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         mSharedPreferenceStore.mEditor.putBoolean("com.peacecorps.malaria.isFirstRun", false);
 
     }
-
+    //
+    public void createUserScoreVariable(){
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(UserMedicineSettingsFragmentActivity.this);
+        SharedPreferences.Editor editor =sharedPreferences.edit();
+        editor.putInt("userScore",0);
+        editor.commit();
+        Log.d("check","user score initialized");
+    }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }

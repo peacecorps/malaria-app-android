@@ -3,9 +3,11 @@ package com.peacecorps.malaria;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +49,9 @@ public class DayFragmentActivity extends FragmentActivity {
     private int flag=0;
     private long curr_time=0;
     private static DatabaseSQLiteHelper sqLite;
+    //yatna
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -171,9 +176,21 @@ public class DayFragmentActivity extends FragmentActivity {
                                 } else {
                                     dosesInaRow = sqLite.getDosesInaRowDaily();
                                 }
-                                Log.d(TAGD,"Doses in a Row:"+dosesInaRow);
+                                Log.d(TAGD, "Doses in a Row:" + dosesInaRow);
                                 SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", dosesInaRow).apply();
                                 indicator.setBackgroundResource(R.drawable.accept_medi_checked_);
+
+                                //yatna
+                                sharedPreferences= PreferenceManager.getDefaultSharedPreferences(con);
+                                editor=sharedPreferences.edit();
+                                int score=sharedPreferences.getInt("userScore",0);
+                                if(data.compareTo("yes")==0){;
+                                    //do nothing as medicine has already been taken
+                                }else{
+                                    score=score+1;
+                                    editor.putInt("userScore",score);
+                                    editor.commit();
+                                }
 
                             } else if (ch.equalsIgnoreCase("no")) {
                                 Toast.makeText(con,
@@ -201,6 +218,17 @@ public class DayFragmentActivity extends FragmentActivity {
                                 Log.d(TAGD, "Doses in a Row:" + dosesInaRow);
                                 SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", dosesInaRow).apply();
                                 indicator.setBackgroundResource(R.drawable.reject_medi_checked);
+                                //yatna
+                                sharedPreferences= PreferenceManager.getDefaultSharedPreferences(con);
+                                editor=sharedPreferences.edit();
+                                int score=sharedPreferences.getInt("userScore",0);
+                                if(data.compareTo("no")==0){;
+                                    //do nothing as medicine has already been taken
+                                }else{
+                                    score=score-1;
+                                    editor.putInt("userScore",score);
+                                    editor.commit();
+                                }
                             } else
                                 dialog.dismiss();
                         } else {

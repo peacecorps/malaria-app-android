@@ -3,7 +3,7 @@
     android:minWidth="50dp"
     android:minHeight="50dp"
     android:updatePeriodMillis="1000"
-    android:previewImage="@drawable/doxy"
+    android:previewImage="@drawable/drug_normal"
     android:initialLayout="@layout/statusappwidget"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen">
