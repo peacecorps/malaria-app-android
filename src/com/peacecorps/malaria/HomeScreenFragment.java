@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class HomeScreenFragment extends Fragment {
     private Button mRemainderToneButton;
     private TextView mCurrentDateLabel;
     private TextView mCurrentDayOfweekLabel;
+    private LinearLayout warningView;
     private static CharSequence mGetCurrentDate;
     private static int mDrugAcceptedCount;
     private static int drugRejectedCount;
@@ -47,7 +49,7 @@ public class HomeScreenFragment extends Fragment {
             "Wednesday", "Thursday", "Friday", "Saturday"};
     private static View rootView;
     private static String TAGHSF = "HomeScreenFragment";
-    //public static TextView checkMediLastTakenTime = null;
+    private SharedPreferences sharedPreferences;
 
     int checkDay = -1;
 
@@ -75,7 +77,6 @@ public class HomeScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home_screen, null);
-        //checkMediLastTakenTime = (TextView) rootView.findViewById(R.id.checkMediLastTakenTime);
 
         updateUI();
         return rootView;
@@ -143,10 +144,11 @@ public class HomeScreenFragment extends Fragment {
                     mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", currentDose).commit();
                 }
                 //yatna
-                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-                int score=sharedPreferences.getInt("userScore",0);
+                int score=sharedPreferences.getInt("userScore", 0);
+                int medicineStore=sharedPreferences.getInt("medicineStore",0);
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.putInt("userScore",score+1);
+                editor.putInt("medicineStore",medicineStore-1);
                 editor.commit();
                 Log.d("check","score updated");
             }
@@ -190,6 +192,13 @@ public class HomeScreenFragment extends Fragment {
                 .findViewById(R.id.fragment_home_screen_current_date);
         mCurrentDayOfweekLabel = (TextView) rootView
                 .findViewById(R.id.fragment_home_screen_current_day_of_week);
+        //yatna
+        warningView=(LinearLayout)rootView
+                .findViewById(R.id.warningView);
+        sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+        if(sharedPreferences.getInt("medicineStore",10)<5){
+            warningView.setVisibility(View.VISIBLE);
+        }
 
         mCurrentDateLabel.setTextColor(Color.rgb(89, 43, 21));
         mCurrentDayOfweekLabel.setTextColor(Color.rgb(89, 43, 21));

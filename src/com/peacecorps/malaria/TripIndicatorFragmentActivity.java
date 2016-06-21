@@ -122,7 +122,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         Typeface cf = Typeface.createFromAsset(getAssets(),"fonts/garreg.ttf");
         pmtLabel.setTypeface(cf);
 
-         sqLite = new DatabaseSQLiteHelper(this);
+        sqLite = new DatabaseSQLiteHelper(this);
 
         mSharedPreferenceStore = new SharedPreferenceStore();
         mSharedPreferenceStore.getSharedPreferences(this);

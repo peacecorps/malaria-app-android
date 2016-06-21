@@ -184,11 +184,13 @@ public class DayFragmentActivity extends FragmentActivity {
                                 sharedPreferences= PreferenceManager.getDefaultSharedPreferences(con);
                                 editor=sharedPreferences.edit();
                                 int score=sharedPreferences.getInt("userScore",0);
+                                int medicineStore=sharedPreferences.getInt("medicineStore",0);
                                 if(data.compareTo("yes")==0){;
                                     //do nothing as medicine has already been taken
                                 }else{
                                     score=score+1;
                                     editor.putInt("userScore",score);
+                                    editor.putInt("medicineStore",medicineStore-1);
                                     editor.commit();
                                 }
 
@@ -222,11 +224,13 @@ public class DayFragmentActivity extends FragmentActivity {
                                 sharedPreferences= PreferenceManager.getDefaultSharedPreferences(con);
                                 editor=sharedPreferences.edit();
                                 int score=sharedPreferences.getInt("userScore",0);
+                                int medicineStore=sharedPreferences.getInt("medicineStore",0);
                                 if(data.compareTo("no")==0){;
                                     //do nothing as medicine has already been taken
                                 }else{
                                     score=score-1;
                                     editor.putInt("userScore",score);
+                                    editor.putInt("medicineStore",medicineStore+1);
                                     editor.commit();
                                 }
                             } else

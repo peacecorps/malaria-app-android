@@ -14,14 +14,12 @@
 
 
         <LinearLayout
-            android:id="@+id/heading_day_dialog_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@color/lightest_brown">
 
             <TextView
-                android:id="@+id/dayDialogTitle"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -47,16 +45,19 @@
             android:layout_weight="0.96">
 
             <EditText
-                android:id="@+id/imageReset"
+                android:id="@+id/order_quantity"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:inputType="number"
                 android:hint="Eg 7"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:textColor="@color/golden_brown"
+                android:textColorHint="@color/lightgray02"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
 
             <TextView
-                android:id="@+id/textReset"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/golden_brown"
@@ -78,7 +79,7 @@
             android:layout_marginTop="15dp">
 
             <Button
-                android:id="@+id/dialogButtonOKReset"
+                android:id="@+id/order_by_email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Email"
@@ -94,7 +95,7 @@
                 android:layout_marginRight="20dp"/>
 
             <Button
-                android:id="@+id/dialogButtonCancelReset"
+                android:id="@+id/order_by_msg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Message"

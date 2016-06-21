@@ -337,7 +337,7 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
 
             saveUserTimeAndMedicationPrefs();
             //yatna
-            createUserScoreVariable();
+            createVariables();
 
             startActivity(new Intent(UserMedicineSettingsFragmentActivity.this,
                     MainActivity.class));
@@ -378,14 +378,16 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         mSharedPreferenceStore.mEditor.putBoolean("com.peacecorps.malaria.isFirstRun", false);
 
     }
-    //
-    public void createUserScoreVariable(){
+    //yatna
+    public void createVariables(){
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(UserMedicineSettingsFragmentActivity.this);
         SharedPreferences.Editor editor =sharedPreferences.edit();
         editor.putInt("userScore",0);
+        editor.putInt("medicineStore",0);
         editor.commit();
-        Log.d("check","user score initialized");
+        Log.d("check","user score and medicineStore initialized");
     }
+
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
