@@ -5,9 +5,8 @@ import android.test.RenamingDelegatingContext;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.peacecorps.malaria.DatabaseSQLiteHelper;
-import com.peacecorps.malaria.FirstAnalyticFragment;
-import com.peacecorps.malaria.SharedPreferenceStore;
+import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
+import com.peacecorps.malaria.fragment.FirstAnalyticFragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

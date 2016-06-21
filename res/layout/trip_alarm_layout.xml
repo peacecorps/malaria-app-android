@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dialog_background"
-    tools:context=".TripIndicatorFragmentActivity"
+    tools:context=".activities.TripIndicatorFragmentActivity"
     android:id="@+id/relativeLayout1">
 
     <LinearLayout

@@ -23,18 +23,18 @@
         android:icon="@drawable/appicon_themed"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        android:name=".VolleyApplication">
-        <service android:name="com.peacecorps.malaria.AlarmService" >
+        android:name=".utils.VolleyApplication">
+        <service android:name=".services.AlarmService" >
         </service>
 
-        <receiver android:name="com.peacecorps.malaria.AlarmAutoStart" >
+        <receiver android:name=".reciever.AlarmAutoStart" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" >
                 </action>
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.peacecorps.malaria.AlarmHandlerClass"
+            android:name=".reciever.AlarmHandlerClass"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.peacecorps.malaria.START_ALARM" />
@@ -43,7 +43,7 @@
         </receiver>
 
         <activity
-            android:name="com.peacecorps.malaria.UserMedicineSettingsFragmentActivity"
+            android:name=".activities.UserMedicineSettingsFragmentActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,58 +52,58 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.peacecorps.malaria.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.peacecorps.malaria.AlertCallerFragmentActivity"
+            android:name=".activities.AlertCallerFragmentActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="com.example.viewpagertest.demoActivity" >
                 </action>
             </intent-filter>
         </activity>
-        <activity android:name="com.peacecorps.malaria.InfoHubFragmentActivity"/>
-        <activity android:name="com.peacecorps.malaria.PeaceCorpsPolicyFragmentActivity"/>
-        <activity android:name="com.peacecorps.malaria.PercentSideEffectsFragmentActivity"/>
-        <activity android:name="com.peacecorps.malaria.SideEffectsPCVFragmentActivity"/>
-        <activity android:name="com.peacecorps.malaria.SideEffectsNPCVFragmentActivity"/>
-        <activity android:name="com.peacecorps.malaria.VolunteerAdherenceFragmentActivity"/>
-        <activity android:name="com.peacecorps.malaria.EffectivenessFragmentActivity"/>
-        <activity android:name="com.peacecorps.malaria.ThirdAnalyticFragment"/>
-        <activity android:name="com.peacecorps.malaria.DayFragmentActivity"/>
-        <activity android:name="com.peacecorps.malaria.BadgeRoom"/>
-        <activity android:name="com.peacecorps.malaria.MythFactGame"/>
-        <activity android:name="com.peacecorps.malaria.RapidFireGame"/>
-        <activity android:name="com.peacecorps.malaria.MedicineStore"/>
-        <activity android:name="com.peacecorps.malaria.NewHomeActivity"/>
-        <activity android:name="com.peacecorps.malaria.TripIndicatorFragmentActivity"
+        <activity android:name=".activities.InfoHubFragmentActivity"/>
+        <activity android:name=".activities.PeaceCorpsPolicyFragmentActivity"/>
+        <activity android:name=".activities.PercentSideEffectsFragmentActivity"/>
+        <activity android:name=".activities.SideEffectsPCVFragmentActivity"/>
+        <activity android:name=".activities.SideEffectsNPCVFragmentActivity"/>
+        <activity android:name=".activities.VolunteerAdherenceFragmentActivity"/>
+        <activity android:name=".activities.EffectivenessFragmentActivity"/>
+        <activity android:name=".fragment.ThirdAnalyticFragment"/>
+        <activity android:name=".activities.DayFragmentActivity"/>
+        <activity android:name=".activities.BadgeRoom"/>
+        <activity android:name=".activities.MythFactGame"/>
+        <activity android:name=".activities.RapidFireGame"/>
+        <activity android:name=".activities.MedicineStore"/>
+        <activity android:name=".activities.NewHomeActivity"/>
+        <activity android:name=".activities.TripIndicatorFragmentActivity"
                   android:launchMode="singleTask"
                   />
 
-        <activity android:name="com.peacecorps.malaria.TripIndicatorDialogActivity"
+        <activity android:name=".activities.TripIndicatorDialogActivity"
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
-        <activity android:name="com.peacecorps.malaria.RemainderToneActivity"
+        <activity android:name=".activities.RemainderToneActivity"
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
-        <activity android:name="com.peacecorps.malaria.TripIndicatorPackingActivity"
+        <activity android:name=".activities.TripIndicatorPackingActivity"
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
 
-        <activity android:name="com.peacecorps.malaria.TripAlarmActivity" android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
+        <activity android:name=".activities.TripAlarmActivity" android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
             android:launchMode="singleTop"/>
 
         <service
-            android:name="com.peacecorps.malaria.TripAlarmService"
+            android:name=".services.TripAlarmService"
             android:enabled="true" />
-        <receiver android:name="com.peacecorps.malaria.TripAlarmReceiver" />
+        <receiver android:name=".reciever.TripAlarmReceiver" />
 
-        <receiver android:name="TripAppWidgetProvider" >
+        <receiver android:name=".widget.TripAppWidgetProvider" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/appwidget_info" />
         </receiver>
-        <receiver android:name="MedicineStatusWidgetProvider" >
+        <receiver android:name=".widget.MedicineStatusWidgetProvider" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
