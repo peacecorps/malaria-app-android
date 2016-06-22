@@ -169,6 +169,7 @@ public class SecondAnalyticFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ThirdAnalyticFragment.class);
                 String mon = thirdMonthProgressLabel.getText().toString();
                 intent.putExtra(MONTH_REQ, mon); //transfering the month Information for displaying Calendar of Specific Month
+                //yatna
                 startActivityForResult(intent, 3);
                 Toast.makeText(getActivity(), "Third progress", Toast.LENGTH_SHORT).show();
             }
@@ -180,6 +181,7 @@ public class SecondAnalyticFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ThirdAnalyticFragment.class);
                 String mon = fourthMonthProgressLabel.getText().toString();
                 intent.putExtra(MONTH_REQ, mon); //transfering the month Information for displaying Calendar of Specific Month
+                //yatna
                 startActivityForResult(intent,2);
                 Toast.makeText(getActivity(), "Fourth progress", Toast.LENGTH_SHORT).show();
             }
@@ -187,7 +189,7 @@ public class SecondAnalyticFragment extends Fragment {
 
 
     }
-
+    //yatna
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {

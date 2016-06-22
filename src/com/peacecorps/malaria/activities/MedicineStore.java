@@ -26,6 +26,7 @@ public class MedicineStore extends Activity {
     private TextView daysLeft;
     private Button addMedicine;
     private Button orderMedicine;
+    private Button settings;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private int medicineStore;
@@ -40,8 +41,10 @@ public class MedicineStore extends Activity {
         daysLeft=(TextView)findViewById(R.id.days_left);
         addMedicine=(Button)findViewById(R.id.add_medicine);
         orderMedicine=(Button)findViewById(R.id.order_medicine);
+        settings=(Button)findViewById(R.id.dialog_setting);
         addMedicine.setOnClickListener(addMedicinesOnClickListener());
         orderMedicine.setOnClickListener(orderMedicineOnClickListener());
+        settings.setOnClickListener(settingsOnClickListener());
         preferences= PreferenceManager.getDefaultSharedPreferences(this);
         mSharedPreferenceStore = new SharedPreferenceStore();
         mSharedPreferenceStore.getSharedPreferences(this);
@@ -141,7 +144,7 @@ public class MedicineStore extends Activity {
                             medicineStore=preferences.getInt("medicineStore",0);
                             editor=preferences.edit();
                             int quantity = Integer.parseInt(medicineQuantityEt.getText().toString());
-                            editor.putInt("medicineStore",medicineStore+quantity);
+                            editor.putInt("medicineStore", medicineStore + quantity);
                             editor.commit();
                             displayMedicineStore();
                             addMedicineDialog.dismiss();
@@ -157,6 +160,52 @@ public class MedicineStore extends Activity {
 
                 // Showing Alert Message
                 addMedicineDialog.show();
+
+            }
+        };
+
+    }
+
+    public View.OnClickListener settingsOnClickListener(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog settingsDialog = new Dialog(MedicineStore.this,android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+                settingsDialog.setContentView(R.layout.reminder_screen_setting_dialog);
+
+                // Setting Dialog Title
+                Button set=(Button)settingsDialog.findViewById(R.id.set);
+                Button cancel=(Button)settingsDialog.findViewById(R.id.cancel);
+                EditText time=(EditText)settingsDialog.findViewById(R.id.time);
+                ((EditText)settingsDialog.findViewById(R.id.time)).requestFocus();
+                int prevAlertTime=preferences.getInt("alertTime",-1);
+                if(prevAlertTime!=-1){
+                    time.setText(prevAlertTime+"");
+                }
+                set.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(time.getText().toString().trim().equals("")){
+                            time.setError("Number of Days Required");
+                        }
+                        else{
+                            editor=preferences.edit();
+                            int intTime = Integer.parseInt(time.getText().toString());
+                            editor.putInt("alertTime",intTime);
+                            editor.commit();
+                            settingsDialog.dismiss();
+                        }
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        settingsDialog.dismiss();
+                    }
+                });
+
+                // Showing Alert Message
+                settingsDialog.show();
 
             }
         };

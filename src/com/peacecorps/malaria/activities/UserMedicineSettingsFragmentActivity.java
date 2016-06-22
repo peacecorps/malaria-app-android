@@ -387,6 +387,7 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         SharedPreferences.Editor editor =sharedPreferences.edit();
         editor.putInt("userScore",0);
         editor.putInt("medicineStore",0);
+        editor.putInt("alertTime",-1);
         editor.commit();
         Log.d("check","user score and medicineStore initialized");
     }

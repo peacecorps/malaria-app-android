@@ -20,19 +20,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.10"
-            android:orientation="vertical"
-            android:weightSum="1"
-            android:gravity="right">
+            android:orientation="horizontal"
+            android:weightSum="1">
             <Button
                 android:id="@+id/add_medicine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/info_hub_button"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/plus"
                 android:gravity="center"
-                android:layout_margin="10dp"
-                android:text="Add"
-                android:textColor="@color/white"
-                android:textSize="20.0sp" />
+                android:layout_margin="5dp"
+                android:textColor="@color/white" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+                <Button
+                    android:id="@+id/dialog_setting"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/settings_normal"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/white" />
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/linearLayout12"
@@ -64,7 +74,6 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 android:weightSum="1" >
-
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"

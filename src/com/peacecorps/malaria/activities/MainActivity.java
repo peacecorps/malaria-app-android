@@ -63,15 +63,18 @@ public class MainActivity extends FragmentActivity {
                 finish();
             }
         });
-
+        //yatna
         //Temporary button, will be moved
         Button tempButton =(Button)findViewById(R.id.tempButton);
         tempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),NewHomeActivity.class));
+                startActivityForResult(new Intent(getApplicationContext(),NewHomeActivity.class),1);
             }
         });
+
+        //yatna
+
 
         mAdapter = new FragmentAdapter(getSupportFragmentManager());
         /**Setting the Fragments**/
@@ -189,7 +192,17 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 1
+        if(requestCode==1)
+        {
+            ViewPager vp=(ViewPager)MainActivity.this.findViewById(R.id.vPager);
+            vp.getAdapter().notifyDataSetChanged();
+        }
 
+    }
 
 
 }

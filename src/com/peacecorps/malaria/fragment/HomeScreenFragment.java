@@ -197,7 +197,8 @@ public class HomeScreenFragment extends Fragment {
         warningView=(LinearLayout)rootView
                 .findViewById(R.id.warningView);
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        if(sharedPreferences.getInt("medicineStore",10)<5){
+        int alertTime=sharedPreferences.getInt("alertTime",-1);
+        if(alertTime!=-1 && sharedPreferences.getInt("medicineStore",0)<alertTime){
             warningView.setVisibility(View.VISIBLE);
         }
 
