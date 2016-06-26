@@ -59,8 +59,8 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/warning_textview"
                 android:textColor="@color/golden_brown"
-                android:text="How many days before your medicine ends, do you want to get the reminder? "
                 android:layout_toRightOf="@+id/image"
                 android:layout_margin="20dp" />
 

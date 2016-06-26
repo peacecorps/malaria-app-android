@@ -180,9 +180,9 @@ public class RapidFireGame extends Activity{
     void addGameScoreToMainScore(){
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=sharedPreferences.edit();
-        int score=sharedPreferences.getInt("userScore",0);
-        score=score+(gameScore/3);
-        editor.putInt("userScore", score);
+        int score=sharedPreferences.getInt("gameScore",0);
+        score=score+gameScore;
+        editor.putInt("gameScore", score);
         editor.commit();
 
     }

@@ -129,9 +129,9 @@ public class MythFactGame extends Activity {
     void addGameScoreToMainScore(){
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=sharedPreferences.edit();
-        int score=sharedPreferences.getInt("userScore",0);
-        score=score+(userCoins/3);
-        editor.putInt("userScore",score);
+        int score=sharedPreferences.getInt("gameScore",0);
+        score=score+userCoins;
+        editor.putInt("gameScore",score);
         editor.commit();
 
     }

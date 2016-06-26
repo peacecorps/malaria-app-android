@@ -126,12 +126,13 @@
             </LinearLayout>
         </LinearLayout>
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Exit Game"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/info_hub_button"
             android:textColor="@color/white"
+            android:layout_margin="10dp"
             android:onClick="exitGame"/>
     </LinearLayout>
 </LinearLayout>

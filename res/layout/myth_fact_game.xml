@@ -58,8 +58,8 @@
             android:id="@+id/question"
             android:textSize="20sp"
             android:text="Question Here"
-            android:background="@color/golden_brown"
-            android:textColor="@color/white"
+            android:background="@drawable/achievement_button"
+            android:textColor="@color/golden_brown"
             android:gravity="center"/>
     </LinearLayout>
     <LinearLayout

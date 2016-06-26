@@ -386,6 +386,7 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(UserMedicineSettingsFragmentActivity.this);
         SharedPreferences.Editor editor =sharedPreferences.edit();
         editor.putInt("userScore",0);
+        editor.putInt("gameScore",0);
         editor.putInt("medicineStore",0);
         editor.putInt("alertTime",-1);
         editor.commit();

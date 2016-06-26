@@ -54,12 +54,25 @@ public class MedicineStore extends Activity {
     }
     private void displayMedicineStore(){
         medicineStore=preferences.getInt("medicineStore",0);
-        if(medicineStore>=0){
-            daysLeft.setText(medicineStore+" Days");
+        //if drug is weekly
+        if(drugName.compareTo("Mefloquine")==0){
+            if(medicineStore>=0){
+                daysLeft.setText(medicineStore+" Weeks");
+            }
+            else{
+                medicineStore=medicineStore*-1;
+                daysLeft.setText(medicineStore+" Weeks Due");
+            }
         }
+        //if drug is daily
         else{
-            medicineStore=medicineStore*-1;
-            daysLeft.setText(medicineStore+" Days Due");
+            if(medicineStore>=0){
+                daysLeft.setText(medicineStore+" Days");
+            }
+            else{
+                medicineStore=medicineStore*-1;
+                daysLeft.setText(medicineStore+" Days Due");
+            }
         }
     }
     public View.OnClickListener orderMedicineOnClickListener() {
@@ -178,7 +191,17 @@ public class MedicineStore extends Activity {
                 Button cancel=(Button)settingsDialog.findViewById(R.id.cancel);
                 EditText time=(EditText)settingsDialog.findViewById(R.id.time);
                 ((EditText)settingsDialog.findViewById(R.id.time)).requestFocus();
+                TextView warningTv=(TextView)settingsDialog.findViewById(R.id.warning_textview);
+                //if drug is weekly
+                if(drugName.compareTo("Mefloquine")==0){
+                    warningTv.setText("How many weeks before your medicine ends, do you want to get the reminder? ");
+                }
+                //if drug is daily
+                else{
+                    warningTv.setText("How many days before your medicine ends, do you want to get the reminder? ");
+                }
                 int prevAlertTime=preferences.getInt("alertTime",-1);
+                //fill editText with previous set values
                 if(prevAlertTime!=-1){
                     time.setText(prevAlertTime+"");
                 }
@@ -186,7 +209,7 @@ public class MedicineStore extends Activity {
                     @Override
                     public void onClick(View view) {
                         if(time.getText().toString().trim().equals("")){
-                            time.setError("Number of Days Required");
+                            time.setError("Entry Required");
                         }
                         else{
                             editor=preferences.edit();
