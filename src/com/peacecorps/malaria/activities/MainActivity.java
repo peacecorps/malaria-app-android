@@ -69,11 +69,18 @@ public class MainActivity extends FragmentActivity {
         tempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(getApplicationContext(),NewHomeActivity.class),1);
+                startActivityForResult(new Intent(getApplicationContext(), NewHomeActivity.class), 1);
             }
         });
 
         //yatna
+        Button tempButton2 =(Button)findViewById(R.id.userProfile);
+        tempButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),UserProfile.class));
+            }
+        });
 
 
         mAdapter = new FragmentAdapter(getSupportFragmentManager());

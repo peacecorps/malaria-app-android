@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context=".activities.UserMedicineSettingsFragmentActivity">
+
+    <LinearLayout
+        android:id="@+id/user_medicine_settings_activity_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/user_medicine_settings_activity_setup_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="User Profile"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/user_medicine_first_text_color"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_line_border"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/UserProfileCommonTextAppearance"
+                    android:text="  Name"
+                    android:textColor="@color/golden_brown"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:hint="Enter Your Name"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/UserProfileCommonTextAppearance"
+                    android:text="  Email"
+                    android:textColor="@color/golden_brown"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:hint="Enter Your Email Address"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/UserProfileCommonTextAppearance"
+                    android:text="  Mobile No."
+
+                    android:textColor="@color/golden_brown"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:hint="Phone No. with country code"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    style="@style/UserProfileCommonTextAppearance"
+                    android:text="  Medication Type"
+                    android:textColor="@color/golden_brown"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:hint="Enter the medicine you take "/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/user_medicine_settings_activity_done_button"
+            style="@style/UserProfileCommonTextAppearance"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="SAVE"
+            android:textColor="@color/white"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:background="@color/golden_brown"
+            />
+    </LinearLayout>
+
+</LinearLayout>

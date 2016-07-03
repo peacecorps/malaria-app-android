@@ -6,8 +6,7 @@
               android:layout_gravity="center"
               android:background="@drawable/background"
               android:orientation="vertical"
-              tools:context=".activities.UserMedicineSettingsFragmentActivity"
-    >
+              tools:context=".activities.UserMedicineSettingsFragmentActivity">
 
     <LinearLayout
             android:id="@+id/user_medicine_settings_activity_container"

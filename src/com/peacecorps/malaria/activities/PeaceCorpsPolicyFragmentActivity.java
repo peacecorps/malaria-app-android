@@ -3,8 +3,11 @@ package com.peacecorps.malaria.activities;
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Locale;
 
 /**
  * Created by Chimdi on 7/18/14.
@@ -37,6 +41,8 @@ import java.io.InputStreamReader;
 public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
 
     private TextView mPeaceCorpsPolicyLabel,pcp;
+    private Button ttsButton;
+    private TextToSpeech tts;
 
     private static String TAGPCP = PeaceCorpsPolicyFragmentActivity.class.getSimpleName();
 
@@ -58,6 +64,7 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
 
         mPeaceCorpsPolicyLabel = (TextView) findViewById(R.id.peaceCorpsPolicyLabel);
         pcp = (TextView) findViewById(R.id.pcp);
+        ttsButton = (Button) findViewById(R.id.ttsButton);
         //"Please Wait" progress dialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
@@ -70,11 +77,36 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
         mPeaceCorpsPolicyLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
         pcp.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
 
-        /*HTTPAsyncTask conTask =new HTTPAsyncTask(this);
-        conTask.execute("http://pc-web-dev.systers.org");*/
-
+        //get the data
         makeJsonObjectRequest();
 
+        //setup the tts language
+        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    tts.setLanguage(Locale.UK);
+                }
+            }
+        });
+
+
+
+        ttsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String toSpeak = mPeaceCorpsPolicyLabel.getText().toString();
+                tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+
+    }
+    public void onBackPressed() {
+       if(tts !=null){
+            tts.stop();
+            tts.shutdown();
+        }
+        finish();
     }
 
     private void makeJsonObjectRequest(){
@@ -117,7 +149,7 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 hidepDialog();
             }

@@ -94,10 +94,19 @@
         <Button
             android:background="@drawable/cal_right_arrow_brown"
             android:id="@+id/tempButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
             android:adjustViewBounds="true"
             android:layout_marginLeft="15dp"
+            android:scaleType="fitCenter"
+            />
+        <Button
+            android:background="@drawable/user"
+            android:id="@+id/userProfile"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="10dp"
             android:scaleType="fitCenter"
             />
     </LinearLayout>
