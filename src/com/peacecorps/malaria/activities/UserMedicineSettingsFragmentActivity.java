@@ -389,6 +389,10 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         editor.putInt("gameScore",0);
         editor.putInt("medicineStore",0);
         editor.putInt("alertTime",-1);
+        //for user profile
+        editor.putString("user_name", "");
+        editor.putString("user_email", "");
+        editor.putInt("user_age",0);
         editor.commit();
         Log.d("check","user score and medicineStore initialized");
     }
