@@ -43,12 +43,11 @@
                 android:id="@+id/effectivenessLabel"
                 android:textSize="20sp"/>
             <ImageView
-                android:layout_width="250dp"
-                android:layout_height="180dp"
-                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
                 android:id="@+id/effectiveness_image"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/red"/>
+                android:background="@drawable/background"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

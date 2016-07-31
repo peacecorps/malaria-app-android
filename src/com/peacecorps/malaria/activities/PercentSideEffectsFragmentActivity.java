@@ -1,10 +1,12 @@
 package com.peacecorps.malaria.activities;
 
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.ImageRequest;
 import com.peacecorps.malaria.utils.AuthJSONObjectRequest;
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.utils.VolleyApplication;
@@ -33,6 +36,7 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
 
     //views and dialogs
     private TextView mPercentSideEffectsLabel,pse;
+    private ImageView sideEffectImage;
 
     private static String TAGPSE = PercentSideEffectsFragmentActivity.class.getSimpleName();
 
@@ -40,6 +44,7 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
 
     //json object response url
     private String urlJsonObj = "http://pc-web-dev.systers.org/api/posts/2/?format=json";
+    private String urlImage ="https://cloud.githubusercontent.com/assets/8321130/17277636/4af66d7a-5765-11e6-9030-ddabe7d040cf.jpg";
 
     // temporary string to show the parsed response
     private String jsonResponse;
@@ -51,6 +56,7 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
         setContentView(R.layout.side_effects_percentage_fragment);
 
         mPercentSideEffectsLabel = (TextView) findViewById(R.id.percentSideEffectsLabel);
+        sideEffectImage =(ImageView)findViewById(R.id.percent_side_effect_image);
         pse=(TextView)findViewById(R.id.pse);
 
         //"Please Wait" progress Dialog
@@ -72,6 +78,19 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
     private void makeJsonObjectRequest(){
         Log.i(TAGPSE, "INSIDE JSON OBJECT REQUEST");
         showpDialog(); //progress dialog shows loading...while the data is being fetched
+
+        ImageRequest myrequest = new ImageRequest(urlImage,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap bitmap) {
+                        sideEffectImage.setImageBitmap(bitmap);
+                    }
+                }, 0, 0, null,
+                new Response.ErrorListener() {
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAGPSE, "Error in loading Image");
+                    }
+                });
 
         //making a JSON Object  Request below
         AuthJSONObjectRequest jsonObjReq = new AuthJSONObjectRequest(Request.Method.GET, urlJsonObj, null
@@ -141,6 +160,7 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
 
         //Adding Request to request queue
         VolleyApplication.getInstance().addToRequestQueue(jsonObjReq);
+        VolleyApplication.getInstance().addToRequestQueue(myrequest);
     }
 
     private void showpDialog(){
