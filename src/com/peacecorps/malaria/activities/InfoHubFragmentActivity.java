@@ -55,6 +55,25 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         btnEffectiveness = (Button) findViewById(R.id.btnEffectiveness);
         btnSettings = (Button)findViewById(R.id.info_hub_settings_button);
 
+        //yatna
+        //Temporary button, will be moved
+        Button tempButton =(Button)findViewById(R.id.tempButton);
+        tempButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(getApplicationContext(), NewHomeActivity.class), 1);
+            }
+        });
+
+        //yatna
+        Button tempButton2 =(Button)findViewById(R.id.userProfile);
+        tempButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),UserProfile.class));
+            }
+        });
+
         /**Setting fonts**/
         Typeface cf = Typeface.createFromAsset(getAssets(),"fonts/garreg.ttf");
         ihLabel.setTypeface(cf);

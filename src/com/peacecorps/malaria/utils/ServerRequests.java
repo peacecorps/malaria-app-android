@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class ServerRequests {
     ProgressDialog progressDialog;
     public static final int CONNECTION_TIMEOUT = 1000 * 15;
-    public static final String SERVER_ADDRESS = "http://yatnaverma.dx.am/";
+    public static final String SERVER_ADDRESS = "http://pc-web-dev.systers.org/api/malaria_users/";
 
 
 
@@ -62,8 +62,7 @@ public class ServerRequests {
             HttpParams httpRequestParams = getHttpRequestParams();
 
             HttpClient client = new DefaultHttpClient(httpRequestParams);
-            HttpPost post = new HttpPost(SERVER_ADDRESS
-                    + "check.php");
+            HttpPost post = new HttpPost(SERVER_ADDRESS);
             String status="";
             try {
                 post.setEntity(new UrlEncodedFormEntity(dataToSend));

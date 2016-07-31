@@ -105,6 +105,25 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         tripTime = (TextView)findViewById(R.id.trip_time);
         ((TextView)findViewById(R.id.trip_time)).requestFocus();
 
+        //yatna
+        //Temporary button, will be moved
+        Button tempButton =(Button)findViewById(R.id.tempButton);
+        tempButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(getApplicationContext(), NewHomeActivity.class), 1);
+            }
+        });
+
+        //yatna
+        Button tempButton2 =(Button)findViewById(R.id.userProfile);
+        tempButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), UserProfile.class));
+            }
+        });
+
 
         pmtLabel = (TextView)findViewById(R.id.pmt);
         departureMonth=(TextView)findViewById(R.id.trip_month_departure);

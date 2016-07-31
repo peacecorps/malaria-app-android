@@ -1,17 +1,17 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/background"
     android:layout_gravity="center_horizontal"
 
     >
 
     <ScrollView android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:id="@+id/scrollSegment"
-
+        android:layout_weight="1"
         >
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -167,76 +167,91 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_alignBottom="@id/scrollSegment"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:layout_height="0.5dp"
-                    android:layout_width="200dp"
-                    android:background="#000000"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-
-                    />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:paddingBottom="5dp"
-
-                    >
-
-                    <Button
-                        android:id="@+id/homeButton"
-
-                        android:background="@drawable/home_icon_inactive_normal"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:adjustViewBounds="true"
-                        android:layout_marginRight="15dp"
-                        android:scaleType="fitCenter"
-
-                        />
-
-                    <Button
-                        android:background="@drawable/bus_icon_inactive_normal"
-                        android:layout_width="40dp"
-                        android:layout_height="30dp"
-                        android:adjustViewBounds="true"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:scaleType="fitCenter"
-                        android:id="@+id/tripButton"
-
-                        />
-
-
-                    <Button
-                        android:background="@drawable/info_hub_normal"
-                        android:id="@+id/infoButton"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:adjustViewBounds="true"
-                        android:layout_marginLeft="15dp"
-                        android:scaleType="fitCenter"
-                        />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_height="0.5dp"
+            android:layout_width="200dp"
+            android:background="#000000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+
+            />
+
+        <LinearLayout
+
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="5dp"
+
+            >
+
+            <Button
+                android:id="@+id/homeButton"
+
+                android:background="@drawable/home_icon_normal"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:layout_marginRight="15dp"
+                android:scaleType="fitCenter"
+
+                />
+
+            <Button
+                android:background="@drawable/bus_icon_inactive_normal"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:scaleType="fitCenter"
+                android:id="@+id/tripButton"
+
+                />
+
+            <Button
+                android:background="@drawable/info_hub_inactive_normal"
+                android:id="@+id/infoButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="15dp"
+                android:scaleType="fitCenter"
+                />
+            <Button
+                android:background="@drawable/cal_right_arrow_brown"
+                android:id="@+id/tempButton"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="15dp"
+                android:scaleType="fitCenter"
+                />
+            <Button
+                android:background="@drawable/user"
+                android:id="@+id/userProfile"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitCenter"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 
 
-</RelativeLayout>
+</LinearLayout>

@@ -23,7 +23,7 @@
     <com.viewpagerindicator.CirclePageIndicator
 
         android:id="@+id/vIndicator"
-        android:padding="10dip"
+        android:padding="5dip"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:textColor="#2FB3E3"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:paddingBottom="5dp"
+        android:paddingBottom="2dp"
 
 
 

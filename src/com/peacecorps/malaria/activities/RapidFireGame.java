@@ -72,6 +72,9 @@ public class RapidFireGame extends Activity{
         askQuestion(quesNo);
     }
     void askQuestion(int i){
+        opt1.setBackground(getResources().getDrawable(R.drawable.info_hub_button));
+        opt2.setBackground(getResources().getDrawable(R.drawable.info_hub_button));
+        opt3.setBackground(getResources().getDrawable(R.drawable.info_hub_button));
         questionTv.setText(questionList.get(i).getQuestion());
         opt1.setText(questionList.get(i).getOption1());
         opt2.setText(questionList.get(i).getOption2());
@@ -88,11 +91,14 @@ public class RapidFireGame extends Activity{
                 if(questionList.get(quesNo).getAns()==1){
                     gameScore++;
                     resultString="Correct !";
+                    opt1.setBackgroundColor(getResources().getColor(R.color.light_green));
                 }
                 else{
                     resultString="Wrong ";
+                    opt1.setBackground(getResources().getDrawable(R.drawable.info_hub_button_grayed));
                 }
-                Toast.makeText(RapidFireGame.this,resultString,Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(RapidFireGame.this,resultString,Toast.LENGTH_SHORT).show();
                 prepNextQues();
 
             }
@@ -106,11 +112,13 @@ public class RapidFireGame extends Activity{
                if(questionList.get(quesNo).getAns()==2){
                    gameScore++;
                    resultString="Correct !";
+                   opt2.setBackgroundColor(getResources().getColor(R.color.light_green));
                }
                else{
                    resultString="Wrong ";
+                   opt2.setBackground(getResources().getDrawable(R.drawable.info_hub_button_grayed));
                }
-               Toast.makeText(RapidFireGame.this,resultString,Toast.LENGTH_SHORT).show();
+               //Toast.makeText(RapidFireGame.this,resultString,Toast.LENGTH_SHORT).show();
                prepNextQues();
            }
        };
@@ -123,11 +131,13 @@ public class RapidFireGame extends Activity{
                 if(questionList.get(quesNo).getAns()==3){
                     gameScore++;
                     resultString="Correct !";
+                    opt3.setBackgroundColor(getResources().getColor(R.color.light_green));
                 }
                 else{
                     resultString="Wrong ";
+                    opt3.setBackground(getResources().getDrawable(R.drawable.info_hub_button_grayed));
                 }
-                Toast.makeText(RapidFireGame.this,resultString,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(RapidFireGame.this,resultString,Toast.LENGTH_SHORT).show();
                 prepNextQues();
 
             }

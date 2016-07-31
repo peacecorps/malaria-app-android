@@ -8,12 +8,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1.5"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
             android:gravity="center_vertical">
             <Button
                 android:layout_width="0dp"
@@ -38,17 +37,15 @@
                 android:textColor="@color/golden_brown"/>
 
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:id="@+id/nextBtn"
-                    android:layout_weight="0.4"
-                    android:background="@drawable/info_hub_button"
-                    android:textColor="@color/white"
-                    android:text="Next"
-                    android:onClick="nextClick"/>
-
-
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:id="@+id/nextBtn"
+                android:layout_weight="0.4"
+                android:background="@drawable/info_hub_button"
+                android:textColor="@color/white"
+                android:text="Next"
+                android:onClick="nextClick"/>
         </LinearLayout>
 
         <LinearLayout
@@ -69,23 +66,24 @@
                 android:textColor="@color/golden_brown"
                 android:gravity="center"/>
         </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:weightSum="2"
         android:gravity="bottom">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"></LinearLayout>
+            android:layout_weight="0.5"></LinearLayout>
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/chest"
             android:gravity="center"
-            android:layout_weight="0.8"
+            android:layout_weight="0.45"
             android:layout_marginTop="5dp"
             android:textStyle="bold"
             android:textSize="19sp"
@@ -97,7 +95,7 @@
             android:id="@+id/trash"
             android:textStyle="bold"
             android:textSize="19sp"
-            android:layout_weight="1"
+            android:layout_weight="0.65"
             android:background="@drawable/trash"/>
     </LinearLayout>
 

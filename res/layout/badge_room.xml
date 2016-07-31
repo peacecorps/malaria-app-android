@@ -5,13 +5,23 @@
     android:background="@drawable/background"
     android:padding="7sp"
     android:weightSum="3.0">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.6"
-        android:gravity="right"
-        android:orientation="vertical"
-        android:clickable="true">
+        android:clickable="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp">
+        <Button
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/shareButton"
+            android:background="@drawable/share_icon"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,12 +29,8 @@
             android:text="Achievement Room"
             android:textColor="@color/golden_brown"
             android:textSize="22dp"
-            android:layout_marginTop="10dp"/>
-        <Button
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/shareButton"
-            android:background="@drawable/share_icon"/>
+            android:paddingRight="32dp"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +47,7 @@
             android:id="@+id/cat1_tv"
             android:text="              Rookie \nTaken your first medicine"
             android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="15sp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,7 +64,7 @@
             android:id="@+id/cat2_tv"
             android:text="               Mr Know-It-All \nAnswered first question correctly"
             android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="15sp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,7 +80,7 @@
             android:id="@+id/cat3_tv"
             android:text="            Explorer \nPlanned your first trip"
             android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="15sp"/>
     </LinearLayout>
 
 

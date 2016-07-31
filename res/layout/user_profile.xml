@@ -29,121 +29,130 @@
             android:textColor="@color/user_medicine_first_text_color"
             />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/custom_line_border"
-            android:orientation="vertical"
-            android:paddingLeft="30dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp">
+      <ScrollView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:background="@drawable/custom_line_border"
+                  android:orientation="vertical"
+                  android:paddingLeft="30dp"
+                  android:paddingTop="15dp"
+                  android:paddingBottom="15dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:orientation="vertical" >
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingTop="5dp"
+                      android:orientation="vertical" >
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    style="@style/UserProfileCommonTextAppearance"
-                    android:text="  Name"
-                    android:textColor="@color/golden_brown"
-                    />
+                      <TextView
+                          android:layout_height="wrap_content"
+                          android:layout_width="match_parent"
+                          style="@style/UserProfileCommonTextAppearance"
+                          android:text="  Name"
+                          android:textColor="@color/golden_brown"
+                          />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/user_name"
-                    android:gravity="center_vertical"
-                    android:hint="Enter Your Name"/>
-            </LinearLayout>
+                      <EditText
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/user_name"
+                          android:gravity="center_vertical"
+                          android:hint="Enter Your Name"/>
+                  </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:orientation="vertical" >
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingTop="5dp"
+                      android:orientation="vertical" >
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    style="@style/UserProfileCommonTextAppearance"
-                    android:text="  Email"
-                    android:textColor="@color/golden_brown"
-                    />
+                      <TextView
+                          android:layout_height="wrap_content"
+                          android:layout_width="match_parent"
+                          style="@style/UserProfileCommonTextAppearance"
+                          android:text="  Email"
+                          android:textColor="@color/golden_brown"
+                          />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/user_email"
-                    android:inputType="textWebEmailAddress"
-                    android:gravity="center_vertical"
-                    android:hint="Enter Your Email Address"/>
-            </LinearLayout>
+                      <EditText
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/user_email"
+                          android:inputType="textWebEmailAddress"
+                          android:gravity="center_vertical"
+                          android:hint="Enter Your Email Address"/>
+                  </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:orientation="vertical" >
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingTop="5dp"
+                      android:orientation="vertical" >
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    style="@style/UserProfileCommonTextAppearance"
-                    android:text="  Age"
-                    android:textColor="@color/golden_brown"
-                    />
+                      <TextView
+                          android:layout_height="wrap_content"
+                          android:layout_width="match_parent"
+                          style="@style/UserProfileCommonTextAppearance"
+                          android:text="  Age"
+                          android:textColor="@color/golden_brown"
+                          />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/user_age"
-                    android:inputType="number"
-                    android:gravity="center_vertical"
-                    android:hint="Age in years"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical" >
+                      <EditText
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/user_age"
+                          android:inputType="number"
+                          android:gravity="center_vertical"
+                          android:hint="Age in years"/>
+                  </LinearLayout>
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingTop="5dp"
+                      android:layout_marginBottom="10dp"
+                      android:orientation="vertical" >
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    style="@style/UserProfileCommonTextAppearance"
-                    android:text="  Medication Type"
-                    android:textColor="@color/golden_brown"
-                    />
+                      <TextView
+                          android:layout_height="wrap_content"
+                          android:layout_width="match_parent"
+                          style="@style/UserProfileCommonTextAppearance"
+                          android:text="  Medication Type"
+                          android:textColor="@color/golden_brown"
+                          />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/user_medicine_type"
-                    android:gravity="center_vertical"
-                    android:editable="false"
-                    android:hint="Enter the medicine you take "/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/user_profile_save"
-            style="@style/UserProfileCommonTextAppearance"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:text="SAVE"
-            android:textColor="@color/white"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:background="@color/golden_brown"
-            />
+                      <EditText
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/user_medicine_type"
+                          android:gravity="center_vertical"
+                          android:editable="false"
+                          android:hint="Enter the medicine you take "/>
+                  </LinearLayout>
+              </LinearLayout>
+              <Button
+                  android:id="@+id/user_profile_save"
+                  style="@style/UserProfileCommonTextAppearance"
+                  android:layout_gravity="center"
+                  android:layout_marginTop="20dp"
+                  android:layout_marginBottom="20dp"
+                  android:text="SAVE"
+                  android:textColor="@color/white"
+                  android:paddingLeft="40dp"
+                  android:paddingRight="40dp"
+                  android:background="@color/golden_brown"
+                  />
+          </LinearLayout>
+      </ScrollView>
     </LinearLayout>
 
 </LinearLayout>

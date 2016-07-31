@@ -58,7 +58,7 @@ public class MythFactGame extends Activity {
         //setup answers
         answers = new ArrayList<String>(Arrays.asList("myth","fact","myth","fact","myth"));
         //initialize game score
-        tvUserCoins.setText("Coins : " + userCoins);
+        tvUserCoins.setText("" + userCoins);
         //initial question
         tvQuestion.setText(questions.get(i));
         //disable the next Button
@@ -206,7 +206,7 @@ public class MythFactGame extends Activity {
                     //enable the next button
                     nxtButton.setClickable(true);
                     nxtButton.setBackground(getResources().getDrawable(R.drawable.info_hub_button));
-                    tvUserCoins.setText("Coins : "+ userCoins);
+                    tvUserCoins.setText(""+ userCoins);
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
                     //no action necessary
