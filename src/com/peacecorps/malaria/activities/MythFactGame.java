@@ -54,7 +54,9 @@ public class MythFactGame extends Activity {
 
     private void initializeGame() {
         //setup questions
-        questions= new ArrayList<String>(Arrays.asList("Question text 1", "Question text 2", "Question text 3", "Question text 4", "Question text 5"));
+        questions= new ArrayList<String>(Arrays.asList("Once you get malaria you will be immune from it for the rest of your life",
+                "Malaria is a life-threatening disease", "You don’t have to worry about malaria in the dry season",
+                "Nearly half of the world's population is at risk of malaria", "There is a vaccine for malaria"));
         //setup answers
         answers = new ArrayList<String>(Arrays.asList("myth","fact","myth","fact","myth"));
         //initialize game score
