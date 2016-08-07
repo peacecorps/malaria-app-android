@@ -91,7 +91,7 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
         });
 
 
-
+        //Implement the speak button
         ttsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +101,7 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
         });
 
     }
+    //shutdown text to speech when the back button is pressed
     public void onBackPressed() {
        if(tts !=null){
             tts.stop();

@@ -79,6 +79,7 @@ public class RapidFireGame extends Activity{
         opt1.setText(questionList.get(i).getOption1());
         opt2.setText(questionList.get(i).getOption2());
         opt3.setText(questionList.get(i).getOption3());
+        //display time as 5 secs
         timer.setText("5");
         counter= new RapidFireTimeCounter(6000,1000);
         counter.start();
@@ -146,6 +147,7 @@ public class RapidFireGame extends Activity{
     void prepNextQues(){
         scoreTv.setText("Score : " + gameScore);
         final android.os.Handler handler =new android.os.Handler();
+        //provide a delay of 1 sec after an option is clicked by the user
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -159,7 +161,7 @@ public class RapidFireGame extends Activity{
             }
         },1000);
     }
-
+    //Implementing the exit game button
     public void exitGame(View view) {
         counter.cancel();
         Dialog alertDialog = new Dialog(RapidFireGame.this,android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
@@ -187,6 +189,7 @@ public class RapidFireGame extends Activity{
         // Showing Alert Message
         alertDialog.show();
     }
+    //add current game's score to the user score
     void addGameScoreToMainScore(){
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=sharedPreferences.edit();
@@ -196,6 +199,7 @@ public class RapidFireGame extends Activity{
         editor.commit();
 
     }
+    //Implementing the timer
     public class RapidFireTimeCounter extends CountDownTimer {
         public RapidFireTimeCounter(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);

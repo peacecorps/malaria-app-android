@@ -47,6 +47,7 @@ public class MythFactGame extends Activity {
         chest.setOnDragListener(new ChoiceDragListener());
         initializeGame();
     }
+
     //disable the back button
     @Override
     public void onBackPressed(){
@@ -68,7 +69,7 @@ public class MythFactGame extends Activity {
         nxtButton.setBackground(getResources().getDrawable(R.drawable.info_hub_button_grayed));
 
     }
-
+    //implementing the 'Next' button
     public void nextClick(View view) {
         i=i+1;
         if(i<questions.size()){
@@ -101,7 +102,7 @@ public class MythFactGame extends Activity {
             alertDialog.show();
         }
     }
-
+    //Implementing the exit game button
     public void exitGame(View view) {
         Dialog alertDialog = new Dialog(MythFactGame.this,android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
         alertDialog.setContentView(R.layout.exit_game_dialog);
@@ -128,6 +129,7 @@ public class MythFactGame extends Activity {
         // Showing Alert Message
         alertDialog.show();
     }
+    //add current game's score to the main score
     void addGameScoreToMainScore(){
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=sharedPreferences.edit();
@@ -144,6 +146,7 @@ public class MythFactGame extends Activity {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 //setup drag
                 ClipData data = ClipData.newPlainText("", "");
+                //create shadow while being dragged
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
                 //start dragging the item touched
                 v.startDrag(data, shadowBuilder, v, 0);

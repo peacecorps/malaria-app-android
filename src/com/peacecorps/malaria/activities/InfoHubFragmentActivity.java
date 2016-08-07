@@ -19,7 +19,7 @@ import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
 public class InfoHubFragmentActivity extends FragmentActivity {
 
     Button homeIconButton, btnPeaceCorpsPolicy, btnPercentSideEffects, btnSideEffectsPCV,
-            btnSideEffectsNPCV, btnVolunteerAdherence, btnEffectiveness,btnTripIndicator,btnSettings;
+            btnSideEffectsNPCV, btnVolunteerAdherence, btnEffectiveness,btnTripIndicator,btnSettings ,tempButton, userProfile;
     TextView ihLabel;
 
         private Dialog dialog = null;
@@ -54,20 +54,17 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         btnVolunteerAdherence = (Button) findViewById(R.id.btnVolunteerAdherence);
         btnEffectiveness = (Button) findViewById(R.id.btnEffectiveness);
         btnSettings = (Button)findViewById(R.id.info_hub_settings_button);
+        tempButton =(Button)findViewById(R.id.tempButton);
+        userProfile =(Button)findViewById(R.id.userProfile);
 
         //yatna
-        //Temporary button, will be moved
-        Button tempButton =(Button)findViewById(R.id.tempButton);
         tempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivityForResult(new Intent(getApplicationContext(), NewHomeActivity.class), 1);
             }
         });
-
-        //yatna
-        Button tempButton2 =(Button)findViewById(R.id.userProfile);
-        tempButton2.setOnClickListener(new View.OnClickListener() {
+        userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),UserProfile.class));

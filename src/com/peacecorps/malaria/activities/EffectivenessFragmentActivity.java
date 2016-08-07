@@ -74,6 +74,7 @@ public class EffectivenessFragmentActivity extends FragmentActivity{
         Log.i(TAGE, "INSIDE JSON OBJECT REQUEST");
         showpDialog(); //progress dialog shows loading...while the data is being fetched
 
+        //making a request to load and cache image
         ImageRequest myrequest = new ImageRequest(urlImage,
                 new Response.Listener<Bitmap>() {
                     @Override

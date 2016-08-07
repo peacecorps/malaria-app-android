@@ -39,6 +39,7 @@ public class SideEffectsNPCVFragmentActivity extends FragmentActivity {
 
     //json object response url
     private String urlJsonObj = "http://pc-web-dev.systers.org/api/posts/4/?format=json";
+    //private String urlJsonObj = "http://pc-web-dev.systers.org/api/malaria_posts";
 
     // temporary string to show the parsed response
     private String jsonResponse;

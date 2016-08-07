@@ -79,6 +79,7 @@ public class PercentSideEffectsFragmentActivity extends FragmentActivity {
         Log.i(TAGPSE, "INSIDE JSON OBJECT REQUEST");
         showpDialog(); //progress dialog shows loading...while the data is being fetched
 
+        //Request to fetch and cache image
         ImageRequest myrequest = new ImageRequest(urlImage,
                 new Response.Listener<Bitmap>() {
                     @Override

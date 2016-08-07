@@ -9,7 +9,7 @@ public class RapidFireQuestionModel {
     private String option2;
     private String option3;
     private int ans;
-
+    //constructs a question model for Rapid Fire game
     public RapidFireQuestionModel(String question,String option1,String option2, String option3, int ans){
         this.question=question;
         this.option1=option1;
@@ -17,6 +17,7 @@ public class RapidFireQuestionModel {
         this.option3=option3;
         this.ans=ans;
     }
+    //getters
     public String getQuestion(){
         return question;
     }

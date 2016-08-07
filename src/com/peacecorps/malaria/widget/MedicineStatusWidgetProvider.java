@@ -27,7 +27,7 @@ public class MedicineStatusWidgetProvider extends AppWidgetProvider{
         // Perform this loop procedure for each App Widget that belongs to this provider
         for (int i=0; i<N; i++) {
             int appWidgetId = appWidgetIds[i];
-
+            //get today's date
             Date date= Calendar.getInstance().getTime();
             Calendar cal = Calendar.getInstance();
             int month=cal.get(Calendar.MONTH);
@@ -37,8 +37,9 @@ public class MedicineStatusWidgetProvider extends AppWidgetProvider{
             Log.d("widget", " "+day +" "+month +" "+year);
             DatabaseSQLiteHelper a;
             a=new DatabaseSQLiteHelper(context.getApplicationContext());
+            //get if medicine is taken or not from the database
             String dat=a.getMedicationData(day,month,year);
-           // String dat="no";
+
             // Create an Intent to launch DayActivity
             Intent intent = new Intent(context, DayFragmentActivity.class);
             intent.putExtra(ThirdAnalyticFragment.DATE_TAG, date.toString());
@@ -51,13 +52,15 @@ public class MedicineStatusWidgetProvider extends AppWidgetProvider{
             //views.setTextViewText(R.id.textView_info,preferences.getString("view_upcoming_reminder", " No upcoming reminder has been set"));
 
             if(dat.compareTo("yes")==0){
+                //if medicine is taken display a green tick
                 views.setImageViewResource(R.id.medicationstatusdisplay,R.drawable.accept_medi_checked_);
             }
             else if(dat.compareTo("no")==0)
-            {
+            {   //if medicine is not taken display a red cross
                 views.setImageViewResource(R.id.medicationstatusdisplay,R.drawable.reject_medi_checked);
             }
             else {
+                //else if its neither of them display a grayed tick
                 views.setImageViewResource(R.id.medicationstatusdisplay, R.drawable.accept_medi_grayscale);
             }
 

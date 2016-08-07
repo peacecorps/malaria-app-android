@@ -29,6 +29,8 @@ public class MainActivity extends FragmentActivity {
     PageIndicator mIndicator;
     Button mInfoButton;
     Button mTripButton;
+    Button tempButton;
+    Button userProfile;
     String TAGMA="MainActivity";
 
 
@@ -63,9 +65,9 @@ public class MainActivity extends FragmentActivity {
                 finish();
             }
         });
-        //yatna
-        //Temporary button, will be moved
-        Button tempButton =(Button)findViewById(R.id.tempButton);
+
+        //play symbol on the screen to open games and achievements
+        tempButton =(Button)findViewById(R.id.tempButton);
         tempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,9 +75,9 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-        //yatna
-        Button tempButton2 =(Button)findViewById(R.id.userProfile);
-        tempButton2.setOnClickListener(new View.OnClickListener() {
+        //user symbol on the screen to enter and push user'ss details
+        userProfile =(Button)findViewById(R.id.userProfile);
+        userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),UserProfile.class));

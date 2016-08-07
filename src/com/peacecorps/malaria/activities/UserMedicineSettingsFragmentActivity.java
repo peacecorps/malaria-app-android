@@ -385,11 +385,15 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
     public void createVariables(){
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(UserMedicineSettingsFragmentActivity.this);
         SharedPreferences.Editor editor =sharedPreferences.edit();
+        //stores the score scored by taking medicines on time
         editor.putInt("userScore",0);
+        //stores the score earned by playing the games
         editor.putInt("gameScore",0);
+        //stores number of medicines left in store
         editor.putInt("medicineStore",0);
+        //store the limit set by user for medicine purchase reminder
         editor.putInt("alertTime",-1);
-        //for user profile
+        //for user profile details
         editor.putString("user_name", "");
         editor.putString("user_email", "");
         editor.putInt("user_age",0);

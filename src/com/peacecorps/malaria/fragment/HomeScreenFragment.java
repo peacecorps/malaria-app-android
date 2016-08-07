@@ -144,11 +144,14 @@ public class HomeScreenFragment extends Fragment {
                     int currentDose = databaseSQLiteHelper.getDosesInaRowDaily();
                     mSharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", currentDose).commit();
                 }
-                //yatna
+                //get user's score
                 int score=sharedPreferences.getInt("userScore", 0);
+                //get medicine in store
                 int medicineStore=sharedPreferences.getInt("medicineStore",0);
                 SharedPreferences.Editor editor=sharedPreferences.edit();
+                //increase score if medicine is taken
                 editor.putInt("userScore",score+1);
+                //decrease medicine store by one if medicine is taken
                 editor.putInt("medicineStore",medicineStore-1);
                 editor.commit();
                 Log.d("check","score updated");
@@ -197,7 +200,9 @@ public class HomeScreenFragment extends Fragment {
         warningView=(LinearLayout)rootView
                 .findViewById(R.id.warningView);
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+        //get the limit set by user from shared preference
         int alertTime=sharedPreferences.getInt("alertTime",-1);
+        //display warning if medicine in store is less than the limit set
         if(alertTime!=-1 && sharedPreferences.getInt("medicineStore",0)<alertTime){
             warningView.setVisibility(View.VISIBLE);
         }

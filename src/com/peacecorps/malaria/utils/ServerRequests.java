@@ -29,8 +29,7 @@ public class ServerRequests {
     public static final int CONNECTION_TIMEOUT = 1000 * 15;
     public static final String SERVER_ADDRESS = "http://pc-web-dev.systers.org/api/malaria_users/";
 
-
-
+    //define a progress dialog on start
     public ServerRequests(Context context) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
@@ -53,6 +52,7 @@ public class ServerRequests {
 
         @Override
         protected String doInBackground(Void... params) {
+            //add details to send
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
             dataToSend.add(new BasicNameValuePair("name", user.getName()));
             dataToSend.add(new BasicNameValuePair("email", user.getEmail()));
@@ -60,7 +60,6 @@ public class ServerRequests {
             dataToSend.add(new BasicNameValuePair("medicine", user.getMedicineType()));
 
             HttpParams httpRequestParams = getHttpRequestParams();
-
             HttpClient client = new DefaultHttpClient(httpRequestParams);
             HttpPost post = new HttpPost(SERVER_ADDRESS);
             String status="";

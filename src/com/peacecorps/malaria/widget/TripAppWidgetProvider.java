@@ -34,6 +34,7 @@ public class TripAppWidgetProvider extends AppWidgetProvider {
             // to the button
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget);
             views.setOnClickPendingIntent(R.id.button_edit, pendingIntent);
+            //display details about the upcoming trip
             views.setTextViewText(R.id.textView_info,preferences.getString("view_upcoming_reminder", " No upcoming reminder has been set"));
 
             // Tell the AppWidgetManager to perform an update on the current app widget

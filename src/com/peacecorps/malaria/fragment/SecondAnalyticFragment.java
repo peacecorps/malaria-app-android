@@ -189,7 +189,7 @@ public class SecondAnalyticFragment extends Fragment {
 
 
     }
-    //yatna
+    /*yatna*/
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -198,6 +198,7 @@ public class SecondAnalyticFragment extends Fragment {
         if(requestCode==2 || requestCode==3)
         {
             ViewPager vp=(ViewPager)getActivity().findViewById(R.id.vPager);
+            //refresh all the pagers in view pager
             vp.getAdapter().notifyDataSetChanged();
         }
 

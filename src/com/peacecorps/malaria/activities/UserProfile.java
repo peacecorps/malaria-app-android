@@ -40,6 +40,7 @@ public class UserProfile extends Activity{
         getPreviousDetails();
         saveData.setOnClickListener(saveDataSetOnClickListener());
     }
+    //fetch previously entered details if any
     private void getPreviousDetails(){
         userMedicineType= SharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.drugPicked", null);
         userMedicineTypeEt.setText(userMedicineType);
@@ -52,6 +53,7 @@ public class UserProfile extends Activity{
         userEmailEt.setText(userEmail);
         userAgeEt.setText(userAge + "");
     }
+    //save new values to shared preferences
     private void setNewDetails(){
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=sharedPreferences.edit();
@@ -60,6 +62,7 @@ public class UserProfile extends Activity{
         editor.putInt("user_age", Integer.parseInt(userAgeEt.getText().toString()));
         editor.commit();
     }
+    //Implement the save button
     private View.OnClickListener saveDataSetOnClickListener(){
         return new View.OnClickListener() {
             @Override
@@ -79,7 +82,9 @@ public class UserProfile extends Activity{
                     userAgeEt.setError("Age required");
                 }
                 else{
+                    //create object to send
                     AppUserModel user= new AppUserModel();
+                    //get medicine type from shared preferences
                     user=user.getAppUser(name,email, Integer.parseInt(age),userMedicineType);
                     postUserDetails(user);
                 }
@@ -87,6 +92,7 @@ public class UserProfile extends Activity{
             }
         };
     }
+    //create the server request
     private void postUserDetails(AppUserModel user){
         ServerRequests serverRequest = new ServerRequests(this);
         serverRequest.storeUserDataInBackground(user, new GetUserCallback() {

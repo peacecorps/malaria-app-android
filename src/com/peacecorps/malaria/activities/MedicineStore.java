@@ -75,6 +75,7 @@ public class MedicineStore extends Activity {
             }
         }
     }
+    //implement order medicine button
     public View.OnClickListener orderMedicineOnClickListener() {
         return new View.OnClickListener() {
             @Override
@@ -87,8 +88,7 @@ public class MedicineStore extends Activity {
                 Button message=(Button)orderMedicineDialog.findViewById(R.id.order_by_msg);
                 EditText medicineQuantityEt=(EditText)orderMedicineDialog.findViewById(R.id.order_quantity);
                 ((EditText)orderMedicineDialog.findViewById(R.id.order_quantity)).requestFocus();
-
-
+                //implement the email button
                 email.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -111,6 +111,7 @@ public class MedicineStore extends Activity {
                         }
                     }
                 });
+                //implement the message button
                 message.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -134,7 +135,7 @@ public class MedicineStore extends Activity {
             }
         };
     }
-
+    //Implement the add medicine button
     public View.OnClickListener addMedicinesOnClickListener() {
         return new View.OnClickListener() {
             @Override
@@ -156,7 +157,9 @@ public class MedicineStore extends Activity {
                         else{
                             medicineStore=preferences.getInt("medicineStore",0);
                             editor=preferences.edit();
+                            //get medicines already in store
                             int quantity = Integer.parseInt(medicineQuantityEt.getText().toString());
+                            //add the new medicines to previous ones
                             editor.putInt("medicineStore", medicineStore + quantity);
                             editor.commit();
                             displayMedicineStore();
@@ -178,7 +181,7 @@ public class MedicineStore extends Activity {
         };
 
     }
-
+    //Implement the settings button
     public View.OnClickListener settingsOnClickListener(){
         return new View.OnClickListener() {
             @Override
@@ -200,6 +203,7 @@ public class MedicineStore extends Activity {
                 else{
                     warningTv.setText("How many days before your medicine ends, do you want to get the reminder? ");
                 }
+                //get previous value if any
                 int prevAlertTime=preferences.getInt("alertTime",-1);
                 //fill editText with previous set values
                 if(prevAlertTime!=-1){
@@ -209,11 +213,13 @@ public class MedicineStore extends Activity {
                     @Override
                     public void onClick(View view) {
                         if(time.getText().toString().trim().equals("")){
+                            //If nothing is entered display error
                             time.setError("Entry Required");
                         }
                         else{
                             editor=preferences.edit();
                             int intTime = Integer.parseInt(time.getText().toString());
+                            //Update shared preference with new value
                             editor.putInt("alertTime",intTime);
                             editor.commit();
                             settingsDialog.dismiss();
@@ -232,6 +238,5 @@ public class MedicineStore extends Activity {
 
             }
         };
-
     }
 }

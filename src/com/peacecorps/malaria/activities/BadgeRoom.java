@@ -63,7 +63,7 @@ public class BadgeRoom extends Activity {
         });
 
     }
-
+    //get user's score from shared preferences
     private void getScores(){
         //get user's score and game score
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
@@ -71,7 +71,7 @@ public class BadgeRoom extends Activity {
         gameScore=sharedPreferences.getInt("gameScore",0);
         Log.d("check", "user score displayed");
     }
-
+    //open dialog to display the current badge
     private void setUpDialog(){
         achievementDialog=new Dialog(BadgeRoom.this,android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
         achievementDialog.setContentView(R.layout.badge_room_dialog);
@@ -80,6 +80,8 @@ public class BadgeRoom extends Activity {
         achievementCatTv=(TextView)achievementDialog.findViewById(R.id.achievement_category);
 
     }
+
+    //get badge based on medication  score
     private Drawable displayUserBadge() {
         Drawable badgeDrawable= null;
         //set badge according to score
@@ -98,6 +100,8 @@ public class BadgeRoom extends Activity {
         }
         return badgeDrawable;
     }
+
+    //get badge based on game score
     private Drawable displayGameBadge() {
         Drawable badgeDrawable= null;
         //set badge according to score
@@ -116,7 +120,7 @@ public class BadgeRoom extends Activity {
         }
        return badgeDrawable;
     }
-
+    //sharing achievements on social media button
     private View.OnClickListener shareButtonOnClickListener(){
         return new View.OnClickListener() {
             @Override
