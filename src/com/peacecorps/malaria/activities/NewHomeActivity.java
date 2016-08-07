@@ -16,6 +16,10 @@ public class NewHomeActivity extends Activity{
     private Button mythFactButton;
     private Button rapidFireButton;
     private Button medicineStoreButton;
+    private Button homeIconButton;
+    private Button btnTripIndicator;
+    private Button infoHub;
+    private Button userProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,40 @@ public class NewHomeActivity extends Activity{
         rapidFireButton=(Button)findViewById(R.id.rapidFire);
         mythFactButton=(Button)findViewById(R.id.mythFact);
         medicineStoreButton=(Button)findViewById(R.id.medicineStore);
+        //footer buttons
+        homeIconButton = (Button) findViewById(R.id.homeButton);
+        btnTripIndicator = (Button) findViewById(R.id.tripButton);
+        infoHub = (Button) findViewById(R.id.infoButton);
+        userProfile =(Button)findViewById(R.id.userProfile);
+        homeIconButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), MainActivity.class));
+                finish();
+            }
+        });
+        btnTripIndicator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), TripIndicatorFragmentActivity.class));
+                finish();
+            }
+        });
+        infoHub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), InfoHubFragmentActivity.class));
+                finish();
+            }
+        });
+        userProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), UserProfile.class));
+            }
+        });
+        //footer ends
+
         badgeScreenButton.setOnClickListener(badgeScreenOnClickListener());
         mythFactButton.setOnClickListener(mythFactGameOnClickListener());
         rapidFireButton.setOnClickListener(rapidFireButtonOnClickListener());
