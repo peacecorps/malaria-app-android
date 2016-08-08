@@ -77,7 +77,8 @@
         <activity android:name=".activities.RapidFireGame"/>
         <activity android:name=".activities.MedicineStore"/>
         <activity android:name=".activities.NewHomeActivity"/>
-        <activity android:name=".activities.UserProfile"/>
+        <activity android:name=".activities.UserProfile"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity android:name=".activities.TripIndicatorFragmentActivity"
                   android:launchMode="singleTask"
                   />
