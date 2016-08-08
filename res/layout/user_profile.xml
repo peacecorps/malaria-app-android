@@ -8,11 +8,16 @@
     android:orientation="vertical"
     tools:context=".activities.UserMedicineSettingsFragmentActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
     <LinearLayout
         android:id="@+id/user_medicine_settings_activity_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -24,14 +29,11 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:text="User Profile"
-            android:textSize="28sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/user_medicine_first_text_color"
             />
 
-      <ScrollView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
           <LinearLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -45,8 +47,8 @@
                   android:background="@drawable/custom_line_border"
                   android:orientation="vertical"
                   android:paddingLeft="30dp"
-                  android:paddingTop="15dp"
-                  android:paddingBottom="15dp">
+                  android:paddingTop="10dp"
+                  android:paddingBottom="10dp">
 
                   <LinearLayout
                       android:layout_width="match_parent"
@@ -143,8 +145,8 @@
                   android:id="@+id/user_profile_save"
                   style="@style/UserProfileCommonTextAppearance"
                   android:layout_gravity="center"
-                  android:layout_marginTop="20dp"
-                  android:layout_marginBottom="20dp"
+                  android:layout_marginTop="15dp"
+                  android:layout_marginBottom="10dp"
                   android:text="SAVE"
                   android:textColor="@color/white"
                   android:paddingLeft="40dp"
@@ -152,7 +154,87 @@
                   android:background="@color/golden_brown"
                   />
           </LinearLayout>
-      </ScrollView>
+
+    </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <View
+            android:layout_height="0.5dp"
+            android:layout_width="200dp"
+            android:background="#000000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            />
+
+        <LinearLayout
+
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="5dp"
+
+
+
+            >
+
+            <Button
+                android:id="@+id/homeButton"
+
+                android:background="@drawable/home_icon_normal"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:layout_marginRight="15dp"
+                android:scaleType="fitCenter"
+
+                />
+
+            <Button
+                android:background="@drawable/bus_icon_inactive_normal"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:scaleType="fitCenter"
+                android:id="@+id/tripButton"
+
+                />
+
+            <Button
+                android:background="@drawable/info_hub_inactive_normal"
+                android:id="@+id/infoButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="15dp"
+                android:scaleType="fitCenter"
+                />
+            <Button
+                android:background="@drawable/cal_right_arrow_brown"
+                android:id="@+id/tempButton"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="15dp"
+                android:scaleType="fitCenter"
+                />
+            <Button
+                android:background="@drawable/user"
+                android:id="@+id/userProfile"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitCenter"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

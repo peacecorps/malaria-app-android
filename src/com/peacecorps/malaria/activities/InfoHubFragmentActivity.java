@@ -61,13 +61,15 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         tempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(getApplicationContext(), NewHomeActivity.class), 1);
+                startActivity(new Intent(getApplication().getApplicationContext(), NewHomeActivity.class));
+                finish();
             }
         });
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),UserProfile.class));
+                startActivity(new Intent(getApplication().getApplicationContext(),UserProfile.class));
+                finish();
             }
         });
 

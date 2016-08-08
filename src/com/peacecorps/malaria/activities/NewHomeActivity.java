@@ -59,6 +59,7 @@ public class NewHomeActivity extends Activity{
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), UserProfile.class));
+                finish();
             }
         });
         //footer ends

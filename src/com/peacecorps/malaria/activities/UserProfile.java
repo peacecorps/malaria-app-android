@@ -1,6 +1,7 @@
 package com.peacecorps.malaria.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -24,6 +25,10 @@ public class UserProfile extends Activity{
     private EditText userAgeEt;
     private EditText userMedicineTypeEt;
     private Button saveData;
+    private Button homeIconButton;
+    private Button btnTripIndicator;
+    private Button infoHub;
+    private Button newHomeButton;
     private String userMedicineType;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -36,6 +41,42 @@ public class UserProfile extends Activity{
         userAgeEt=(EditText)findViewById(R.id.user_age);
         userMedicineTypeEt=(EditText)findViewById(R.id.user_medicine_type);
         saveData=(Button)findViewById(R.id.user_profile_save);
+
+        //footer buttons
+        homeIconButton = (Button) findViewById(R.id.homeButton);
+        btnTripIndicator = (Button) findViewById(R.id.tripButton);
+        infoHub = (Button) findViewById(R.id.infoButton);
+        newHomeButton =(Button)findViewById(R.id.tempButton);
+        homeIconButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), MainActivity.class));
+                finish();
+            }
+        });
+        btnTripIndicator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), TripIndicatorFragmentActivity.class));
+                finish();
+            }
+        });
+        infoHub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplication().getApplicationContext(), InfoHubFragmentActivity.class));
+                finish();
+            }
+        });
+        newHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), NewHomeActivity.class));
+                finish();
+            }
+        });
+        //footer ends
+
 
         getPreviousDetails();
         saveData.setOnClickListener(saveDataSetOnClickListener());

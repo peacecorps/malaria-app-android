@@ -48,7 +48,7 @@ import java.util.Date;
 public class TripIndicatorFragmentActivity extends FragmentActivity {
     //declaring views
     public boolean sent;
-    private Button btnInfoHub, btnHome,btnGenerate,btnGear;
+    private Button btnInfoHub, btnHome,btnGenerate,btnGear,newHome, userProfile;
     private String mDrugPicked,mLocationPicked;
     public static String mDatesPicked;
     private TextView dateData,monthData,yearData,DepartureDateData,DepartureMonthData,DepartureYearData;
@@ -105,22 +105,23 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         tripTime = (TextView)findViewById(R.id.trip_time);
         ((TextView)findViewById(R.id.trip_time)).requestFocus();
 
-        //yatna
-        //Temporary button, will be moved
-        Button tempButton =(Button)findViewById(R.id.tempButton);
-        tempButton.setOnClickListener(new View.OnClickListener() {
+        //implementing the new Home button
+        newHome =(Button)findViewById(R.id.tempButton);
+        newHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivityForResult(new Intent(getApplicationContext(), NewHomeActivity.class), 1);
+                finish();
             }
         });
 
-        //yatna
-        Button tempButton2 =(Button)findViewById(R.id.userProfile);
-        tempButton2.setOnClickListener(new View.OnClickListener() {
+        //implementing the user's profile button
+        userProfile =(Button)findViewById(R.id.userProfile);
+        userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), UserProfile.class));
+                finish();
             }
         });
 

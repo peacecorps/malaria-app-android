@@ -71,16 +71,18 @@ public class MainActivity extends FragmentActivity {
         tempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(getApplicationContext(), NewHomeActivity.class), 1);
+                startActivity(new Intent(getApplicationContext(), NewHomeActivity.class));
+                finish();
             }
         });
 
-        //user symbol on the screen to enter and push user'ss details
+        //user symbol on the screen to enter and push user's details
         userProfile =(Button)findViewById(R.id.userProfile);
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),UserProfile.class));
+                finish();
             }
         });
 
