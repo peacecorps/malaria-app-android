@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/yatna/AndroidStudioProjects/ma/malaria-app-android/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/home/yatna/AndroidStudioProjects/ma/malaria-app-android/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-c2aab4730c9bf147f6cf35291fc50ecc3b4514fa.jar" />
+    </item>
+    <item
+        jar="/home/yatna/AndroidStudioProjects/ma/malaria-app-android/build/intermediates/exploded-aar/ma/ViewPagerIndicator/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6aa2ea826a271de822f514d5c19e796bf723bcd0">
+        <dex dex="/home/yatna/AndroidStudioProjects/ma/malaria-app-android/build/intermediates/pre-dexed/debug/classes-2105293230792659e868b09b6b14542db78d9a9b.jar" />
+    </item>
+    <item
+        jar="/home/yatna/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/home/yatna/AndroidStudioProjects/ma/malaria-app-android/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-75976459b3302ce27549e932c5a85b9b7328c76f.jar" />
+    </item>
+    <item
+        jar="/home/yatna/AndroidStudioProjects/ma/malaria-app-android/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/home/yatna/AndroidStudioProjects/ma/malaria-app-android/build/intermediates/pre-dexed/debug/classes-78a6371bfd54bab9f94522e08c98b8fced454e54.jar" />
+    </item>
+    <item
+        jar="/home/yatna/AndroidStudioProjects/ma/malaria-app-android/libs/volleylib.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d8f5b9114ebe0f76de7fbf55e950540959ce4ff8">
+        <dex dex="/home/yatna/AndroidStudioProjects/ma/malaria-app-android/build/intermediates/pre-dexed/debug/volleylib-1ede61a1fbed861ccb2ec8efc2e19cb0edebdbde.jar" />
+    </item>
+    <item
+        jar="/home/yatna/AndroidStudioProjects/ma/malaria-app-android/libs/GraphView-3.1.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7ffc41c72432299f41689c8f707d0d89254d59d5">
+        <dex dex="/home/yatna/AndroidStudioProjects/ma/malaria-app-android/build/intermediates/pre-dexed/debug/GraphView-3.1.2-fa5e06655929651204b991baaa965889a318806b.jar" />
+    </item>
+
+</items>
