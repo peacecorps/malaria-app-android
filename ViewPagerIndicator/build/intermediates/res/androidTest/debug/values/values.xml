@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/yatna/AndroidStudioProjects/ma/ViewPagerIndicator/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/home/yatna/AndroidStudioProjects/send_ankita/ma/ViewPagerIndicator/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <attr format="boolean" name="centered"/>
     <attr format="color" name="selectedColor"/>
