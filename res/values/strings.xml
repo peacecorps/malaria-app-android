@@ -37,7 +37,36 @@
     <string name="items_spinner_label">Pick Items</string>
     <string name="trip_select_string">Add Packing Items</string>
     <string name="dump_test">Fetching...</string>
-
+    <string name="mal_description">
+        -Interferes with growth of parasites in red blood cells\n
+        -Take the medicine everyday at the same time with food\n
+        -Start using 1-2 days before entering the area\n
+        -Continue using through out the stay,and at least 7 days after leave\n
+        -Take missed doses as soon as possible, but skip them if it is almost time for next dose\n
+        -Consult your doctor if you have liver or kidney disease, or malaria complications\n
+        -Some side effects of drug: stomach pain, headache, diarrhea, fever, weakness\n
+        -Visit http://www.drugs.com/malarone.html for more information\n
+    </string>
+    <string name="doxy_description">
+        -Tetracycline antibiotic that helps to fight bacteria in the body\n
+        -Take the medicine everyday at the same time with food\n
+        -Start using 1-2 days before entering the area\n
+        -Continue using through out the stay,and at least 28 days after leave\n
+        -Take missed doses as soon as possible, but skip them if it is almost time for next dose\n
+        -Consult your doctor if you have liver or kidney disease, or are taking supplements and other medicines\n
+        -Some side effects of drug: stomach pain, headache, diarrhea, fever, weakness\n
+        -Visit http://www.drugs.com/doxycycline.html for more information\n
+    </string>
+    <string name="mef_description">
+        -Antimalarial agent that kills sensitive malaria parasites\n
+        -Take the medicine once a week after your main meal (NOT ON AN EMPTY STOMACH)\n
+        -Start using 1 week before entering the area\n
+        -Continue using through out the stay,and at least 4 weeks after leave\n
+        -Take missed doses as soon as possible, but skip them if it is almost time for next dose\n
+        -Consult your doctor if you have allergies, mental illnesses, seizures, or are taking similar medicines\n
+        -Some side effects of drug: stomach pain, headache, muscle ache, tiredness, vomiting\n
+        -Visit http://www.drugs.com/cdi/mefloquine.html for more information\n
+    </string>
 
     <string-array name="user_medicine_settings_activity_drug_array">
         <item>Malarone (Daily)</item>

@@ -6,18 +6,19 @@
               android:layout_gravity="center"
               android:background="@drawable/background"
               android:orientation="vertical"
-              tools:context=".UserMedicineSettingsFragmentActivity"
-    >
+              android:paddingTop="15dp"
+              tools:context=".activities.UserMedicineSettingsFragmentActivity">
 
-    <LinearLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:id="@+id/user_medicine_settings_activity_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:gravity="center"
             android:orientation="vertical" >
-
-        <TextView
+            <TextView
                 android:id="@+id/user_medicine_settings_activity_setup_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -30,7 +31,7 @@
                 android:textColor="@color/user_medicine_first_text_color"
                 />
 
-        <LinearLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -40,12 +41,12 @@
                 android:orientation="vertical"
                 android:paddingLeft="30dp" >
 
-            <LinearLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
 
-                <TextView
+                    <TextView
                         android:id="@+id/user_medicine_settings_activity_drug_take_label"
                         style="@style/UserMedicineSettingsCommonTextAppearance"
                         android:text="@string/user_medicine_settings_activity_drug_take_label"
@@ -53,19 +54,19 @@
                         android:textColor="@color/golden_brown"
                         />
 
-                <TextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="114dp" />
-            </LinearLayout>
+                </LinearLayout>
 
-            <Spinner
+                <Spinner
                     android:id="@+id/user_medicine_settings_activity_drug_select_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
 
-            <TextView
+                <TextView
                     android:id="@+id/user_medicine_settings_activity_time_pick_label"
                     style="@style/UserMedicineSettingsCommonTextAppearance"
                     android:layout_marginRight="8dp"
@@ -74,7 +75,7 @@
                     android:textColor="@color/golden_brown"
                     />
 
-            <TextView
+                <TextView
                     android:id="@+id/user_medicine_settings_activity_time_pick_button"
                     style="@style/UserMedicineSettingsCommonTextAppearance"
                     android:layout_gravity="center"
@@ -83,11 +84,11 @@
                     android:text="@string/user_medicine_settings_activity_time_pick_button"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <LinearLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
 
-                <TextView
+                    <TextView
                         android:id="@+id/user_medicine_settings_activity_if_forget_label"
                         style="@style/UserMedicineSettingsCommonTextAppearance"
                         android:text="@string/user_medicine_settings_activity_if_forget_label"
@@ -95,14 +96,14 @@
                         android:textColor="@color/golden_brown"
                         />
 
-                <TextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="72dp" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-        <Button
+            <Button
                 android:id="@+id/user_medicine_settings_activity_done_button"
                 style="@style/UserMedicineSettingsCommonTextAppearance"
                 android:layout_gravity="center"
@@ -113,17 +114,24 @@
                 android:paddingRight="40dp"
                 android:background="@color/golden_brown"
                 />
-    </LinearLayout>
 
-    <ImageView
-            android:id="@+id/user_medicine_settings_activity_pc_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/user_medicine_settings_activity_pc_logo"
-            android:scaleType="fitCenter"
-            android:src="@drawable/pc_logo"
+        </LinearLayout>
+
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:gravity="bottom">
+        <ImageView
+        android:id="@+id/user_medicine_settings_activity_pc_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/user_medicine_settings_activity_pc_logo"
+        android:scaleType="fitCenter"
+        android:src="@drawable/pc_logo"
         />
+    </LinearLayout>
 
 </LinearLayout>

@@ -42,6 +42,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/effectivenessLabel"
                 android:textSize="20sp"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:id="@+id/effectiveness_image"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/background"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
