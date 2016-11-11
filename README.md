@@ -26,6 +26,25 @@ Included in this repository are files to help you get started:
 <li>A research folder containing a map of Malaria Prevalence, and additional information about Malaria from the Centers for Disease Control and Prevention.</li>
 </ul>
 
+## Building the Project
+The project can be built successfully by following the instructions given this document. <a href="https://github.com/systers/malaria-app-android/wiki/Building-the-Repository"> Building the repository</a>
+
+## Contributing to the repository
+<ol>
+<li>Check if a similar issue does not already exist. Do not forget to check the 'Closed Issues' list too.</li>
+<li>If the issue is new, then create a 'New Issue' clearly describing the bug/enhancement. </li>
+<li>Wait for a collaborator to review your issue and get yourself assigned for that particular issue. </li>
+<li>Once assigned, send a Pull Request. </li>
+</ol>
+
+## Some Do's and Don'ts
+<ul>
+<li>Use short and clear commit messages.</li>
+<li>Use a single commit per feature. Squash the unnecessary commits.</li>
+<li>Try to follow the JAVA's naming convention while writing code.</li>
+<li>Avoid using hardcoded resources. </li>
+</ul>
+
 
 ## Dependencies
 This project uses Jack Wharton's Android-ViewPagerIndicator for the Viewpager Swipe view.
