@@ -390,7 +390,6 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getApplicationContext());
 
 
-
                 startActivity(intent);
 
                 //TripIndicatorFragmentActivity.this.finish();
