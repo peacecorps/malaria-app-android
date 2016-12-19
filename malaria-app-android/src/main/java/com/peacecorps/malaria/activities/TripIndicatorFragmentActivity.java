@@ -248,7 +248,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 packingSelect.setError(null);
                 tripTime.setError(null);
 
-               if(locationSpinner.getText().toString().equals(""))
+               if("".equals(locationSpinner.getText().toString().trim()))
                {
                    Toast.makeText(getApplicationContext()," Location Missing ",Toast.LENGTH_SHORT).show();
                }
@@ -295,7 +295,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                        chklist+=q+" "+item+" ";
 
                    }
-                   mLocationPicked=locationSpinner.getText().toString();
+                   mLocationPicked=locationSpinner.getText().toString().trim();
                    mDatesPicked = "Trip to " + mLocationPicked + " is scheduled for " + departure_formattedate + ".\n" +"Stay safe, don't forget to take your pills.";
 
                    //save mItemPicked to view reminder
