@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ public class RapidFireGame extends Activity{
     private  int gameScore;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-
+    private long timercount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,6 +212,8 @@ public class RapidFireGame extends Activity{
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
+                counter = new RapidFireTimeCounter(timercount,1000);
+                counter.start();
             }
         });
 
@@ -235,7 +238,9 @@ public class RapidFireGame extends Activity{
 
         @Override
         public void onTick(long l) {
-            timer.setText(""+l/1000);
+            timercount=l;
+            timer.setText(""+ l/1000);
+
         }
 
         @Override
