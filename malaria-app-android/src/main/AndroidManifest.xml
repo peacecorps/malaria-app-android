@@ -76,7 +76,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.InfoHubFragmentActivity"/>
-        <activity android:name=".activities.PeaceCorpsPolicyFragmentActivity"/>
+        <activity android:name=".activities.PeaceCorpsPolicyFragmentActivity"
+            android:configChanges="orientation|screenSize"/>
         <activity android:name=".activities.PercentSideEffectsFragmentActivity"/>
         <activity android:name=".activities.SideEffectsPCVFragmentActivity"/>
         <activity android:name=".activities.SideEffectsNPCVFragmentActivity"/>
