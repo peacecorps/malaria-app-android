@@ -411,24 +411,30 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 }
                else
                 {
+                    String date = new SimpleDateFormat("dd/MM/yy").format(new Date());
+                    Date curr_date = getDateObj(date);
                     Date departure=getDateObj(departure_formattedate);
                     Date arrival=getDateObj(arrival_formattedate);
+                    long curr_datel = curr_date.getTime();
                     long departurel = departure.getTime();
                     long arrivall = arrival.getTime();
 
-                    if(arrivall>=departurel) {
+                    if(departurel < curr_datel) {
+                        Toast.makeText(getApplicationContext(),R.string.departuredate_currentdate,Toast.LENGTH_SHORT).show();
+
+                    } else if(arrivall < departurel) {
+                        Toast.makeText(getApplicationContext(),R.string.arrivaldate_departuredate,Toast.LENGTH_SHORT).show();
+
+                    } else if(arrivall>=departurel) {
                         Intent intent = new Intent(getApplication(), TripIndicatorPackingActivity.class);
                         setNumDrugs(departure_formattedate, arrival_formattedate);
                         intent.putExtra(DRUG_TAG, num_drugs);
                         startActivity(intent);
                         packingSelect.setText(TripIndicatorPackingActivity.tripDrugName);
-                    }else{
-                        Toast.makeText(getApplicationContext(),"Arrival date cannot be before the Departure date.",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
-
     }
 
     private void createSelectionSpinners() {
