@@ -86,7 +86,8 @@
         <activity android:name=".fragment.ThirdAnalyticFragment"/>
         <activity android:name=".activities.DayFragmentActivity"/>
         <activity android:name=".activities.BadgeRoom"/>
-        <activity android:name=".activities.MythFactGame"/>
+        <activity android:name=".activities.MythFactGame"
+            android:configChanges="orientation|screenSize"/>
         <activity android:name=".activities.RapidFireGame"/>
         <activity android:name=".activities.MedicineStore"/>
         <activity android:name=".activities.NewHomeActivity"/>
