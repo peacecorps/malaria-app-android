@@ -108,12 +108,13 @@
                 style="@style/UserMedicineSettingsCommonTextAppearance"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:text="@string/user_medicine_settings_activity_done_button"
                 android:textColor="@color/white"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:background="@color/golden_brown"
-                />
+                android:background="@color/gray"
+                android:hint="@string/user_medicine_settings_activity_done_button"
+                android:textColorHint="@color/white"
+            />
 
         </LinearLayout>
 

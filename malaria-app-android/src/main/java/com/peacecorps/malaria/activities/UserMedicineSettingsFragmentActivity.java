@@ -257,6 +257,10 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
 
     public static void checkIfTimeSet(boolean isDoneButtonChecked) {
         mDoneButton.setEnabled(isDoneButtonChecked);
+        if (isDoneButtonChecked){
+            mDoneButton.setText(mFragmentContext.getString(R.string.user_medicine_settings_activity_done_button));
+            mDoneButton.setBackgroundColor(mFragmentContext.getResources().getColor(R.color.golden_brown));
+        }
     }
 
     /*Method for saving all the settings of the User\
