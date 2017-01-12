@@ -8,6 +8,7 @@ import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,9 @@ import java.util.List;
  * Created by yatna on 9/6/16.
  */
 public class RapidFireGame extends Activity{
+    private static final String COUNTER_MILLIS_LEFT = "COUNTER_MILLIS_LEFT" ;
+    private static final String GAME_SCORE = "GAME_SCORE";
+    private static final String QUES_NO ="QUES_NO" ;
     private Button opt1;
     private Button opt2;
     private Button opt3;
@@ -33,6 +37,7 @@ public class RapidFireGame extends Activity{
     private RapidFireTimeCounter counter;
     private String resultString;
     private int quesNo;
+    private long millisLeft;
     private  int gameScore;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -58,7 +63,7 @@ public class RapidFireGame extends Activity{
         questionList.add(new RapidFireQuestionModel("Doxycycline should be taken ", "Daily", "Weekly", "Monthly", 1));
         questionList.add(new RapidFireQuestionModel("Malaria is transmitted through _____ mosquito", "Female Aedes", "Female Anopheles", "Male Aedes", 2));
         questionList.add(new RapidFireQuestionModel("Malarone should be taken ", "Daily", "Weekly", "Monthly", 1));
-        initializeGame();
+        initializeGame(savedInstanceState);
 
     }
     //disable the back button
@@ -66,16 +71,27 @@ public class RapidFireGame extends Activity{
     public void onBackPressed(){
     }
 
-    void initializeGame(){
+    void initializeGame(Bundle savedInstanceState){
+        // below parameters are initialized with their initial value when game starts
         quesNo=0;
         gameScore=0;
+        millisLeft=6000;
+        // in case the game is coming from saved instance, below parameters are changed to saved values
+        if(savedInstanceState!=null) {
+            millisLeft=savedInstanceState.getLong(COUNTER_MILLIS_LEFT);
+            gameScore=savedInstanceState.getInt(GAME_SCORE);
+            quesNo=savedInstanceState.getInt(QUES_NO);
+        }
         scoreTv.setText("Score : " + gameScore);
-        askQuestion(quesNo);
+        askQuestion(quesNo,millisLeft);
     }
-    void askQuestion(int i){
+    void askQuestion(int i,long millisLeft){
         opt1.setBackground(getResources().getDrawable(R.drawable.info_hub_button));
         opt2.setBackground(getResources().getDrawable(R.drawable.info_hub_button));
         opt3.setBackground(getResources().getDrawable(R.drawable.info_hub_button));
+        //if quesNo exceeds the questionList size which happens on orientation change, quesNo have to be decremented
+        if(i== questionList.size())
+            i--;
         questionTv.setText(questionList.get(i).getQuestion());
         opt1.setText(questionList.get(i).getOption1());
         opt2.setText(questionList.get(i).getOption2());
@@ -87,10 +103,14 @@ public class RapidFireGame extends Activity{
         opt2.setClickable(true);
         opt3.setEnabled(true);
         opt3.setClickable(true);
-        //display time as 5 secs
-        timer.setText("5");
-        counter= new RapidFireTimeCounter(6000,1000);
-        counter.start();
+        //displays the time left for the next question
+        timer.setText(""+ millisLeft/1000);
+        //checks that quesNo is within questionList size which is possible on orientation change
+        if(i != questionList.size()) {
+            counter= new RapidFireTimeCounter(millisLeft,1000);
+            counter.start();
+        }
+
     }
     public View.OnClickListener  optionOneClick() {
         return new View.OnClickListener() {
@@ -180,12 +200,16 @@ public class RapidFireGame extends Activity{
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                quesNo++;
+                if(quesNo<questionList.size())
+                {
+                    quesNo++;
+
                 if (quesNo<questionList.size()){
-                    askQuestion(quesNo);
+                    askQuestion(quesNo,6000);
                 }
                 else{
                     showDialog();
+                }
                 }
             }
         },1000);
@@ -219,6 +243,7 @@ public class RapidFireGame extends Activity{
 
         // Showing Alert Message
         alertDialog.show();
+        doKeepDialog(alertDialog);
     }
     //add current game's score to the user score
     void addGameScoreToMainScore(){
@@ -240,6 +265,7 @@ public class RapidFireGame extends Activity{
         public void onTick(long l) {
             timercount=l;
             timer.setText(""+ l/1000);
+            millisLeft=l;
 
         }
 
@@ -269,7 +295,30 @@ public class RapidFireGame extends Activity{
         });
 
         // Showing Alert Message
+
         alertDialog.show();
+        doKeepDialog(alertDialog);
     }
 
+    @Override
+    protected void onDestroy() {
+        counter.cancel();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putLong(COUNTER_MILLIS_LEFT,millisLeft);
+        outState.putInt(GAME_SCORE,gameScore);
+        outState.putInt(QUES_NO,quesNo);
+        super.onSaveInstanceState(outState);
+    }
+    // attaches the dialog with WindowManager to avoid cancelling on orientation change
+    private static void doKeepDialog(Dialog dialog){
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
+    }
 }
