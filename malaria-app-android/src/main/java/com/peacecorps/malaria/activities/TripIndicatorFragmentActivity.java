@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +33,7 @@ import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
 import com.peacecorps.malaria.model.SharedPreferenceStore;
 import com.peacecorps.malaria.reciever.TripAlarmReceiver;
+import com.peacecorps.malaria.widget.TripAppWidgetProvider;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -364,6 +367,11 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                            startActivity(new Intent(getApplication().getApplicationContext(), MainActivity.class));
                            finish();
                        }
+
+                       //update the widgets
+                       int widgetIds[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), TripAppWidgetProvider.class));
+                       TripAppWidgetProvider tripWidgets = new TripAppWidgetProvider();
+                       tripWidgets.onUpdate(getApplicationContext(), AppWidgetManager.getInstance(getApplicationContext()),widgetIds);
                    }
                    else
                    {
