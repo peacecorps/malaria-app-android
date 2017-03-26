@@ -47,6 +47,7 @@
                 android:id="@+id/percent_side_effect_image"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/back_ground"/>
+                android:contentDescription="@string/description_side_effects_graph"/>
 
         </LinearLayout>
     </ScrollView>
