@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +33,7 @@ import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
 import com.peacecorps.malaria.model.SharedPreferenceStore;
 import com.peacecorps.malaria.reciever.TripAlarmReceiver;
+import com.peacecorps.malaria.widget.TripAppWidgetProvider;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -77,6 +80,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     private TextView pmtLabel;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+    public Calendar departureDate;
 
     public static TripIndicatorFragmentActivity instance(){
         return inst;
@@ -266,7 +270,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 packingSelect.setError(null);
                 tripTime.setError(null);
 
-               if(locationSpinner.getText().toString().equals(""))
+               if("".equals(locationSpinner.getText().toString().trim()))
                {
                    Toast.makeText(getApplicationContext()," Location Missing ",Toast.LENGTH_SHORT).show();
                }
@@ -313,7 +317,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                        chklist+=q+" "+item+" ";
 
                    }
-                   mLocationPicked=locationSpinner.getText().toString();
+                   mLocationPicked=locationSpinner.getText().toString().trim();
                    mDatesPicked = "Trip to " + mLocationPicked + " is scheduled for " + departure_formattedate + ".\n" +"Stay safe, don't forget to take your pills.";
 
                    //save mItemPicked to view reminder
@@ -394,6 +398,11 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                            startActivity(new Intent(getApplication().getApplicationContext(), MainActivity.class));
                            finish();
                        }
+
+                       //update the widgets
+                       int widgetIds[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), TripAppWidgetProvider.class));
+                       TripAppWidgetProvider tripWidgets = new TripAppWidgetProvider();
+                       tripWidgets.onUpdate(getApplicationContext(), AppWidgetManager.getInstance(getApplicationContext()),widgetIds);
                    }
                    else
                    {
@@ -441,24 +450,30 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 }
                else
                 {
+                    String date = new SimpleDateFormat("dd/MM/yy").format(new Date());
+                    Date curr_date = getDateObj(date);
                     Date departure=getDateObj(departure_formattedate);
                     Date arrival=getDateObj(arrival_formattedate);
+                    long curr_datel = curr_date.getTime();
                     long departurel = departure.getTime();
                     long arrivall = arrival.getTime();
 
-                    if(arrivall>=departurel) {
+                    if(departurel < curr_datel) {
+                        Toast.makeText(getApplicationContext(),R.string.departuredate_currentdate,Toast.LENGTH_SHORT).show();
+
+                    } else if(arrivall < departurel) {
+                        Toast.makeText(getApplicationContext(),R.string.arrivaldate_departuredate,Toast.LENGTH_SHORT).show();
+
+                    } else if(arrivall>=departurel) {
                         Intent intent = new Intent(getApplication(), TripIndicatorPackingActivity.class);
                         setNumDrugs(departure_formattedate, arrival_formattedate);
                         intent.putExtra(DRUG_TAG, num_drugs);
                         startActivity(intent);
                         packingSelect.setText(TripIndicatorPackingActivity.tripDrugName);
-                    }else{
-                        Toast.makeText(getApplicationContext(),"Arrival date cannot be before the Departure date.",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
-
     }
 
     private void createSelectionSpinners() {
@@ -533,7 +548,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 SharedPreferenceStore.mEditor.clear().commit();
                 startActivity(new Intent(getApplication().getApplicationContext(),
                         UserMedicineSettingsFragmentActivity.class));
-
+                dialog.dismiss();
             }
         });
 
@@ -620,13 +635,16 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
-            final Calendar c = Calendar.getInstance();
+            final Calendar c = departureDate;
+            c.add(Calendar.DATE, 1);
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), R.style.MyDatePicker , this, year, month, day);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), R.style.MyDatePicker , this, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
+            return datePickerDialog;
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -657,6 +675,10 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     }
 
     public void showDatePickerDialogArrival(View v) {
+        if(!depar){
+            Toast.makeText(getApplicationContext(), "Set departure date first.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         DialogFragment newFragment = new DatePickerFragmentArrival();
         newFragment.show(getFragmentManager(), "Arrival Data");
     }
@@ -668,16 +690,21 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
-             dep_year = c.get(Calendar.YEAR);
-             dep_month = c.get(Calendar.MONTH);
-             dep_day = c.get(Calendar.DAY_OF_MONTH);
+            c.add(Calendar.DATE, 1);
+            dep_year = c.get(Calendar.YEAR);
+            dep_month = c.get(Calendar.MONTH);
+            dep_day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(),R.style.MyDatePicker ,this, dep_year, dep_month, dep_day);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), R.style.MyDatePicker , this, dep_year, dep_month, dep_day);
+            datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
+            return datePickerDialog;
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             setTextFields(day,month+1,year);
+            departureDate = Calendar.getInstance();
+            departureDate.set(year, month, day);
 
             depar=true;
 

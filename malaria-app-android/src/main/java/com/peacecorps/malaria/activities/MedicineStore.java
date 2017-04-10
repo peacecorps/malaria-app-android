@@ -95,6 +95,9 @@ public class MedicineStore extends Activity {
                         if(medicineQuantityEt.getText().toString().trim().equals("")){
                             medicineQuantityEt.setError("Quantity Required");
                         }
+                        else if(medicineQuantityEt.getText().toString().matches("[0]+")){
+                            medicineQuantityEt.setError("Quantity Required");
+                        }
                         else{
                             //send and email
                             String msgBody="My malaria pills will last for the coming  "+"<b>"+medicineStore+"</b>"+" days only.<br> Send the following immediately: <br>" +
@@ -116,6 +119,9 @@ public class MedicineStore extends Activity {
                     @Override
                     public void onClick(View view) {
                         if(medicineQuantityEt.getText().toString().trim().equals("")){
+                            medicineQuantityEt.setError("Quantity Required");
+                        }
+                        else if(medicineQuantityEt.getText().toString().matches("[0]+")){
                             medicineQuantityEt.setError("Quantity Required");
                         }
                         else{
