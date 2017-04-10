@@ -109,6 +109,24 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         tripTime = (TextView)findViewById(R.id.trip_time);
         ((TextView)findViewById(R.id.trip_time)).requestFocus();
 
+        //Getting details of the saved trip.
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.trip_pref), MODE_PRIVATE);
+        locationSpinner.setText(prefs.getString(getString(R.string.trip_pref_destination), ""));
+        ((TextView)findViewById(R.id.trip_month_departure)).setText(prefs.getString(getString(R.string.trip_pref_dep_month), ""));
+        ((TextView)findViewById(R.id.trip_date_departure)).setText(prefs.getString(getString(R.string.trip_pref_dep_date), ""));
+        ((TextView)findViewById(R.id.trip_year_departure)).setText(prefs.getString(getString(R.string.trip_pref_dep_year), ""));
+        ((TextView)findViewById(R.id.trip_month)).setText(prefs.getString(getString(R.string.trip_pref_arr_month), ""));
+        ((TextView)findViewById(R.id.trip_date)).setText(prefs.getString(getString(R.string.trip_pref_arr_date), ""));
+        ((TextView)findViewById(R.id.trip_year)).setText(prefs.getString(getString(R.string.trip_pref_arr_year), ""));
+        packingSelect.setText(prefs.getString(getString(R.string.trip_pref_packed_items), ""));
+        tripTime.setText(prefs.getString(getString(R.string.trip_pref_reminder_time), ""));
+
+        //Setting departure and arrival date formats if trip details are present.
+        if (!(prefs.getString("reminderTime", "").equals(""))) {
+            departure_formattedate = prefs.getString("departure_date", "") + "/" + prefs.getString("departure_month", "") + "/"+ prefs.getString("departure_year", "");
+            arrival_formattedate = prefs.getString("arrival_date", "") + "/" + prefs.getString("arrival_month", "") + "/" + prefs.getString("arrival_year", "");
+        }
+
         //implementing the new Home button
         newHome =(Button)findViewById(R.id.tempButton);
         newHome.setOnClickListener(new View.OnClickListener() {
@@ -315,6 +333,18 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                    Log.d(TAGTIFA,"Dep Time:"+deptime);
                    Log.d(TAGTIFA, "Today: " + today);
                    if(deptime>today) {
+                       //Saving the trip details.
+                       SharedPreferences.Editor editTripDetails = getSharedPreferences(getString(R.string.trip_pref), MODE_MULTI_PROCESS).edit();
+                       editTripDetails.putString(getString(R.string.trip_pref_destination), mLocationPicked);
+                       editTripDetails.putString(getString(R.string.trip_pref_dep_month), ((TextView) findViewById(R.id.trip_month_departure)).getText().toString());
+                       editTripDetails.putString(getString(R.string.trip_pref_dep_date), ((TextView) findViewById(R.id.trip_date_departure)).getText().toString());
+                       editTripDetails.putString(getString(R.string.trip_pref_dep_year), ((TextView) findViewById(R.id.trip_year_departure)).getText().toString());
+                       editTripDetails.putString(getString(R.string.trip_pref_arr_month), ((TextView) findViewById(R.id.trip_month)).getText().toString());
+                       editTripDetails.putString(getString(R.string.trip_pref_arr_date), ((TextView) findViewById(R.id.trip_date)).getText().toString());
+                       editTripDetails.putString(getString(R.string.trip_pref_arr_year), ((TextView) findViewById(R.id.trip_year)).getText().toString());
+                       editTripDetails.putString(getString(R.string.trip_pref_packed_items), ((TextView) findViewById(R.id.tripSelectBox)).getText().toString());
+                       editTripDetails.putString(getString(R.string.trip_pref_reminder_time), tripTime.getText().toString());
+                       editTripDetails.apply();
                        interval = getTimeInterval(deptime, today);
                        /**
                         * Setting Up Alarm for a Week Before

@@ -69,6 +69,16 @@
         -Some side effects of drug: stomach pain, headache, muscle ache, tiredness, vomiting\n
         -Visit <a href="http://www.drugs.com/cdi/mefloquine.html">http://www.drugs.com/cdi/mefloquine.html</a> for more information
     </string>
+    <string name="trip_pref_destination">destination</string>
+    <string name="trip_pref_dep_month">departure_month</string>
+    <string name="trip_pref_dep_date">departure_date</string>
+    <string name="trip_pref_dep_year">departure_year</string>
+    <string name="trip_pref_arr_month">arrival_month</string>
+    <string name="trip_pref_arr_date">arrival_date</string>
+    <string name="trip_pref_arr_year">arrival_year</string>
+    <string name="trip_pref_packed_items">packed_items</string>
+    <string name="trip_pref_reminder_time">reminderTime</string>
+    <string name="trip_pref">trip-details</string>
 
     <!--Notification string-->
     <string name="drug_reminder_notification_title">Malaria Prevention</string>
@@ -122,7 +132,6 @@
     <string name="description_badge_newbie">Newbie badge</string>
     <string name="description_badge_hat">Hat badge</string>
     <string name="description_"></string>
-
     <string-array name="user_medicine_settings_activity_drug_array">
         <item>Malarone (Daily)</item>
         <item>Doxycycline (Daily)</item>
