@@ -62,7 +62,8 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     static SharedPreferenceStore mSharedPreferenceStore;
     private Dialog dialog = null;
     private ImageView loc_history;
-    public static TextView packingSelect,departureMonth,arrivalMonth;
+    public static TextView packingSelect;
+    public TextView departureMonth, arrivalMonth;
     public static final String DRUG_TAG="com.peacecorps.malaria.activites.TripIndicatorFragmentActivity.DRUG_TAG";
     long num_drugs=0;
     private String arrival_formattedate, departure_formattedate;

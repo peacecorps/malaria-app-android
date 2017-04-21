@@ -43,7 +43,7 @@ public class DayFragmentActivity extends FragmentActivity {
     private int day,month, year;
     private String drugPicked="";
     static SharedPreferenceStore mSharedPreferenceStore;
-    public static Context mFragmentContext;
+    public Context mFragmentContext;
     final Context con = this;
     private RadioGroup btnRadGroup;
     private RadioButton btnRadButton;
