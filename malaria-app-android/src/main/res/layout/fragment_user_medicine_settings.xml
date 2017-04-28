@@ -114,8 +114,8 @@
                 android:background="@color/gray"
                 android:hint="@string/user_medicine_settings_activity_done_button"
                 android:textColorHint="@color/white"
-            />
-
+                android:layout_marginBottom="@dimen/user_medicine_settings_marginBottom"
+                />
         </LinearLayout>
 
     </ScrollView>
