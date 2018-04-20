@@ -1,24 +1,20 @@
-### What is wrong?
-Tell us what is going wrong.
+## Description
+As a [USER],
+I need [TO DO THIS],
+so that I can [ACCOMPLISH THAT].
 
-### Steps to reproduce the issue.
-Write the steps to reproduce the issue (If applicable).
+## Mocks
+[INSERT RELEVANT PNG FILE]
 
-### Expected behaviour.
-What do you think should be the expected behaviour?
+## Acceptance Criteria
+### Update [Required]
+- [ ] [LIST ITEMS]
+### Enhancement to Update [Optional]
+- [ ] [LIST ITEMS]
 
-### Your development environment
-1. Device model -
-2. Android version -
+## Definition of Done
+- [ ] All of the required items are completed.
+- [ ] Approval by 1 mentor.
 
-### LogCat
-Provide LogCat in case of a crash.
-
-### Screenshot or GIF
-Upload screenshot(s) or GIF showing the issue (If applicable).
-
-### Do you want to work on the issue?
-Tell us if you would like to solve the issue?
-
-
-_**Note** - Before opening an issue please read [Issue Reporting Best Practices](https://github.com/systers/malaria-app-android/wiki/Issue-Reporting-Best-Practices)._
+## Estimation
+[INSERT NUMBER HERE] hours
