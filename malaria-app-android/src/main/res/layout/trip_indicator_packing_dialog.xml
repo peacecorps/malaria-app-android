@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_background"
-    tools:context=".activities.TripIndicatorFragmentActivity">
+    tools:context=".code.activities.TripIndicatorFragmentActivity">
 
     <ScrollView
         android:layout_width="match_parent"

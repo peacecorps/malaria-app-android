@@ -1,16 +1,12 @@
 package com.peacecorps.malaria.activities;
 
-import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.InstrumentationTestCase;
-import android.test.InstrumentationTestRunner;
 import android.test.ViewAsserts;
 import android.view.View;
 import android.widget.Button;
 
 import com.peacecorps.malaria.R;
-
-import junit.framework.TestCase;
+import com.peacecorps.malaria.code.activities.NewHomeActivity;
 
 /**
  * Created by yatna on 17/8/16.

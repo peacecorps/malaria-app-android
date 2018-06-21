@@ -7,8 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.peacecorps.malaria.R;
-
-import junit.framework.TestCase;
+import com.peacecorps.malaria.code.activities.RapidFireGame;
 
 /**
  * Created by yatna on 17/8/16.

@@ -4,7 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.peacecorps.malaria.reciever.AlarmHandlerClass;
+import com.peacecorps.malaria.code.reciever.AlarmHandlerClass;
 
 public class AlarmService extends Service {
 

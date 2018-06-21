@@ -26,9 +26,13 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion" // v4
-    compile "com.viewpagerindicator:library:$rootProject.ext.viewPagerIndicatorVersion"
-    compile files('libs/volleylib.jar')
-    compile files('libs/GraphView-3.1.2.jar')
-    testCompile 'junit:junit:4.12'
+    implementation "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion" // v4
+    implementation "com.viewpagerindicator:library:$rootProject.ext.viewPagerIndicatorVersion"
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    implementation files('libs/volleylib.jar')
+    implementation files('libs/GraphView-3.1.2.jar')
+    testImplementation 'junit:junit:4.12'
+    //Room
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
 }

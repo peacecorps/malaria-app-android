@@ -1,5 +1,7 @@
 package com.peacecorps.malaria.model;
 
+import com.peacecorps.malaria.code.model.RapidFireQuestionModel;
+
 import junit.framework.TestCase;
 
 /**

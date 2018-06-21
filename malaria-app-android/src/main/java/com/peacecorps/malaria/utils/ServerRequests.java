@@ -2,11 +2,9 @@ package com.peacecorps.malaria.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
 
-import com.peacecorps.malaria.interfaces.GetUserCallback;
-import com.peacecorps.malaria.model.AppUserModel;
+import com.peacecorps.malaria.code.interfaces.GetUserCallback;
+import com.peacecorps.malaria.code.model.AppUserModel;
 
 //import org.apache.http.HttpResponse;
 //import org.apache.http.NameValuePair;
@@ -16,10 +14,7 @@ import com.peacecorps.malaria.model.AppUserModel;
 //import org.apache.http.impl.client.DefaultHttpClient;
 //import org.apache.http.message.BasicNameValuePair;
 //import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 
-import java.util.ArrayList;
 
 // TODO: Since servers are not working,http errors should be fixed after community's decision. Issue #281 ;)
 
