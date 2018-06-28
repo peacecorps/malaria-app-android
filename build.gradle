@@ -26,6 +26,8 @@ ext {
     buildToolsVersion = '26.0.2'
 
     // App dependencies
-    supportLibraryVersion = '27.0.0'
+    supportLibraryVersion = '27.1.1'
     viewPagerIndicatorVersion = '2.4.1@aar'
+    lifecycle_version = '1.1.1'
+    room_version = '1.1.1'
 }

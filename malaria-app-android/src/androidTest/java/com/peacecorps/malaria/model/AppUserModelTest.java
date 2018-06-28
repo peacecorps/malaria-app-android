@@ -1,5 +1,7 @@
 package com.peacecorps.malaria.model;
 
+import com.peacecorps.malaria.code.model.AppUserModel;
+
 import junit.framework.TestCase;
 
 /**

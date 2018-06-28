@@ -6,8 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.peacecorps.malaria.R;
-
-import junit.framework.TestCase;
+import com.peacecorps.malaria.code.activities.MythFactGame;
 
 /**
  * Created by yatna on 18/8/16.

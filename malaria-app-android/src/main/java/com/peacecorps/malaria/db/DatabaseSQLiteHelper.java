@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.peacecorps.malaria.model.SharedPreferenceStore;
+import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

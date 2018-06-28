@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".activities.UserMedicineSettingsFragmentActivity">
+    tools:context=".code.activities.UserMedicineSettingsFragmentActivity">
 
     <ScrollView
         android:layout_width="match_parent"

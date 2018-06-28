@@ -27,14 +27,14 @@
         <service android:name=".services.AlarmService" >
         </service>
 
-        <receiver android:name=".reciever.AlarmAutoStart" >
+        <receiver android:name=".code.reciever.AlarmAutoStart" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" >
                 </action>
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".reciever.AlarmHandlerClass"
+            android:name=".code.reciever.AlarmHandlerClass"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.peacecorps.malaria.START_ALARM" />
@@ -43,19 +43,19 @@
         </receiver>
 
         <receiver
-            android:name=".reciever.DrugReminderReceiver"
+            android:name=".code.reciever.DrugReminderReceiver"
             android:exported="false"
             android:enabled="true">
         </receiver>
 
         <receiver
-            android:name=".reciever.DrugReminderCallerReceiver"
+            android:name=".code.reciever.DrugReminderCallerReceiver"
             android:exported="false"
             android:enabled="true">
         </receiver>
 
         <activity
-            android:name=".activities.UserMedicineSettingsFragmentActivity"
+            android:name=".code.activities.UserMedicineSettingsFragmentActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,7 +64,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".code.activities.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
@@ -75,56 +75,56 @@
                 </action>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.InfoHubFragmentActivity"/>
-        <activity android:name=".activities.PeaceCorpsPolicyFragmentActivity"
+        <activity android:name=".code.activities.InfoHubFragmentActivity"/>
+        <activity android:name=".code.activities.PeaceCorpsPolicyFragmentActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".activities.PercentSideEffectsFragmentActivity"
+        <activity android:name=".code.activities.PercentSideEffectsFragmentActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".activities.SideEffectsPCVFragmentActivity"
+        <activity android:name=".code.activities.SideEffectsPCVFragmentActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".activities.SideEffectsNPCVFragmentActivity"
+        <activity android:name=".code.activities.SideEffectsNPCVFragmentActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".activities.VolunteerAdherenceFragmentActivity"
+        <activity android:name=".code.activities.VolunteerAdherenceFragmentActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".activities.EffectivenessFragmentActivity"
+        <activity android:name=".code.activities.EffectivenessFragmentActivity"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".fragment.ThirdAnalyticFragment"/>
-        <activity android:name=".activities.DayFragmentActivity"/>
-        <activity android:name=".activities.BadgeRoom"/>
-        <activity android:name=".activities.MythFactGame"
+        <activity android:name=".code.fragment.ThirdAnalyticFragment"/>
+        <activity android:name=".code.activities.DayFragmentActivity"/>
+        <activity android:name=".code.activities.BadgeRoom"/>
+        <activity android:name=".code.activities.MythFactGame"
             android:configChanges="orientation|screenSize"/>
-        <activity android:name=".activities.RapidFireGame"/>
-        <activity android:name=".activities.MedicineStore"/>
-        <activity android:name=".activities.NewHomeActivity"/>
-        <activity android:name=".activities.UserProfile"
+        <activity android:name=".code.activities.RapidFireGame"/>
+        <activity android:name=".code.activities.MedicineStore"/>
+        <activity android:name=".code.activities.NewHomeActivity"/>
+        <activity android:name=".code.activities.UserProfile"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
-        <activity android:name=".activities.TripIndicatorFragmentActivity"
+        <activity android:name=".code.activities.TripIndicatorFragmentActivity"
                   android:launchMode="singleTask"
                   />
 
-        <activity android:name=".activities.TripIndicatorDialogActivity"
+        <activity android:name=".code.activities.TripIndicatorDialogActivity"
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
-        <activity android:name=".activities.RemainderToneActivity"
+        <activity android:name=".code.activities.RemainderToneActivity"
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
-        <activity android:name=".activities.TripIndicatorPackingActivity"
+        <activity android:name=".code.activities.TripIndicatorPackingActivity"
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
 
-        <activity android:name=".activities.TripAlarmActivity" android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
+        <activity android:name=".code.activities.TripAlarmActivity" android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
             android:launchMode="singleTop"/>
 
         <service
             android:name=".services.TripAlarmService"
             android:enabled="true" />
-        <receiver android:name=".reciever.TripAlarmReceiver" />
+        <receiver android:name=".code.reciever.TripAlarmReceiver" />
 
-        <receiver android:name=".widget.TripAppWidgetProvider" >
+        <receiver android:name=".code.widget.TripAppWidgetProvider" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/appwidget_info" />
         </receiver>
-        <receiver android:name=".widget.MedicineStatusWidgetProvider" >
+        <receiver android:name=".code.widget.MedicineStatusWidgetProvider" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
