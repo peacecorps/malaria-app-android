@@ -1,4 +1,6 @@
 package com.peacecorps.malaria.data.prefs;
 
-public interface PreferencesHelper {
+interface PreferencesHelper {
+    boolean hasUserSetPreferences();
+    void setUserPreferences(boolean value);
 }
