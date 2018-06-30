@@ -1,12 +1,8 @@
 package com.peacecorps.malaria.data.db;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.CursorIndexOutOfBoundsException;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 import com.peacecorps.malaria.data.db.dao.*;
 import com.peacecorps.malaria.data.db.entities.*;
 import com.peacecorps.malaria.utils.AppExecutors;
@@ -121,6 +117,7 @@ public class AppDbHelper implements DbHelper {
                 }
             }
         };
+        appExecutors.diskIO().execute(runnable);
     }
 
     /**Getting Medication Data of Each Day in Day Fragment Activity**/
@@ -215,7 +212,6 @@ public class AppDbHelper implements DbHelper {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                final int value = 0;
                 final String status = userMedicineDao.isEntered(date, month, year);
 
                 appExecutors.mainThread().execute(new Runnable() {
@@ -360,7 +356,6 @@ public class AppDbHelper implements DbHelper {
             @Override
             public void run() {
                 List<Location> locations = locationDao.getLocationListByLocation(location);
-                int size = locations.size()-1;
                 for (Location l: locations) {
                     a[0] = l.getTime();
                     a[0]++;
@@ -404,7 +399,6 @@ public class AppDbHelper implements DbHelper {
             @Override
             public void run() {
                 List<Integer> intList = packingDao.getPackingQuantityList(pItem);
-                int flag = 0;
                 if(intList.size()>0) {
                     packingDao.updatePacking(pItem, quantity, status);
                 }
@@ -507,8 +501,7 @@ public class AppDbHelper implements DbHelper {
             @Override
             public void run() {
                 List<String> timeStampList = userMedicineDao.getLastTaken("yes");
-                int count = 0;
-                String d;
+                int count = 0;String d;
                 for (String time: timeStampList) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     Date curr = Calendar.getInstance().getTime();
@@ -545,5 +538,7 @@ public class AppDbHelper implements DbHelper {
                 });
             }
         };
+        appExecutors.diskIO().execute(runnable);
+
     }
 }

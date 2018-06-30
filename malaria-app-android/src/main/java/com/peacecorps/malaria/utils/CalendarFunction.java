@@ -78,7 +78,7 @@ public class CalendarFunction {
     }
 
     /**Finding the No. of weekly days between two dates for calculating Adherence**/
-    public int getIntervalWeekly(Date s, Date e, int weekday)
+    public static int getIntervalWeekly(Date s, Date e, int weekday)
     {
         Calendar startCal;
         Calendar endCal;
@@ -86,14 +86,11 @@ public class CalendarFunction {
         startCal.setTime(s);
         endCal = Calendar.getInstance();
         endCal.setTime(e);
-        int medDays = 0,flag=0;
+        int medDays = 0;
         //If working dates are same,then checking what is the day on that date.
-        if (startCal.getTimeInMillis() == endCal.getTimeInMillis()) {
-            if (startCal.get(Calendar.DAY_OF_WEEK) == weekday)
-            {
+        if ((startCal.getTimeInMillis() == endCal.getTimeInMillis()) && (startCal.get(Calendar.DAY_OF_WEEK) == weekday)) {
                 ++medDays;
                 return medDays;
-            }
         }
         /*If start date is coming after end date, Then shuffling Dates and storing dates
         by incrementing upto end date in do-while part.*/
@@ -117,7 +114,7 @@ public class CalendarFunction {
     }
 
     /**Finding the No. of days between two dates for calculating adherence of daily drugs**/
-    public int getIntervalDaily(Date s,Date e)
+    public static int getIntervalDaily(Date s, Date e)
     {
         long sLong=s.getTime();
         long eLong=e.getTime();

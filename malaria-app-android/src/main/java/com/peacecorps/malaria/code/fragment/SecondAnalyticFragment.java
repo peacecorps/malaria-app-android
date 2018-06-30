@@ -22,7 +22,7 @@ import com.jjoe64.graphview.GraphViewStyle;
 import com.jjoe64.graphview.LineGraphView;
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
-import com.peacecorps.malaria.code.activities.UserMedicineSettingsFragmentActivity;
+import com.peacecorps.malaria.ui.user_medicine_setting.UserMedicineSettingsFragmentActivity;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
 
 import java.util.Calendar;

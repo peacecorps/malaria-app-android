@@ -7,19 +7,19 @@
               android:background="@drawable/background"
               android:orientation="vertical"
               android:paddingTop="15dp"
-              tools:context=".code.activities.UserMedicineSettingsFragmentActivity">
+              tools:context=".ui.user_medicine_setting.UserMedicineSettingsFragmentActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:id="@+id/user_medicine_settings_activity_container"
+            android:id="@+id/activity_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical" >
             <TextView
-                android:id="@+id/user_medicine_settings_activity_setup_label"
+                android:id="@+id/setup_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -47,7 +47,7 @@
                     android:orientation="horizontal" >
 
                     <TextView
-                        android:id="@+id/user_medicine_settings_activity_drug_take_label"
+                        android:id="@+id/drug_take_label"
                         style="@style/UserMedicineSettingsCommonTextAppearance"
                         android:text="@string/user_medicine_settings_activity_drug_take_label"
                         android:paddingTop="15dp"
@@ -61,13 +61,13 @@
                 </LinearLayout>
 
                 <Spinner
-                    android:id="@+id/user_medicine_settings_activity_drug_select_spinner"
+                    android:id="@+id/drug_select_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
 
                 <TextView
-                    android:id="@+id/user_medicine_settings_activity_time_pick_label"
+                    android:id="@+id/time_pick_label"
                     style="@style/UserMedicineSettingsCommonTextAppearance"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="5dp"
@@ -76,7 +76,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/user_medicine_settings_activity_time_pick_button"
+                    android:id="@+id/time_pick_button"
                     style="@style/UserMedicineSettingsCommonTextAppearance"
                     android:layout_gravity="center"
                     android:paddingBottom="10dp"
@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
-                        android:id="@+id/user_medicine_settings_activity_if_forget_label"
+                        android:id="@+id/if_forget_label"
                         style="@style/UserMedicineSettingsCommonTextAppearance"
                         android:text="@string/user_medicine_settings_activity_if_forget_label"
                         android:paddingBottom="10dp"
@@ -104,7 +104,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/user_medicine_settings_activity_done_button"
+                android:id="@+id/done_button"
                 style="@style/UserMedicineSettingsCommonTextAppearance"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
@@ -124,7 +124,7 @@
         android:layout_gravity="right"
         android:gravity="bottom">
         <ImageView
-        android:id="@+id/user_medicine_settings_activity_pc_logo"
+        android:id="@+id/pc_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"

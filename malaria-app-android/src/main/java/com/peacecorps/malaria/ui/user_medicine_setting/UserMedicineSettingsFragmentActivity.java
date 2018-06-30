@@ -1,4 +1,4 @@
-package com.peacecorps.malaria.code.activities;
+package com.peacecorps.malaria.ui.user_medicine_setting;
 
 /**
  * Created by Chimdi on 6/2/2014.
@@ -26,35 +26,49 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.peacecorps.malaria.R;
+import com.peacecorps.malaria.code.activities.MainActivity;
 import com.peacecorps.malaria.code.adapter.DrugArrayAdapter;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 import com.peacecorps.malaria.services.AlarmService;
+import com.peacecorps.malaria.ui.base.BaseActivity;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import butterknife.BindDimen;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class UserMedicineSettingsFragmentActivity extends FragmentActivity
+
+public class UserMedicineSettingsFragmentActivity extends BaseActivity
         implements AdapterView.OnItemSelectedListener {
 
-    private static Button mDoneButton;
+    @BindView(R.id.done_button)
+    Button mDoneButton;
 
-    private static TextView timePickButton;
-    private TextView mSetupLabel;
-    private TextView mDrugTakeLabel;
-    private TextView mTimePickLabel;
-    private TextView mIfForgetLabel;
+    @BindView(R.id.time_pick_button)
+    TextView timePickButton;
+    @BindView(R.id.setup_label)
+    TextView mSetupLabel;
+    @BindView(R.id.drug_take_label)
+    TextView mDrugTakeLabel;
+    @BindView(R.id.time_pick_label)
+    TextView mTimePickLabel;
+    @BindView(R.id.if_forget_label)
+    TextView mIfForgetLabel;
+    private static View v;
+    private static TimePicker tp;
+
     private Spinner mDrugSelectSpinner;
+
     private static boolean isTimeSet = false;
     private static String mDrugPicked;
     private static int mHour;
     private static int mMinute;
     private final static Calendar mCalendar = Calendar.getInstance();
     private String TAGUMSFA = "UserMedicineSettingsFragmentActivity";
-    static SharedPreferenceStore mSharedPreferenceStore;
-    private static View v;
-    private static TimePicker tp;
 
+    static SharedPreferenceStore mSharedPreferenceStore;
     public static Context mFragmentContext;
 
     /*User Medicine Settings Fragment Activity is for the Setup Screen of the Malaria App*/
@@ -63,23 +77,17 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.fragment_user_medicine_settings);
+        // set up title of activity
         this.setTitle(R.string.user_medicine_settings_fragment_activity_title);
+        ButterKnife.bind(this);
 
         mSharedPreferenceStore = new SharedPreferenceStore();
 
         mFragmentContext = UserMedicineSettingsFragmentActivity.this
                 .getApplicationContext();
-        mDoneButton = (Button) findViewById(R.id.user_medicine_settings_activity_done_button);
         mDoneButton.setOnClickListener(mDoneButtonClickListener);
 
         boolean isDoneButtonChecked = false;
-
-        timePickButton = (TextView) findViewById(R.id.user_medicine_settings_activity_time_pick_button);
-        mDrugTakeLabel = (TextView) findViewById(R.id.user_medicine_settings_activity_drug_take_label);
-        mSetupLabel = (TextView) findViewById(R.id.user_medicine_settings_activity_setup_label);
-        mTimePickLabel = (TextView) findViewById(R.id.user_medicine_settings_activity_time_pick_label);
-        mIfForgetLabel = (TextView) findViewById(R.id.user_medicine_settings_activity_if_forget_label);
-        mDrugSelectSpinner = (Spinner) findViewById(R.id.user_medicine_settings_activity_drug_select_spinner);
 
 
         mSharedPreferenceStore.getSharedPreferences(this);
@@ -233,7 +241,7 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
      */
 
     public static void checkIfTimeSet(boolean isDoneButtonChecked) {
-        mDoneButton.setEnabled(isDoneButtonChecked);
+       // mDoneButton.setEnabled(isDoneButtonChecked);
     }
 
     /*Method for saving all the settings of the User\
@@ -305,7 +313,7 @@ public class UserMedicineSettingsFragmentActivity extends FragmentActivity
         String theTime = String.valueOf(hours) + ':' + minutes + " " + timeSet;
 
         // Set the timePickButton as the converted time
-        timePickButton.setText(theTime);
+        //timePickButton.setText(theTime);
         isTimeSet = true;
 
     }

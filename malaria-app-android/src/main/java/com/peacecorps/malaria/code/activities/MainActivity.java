@@ -18,6 +18,7 @@ import com.peacecorps.malaria.code.adapter.FragmentAdapter;
 import com.peacecorps.malaria.code.fragment.FirstAnalyticFragment;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
+import com.peacecorps.malaria.utils.CalendarFunction;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.PageIndicator;
 
@@ -182,9 +183,10 @@ public class MainActivity extends FragmentActivity {
                 Date start=cal.getTime();
                 int weekDay=cal.get(Calendar.DAY_OF_WEEK);
                 if(SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly",false))
-                    interval=sqLite.getIntervalWeekly(start,tdy,weekDay);
+                    interval= CalendarFunction.getIntervalWeekly(start,tdy,weekDay);
                 else
-                    interval=sqLite.getIntervalDaily(start,tdy);
+                    interval=CalendarFunction.getIntervalDaily(start,tdy);
+                // Todo add it to preferences later, not able to decide pref_key now
                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
                         + time, takenDate).apply();
                 /*long oneDay = 1000 * 60 * 60 * 24;

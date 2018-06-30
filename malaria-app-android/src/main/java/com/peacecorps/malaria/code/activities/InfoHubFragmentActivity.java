@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
+import com.peacecorps.malaria.ui.user_medicine_setting.UserMedicineSettingsFragmentActivity;
 
 /**
  * Created by Chimdi on 7/18/14.

@@ -6,7 +6,7 @@ import com.peacecorps.malaria.data.db.entities.Packing;
 import java.util.Date;
 import java.util.List;
 
-interface DbHelper {
+public interface DbHelper {
     interface LoadIntegerCallback {
         void onDataLoaded(int value);
     }
