@@ -31,6 +31,7 @@ import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 import com.peacecorps.malaria.code.reciever.TripAlarmReceiver;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
+import com.peacecorps.malaria.ui.user_medicine_setting.UserMedicineSettingsFragmentActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -573,13 +574,14 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         String month_data=monthData.getText().toString();
         String year_data=yearData.getText().toString();
         arrival_formattedate=date_data+"/"+month_data+"/"+year_data;
+        //Todo check need of later later
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_date", arrival_formattedate).commit();
 
         String departure_date_data=DepartureDateData.getText().toString();
         String departure_month_data=DepartureMonthData.getText().toString();
         String departure_year_data=DepartureYearData.getText().toString();
         departure_formattedate=departure_date_data+"/"+departure_month_data+"/"+departure_year_data;
-
+        //Todo check need of later later
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.departure_trip_date", departure_formattedate).commit();
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_drug",mDrugPicked).commit();
         //SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.TRIP_LOCATION",mLocationPicked).commit();

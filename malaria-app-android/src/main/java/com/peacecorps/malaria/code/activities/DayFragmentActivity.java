@@ -21,6 +21,7 @@ import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.fragment.ThirdAnalyticFragment;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
+import com.peacecorps.malaria.utils.CalendarFunction;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -179,7 +180,6 @@ public class DayFragmentActivity extends FragmentActivity {
                                 SharedPreferenceStore.mEditor.putInt("com.peacecorps.malaria.dailyDose", dosesInaRow).apply();
                                 indicator.setBackgroundResource(R.drawable.accept_medi_checked_);
 
-                                //yatna
                                 sharedPreferences= PreferenceManager.getDefaultSharedPreferences(con);
                                 editor=sharedPreferences.edit();
                                 int score=sharedPreferences.getInt("userScore",0);
@@ -354,12 +354,13 @@ public class DayFragmentActivity extends FragmentActivity {
             calt.add(Calendar.MONTH, 2);
             Date start = calt.getTime();
             Date end = cal.getTime();
+            //Todo idk what key it is, check later
             SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
                     + time, takenDate).apply();
             if (SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly", false)) {
-                interval = sqLite.getIntervalWeekly(start, end, SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDay", 1));
+                interval = CalendarFunction.getIntervalWeekly(start, end, SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDay", 1));
             } else {
-                interval = sqLite.getIntervalDaily(start, end);
+                interval = CalendarFunction.getIntervalDaily(start, end);
             }
             Log.d(TAGD,"First Date :"+ calt.get(Calendar.DATE));
             Log.d(TAGD, "Current Date :" + cal.get(Calendar.DATE));

@@ -185,6 +185,7 @@ public class TripIndicatorPackingActivity extends Activity {
 
                 mSharedPreferenceStore.mEditor.putInt("Array Size", outputStrArr.length);
 
+                //Todo check it's need later during mvp implementation
                 for(int i=0;i<outputStrArr.length;i++)
                     mSharedPreferenceStore.mEditor.putString(outputStrArr + "_" + i, outputStrArr[i]).commit();
 

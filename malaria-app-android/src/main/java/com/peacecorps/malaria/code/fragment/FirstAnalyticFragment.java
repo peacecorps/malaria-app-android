@@ -15,8 +15,9 @@ import android.widget.TextView;
 
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
-import com.peacecorps.malaria.code.activities.UserMedicineSettingsFragmentActivity;
+import com.peacecorps.malaria.ui.user_medicine_setting.UserMedicineSettingsFragmentActivity;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
+import com.peacecorps.malaria.utils.CalendarFunction;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -125,9 +126,9 @@ public class FirstAnalyticFragment extends Fragment {
                 int weekDay=cal.get(Calendar.DAY_OF_WEEK);
                 //calaculating no. of weekdays for weekly drug
                 if(SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly",false))
-                    interval=sqLite.getIntervalWeekly(start,tdy,weekDay);
+                    interval= CalendarFunction.getIntervalWeekly(start,tdy,weekDay);
                 else
-                    interval=sqLite.getIntervalDaily(start,tdy);
+                    interval=CalendarFunction.getIntervalDaily(start,tdy);
                 //^for daily drug only the no. of days
                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
                         + time, takenDate).apply();

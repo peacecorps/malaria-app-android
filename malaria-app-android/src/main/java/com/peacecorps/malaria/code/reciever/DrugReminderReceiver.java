@@ -15,6 +15,7 @@ import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 import com.peacecorps.malaria.services.AlarmService;
+import com.peacecorps.malaria.utils.CalendarFunction;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -229,9 +230,9 @@ public class DrugReminderReceiver extends BroadcastReceiver {
                 Date start = cal.getTime();
                 int weekDay = cal.get(Calendar.DAY_OF_WEEK);
                 if (SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly", false))
-                    interval = sqLite.getIntervalWeekly(start, tdy, weekDay);
+                    interval = CalendarFunction.getIntervalWeekly(start, tdy, weekDay);
                 else
-                    interval = sqLite.getIntervalDaily(start, tdy);
+                    interval = CalendarFunction.getIntervalDaily(start, tdy);
                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
                         + time, takenDate).apply();
 

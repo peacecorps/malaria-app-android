@@ -21,15 +21,17 @@ import android.widget.TextView;
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.activities.RemainderToneActivity;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
-import com.peacecorps.malaria.code.activities.UserMedicineSettingsFragmentActivity;
+import com.peacecorps.malaria.ui.user_medicine_setting.UserMedicineSettingsFragmentActivity;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
 import com.peacecorps.malaria.services.AlarmService;
+import com.peacecorps.malaria.utils.CalendarFunction;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+//Todo many preferences usage, need to look it in detail and then create function inside pref_file, skipped for now.
 public class HomeScreenFragment extends Fragment {
 
     static final private int INIT_HOUR = 5;
@@ -201,6 +203,7 @@ public class HomeScreenFragment extends Fragment {
                 .findViewById(R.id.warningView);
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
         //get the limit set by user from shared preference
+        //Todo check it's usage later
         int alertTime=sharedPreferences.getInt("alertTime",-1);
         //display warning if medicine in store is less than the limit set
         if(alertTime!=-1 && sharedPreferences.getInt("medicineStore",0)<alertTime){
@@ -342,11 +345,11 @@ public class HomeScreenFragment extends Fragment {
                 SharedPreferenceStore.mEditor.putLong("com.peacecorps.malaria."
                         + time, takenDate).apply();
                 if(SharedPreferenceStore.mPrefsStore.getBoolean("com.peacecorps.malaria.isWeekly",false)) {
-                    interval = sqLite.getIntervalWeekly(start,end,SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDay",1));
+                    interval = CalendarFunction.getIntervalWeekly(start,end,SharedPreferenceStore.mPrefsStore.getInt("com.peacecorps.malaria.weeklyDay",1));
                 }
                 else
                 {
-                    interval = sqLite.getIntervalDaily(start,end);
+                    interval = CalendarFunction.getIntervalDaily(start,end);
                 }
 
                 /*long oneDay = 1000 * 60 * 60 * 24;
