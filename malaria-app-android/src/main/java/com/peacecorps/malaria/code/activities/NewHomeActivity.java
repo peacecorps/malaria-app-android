@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.peacecorps.malaria.R;
+import com.peacecorps.malaria.ui.home_screen.MainActivity;
 
 /**
  * Created by yatna on 14/6/16.

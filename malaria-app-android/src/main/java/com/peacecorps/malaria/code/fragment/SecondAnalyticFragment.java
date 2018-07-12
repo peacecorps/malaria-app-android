@@ -22,7 +22,7 @@ import com.jjoe64.graphview.GraphViewStyle;
 import com.jjoe64.graphview.LineGraphView;
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
-import com.peacecorps.malaria.ui.user_medicine_setting.UserMedicineSettingsFragmentActivity;
+import com.peacecorps.malaria.ui.user_medicine_setting.MedicineSettingsActivity;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
 
 import java.util.Calendar;
@@ -407,7 +407,7 @@ public class SecondAnalyticFragment extends Fragment {
                     sqLite.resetDatabase();
                     mSharedPreferenceStore.mEditor.clear().commit();
                     startActivity(new Intent(getActivity(),
-                            UserMedicineSettingsFragmentActivity.class));
+                            MedicineSettingsActivity.class));
                     getActivity().finish();
                 } else {
                     dialog.dismiss();
@@ -417,7 +417,7 @@ public class SecondAnalyticFragment extends Fragment {
                 sqLite.resetDatabase();
                 mSharedPreferenceStore.mEditor.clear().commit();
                 startActivity(new Intent(getActivity(),
-                        UserMedicineSettingsFragmentActivity.class));
+                        MedicineSettingsActivity.class));
                 getActivity().finish();
 
 

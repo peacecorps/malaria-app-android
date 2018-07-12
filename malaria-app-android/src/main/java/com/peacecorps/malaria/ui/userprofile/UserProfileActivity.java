@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.activities.InfoHubFragmentActivity;
-import com.peacecorps.malaria.code.activities.MainActivity;
+import com.peacecorps.malaria.ui.home_screen.MainActivity;
 import com.peacecorps.malaria.code.activities.NewHomeActivity;
 import com.peacecorps.malaria.code.activities.TripIndicatorFragmentActivity;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;

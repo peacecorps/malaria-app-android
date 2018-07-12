@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
+import com.peacecorps.malaria.ui.home_screen.MainActivity;
 import com.peacecorps.malaria.utils.UtilityMethods;
 
 /**

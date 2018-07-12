@@ -28,6 +28,7 @@ android {
 dependencies {
     implementation "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion" // v4
     implementation "com.viewpagerindicator:library:$rootProject.ext.viewPagerIndicatorVersion"
+    implementation "com.android.support:design:$rootProject.ext.supportLibraryVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     implementation files('libs/volleylib.jar')
     implementation files('libs/GraphView-3.1.2.jar')

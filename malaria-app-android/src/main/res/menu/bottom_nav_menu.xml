@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/bnv_home"
+        android:icon="@drawable/home_icon_normal"
+        android:title="@string/nav_home_button"
+        app:showAsAction="always|withText"
+        tools:ignore="AlwaysShowAction" />
+    <item
+        android:id="@+id/bnv_trip_button"
+        android:icon="@drawable/bus_icon_inactive_normal"
+        android:title="@string/nav_trip_button"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/bnv_info_button"
+        android:icon="@drawable/info_hub_inactive_normal"
+        android:title="@string/nav_infohub_button"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/bnv_play_button"
+        android:icon="@drawable/cal_right_arrow_off"
+        android:title="@string/nav_game_button"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/bnv_user_profile"
+        android:icon="@drawable/user"
+        android:title="@string/nav_profile_button"
+        app:showAsAction="always|withText" />
+</menu>
