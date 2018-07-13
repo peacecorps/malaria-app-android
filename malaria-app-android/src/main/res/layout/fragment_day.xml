@@ -21,7 +21,7 @@
             android:layout_weight="0.6"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/golden_brown"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_25sp"
             android:textStyle="bold"/>
 
@@ -50,7 +50,7 @@
             android:layout_margin="@dimen/margin_10dp"
             android:padding="@dimen/padding_5dp"
             android:text="Drug:"
-            android:textColor="@color/golden_brown"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_20sp"
             android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
             android:paddingLeft="@dimen/padding_15dp"
             android:paddingRight="@dimen/padding_10dp"
             android:text="Taken:"
-            android:textColor="@color/golden_brown"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_20sp"
             android:textStyle="bold" />
 

@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Trip Checklist Reminder"
-            android:textColor="@color/golden_brown"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_25sp"
             android:gravity="center"
             android:background="@color/lightest_brown"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tripRemindingItems"
-            android:textColor="@color/golden_brown"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_20sp"
             android:text="hi"
             />

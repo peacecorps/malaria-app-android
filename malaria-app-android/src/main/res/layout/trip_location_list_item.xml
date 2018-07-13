@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@color/cream"
         android:padding="@dimen/padding_5dp"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_15sp" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:background="@color/cream"
         android:padding="@dimen/padding_5dp"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_15sp" />
 
 </RelativeLayout>

@@ -343,8 +343,8 @@ public class SecondAnalyticFragment extends Fragment {
          //styling graph
         lineGraphView.getGraphViewStyle().setGridColor(getResources().getColor(R.color.lightest_brown));
         lineGraphView.getGraphViewStyle().setGridStyle(GraphViewStyle.GridStyle.BOTH);
-        lineGraphView.getGraphViewStyle().setHorizontalLabelsColor(getResources().getColor(R.color.golden_brown));
-        lineGraphView.getGraphViewStyle().setVerticalLabelsColor(getResources().getColor(R.color.golden_brown));
+        lineGraphView.getGraphViewStyle().setHorizontalLabelsColor(getResources().getColor(R.color.text_color_primary));
+        lineGraphView.getGraphViewStyle().setVerticalLabelsColor(getResources().getColor(R.color.text_color_primary));
         lineGraphView.setBackground(getResources().getDrawable(R.drawable.graph_bg));
         lineGraphView.getGraphViewStyle().setTextSize(8.0F);
         lineGraphView.setVerticalLabels(verLabels);

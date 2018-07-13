@@ -2,7 +2,7 @@
 <TextView
     android:id="@+id/reminderListItem"
     android:background="@color/cream"
-    android:textColor="@color/golden_brown"
+    android:textColor="@color/text_color_primary"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:textSize="@dimen/text_size_15sp"

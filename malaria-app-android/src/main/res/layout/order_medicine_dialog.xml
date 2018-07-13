@@ -26,8 +26,7 @@
                 android:layout_margin="@dimen/margin_10dp"
                 android:gravity="center"
                 android:text="Place Order"
-                android:textColor="@color/golden_brown"
-                android:textSize="@dimen/text_size_25sp"/>
+                android:textColor="@color/textColorPrimary"                android:textSize="@dimen/text_size_25sp"/>
 
         </LinearLayout>
 
@@ -50,8 +49,8 @@
                 android:focusableInTouchMode="true"
                 android:hint="Eg 7"
                 android:inputType="number"
-                android:textColor="@color/golden_brown"
-                android:textColorHint="@color/lightgray02" />
+                android:textColor="@color/textColorPrimary"
+            android:textColorHint="@color/lightgray02" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -59,7 +58,7 @@
                 android:layout_margin="@dimen/margin_20dp"
                 android:layout_toRightOf="@+id/image"
                 android:text="Enter the number of medicines you want to order."
-                android:textColor="@color/golden_brown" />
+                android:textColor="@color/textColorPrimary"/>
 
         </LinearLayout>
 

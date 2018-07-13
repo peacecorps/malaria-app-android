@@ -28,7 +28,7 @@
                 android:layout_margin="@dimen/margin_10dp"
                 android:gravity="center"
                 android:text="Reset Data"
-                android:textColor="@color/golden_brown"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/text_size_25sp" />
 
         </LinearLayout>
@@ -56,7 +56,7 @@
                 android:layout_margin="@dimen/margin_20dp"
                 android:layout_toRightOf="@+id/image"
                 android:text="Do you want to reset app settings? It will delete all data."
-                android:textColor="@color/golden_brown" />
+                android:textColor="@color/textColorPrimary"/>
 
         </LinearLayout>
 

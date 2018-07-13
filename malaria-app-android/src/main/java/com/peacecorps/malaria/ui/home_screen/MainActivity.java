@@ -39,6 +39,11 @@ public class MainActivity extends BaseActivity implements HomeContract.IHomeView
         presenter = new HomePresenter<>(dataManager, this);
         presenter.attachView(this);
 
+        if(getSupportActionBar()!=null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_launcher);
+        }
+
         //setting up bottom navigation
         setBottomNavigation();
     }

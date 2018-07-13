@@ -28,6 +28,7 @@ ext {
     // App dependencies
     supportLibraryVersion = '27.1.1'
     viewPagerIndicatorVersion = '2.4.1@aar'
+    constraintLayoutVersion= '1.1.2'
     lifecycle_version = '1.1.1'
     room_version = '1.1.1'
 }

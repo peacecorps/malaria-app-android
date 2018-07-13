@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#FFF</color>
-    <color name="golden_brown">#664a3a</color>
+    <color name="text_color_primary">#664a3a</color>
     <color name="light_red">#da6767</color>
     <color name="view_pager_indicator_text_color">#2FB3E3</color>
     <color name="black">#000000</color>
@@ -30,5 +30,17 @@
     <color name="lightest_brown">#ffe0cf79</color>
     <color name="transparent_cream">#89fffefa</color>
     <color name="transparent">#00FFFFFF</color>
+    
+    <color name="text_hint_color">#ACA25E</color>
+    <color name="correct_green">#00BF48</color>
+
+    <color name="colorPrimary">#C69C6C</color>
+    <color name="colorPrimaryDark">#803400</color>
+    <color name="textColorPrimary">#803400</color>
+    <color name="textColorSecondary">#ACA25E</color>
+    <color name="colorSecondary">#C4A265</color>
+    <color name="windowBackground">#ffe989</color>
+    <color name="colorAccent">#FF4938</color>
+
 
 </resources>

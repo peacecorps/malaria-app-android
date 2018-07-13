@@ -71,7 +71,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="Malarone"
-                    android:textColor="@color/golden_brown"
+                    android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/text_size_25sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -89,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="7 Days"
-                    android:textColor="@color/golden_brown"
+                    android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/text_size_50sp"
                     android:textStyle="bold" />
             </LinearLayout>

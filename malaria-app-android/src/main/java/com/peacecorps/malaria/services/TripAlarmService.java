@@ -42,7 +42,7 @@ public class TripAlarmService extends IntentService {
                 activIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder alamNotificationBuilder = new NotificationCompat.Builder(
-                this).setContentTitle("Upcoming Trip Reminder").setSmallIcon(R.drawable.appicon_themed)
+                this).setContentTitle("Upcoming Trip Reminder").setSmallIcon(R.drawable.app_icon)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .setContentText(msg)
                 .addAction(R.drawable.checked, "Trip Checklist", contentIntent)

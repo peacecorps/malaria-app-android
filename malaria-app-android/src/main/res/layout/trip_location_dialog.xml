@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Previous Locations"
-            android:textColor="@color/golden_brown"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_25sp"
             android:gravity="center"
             android:background="@color/lightest_brown"

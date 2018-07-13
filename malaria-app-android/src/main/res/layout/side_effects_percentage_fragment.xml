@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Percentage Side Effects"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_25sp"
         android:textStyle="bold" />
 

@@ -27,8 +27,7 @@
                 android:layout_margin="@dimen/margin_10dp"
                 android:gravity="center"
                 android:text="Select Drugs"
-                android:textColor="@color/golden_brown"
-                android:textSize="@dimen/text_size_25sp"/>
+                android:textColor="@color/textColorPrimary"                android:textSize="@dimen/text_size_25sp"/>
 
         </LinearLayout>
 
@@ -43,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/cream"
-                android:divider="@color/golden_brown"
+                android:textColor="@color/textColorPrimary"
                 android:dividerHeight="@dimen/height_1dp"
                 android:headerDividersEnabled="true"/>
 
