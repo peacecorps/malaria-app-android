@@ -13,5 +13,4 @@ public interface AlarmDao {
 
     @Query("SELECT * FROM alarmtime")
     AlarmTime getAlarmData();
-
 }

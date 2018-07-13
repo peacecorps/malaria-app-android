@@ -34,17 +34,6 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_hub_screen);
 
-        /*internetIsConnected = (TextView)findViewById(R.id.internetIsConnected);
-
-        // check if you are connected or not
-        if(isConnected()){
-            internetIsConnected.setBackgroundColor(0xFF00CC00);
-            internetIsConnected.setText("Internet Connected");
-        }
-        else{
-            internetIsConnected.setText("You are NOT connected");
-        }*/
-
         /**Declaring Views**/
         ihLabel= (TextView)findViewById(R.id.ih);
         homeIconButton = (Button) findViewById(R.id.homeButton);
@@ -64,13 +53,6 @@ public class InfoHubFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplication().getApplicationContext(), NewHomeActivity.class));
-                finish();
-            }
-        });
-        userProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplication().getApplicationContext(),UserProfile.class));
                 finish();
             }
         });

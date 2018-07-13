@@ -119,15 +119,6 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
         //implementing the user's profile button
         userProfile =(Button)findViewById(R.id.userProfile);
-        userProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), UserProfile.class));
-                finish();
-            }
-        });
-
-
         pmtLabel = (TextView)findViewById(R.id.pmt);
         departureMonth=(TextView)findViewById(R.id.trip_month_departure);
         ((TextView)findViewById(R.id.trip_month_departure)).requestFocus();
@@ -442,7 +433,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     private void createSelectionSpinners() {
 
         ArrayAdapter<CharSequence> drugAdapter = ArrayAdapter.createFromResource(
-                this, R.array.drug_array,
+                this, R.array.array_drugs,
                 R.layout.trip_spinner_item);
 
         drugAdapter.setDropDownViewResource(R.layout.trip_spinner_popup_item);
