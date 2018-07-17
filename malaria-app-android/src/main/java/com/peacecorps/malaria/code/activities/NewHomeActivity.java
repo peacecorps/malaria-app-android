@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.peacecorps.malaria.R;
+import com.peacecorps.malaria.ui.home_screen.MainActivity;
 
 /**
  * Created by yatna on 14/6/16.
@@ -60,13 +61,6 @@ public class NewHomeActivity extends Activity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplication().getApplicationContext(), InfoHubFragmentActivity.class));
-                finish();
-            }
-        });
-        userProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), UserProfile.class));
                 finish();
             }
         });

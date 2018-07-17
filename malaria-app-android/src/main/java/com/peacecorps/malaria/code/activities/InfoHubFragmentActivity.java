@@ -12,7 +12,8 @@ import android.widget.TextView;
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
-import com.peacecorps.malaria.ui.user_medicine_setting.UserMedicineSettingsFragmentActivity;
+import com.peacecorps.malaria.ui.home_screen.MainActivity;
+import com.peacecorps.malaria.ui.user_medicine_setting.MedicineSettingsActivity;
 
 /**
  * Created by Chimdi on 7/18/14.
@@ -33,17 +34,6 @@ public class InfoHubFragmentActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_hub_screen);
 
-        /*internetIsConnected = (TextView)findViewById(R.id.internetIsConnected);
-
-        // check if you are connected or not
-        if(isConnected()){
-            internetIsConnected.setBackgroundColor(0xFF00CC00);
-            internetIsConnected.setText("Internet Connected");
-        }
-        else{
-            internetIsConnected.setText("You are NOT connected");
-        }*/
-
         /**Declaring Views**/
         ihLabel= (TextView)findViewById(R.id.ih);
         homeIconButton = (Button) findViewById(R.id.homeButton);
@@ -63,13 +53,6 @@ public class InfoHubFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplication().getApplicationContext(), NewHomeActivity.class));
-                finish();
-            }
-        });
-        userProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplication().getApplicationContext(),UserProfile.class));
                 finish();
             }
         });
@@ -191,7 +174,7 @@ public class InfoHubFragmentActivity extends FragmentActivity {
                     sqLite.resetDatabase();
                     mSharedPreferenceStore.mEditor.clear().commit();
                     startActivity(new Intent(getApplication().getApplicationContext(),
-                            UserMedicineSettingsFragmentActivity.class));
+                            MedicineSettingsActivity.class));
 
                 } else {
                     dialog.dismiss();
@@ -200,7 +183,7 @@ public class InfoHubFragmentActivity extends FragmentActivity {
                 sqLite.resetDatabase();
                 mSharedPreferenceStore.mEditor.clear().commit();
                 startActivity(new Intent(getApplication().getApplicationContext(),
-                        UserMedicineSettingsFragmentActivity.class));
+                        MedicineSettingsActivity.class));
             }
         });
 

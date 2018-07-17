@@ -31,7 +31,8 @@ import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 import com.peacecorps.malaria.code.reciever.TripAlarmReceiver;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
-import com.peacecorps.malaria.ui.user_medicine_setting.UserMedicineSettingsFragmentActivity;
+import com.peacecorps.malaria.ui.home_screen.MainActivity;
+import com.peacecorps.malaria.ui.user_medicine_setting.MedicineSettingsActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -118,15 +119,6 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
         //implementing the user's profile button
         userProfile =(Button)findViewById(R.id.userProfile);
-        userProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), UserProfile.class));
-                finish();
-            }
-        });
-
-
         pmtLabel = (TextView)findViewById(R.id.pmt);
         departureMonth=(TextView)findViewById(R.id.trip_month_departure);
         ((TextView)findViewById(R.id.trip_month_departure)).requestFocus();
@@ -441,7 +433,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     private void createSelectionSpinners() {
 
         ArrayAdapter<CharSequence> drugAdapter = ArrayAdapter.createFromResource(
-                this, R.array.drug_array,
+                this, R.array.array_drugs,
                 R.layout.trip_spinner_item);
 
         drugAdapter.setDropDownViewResource(R.layout.trip_spinner_popup_item);
@@ -499,7 +491,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                     mSharedPreferenceStore.mEditor.clear().commit();
                     SharedPreferenceStore.mEditor.clear().commit();
                     startActivity(new Intent(getApplication().getApplicationContext(),
-                            UserMedicineSettingsFragmentActivity.class));
+                            MedicineSettingsActivity.class));
 
                 } else {
                     dialog.dismiss();
@@ -509,7 +501,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
                 mSharedPreferenceStore.mEditor.clear().commit();
                 SharedPreferenceStore.mEditor.clear().commit();
                 startActivity(new Intent(getApplication().getApplicationContext(),
-                        UserMedicineSettingsFragmentActivity.class));
+                        MedicineSettingsActivity.class));
 
             }
         });
