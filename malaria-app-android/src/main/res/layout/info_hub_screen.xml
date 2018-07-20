@@ -54,7 +54,7 @@
                         android:layout_marginLeft="@dimen/margin_10dp"
                         android:layout_marginTop="@dimen/margin_10dp"
                         android:text="@string/info_hub_title_label"
-                        android:textColor="@color/golden_brown"
+                        android:textColor="@color/textColorPrimary"
                         android:textSize="@dimen/text_size_25sp"
                         android:textStyle="bold"
 

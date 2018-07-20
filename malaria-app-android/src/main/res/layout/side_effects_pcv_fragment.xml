@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Side Effects Reported by PCVs"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_25sp"
         android:textStyle="bold"
 

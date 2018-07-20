@@ -24,8 +24,7 @@
                 android:layout_margin="@dimen/margin_10dp"
                 android:gravity="center"
                 android:text="Exit Game"
-                android:textColor="@color/golden_brown"
-                android:textSize="@dimen/text_size_25sp"/>
+                android:textColor="@color/textColorPrimary"                android:textSize="@dimen/text_size_25sp"/>
 
         </LinearLayout>
 
@@ -41,8 +40,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Are you sure you want to exit the Game? Your current game points will be converted and added to your main score."
-                android:textColor="@color/golden_brown"
-                android:textSize="@dimen/text_size_20sp" />
+                android:textColor="@color/textColorPrimary"                android:textSize="@dimen/text_size_20sp" />
         </LinearLayout>
 
         <LinearLayout

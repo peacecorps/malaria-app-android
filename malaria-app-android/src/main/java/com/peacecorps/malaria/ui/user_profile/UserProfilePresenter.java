@@ -17,6 +17,7 @@ public class UserProfilePresenter<V extends UserProfileMvpView> extends BasePres
         super(manager, context);
     }
 
+    // sets values from preferences to the edit texts
     @Override
     public void setPreviousDetails() {
         getView().setInitialValuesIfAvailable(
@@ -36,6 +37,7 @@ public class UserProfilePresenter<V extends UserProfileMvpView> extends BasePres
         super.detachView();
     }
 
+    // called if values are valid on done button click, saves in shared preferences
     @Override
     public void setNewDetails(String name, String email, int age) {
         getDataManager().setUserName(name);
@@ -43,24 +45,29 @@ public class UserProfilePresenter<V extends UserProfileMvpView> extends BasePres
         getDataManager().setUserAge(age);
     }
 
+    // util function for testing text is empty of not
     @Override
     public boolean testIsEmpty(String text) {
         return TextUtils.isEmpty(text);
     }
 
+    // if age is not empty & is >0 + <=100 return true else false
     @Override
     public boolean isAgeValid() {
         if(testIsEmpty(getView().getUserAge()))
             return false;
-        String text = getView().getUserAge();
-        return text.length()<= 2;
+        // user age can either be empty or a number (input type is number in edit text)
+        int age = Integer.valueOf(getView().getUserAge());
+        return age > 0 && age <= 100;
     }
 
+    // if email is not empty & matches email address pattern, return true else false
     @Override
     public boolean isEmailValid() {
         return !testIsEmpty(getView().getUserEmail()) && android.util.Patterns.EMAIL_ADDRESS.matcher(getView().getUserEmail()).matches();
     }
 
+    // called when save button clicked, returns true only if age, name & error are valid.
     @Override
     public boolean checkError() {
         return getView().checkAgeError() && getView().checkNameError() && getView().checkEmailError();

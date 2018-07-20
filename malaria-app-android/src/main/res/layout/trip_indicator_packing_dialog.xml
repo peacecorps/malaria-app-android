@@ -28,7 +28,7 @@
                     android:gravity="center"
                     android:padding="@dimen/padding_10dp"
                     android:text="Packing Items"
-                    android:textColor="@color/golden_brown"
+                    android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/text_size_25sp" />
 
             </LinearLayout>
@@ -58,7 +58,7 @@
                     android:layout_centerHorizontal="true"
                     android:clickable="true"
                     android:text="Select Pill"
-                    android:textColor="@color/golden_brown"
+                    android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/text_size_20sp"
                     android:textStyle="bold" />
 
@@ -104,7 +104,7 @@
                     android:layout_centerVertical="true"
                     android:layout_gravity="center_vertical"
                     android:text="Cash"
-                    android:textColor="@color/golden_brown"
+                    android:textColor="@color/textColorPrimary"
                     android:textSize="@dimen/text_size_20sp"
                     android:textStyle="bold" />
 
@@ -146,8 +146,7 @@
                     android:layout_marginLeft="@dimen/margin_15dp"
                     android:hint="Add Items"
                     android:maxWidth="@dimen/width_110dp"
-                    android:textColor="@color/golden_brown"
-
+                    android:textColor="@color/textColorPrimary"
                     />
 
                 <ImageButton

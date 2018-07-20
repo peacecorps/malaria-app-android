@@ -424,7 +424,7 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
                     break;
                 case 2:
                     gridcell.setBackgroundResource(R.drawable.calendar_button_selector);
-                    gridcell.setTextColor(getResources().getColor(R.color.golden_brown));
+                    gridcell.setTextColor(getResources().getColor(R.color.text_color_primary));
                     break;
             }
 

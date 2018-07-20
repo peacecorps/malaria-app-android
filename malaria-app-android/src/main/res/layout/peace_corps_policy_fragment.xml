@@ -22,7 +22,7 @@
             android:layout_weight="0.94"
             android:gravity="center"
             android:text="Peace Corps Policy"
-            android:textColor="@color/golden_brown"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_25sp"
             android:textStyle="bold" />
 

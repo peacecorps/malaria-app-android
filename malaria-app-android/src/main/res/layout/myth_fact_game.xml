@@ -37,7 +37,7 @@
                 android:layout_weight="1.2"
                 android:gravity="center_horizontal"
                 android:text="6"
-                android:textColor="@color/golden_brown"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/text_size_25sp"
                 android:textStyle="bold" />
 
@@ -71,7 +71,7 @@
                 android:gravity="center"
                 android:padding="@dimen/padding_10dp"
                 android:text="Question Here"
-                android:textColor="@color/golden_brown"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/text_size_20sp" />
         </LinearLayout>
     </LinearLayout>
@@ -86,7 +86,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"/>
+            android:layout_weight="0.2" />
 
         <TextView
             android:id="@+id/chest"

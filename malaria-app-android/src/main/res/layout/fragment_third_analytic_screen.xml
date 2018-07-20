@@ -30,7 +30,7 @@
             android:layout_weight="0.6"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/golden_brown"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_25sp"
             android:textStyle="bold"/>
 

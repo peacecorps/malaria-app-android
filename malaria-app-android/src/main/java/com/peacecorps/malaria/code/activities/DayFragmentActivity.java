@@ -133,7 +133,7 @@ public class DayFragmentActivity extends FragmentActivity {
                 TextView tv = (TextView) dialog.findViewById(R.id.text);
                 tv.setText("Added inaccurate data? Don't worry, you can change here.");
                 tv.setTextSize(17);
-                tv.setTextColor(getResources().getColor(R.color.golden_brown));
+                tv.setTextColor(getResources().getColor(R.color.text_color_primary));
 
                 btnRadGroup = (RadioGroup) dialog.findViewById(R.id.radioGroup);
 

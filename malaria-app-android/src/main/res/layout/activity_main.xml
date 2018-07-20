@@ -19,9 +19,9 @@
         android:layout_gravity="bottom"
         android:foregroundGravity="center"
         android:background="?android:attr/windowBackground"
-        app:itemBackground="@color/lightest_brown"
+        app:itemBackground="@color/colorPrimary"
         android:foreground="?attr/selectableItemBackground"
-        app:itemIconTint="@color/lightest_red"
-        app:itemTextColor="@color/light_red"
+        app:itemIconTint="@color/bnv_tab_item_foreground"
+        app:itemTextColor="@color/bnv_tab_item_foreground"
         app:menu="@menu/bottom_nav_menu" />
 </android.support.design.widget.CoordinatorLayout>

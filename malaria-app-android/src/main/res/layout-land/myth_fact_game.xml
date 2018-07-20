@@ -34,7 +34,7 @@
                 android:layout_weight="1.2"
                 android:text="6"
                 android:gravity="center_horizontal"
-                android:textColor="@color/golden_brown"/>
+                android:textColor="@color/text_color_primary"/>
 
 
             <Button
@@ -63,7 +63,7 @@
                 android:textSize="20sp"
                 android:text="Question Here"
                 android:background="@drawable/achievement_button"
-                android:textColor="@color/golden_brown"
+                android:textColor="@color/text_color_primary"
                 android:gravity="center"/>
         </LinearLayout>
 

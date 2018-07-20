@@ -52,7 +52,7 @@ public class DrugReminderNotification {
         /**Building Notifications**/
         NotificationCompat.Builder builder = new NotificationCompat.Builder(
                 context).setContentTitle(context.getString(R.string.drug_reminder_notification_title))
-                .setSmallIcon(R.drawable.appicon_themed)
+                .setSmallIcon(R.drawable.app_icon)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.drug_reminder_notification_message)))
                 .setContentText(context.getString(R.string.drug_reminder_notification_message))
                 .setAutoCancel(false)

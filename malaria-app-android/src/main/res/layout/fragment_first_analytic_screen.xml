@@ -10,10 +10,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <Button
                 android:id="@+id/fragment_first_screen_settings_button"
                 android:layout_width="@dimen/size_24dp"
@@ -29,36 +31,36 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:orientation="horizontal"
-                android:padding="@dimen/padding_5dp" >
+                android:padding="@dimen/padding_5dp">
 
                 <ImageView
                     android:layout_width="@dimen/width_70dp"
                     android:layout_height="@dimen/height_60dp"
                     android:adjustViewBounds="true"
                     android:background="@drawable/medication_last_normal"
-                    android:scaleType="fitCenter"
-                    android:contentDescription="@string/description_med_last_taken"/>
+                    android:contentDescription="@string/description_med_last_taken"
+                    android:scaleType="fitCenter" />
 
                 <TextView
+                    android:id="@+id/mlt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="@dimen/padding_3dp"
                     android:paddingRight="@dimen/padding_3dp"
                     android:text="@string/first_analytic_screen_medicine_last_taken_text"
-                    android:textSize="@dimen/text_size_20sp"
-                    android:textColor="@color/golden_brown"
-                    android:id="@+id/mlt"
-                    />
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/text_size_20sp" />
 
-                <TextView android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <TextView
                     android:id="@+id/checkMediLastTakenTime"
-                    android:text="15/07"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:background="@drawable/info_hub_button"
+                    android:text="15/07"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_20sp"
-                    android:layout_gravity="center_vertical"
 
                     />
 
@@ -69,37 +71,35 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:orientation="horizontal"
-                android:padding="@dimen/padding_5dp" >
+                android:padding="@dimen/padding_5dp">
 
                 <ImageView
                     android:layout_width="@dimen/width_70dp"
                     android:layout_height="@dimen/height_60dp"
                     android:adjustViewBounds="true"
                     android:background="@drawable/doses_missing_image_normal"
-                    android:scaleType="fitCenter"
-                    android:contentDescription="@string/description_med_doses"/>
+                    android:contentDescription="@string/description_med_doses"
+                    android:scaleType="fitCenter" />
 
                 <TextView
+                    android:id="@+id/dinr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="@dimen/padding_3dp"
                     android:paddingRight="@dimen/padding_3dp"
                     android:text="@string/first_analytic_screen_doses_missing_text"
-                    android:textSize="@dimen/text_size_20sp"
-                    android:textColor="@color/golden_brown"
-                    android:id="@+id/dinr"
-                    />
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/text_size_20sp" />
 
                 <TextView
                     android:id="@+id/doses"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:background="@drawable/info_hub_button"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20sp"
-                    android:layout_gravity="center_vertical"
-                    />
+                    android:textSize="@dimen/text_size_20sp" />
 
             </LinearLayout>
 
@@ -108,36 +108,35 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:orientation="horizontal"
-                android:padding="@dimen/padding_5dp" >
+                android:padding="@dimen/padding_5dp">
 
                 <ImageView
                     android:layout_width="@dimen/width_70dp"
                     android:layout_height="@dimen/height_60dp"
                     android:adjustViewBounds="true"
                     android:background="@drawable/medicine_adhere_normal"
-                    android:scaleType="fitCenter"
-                    android:contentDescription="@string/description_med_adherence"/>
+                    android:contentDescription="@string/description_med_adherence"
+                    android:scaleType="fitCenter" />
 
                 <TextView
+                    android:id="@+id/atm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="@dimen/padding_3dp"
                     android:paddingRight="@dimen/padding_3dp"
                     android:text="@string/first_analytic_screen_medicine_adherence_to_medicine_text"
-                    android:textSize="@dimen/text_size_20sp"
-                    android:textColor="@color/golden_brown"
-                    android:id="@+id/atm"
-                    />
+                    android:textColor="@color/text_color_primary"
+                    android:textSize="@dimen/text_size_20sp" />
 
                 <TextView
                     android:id="@+id/adherence"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:background="@drawable/info_hub_button"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20sp"
-                    android:layout_gravity="center_vertical" />
+                    android:textSize="@dimen/text_size_20sp" />
 
             </LinearLayout>
         </LinearLayout>

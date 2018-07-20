@@ -10,7 +10,7 @@
         android:text="January"
         android:id="@+id/firstMonthProgressLabel"
         android:textStyle="bold"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"/>
 
     <ProgressBar android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
         android:text="100%"
         android:id="@+id/firstMonthProgressPercent"
         android:textStyle="bold"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:gravity="end"
         android:layout_alignParentRight="true"/>
@@ -46,7 +46,7 @@
         android:layout_weight="1"
         android:id="@+id/secondMonthProgressLabel"
         android:textStyle="bold"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:layout_below="@id/firstMonthProgressLabel" />
 
@@ -74,7 +74,7 @@
         android:text="60%"
         android:id="@+id/secondMonthProgressPercent"
         android:textStyle="bold"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:gravity="end"
         android:layout_alignParentRight="true"
@@ -85,7 +85,7 @@
         android:text="March"
         android:id="@+id/thirdMonthProgressLabel"
         android:textStyle="bold"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:layout_below="@id/secondMonthProgressLabel" />
 
@@ -112,7 +112,7 @@
         android:text="80%"
         android:id="@+id/thirdMonthProgressPercent"
         android:textStyle="bold"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:gravity="end"
         android:layout_below="@id/secondMonthProgressPercent"
@@ -123,7 +123,7 @@
         android:text="April"
         android:id="@+id/fourthMonthProgressLabel"
         android:textStyle="bold"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:layout_below="@id/thirdMonthProgressLabel" />
 
@@ -150,7 +150,7 @@
         android:text="80%"
         android:id="@+id/fourthMonthProgressPercent"
         android:textStyle="bold"
-        android:textColor="@color/golden_brown"
+        android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:gravity="end"
         android:layout_below="@id/thirdMonthProgressPercent"
