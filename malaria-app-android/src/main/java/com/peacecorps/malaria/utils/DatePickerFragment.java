@@ -14,7 +14,7 @@ import java.util.Calendar;
  * Created by Anamika Tripathi on 28/7/18.
  */
 public class DatePickerFragment extends DialogFragment {
-    DatePickerDialog.OnDateSetListener ondateSet;
+    private DatePickerDialog.OnDateSetListener ondateSet;
 
     public void setCallBack(DatePickerDialog.OnDateSetListener ondate) {
         ondateSet = ondate;

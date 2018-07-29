@@ -27,7 +27,6 @@ import com.peacecorps.malaria.utils.InjectionClass;
 import com.peacecorps.malaria.utils.TimePickerFragment;
 import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -91,12 +90,11 @@ public class PlanTripFragment extends BaseFragment implements PlanTripMvpView {
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_RIGHT = 2;
 
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (tvTripLocation.getRight() - tvTripLocation.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        // creating a custom dialog with location history
-                        presenter.getLocationHistory();
-                        return true;
-                    }
+                if (event.getAction() == MotionEvent.ACTION_UP &&
+                        (event.getRawX() >= (tvTripLocation.getRight() - tvTripLocation.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()))) {
+                    // creating a custom dialog with location history
+                    presenter.getLocationHistory();
+                    return true;
                 }
                 return false;
             }
@@ -135,7 +133,9 @@ public class PlanTripFragment extends BaseFragment implements PlanTripMvpView {
         } else {
             if (getActivity() != null) {
                 ToastLogSnackBarUtil.showSnackBar(context, getActivity().findViewById(android.R.id.content), "No location History found!");
-            } else ToastLogSnackBarUtil.showErrorLog("getActivity return null in PlanTripFragment");
+            } else {
+                ToastLogSnackBarUtil.showErrorLog("getActivity return null in PlanTripFragment");
+            }
         }
 
     }
@@ -147,14 +147,12 @@ public class PlanTripFragment extends BaseFragment implements PlanTripMvpView {
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_RIGHT = 2;
 
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (tvDepartureDate.getRight()
-                            - tvDepartureDate.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        checkDepartureOrArrivalEt = true;
-                        // creating show date picker dialog
-                        showDatePicker();
-                        return true;
-                    }
+                if (event.getAction() == MotionEvent.ACTION_UP &&
+                        (event.getRawX() >= (tvDepartureDate.getRight() - tvDepartureDate.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()))) {
+                    checkDepartureOrArrivalEt = true;
+                    // creating show date picker dialog
+                    showDatePicker();
+                    return true;
                 }
                 return false;
             }
@@ -167,14 +165,12 @@ public class PlanTripFragment extends BaseFragment implements PlanTripMvpView {
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_RIGHT = 2;
 
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (tvArrivalDate.getRight()
-                            - tvArrivalDate.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        checkDepartureOrArrivalEt = false;
-                        // creating show date picker dialog
-                        showDatePicker();
-                        return true;
-                    }
+                if (event.getAction() == MotionEvent.ACTION_UP &&
+                        (event.getRawX() >= (tvArrivalDate.getRight() - tvArrivalDate.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()))) {
+                    checkDepartureOrArrivalEt = false;
+                    // creating show date picker dialog
+                    showDatePicker();
+                    return true;
                 }
                 return false;
             }
@@ -187,14 +183,12 @@ public class PlanTripFragment extends BaseFragment implements PlanTripMvpView {
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_RIGHT = 2;
 
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (tvReminderTime.getRight()
-                            - tvReminderTime.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        checkDepartureOrArrivalEt = false;
-                        // creating show date picker dialog
-                        showTimePicker();
-                        return true;
-                    }
+                if (event.getAction() == MotionEvent.ACTION_UP &&
+                        (event.getRawX() >= (tvReminderTime.getRight() - tvReminderTime.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()))) {
+                    checkDepartureOrArrivalEt = false;
+                    // creating show date picker dialog
+                    showTimePicker();
+                    return true;
                 }
                 return false;
             }
@@ -208,7 +202,9 @@ public class PlanTripFragment extends BaseFragment implements PlanTripMvpView {
 
         if (getFragmentManager() != null) {
             date.show(getFragmentManager(), "Date Picker");
-        } else ToastLogSnackBarUtil.showErrorLog("getFragmentManager is null in PlanTripFragment");
+        } else {
+            ToastLogSnackBarUtil.showErrorLog("getFragmentManager is null in PlanTripFragment");
+        }
 
 
         DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
@@ -236,8 +232,9 @@ public class PlanTripFragment extends BaseFragment implements PlanTripMvpView {
         TimePickerFragment timePickerFragment = new TimePickerFragment();
         if (getFragmentManager() != null && getActivity() != null) {
             timePickerFragment.show(getActivity().getFragmentManager(), "Time Picker in PlanTripFragment");
-        } else ToastLogSnackBarUtil.showErrorLog("getFragmentManager is null in PlanTripFragment");
-
+        } else {
+            ToastLogSnackBarUtil.showErrorLog("PlanTripFragment: getFragmentManager/getActivity is null");
+        }
 
         TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -254,7 +251,7 @@ public class PlanTripFragment extends BaseFragment implements PlanTripMvpView {
 
     @OnClick(R.id.btn_trip_generate)
     public void generateButtonListener(View view) {
-        //Todo check whether any edit text is not empty
+        //Todo Need to implement it
 
     }
 

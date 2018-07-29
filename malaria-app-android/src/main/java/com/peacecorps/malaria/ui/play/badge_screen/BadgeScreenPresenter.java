@@ -13,7 +13,6 @@ import com.peacecorps.malaria.ui.play.badge_screen.BadgeScreenContract.BadgeMvpV
  * Created by Anamika Tripathi on 24/7/18.
  */
 public class BadgeScreenPresenter<V extends BadgeMvpView> extends BasePresenter<V> implements BadgeMvpPresenter<V> {
-    Context context;
     BadgeScreenPresenter(AppDataManager manager, Context context) {
         super(manager, context);
     }
@@ -45,17 +44,17 @@ public class BadgeScreenPresenter<V extends BadgeMvpView> extends BasePresenter<
         int userScore = getDataManager().getUserScore();
         //set badge according to score
         if(userScore<2){
-            badgeDrawable=context.getResources().getDrawable(R.drawable.y_b1);
+            badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_b1);
         } else if(userScore<4){
-            badgeDrawable=context.getResources().getDrawable(R.drawable.y_b3);
+            badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_b3);
         }else if(userScore<6){
-            badgeDrawable=context.getResources().getDrawable(R.drawable.y_b5);
+            badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_b5);
         }else if(userScore<7){
-            badgeDrawable=context.getResources().getDrawable(R.drawable.y_b6);
+            badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_b6);
         }else if(userScore<8){
-            badgeDrawable=context.getResources().getDrawable(R.drawable.y_newbie);
+            badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_newbie);
         }else {
-            badgeDrawable = context.getResources().getDrawable(R.drawable.y_hat);
+            badgeDrawable = getContext().getResources().getDrawable(R.drawable.y_hat);
         }
         // start the category medication dialog by setting drawable
         getView().startCategoryMedicineDialog(badgeDrawable);
@@ -68,17 +67,17 @@ public class BadgeScreenPresenter<V extends BadgeMvpView> extends BasePresenter<
         Drawable badgeDrawable= null;
         //set badge according to score
         if(gameScore<2){
-            badgeDrawable=context.getResources().getDrawable(R.drawable.y_b1);
+            badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_b1);
         } else if(gameScore<4){
-            badgeDrawable=context.getResources().getDrawable(R.drawable.y_b3);
+            badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_b3);
         }else if(gameScore<6){
-            badgeDrawable=context.getResources().getDrawable(R.drawable.y_b5);
+            badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_b5);
         }else if(gameScore<8){
-            badgeDrawable=context.getResources().getDrawable(R.drawable.y_b6);
+            badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_b6);
         }else if(gameScore<10){
-            badgeDrawable=context.getResources().getDrawable(R.drawable.y_newbie);
+            badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_newbie);
         }else{
-            badgeDrawable=context.getResources().getDrawable(R.drawable.y_hat);
+            badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_hat);
         }
         getView().startCategoryQADialog(badgeDrawable);
     }

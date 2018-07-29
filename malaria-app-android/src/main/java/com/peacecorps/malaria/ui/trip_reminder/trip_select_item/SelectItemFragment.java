@@ -19,14 +19,11 @@ import butterknife.ButterKnife;
 // Still need to implement this fragment!
 public class SelectItemFragment extends BaseFragment {
 
-    private Context context;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.trip_indicator_packing_dialog, container, false);
         ButterKnife.bind(this, view);
-        context = getContext();
         return view;
     }
 

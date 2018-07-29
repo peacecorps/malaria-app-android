@@ -31,10 +31,10 @@ public class TimePickerFragment extends DialogFragment {
         int hour = calender.get(Calendar.HOUR_OF_DAY);
         int minute = calender.get(Calendar.MINUTE);
 
-        if (getActivity() != null)
+        if (getActivity() != null) {
             return new TimePickerDialog(getActivity(), R.style.MyTimePicker, listener, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
-        else {
+        } else {
             ToastLogSnackBarUtil.showErrorLog("getActivity is null");
             return null;
         }

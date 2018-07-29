@@ -85,7 +85,9 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
         if (savedInstanceState != null) {
             // saved values from orientation changes
             restoreFromInstanceState(savedInstanceState);
-        } else init();
+        } else {
+            init();
+        }
         setGameScore();
         //displays the time left for the next question
         updateTimer(millisLeft / 1000);

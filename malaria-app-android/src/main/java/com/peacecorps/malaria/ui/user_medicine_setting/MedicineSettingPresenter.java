@@ -83,31 +83,33 @@ public class MedicineSettingPresenter<V extends View> extends BasePresenter<V> i
     }
 
     /**
-     * @param hours : hour selected in @TimePickerFragment (24 hour format)
+     * @param hr : hour selected in @TimePickerFragment (24 hour format)
      * @param mins  : min selected in Fragment
      */
     @Override
-    public void convertToTwelveHours(int hours, int mins) {
+    public void convertToTwelveHours(int hr, int mins) {
         String timeSet;
-        if (hours > 12) {
-            hours -= 12;
+        int hour = 0;
+        if (hr > 12) {
+            hour -= 12;
             timeSet = "PM";
-        } else if (hours == 0) {
-            hours += 12;
+        } else if (hr == 0) {
+            hour += 12;
             timeSet = "AM";
-        } else if (hours == 12)
+        } else if (hr == 12) {
             timeSet = "PM";
-        else
+        } else {
             timeSet = "AM";
+        }
 
         String minutes;
-        if (mins < 10)
+        if (mins < 10) {
             minutes = getContext().getResources().getString(R.string.add_zero_beginning, mins);
-        else
+        } else {
             minutes = String.valueOf(mins);
-
+        }
         // Append the time to a stringBuilder
-        String theTime = getContext().getResources().getString(R.string.time_picker, hours, minutes, timeSet);
+        String theTime = getContext().getResources().getString(R.string.time_picker, hour, minutes, timeSet);
 
         getView().setSelectedTime(theTime);
         getView().enableDoneButton();

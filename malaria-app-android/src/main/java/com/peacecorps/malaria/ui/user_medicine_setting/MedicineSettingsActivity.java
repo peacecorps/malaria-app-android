@@ -135,8 +135,10 @@ public class MedicineSettingsActivity extends BaseActivity
         TimePickerFragment timePickerFragment = new TimePickerFragment();
         if (getFragmentManager() != null) {
             timePickerFragment.show(getFragmentManager(), "Time Picker in MedicineSettingActivity");
-        } else
+        } else {
             ToastLogSnackBarUtil.showErrorLog("getFragmentManager is null in MedicineSettingActivity");
+        }
+
         TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {

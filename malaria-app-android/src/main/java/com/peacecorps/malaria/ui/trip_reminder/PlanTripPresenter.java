@@ -2,7 +2,6 @@ package com.peacecorps.malaria.ui.trip_reminder;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.data.AppDataManager;
@@ -53,31 +52,33 @@ public class PlanTripPresenter<V extends PlanTripMvpView> extends BasePresenter<
     }
 
     /**
-     * @param hours : hour selected in @TimePickerFragment (24 hour format)
+     * @param hr : hour selected in @TimePickerFragment (24 hour format)
      * @param mins  : min selected in Fragment
      */
     @Override
-    public String convertToTwelveHours(int hours, int mins) {
+    public String convertToTwelveHours(int hr, int mins) {
         String timeSet;
-        if (hours > 12) {
-            hours -= 12;
-            timeSet = "PM";
-        } else if (hours == 0) {
-            hours += 12;
-            timeSet = "AM";
-        } else if (hours == 12)
-            timeSet = "PM";
-        else
-            timeSet = "AM";
-
         String minutes;
-        if (mins < 10)
-            minutes = getContext().getResources().getString(R.string.add_zero_beginning, mins);
-        else
-            minutes = String.valueOf(mins);
+        int hour = 0;
+        if (hr > 12) {
+            hour -= 12;
+            timeSet = "PM";
+        } else if (hr == 0) {
+            hour += 12;
+            timeSet = "AM";
+        } else if (hr == 12) {
+            timeSet = "PM";
+        } else {
+            timeSet = "AM";
+        }
 
+        if (mins < 10) {
+            minutes = getContext().getResources().getString(R.string.add_zero_beginning, mins);
+        } else {
+            minutes = String.valueOf(mins);
+        }
         // Append the time to a stringBuilder
-        return getContext().getResources().getString(R.string.time_picker, hours, minutes, timeSet);
+        return getContext().getResources().getString(R.string.time_picker, hour, minutes, timeSet);
     }
 
     // util function for testing text is empty of not
@@ -117,11 +118,11 @@ public class PlanTripPresenter<V extends PlanTripMvpView> extends BasePresenter<
      */
     @Override
     public void checkDateValidity(String dateArr, String dateDepart) {
-        if (testIsEmpty(dateDepart))
+        if (testIsEmpty(dateDepart)) {
             ToastLogSnackBarUtil.showToast(getContext(), "Select Departure date first");
-        else if (testIsEmpty(dateArr))
+        } else if (testIsEmpty(dateArr)) {
             ToastLogSnackBarUtil.showToast(getContext(), "Select Arrival date first");
-        else {
+        } else {
             String currDateString = new SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(new Date());
             Date currdate = getDateObj(currDateString);
             Date deptDate = getDateObj(dateDepart);

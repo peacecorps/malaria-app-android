@@ -6,7 +6,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,9 +13,7 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -24,7 +21,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 
@@ -33,7 +29,6 @@ import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 import com.peacecorps.malaria.code.reciever.TripAlarmReceiver;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
 import com.peacecorps.malaria.ui.home_screen.MainActivity;
-import com.peacecorps.malaria.ui.user_medicine_setting.MedicineSettingsActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -68,9 +63,6 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
     private ArrayList<String> items;
     public boolean arriv, depar;
 
-
-    private Dialog dialog = null;
-
     public static final String DRUG_TAG = "com.peacecorps.malaria.activites.TripIndicatorFragmentActivity.DRUG_TAG";
     long num_drugs = 0;
     private String arrival_formattedate, departure_formattedate;
@@ -83,8 +75,6 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
 
     private DatabaseSQLiteHelper sqLite, location_sqLite;
     private String loc = "";
-    private TimePicker tp;
-    private View v;
 
 
     SharedPreferences preferences;
@@ -441,7 +431,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         //Todo check need of later later
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.departure_trip_date", departure_formattedate).commit();
         SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.trip_drug", mDrugPicked).commit();
-        SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.TRIP_LOCATION",mLocationPicked).commit();
+        SharedPreferenceStore.mEditor.putString("com.peacecorps.malaria.TRIP_LOCATION", mLocationPicked).commit();
 
 
     }

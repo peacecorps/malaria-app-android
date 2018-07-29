@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 
 public class AppExecutors implements Executor {
     private final Executor mDiskIO;
-    private final Executor mainThread;
+    private final Executor mainThreadExecutor;
     @Override
     public void execute(@NonNull Runnable command) {
         mDiskIO.execute(command);
@@ -18,12 +18,12 @@ public class AppExecutors implements Executor {
     }
 
     @VisibleForTesting
-    AppExecutors(Executor diskIO, Executor mainThread) {
+    private AppExecutors(Executor diskIO, Executor mainThread) {
         this.mDiskIO = diskIO;
-        this.mainThread = mainThread;
+        this.mainThreadExecutor = mainThread;
     }
 
-    public AppExecutors() {
+    AppExecutors() {
         this(new DiskIOThreadExecutor(),new MainThreadExecutor());
     }
 
@@ -33,7 +33,7 @@ public class AppExecutors implements Executor {
     }
 
     public Executor mainThread() {
-        return mainThread;
+        return mainThreadExecutor;
     }
 
     private static class MainThreadExecutor implements Executor {
@@ -49,7 +49,7 @@ public class AppExecutors implements Executor {
 
         private final Executor mDiskIO;
 
-        public DiskIOThreadExecutor() {
+        DiskIOThreadExecutor() {
             mDiskIO = Executors.newSingleThreadExecutor();
         }
 

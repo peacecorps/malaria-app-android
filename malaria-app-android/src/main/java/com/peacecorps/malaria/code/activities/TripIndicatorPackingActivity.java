@@ -313,9 +313,9 @@ public class TripIndicatorPackingActivity extends Activity {
     }
 
     protected void setNumberOfDrugs() {
-        if (tripDrugName.equals("Malarone")) {
+        if ("Malarone".equals(tripDrugName)) {
             numDrugs.setText("" + mNumDrugs);
-        } else if (tripDrugName.equals("Doxycycline") || tripDrugName.equals("Mefloquine")) {
+        } else if ("Doxycycline".equals(tripDrugName) || "Mefloquine".equals(tripDrugName)) {
             if (mNumDrugs % 7 == 0) {
                 numDrugs.setText("" + mNumDrugs / 7);
             } else {

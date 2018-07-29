@@ -10,15 +10,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.ui.base.BaseFragment;
-import com.peacecorps.malaria.utils.InjectionClass;;
+import com.peacecorps.malaria.utils.InjectionClass;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
