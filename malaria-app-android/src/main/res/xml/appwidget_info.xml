@@ -3,7 +3,7 @@
     android:minWidth="200dp"
     android:minHeight="40dp"
     android:updatePeriodMillis="100"
-    android:previewImage="@drawable/bus_icon_normal"
+    android:previewImage="@drawable/bnv_trip_button"
     android:initialLayout="@layout/appwidget"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen">

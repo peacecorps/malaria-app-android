@@ -79,7 +79,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void getLocation(LoadListLocationCallback callback) {
+    public void getLocation(loadListStringCallBack callback) {
         dbHelper.getLocation(callback);
     }
 
@@ -115,7 +115,7 @@ public class AppDataManager implements DataManager {
 
     @Override
     public void getCountTakenBetween(Date s, Date e, LoadIntegerCallback callback) {
-        dbHelper.getCountTakenBetween(s,e,callback);
+        dbHelper.getCountTakenBetween(s, e, callback);
     }
 
     @Override

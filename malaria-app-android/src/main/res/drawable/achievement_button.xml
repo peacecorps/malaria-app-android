@@ -7,29 +7,29 @@
 
     <!-- view background color -->
     <solid
-        android:color="@color/transparent" >
+        android:color="@color/colorPrimary" >
     </solid>
 
     <!-- view border color and width -->
     <stroke
-        android:width="3dp"
+        android:width="2dp"
         android:color="@color/text_color_primary" >
     </stroke>
 
     <!-- If you want to add some padding -->
     <padding
-        android:left="4dp"
-        android:top="4dp"
-        android:right="4dp"
-        android:bottom="4dp"    >
+        android:left="@dimen/padding_4dp"
+        android:top="@dimen/padding_4dp"
+        android:right="@dimen/padding_4dp"
+        android:bottom="@dimen/padding_4dp"    >
     </padding>
 
     <!-- Here is the corner radius -->
     <corners
-        android:topLeftRadius="30dp"
-        android:topRightRadius="30dp"
-        android:bottomLeftRadius="30dp"
-        android:bottomRightRadius="30dp">
+        android:topLeftRadius="10dp"
+        android:topRightRadius="40dp"
+        android:bottomLeftRadius="40dp"
+        android:bottomRightRadius="10dp">
     </corners>
 
 

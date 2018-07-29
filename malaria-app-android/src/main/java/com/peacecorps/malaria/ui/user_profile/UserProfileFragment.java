@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.ui.base.BaseFragment;
 import com.peacecorps.malaria.utils.InjectionClass;
+import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,8 +85,12 @@ public class UserProfileFragment extends BaseFragment implements UserProfileCont
         if (context instanceof OnUserFragmentListener) {
             mListener = (OnUserFragmentListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnUserFragmentListener");
+            // Show error Log for debugging & display snackbar to user
+            ToastLogSnackBarUtil.showErrorLog(context.toString() + " must implement OnUserFragmentListener");
+            if(getActivity()!=null) {
+                ToastLogSnackBarUtil.showSnackBar(context, getActivity().findViewById(android.R.id.content),
+                        "Something went wrong!");
+            }
         }
     }
 

@@ -30,31 +30,37 @@ import java.util.ArrayList;
  */
 public class TripIndicatorPackingActivity extends Activity {
 
-    private long mNumDrugs=0;
+    private long mNumDrugs = 0;
     TextView numDrugs;
     ListView listView;
-    EditText cash,edit;
+    EditText cash, edit;
     TextView whichDrug;
     public static String tripDrugName;
 
-    /** Items entered by the user is stored in this ArrayList variable */
+    /**
+     * Items entered by the user is stored in this ArrayList variable
+     */
     ArrayList<String> list = new ArrayList<String>();
 
-    /** Declaring an ArrayAdapter to set items to ListView */
+    /**
+     * Declaring an ArrayAdapter to set items to ListView
+     */
     ArrayAdapter<String> adapter;
 
     private SharedPreferenceStore mSharedPreferenceStore;
 
-    private String [] outputStrArr;
+    private String[] outputStrArr;
 
     private Intent bkIntent;
 
     ListView dialog_listView;
 
-    String[] listContent = {"Malarone","Doxycycline","Mefloquine"};
-    Integer[] imageId = {R.drawable.mal,R.drawable.doxy,R.drawable.mef};
+    String[] listContent = {"Malarone", "Doxycycline", "Mefloquine"};
+    Integer[] imageId = {R.drawable.mal, R.drawable.doxy, R.drawable.mef};
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,38 +71,35 @@ public class TripIndicatorPackingActivity extends Activity {
         setContentView(R.layout.trip_indicator_packing_dialog);
 
         /** Reference to the button of the layout main.xml */
-        ImageButton btnAdd = (ImageButton) findViewById(R.id.btnAdd);
-        ImageButton btnDelete = (ImageButton) findViewById(R.id.btnDelete);
-        ImageButton btnSubmit = (ImageButton) findViewById(R.id.btnSubmit);
+        ImageButton btnAdd = findViewById(R.id.btnAdd);
+        ImageButton btnDelete = findViewById(R.id.btnDelete);
+        ImageButton btnSubmit = findViewById(R.id.btnSubmit);
 
         /** Cash Data**/
-        cash=(EditText)findViewById(R.id.cash_et);
+        cash = (EditText) findViewById(R.id.cash_et);
 
         /** List View **/
-        listView = (ListView)findViewById(R.id.listV);
+        listView = (ListView) findViewById(R.id.listV);
 
         /**Description of the new item added**/
         edit = (EditText) findViewById(R.id.packing_et);
 
         /**Populating the List **/
         Cursor cursor = sqLite.getPackingItem();
-        String item="";
+        String item = "";
 
 
-        while (cursor.moveToNext())
-        {
+        while (cursor.moveToNext()) {
             try {
                 item = cursor.getString(cursor.getColumnIndex("PackingItem"));
                 list.add(item);
-            }
-            catch (Exception e)
-            {
-                item="";
+            } catch (Exception e) {
+                item = "";
             }
         }
 
         /** Defining the ArrayAdapter to set items to ListView */
-        adapter = new ArrayAdapter<String>(this,R.layout.trip_packing_item, list);
+        adapter = new ArrayAdapter<String>(this, R.layout.trip_packing_item, list);
 
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
@@ -109,14 +112,11 @@ public class TripIndicatorPackingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String s = edit.getText().toString().trim();
-                if("".equals(s))
-                {
+                if ("".equals(s)) {
                     Toast.makeText(getApplicationContext(), "Enter item name ", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                } else {
                     list.add(edit.getText().toString().trim());
-                    sqLite.insertPackingItem(edit.getText().toString().trim(),1,"no");
+                    sqLite.insertPackingItem(edit.getText().toString().trim(), 1, "no");
                     edit.setText("");
                     adapter.notifyDataSetChanged();
 
@@ -130,7 +130,7 @@ public class TripIndicatorPackingActivity extends Activity {
         /** Setting the adapter to the ListView */
         listView.setAdapter(adapter);
 
-		/** Setting the event listeners for the list view */
+        /** Setting the event listeners for the list view */
         addListViewListeners();
 
         View.OnClickListener listenerDelete = new View.OnClickListener() {
@@ -140,8 +140,8 @@ public class TripIndicatorPackingActivity extends Activity {
                 SparseBooleanArray checkedItemPositions = listView.getCheckedItemPositions();
                 int itemCount = listView.getCount();
 
-                for(int i=itemCount-1; i >= 0; i--){
-                    if(checkedItemPositions.get(i)){
+                for (int i = itemCount - 1; i >= 0; i--) {
+                    if (checkedItemPositions.get(i)) {
                         adapter.remove(list.get(i));
                     }
                 }
@@ -159,7 +159,7 @@ public class TripIndicatorPackingActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                if ("".equals(numDrugs.getText().toString().trim())){
+                if ("".equals(numDrugs.getText().toString().trim())) {
                     Toast.makeText(getApplicationContext(), "Please select a pill", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -178,7 +178,7 @@ public class TripIndicatorPackingActivity extends Activity {
                 //adding to database
                 for (int i = 0; i < selectedItems.size(); i++) {
                     outputStrArr[i] = selectedItems.get(i);
-                    sqLite.insertPackingItem(outputStrArr[i],1,"yes");
+                    sqLite.insertPackingItem(outputStrArr[i], 1, "yes");
                 }
 
                 getSharedPreferences();
@@ -186,7 +186,7 @@ public class TripIndicatorPackingActivity extends Activity {
                 mSharedPreferenceStore.mEditor.putInt("Array Size", outputStrArr.length);
 
                 //Todo check it's need later during mvp implementation
-                for(int i=0;i<outputStrArr.length;i++)
+                for (int i = 0; i < outputStrArr.length; i++)
                     mSharedPreferenceStore.mEditor.putString(outputStrArr + "_" + i, outputStrArr[i]).commit();
 
                 /** Create a bundle object**/
@@ -197,17 +197,15 @@ public class TripIndicatorPackingActivity extends Activity {
                 bkIntent.putExtras(b);
                 //.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
-                int cashV=0;
+                int cashV = 0;
                 try {
-                    cashV=Integer.parseInt(cash.getText().toString());
-                }
-                catch (Exception e)
-                {
-                    Toast.makeText(getApplicationContext(),"Enter Integral Value of Cash!",Toast.LENGTH_SHORT);
+                    cashV = Integer.parseInt(cash.getText().toString());
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Enter Integral Value of Cash!", Toast.LENGTH_SHORT);
                 }
 
 
-                sqLite.insertPackingItem("Cash", cashV ,"yes");
+                sqLite.insertPackingItem("Cash", cashV, "yes");
 
                 startActivity(bkIntent);
 
@@ -222,9 +220,9 @@ public class TripIndicatorPackingActivity extends Activity {
 
         /**Getting the Identity of Pill**/
         Intent intent = getIntent();
-        mNumDrugs=intent.getLongExtra(TripIndicatorFragmentActivity.DRUG_TAG,0);
-        numDrugs = (TextView)findViewById(R.id.quantity);
-        whichDrug = (TextView)findViewById(R.id.drugName);
+        mNumDrugs = intent.getLongExtra(TripIndicatorFragmentActivity.DRUG_TAG, 0);
+        numDrugs = (TextView) findViewById(R.id.quantity);
+        whichDrug = (TextView) findViewById(R.id.drugName);
 
         sqLite.insertPackingItem("Pills", (int) mNumDrugs, "yes");
 
@@ -237,7 +235,7 @@ public class TripIndicatorPackingActivity extends Activity {
         });
 
 
-        tripDrugName=whichDrug.getText().toString();
+        tripDrugName = whichDrug.getText().toString();
 
 
     }
@@ -268,7 +266,7 @@ public class TripIndicatorPackingActivity extends Activity {
     //Updates in view checked items to green, and unchecked items to red
     private void updateChildBackgrounds() {
         SparseBooleanArray checkedItemPositions = listView.getCheckedItemPositions();
-        for (int i = 0 ; i < listView.getChildCount() ; i++) {
+        for (int i = 0; i < listView.getChildCount(); i++) {
             int actualPosition = listView.getFirstVisiblePosition() + i;
             if (checkedItemPositions.get(actualPosition)) {
                 listView.getChildAt(i).setBackgroundResource(R.color.light_green);
@@ -290,56 +288,45 @@ public class TripIndicatorPackingActivity extends Activity {
 
     @Override
     protected Dialog onCreateDialog(int id) {
-         /**Dialog for Selecting the Drug**/
-        final Dialog dialog=new Dialog(TripIndicatorPackingActivity.this,android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+        /**Dialog for Selecting the Drug**/
+        final Dialog dialog = new Dialog(TripIndicatorPackingActivity.this, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
         dialog.setContentView(R.layout.trip_item_dropdown_list);
         dialog.setTitle("Select Drugs");
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
-        dialog_listView=(ListView)dialog.findViewById(R.id.tripDrugDialogList);
-        DrugArrayAdapter adapter = new DrugArrayAdapter(this,listContent,imageId,null);
+        dialog_listView = (ListView) dialog.findViewById(R.id.tripDrugDialogList);
+        DrugArrayAdapter adapter = new DrugArrayAdapter(this, listContent, imageId, null);
         dialog_listView.setAdapter(adapter);
         dialog_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //setting the text to the drug selected
                 whichDrug.setText(parent.getItemAtPosition(position).toString());
-                tripDrugName=parent.getItemAtPosition(position).toString();
+                tripDrugName = parent.getItemAtPosition(position).toString();
                 setNumberOfDrugs();
                 TripIndicatorFragmentActivity.packingSelect.setText(mNumDrugs + " " + tripDrugName + " etc.");
                 dialog.dismiss();
             }
         });
-            return dialog;
+        return dialog;
 
     }
 
-    protected void  setNumberOfDrugs()
-    {
-        if(tripDrugName.equals("Malarone"))
-        {
+    protected void setNumberOfDrugs() {
+        if (tripDrugName.equals("Malarone")) {
             numDrugs.setText("" + mNumDrugs);
-        }
-        else if(tripDrugName.equals("Doxycycline") || tripDrugName.equals("Mefloquine"))
-        {   if(mNumDrugs%7==0)
-        {
-            numDrugs.setText("" + mNumDrugs/7);
-        }
-        else
-        {
-            numDrugs.setText("" +(( mNumDrugs/7)+1));
-        }
-        }
-        else
-        {
+        } else if (tripDrugName.equals("Doxycycline") || tripDrugName.equals("Mefloquine")) {
+            if (mNumDrugs % 7 == 0) {
+                numDrugs.setText("" + mNumDrugs / 7);
+            } else {
+                numDrugs.setText("" + ((mNumDrugs / 7) + 1));
+            }
+        } else {
             Toast.makeText(getApplicationContext(), "Please select a pill", Toast.LENGTH_SHORT).show();
             numDrugs.setText("");
         }
 
     }
-
-
-
 
 
 }

@@ -13,7 +13,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.peacecorps.malaria.code.fragment.HomeScreenFragment;
@@ -22,24 +21,26 @@ import com.peacecorps.malaria.ui.base.BaseActivity;
 import com.peacecorps.malaria.ui.home_screen.HomeContract.IHomeView;
 import com.peacecorps.malaria.ui.play.PlayFragment.OnPlayFragmentListener;
 import com.peacecorps.malaria.ui.play.PlayFragment;
+import com.peacecorps.malaria.ui.play.badge_screen.BadgeScreenFragment;
 import com.peacecorps.malaria.ui.play.medicine_store.MedicineStoreFragment;
 import com.peacecorps.malaria.ui.play.myth_vs_fact.MythFactFragment;
 import com.peacecorps.malaria.ui.play.rapid_fire.RapidFireFragment;
 import com.peacecorps.malaria.ui.play.rapid_fire.RapidFireFragment.OnRapidFragmentListener;
+import com.peacecorps.malaria.ui.trip_reminder.PlanTripFragment;
+import com.peacecorps.malaria.ui.trip_reminder.trip_select_item.SelectItemFragment;
 import com.peacecorps.malaria.ui.user_profile.UserProfileFragment;
 import com.peacecorps.malaria.ui.user_profile.UserProfileFragment.OnUserFragmentListener;
 import com.peacecorps.malaria.utils.BottomNavigationViewHelper;
 import com.peacecorps.malaria.utils.InjectionClass;
-import com.peacecorps.malaria.utils.ToastLogUtil;
+import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
 import static com.peacecorps.malaria.ui.play.myth_vs_fact.MythFactFragment.*;
 
 public class MainActivity extends BaseActivity implements IHomeView, OnUserFragmentListener,
-                                            OnPlayFragmentListener, OnMythFragmentListener, OnRapidFragmentListener {
+        OnPlayFragmentListener, OnMythFragmentListener, OnRapidFragmentListener, PlanTripFragment.OnPlanFragmentListener {
 
     private HomePresenter<MainActivity> presenter;
     private BottomNavigationView bottomNavigationView;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class MainActivity extends BaseActivity implements IHomeView, OnUserFragm
         presenter = new HomePresenter<>(dataManager, this);
         presenter.attachView(this);
 
+        // adding ic_launcher icon to the Toolbar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_launcher);
@@ -67,20 +69,23 @@ public class MainActivity extends BaseActivity implements IHomeView, OnUserFragm
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // detach view & make presenter null
         presenter.detachView();
         presenter = null;
     }
 
     private void setBottomNavigation() {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        // disables moving/shifting mode (by default available for >3 items in bottom navigation) for application
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
-
+        // set home icon to be default selected & add Home screen fragment in Frame layout
         bottomNavigationView.setSelectedItemId(R.id.home_screen_fragment);
         bottomNavigationView.getMenu().findItem(R.id.bnv_home).setChecked(true);
         Fragment fragment = new HomeScreenFragment();
         loadFragment(fragment);
 
+        // listener implementation for bottom navigation, replaces frame layout with different fragments
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -92,7 +97,8 @@ public class MainActivity extends BaseActivity implements IHomeView, OnUserFragm
                         break;
 
                     case R.id.bnv_trip_button:
-                        Toast.makeText(MainActivity.this, "trip button", Toast.LENGTH_SHORT).show();
+                        fragment = new PlanTripFragment();
+                        loadFragment(fragment);
                         break;
 
                     case R.id.bnv_info_button:
@@ -117,6 +123,9 @@ public class MainActivity extends BaseActivity implements IHomeView, OnUserFragm
         });
     }
 
+    /**
+     * @param fragment : replaces frame layout with parameter received in main activity
+     */
     private void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -130,65 +139,79 @@ public class MainActivity extends BaseActivity implements IHomeView, OnUserFragm
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.btn_menu_reset) {
+            // creating dialog to display
             final Dialog dialog;
             dialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
             dialog.setContentView(R.layout.resetdata_dialog);
             dialog.setTitle("Reset Data");
-
-            Button btnOK = dialog.findViewById(R.id.btn_dialog_reset_okay);
-
-            btnOK.setOnClickListener(new View.OnClickListener() {
+            // reset database & dismiss dialog
+            dialog.findViewById(R.id.btn_dialog_reset_okay).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
-                    //Todo   reset database here
+
                 }
             });
-
-            Button btnCancel = dialog.findViewById(R.id.btn_dialog_reset_cancel);
-            btnCancel.setOnClickListener(new View.OnClickListener() {
+            // dismiss dialog
+            dialog.findViewById(R.id.btn_dialog_reset_cancel).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
                 }
             });
             dialog.show();
-
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    // inflates the main_menu which contains "reset button for action"
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
+    // starts homes fragment
     @Override
     public void startHomeFragment() {
         bottomNavigationView.setSelectedItemId(R.id.home_screen_fragment);
         loadFragment(new HomeScreenFragment());
     }
 
+    /**
+     * @param id : Checks id received (button IDs in playFragment, loads respective fragment)
+     */
     @Override
     public void replacePlayFragment(int id) {
         switch (id) {
-            case R.id.btn_badge_screen: break;
-            case R.id.btn_myth_vs_fact:loadFragment(new MythFactFragment());
-                                            break;
-            case R.id.btn_medicine_store:loadFragment(new MedicineStoreFragment());
-                                            break;
+            case R.id.btn_badge_screen:
+                loadFragment(new BadgeScreenFragment());
+                break;
+            case R.id.btn_myth_vs_fact:
+                loadFragment(new MythFactFragment());
+                break;
+            case R.id.btn_medicine_store:
+                loadFragment(new MedicineStoreFragment());
+                break;
 
-            case R.id.btn_rapid_fire:loadFragment(new RapidFireFragment());
-                                            break;
+            case R.id.btn_rapid_fire:
+                loadFragment(new RapidFireFragment());
+                break;
             default:
-                ToastLogUtil.showToast(this, "Wrong button ");
+                ToastLogSnackBarUtil.showToast(this, "Wrong button ");
         }
     }
 
+    // starts playFragment from another child fragment
     @Override
     public void goBackToPlayFragment() {
         loadFragment(new PlayFragment());
+    }
+
+    // replaces trip fragment with select item fragment
+    @Override
+    public void startSelectItemFragment() {
+        loadFragment(new SelectItemFragment());
     }
 }

@@ -17,8 +17,8 @@ public interface LocationDao {
     @Query("SELECT * FROM Location WHERE location= :location")
     List<Location> getLocationListByLocation(String location);
 
-    @Query("SELECT * FROM Location ORDER BY locationId ASC")
-    List<Location> getLocationList();
+    @Query("SELECT location FROM Location ORDER BY locationId ASC")
+    List<String> getLocationList();
 
     @Query("UPDATE Location SET time= :a WHERE location= :location ")
     void updateLocation(int a, String location);

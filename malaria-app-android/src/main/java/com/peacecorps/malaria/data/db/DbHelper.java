@@ -16,6 +16,10 @@ public interface DbHelper {
         void onDataLoaded(String data);
     }
 
+    interface loadListStringCallBack {
+        void onDataLoaded(List<String> data);
+    }
+
     interface LoadLongCallback {
         void onDataLoaded(Long value);
     }
@@ -56,7 +60,7 @@ public interface DbHelper {
 
     void insertLocation(String location);
 
-    void getLocation(LoadListLocationCallback callback);
+    void getLocation(loadListStringCallBack callback);
 
     void insertPackingItem(String pItem,int quantity, String status);
 

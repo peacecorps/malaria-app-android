@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogMedGroup"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/dialog_background"
-    android:id="@+id/dialogMedGroup">
+    android:background="@drawable/dialog_background">
 
 
     <LinearLayout
@@ -16,20 +16,15 @@
             android:id="@+id/heading_day_dialog_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/lightest_brown">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/dayDialogTitle"
+                style="@style/style_dialog_heading"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/text_color_primary"
                 android:text="Medicine Consumption"
-                android:textSize="@dimen/text_size_25sp"
-                android:layout_margin="@dimen/margin_10dp"
-                >
-            </TextView>
+                android:padding="@dimen/padding_10dp"/>
 
         </LinearLayout>
 
@@ -42,19 +37,19 @@
                 android:id="@+id/image"
                 android:layout_width="@dimen/size_60dp"
                 android:layout_height="@dimen/size_60dp"
+                android:layout_margin="@dimen/margin_10dp"
                 android:layout_marginRight="@dimen/margin_5dp"
                 android:background="@drawable/drug_normal"
-                android:layout_margin="@dimen/margin_10dp"
-                android:contentDescription="@string/description_change_data"/>
+                android:contentDescription="@string/description_change_data" />
 
             <TextView
                 android:id="@+id/text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color_primary"
-                android:text="Change Entry!"
+                android:layout_margin="@dimen/margin_10dp"
                 android:layout_toRightOf="@+id/image"
-                android:layout_margin="@dimen/margin_10dp" />
+                android:text="Change Entry!"
+                android:textColor="@color/text_color_primary" />
 
         </LinearLayout>
 
@@ -62,22 +57,21 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <RadioGroup
                 android:id="@+id/radioGroup"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <RadioButton
                     android:id="@+id/radioYes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yes"
                     android:checked="true"
-                    android:textColor="@color/text_color_primary"
                     android:hint="@color/light_red"
-                    />
+                    android:text="Yes"
+                    android:textColor="@color/text_color_primary" />
 
                 <RadioButton
                     android:id="@+id/radioNo"
@@ -85,8 +79,7 @@
                     android:layout_height="wrap_content"
                     android:text="No"
                     android:textColor="@color/text_color_primary"
-                    android:tint="@color/light_red"
-                    />
+                    android:tint="@color/light_red" />
 
             </RadioGroup>
         </LinearLayout>
@@ -94,34 +87,34 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.29"
-            android:gravity="center|bottom"
-            android:orientation="horizontal"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/margin_5dp">
+            android:layout_marginBottom="@dimen/margin_5dp"
+            android:layout_weight="0.29"
+            android:gravity="center|bottom"
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/dialogButtonOK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="OK"
-                android:layout_marginTop="@dimen/margin_5dp"
-                android:layout_marginRight="@dimen/margin_10dp"
                 android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_5dp"
                 android:background="@drawable/button_background"
-                android:textColor="@color/white"
-                />
+                android:text="OK"
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/dialogButtonCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:layout_marginTop="@dimen/margin_5dp"
-                android:layout_marginRight="@dimen/margin_5dp"
                 android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginRight="@dimen/margin_5dp"
+                android:layout_marginTop="@dimen/margin_5dp"
                 android:background="@drawable/button_background"
+                android:text="Cancel"
                 android:textColor="@color/white"
 
                 />

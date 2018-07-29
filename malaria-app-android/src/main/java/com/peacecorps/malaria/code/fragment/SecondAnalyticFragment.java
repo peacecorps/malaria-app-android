@@ -197,9 +197,10 @@ public class SecondAnalyticFragment extends Fragment {
         // check if the request code is same as what is passed  here it is 2
         if(requestCode==2 || requestCode==3)
         {
-            ViewPager vp=(ViewPager)getActivity().findViewById(R.id.vPager);
-            //refresh all the pagers in view pager
-            vp.getAdapter().notifyDataSetChanged();
+            // Creating error now, keeping for future reference
+//            ViewPager vp=(ViewPager)getActivity().findViewById(R.id.vPager);
+//            //refresh all the pagers in view pager
+//            vp.getAdapter().notifyDataSetChanged();
         }
 
     }

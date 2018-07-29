@@ -380,11 +380,11 @@ public class AppDbHelper implements DbHelper {
 
     /**Fetching the Location**/
     @Override
-    public void getLocation(final LoadListLocationCallback callback) {
+    public void getLocation(final loadListStringCallBack callback) {
         Runnable locationRunnable = new Runnable() {
             @Override
             public void run() {
-                final List<Location> locations = locationDao.getLocationList();
+                final List<String> locations = locationDao.getLocationList();
                 appExecutors.mainThread().execute(new Runnable() {
                     @Override
                     public void run() {
