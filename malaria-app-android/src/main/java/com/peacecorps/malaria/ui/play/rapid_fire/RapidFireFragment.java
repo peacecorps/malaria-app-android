@@ -17,7 +17,7 @@ import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.ui.base.BaseFragment;
 import com.peacecorps.malaria.ui.play.rapid_fire.RapidFireContract.RapidFireMvpView;
 import com.peacecorps.malaria.utils.InjectionClass;
-import com.peacecorps.malaria.utils.ToastLogUtil;
+import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,7 +85,9 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
         if (savedInstanceState != null) {
             // saved values from orientation changes
             restoreFromInstanceState(savedInstanceState);
-        } else init();
+        } else {
+            init();
+        }
         setGameScore();
         //displays the time left for the next question
         updateTimer(millisLeft / 1000);
@@ -361,7 +363,12 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
         if (context instanceof OnRapidFragmentListener) {
             listener = (OnRapidFragmentListener) context;
         } else {
-            ToastLogUtil.showErrorLog(context.toString() + "must implement OnRapidFragmentListener");
+            // Show error Log for debugging & display snack bar to user
+            ToastLogSnackBarUtil.showErrorLog(context.toString() + " must implement OnRapidFragmentListener");
+            if (getActivity() != null) {
+                ToastLogSnackBarUtil.showSnackBar(context, getActivity().findViewById(android.R.id.content),
+                        "Something went wrong!");
+            }
         }
     }
 }

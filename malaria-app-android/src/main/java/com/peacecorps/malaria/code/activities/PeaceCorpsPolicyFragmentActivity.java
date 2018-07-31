@@ -40,7 +40,7 @@ import java.util.Locale;
  */
 public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
 
-    private TextView mPeaceCorpsPolicyLabel,pcp;
+    private TextView mPeaceCorpsPolicyLabel, pcp;
     private Button ttsButton;
     private TextToSpeech tts;
 
@@ -53,7 +53,6 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
 
     // temporary string to show the parsed response
     private String jsonResponse;
-
 
 
     @Override
@@ -83,7 +82,6 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
 
     @Override
     protected void onResume() {
-
         //setup the tts language
         tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -103,28 +101,28 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
             }
         });
 
-    super.onResume();
+        super.onResume();
     }
 
     //shutdown text to speech when the back button is pressed
     public void onBackPressed() {
-       if(tts !=null){
+        if (tts != null) {
             tts.stop();
             tts.shutdown();
         }
-       finish();
+        finish();
     }
 
     @Override
     protected void onPause() {
-        if(tts !=null){
+        if (tts != null) {
             tts.stop();
             tts.shutdown();
         }
         super.onPause();
     }
 
-    private void makeJsonObjectRequest(){
+    private void makeJsonObjectRequest() {
         Log.i(TAGPCP, "INSIDE JSON OBJECT REQUEST");
         showpDialog(); //progress dialog shows loading...while the data is being fetched
 
@@ -136,7 +134,7 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
                 Log.d(TAGPCP, response.toString());
 
                 try {
-                    Log.i(TAGPCP,"INSIDE JSON RESPONSE");
+                    Log.i(TAGPCP, "INSIDE JSON RESPONSE");
                     //parsing json object response
                     String name = response.getString("title_post");
                     String desc = response.getString("description_post");
@@ -204,14 +202,14 @@ public class PeaceCorpsPolicyFragmentActivity extends FragmentActivity {
         VolleyApplication.getInstance().addToRequestQueue(jsonObjReq);
     }
 
-    private void showpDialog(){
-        if(!progressDialog.isShowing())
+    private void showpDialog() {
+        if (!progressDialog.isShowing())
             progressDialog.show();
         //for showing the loading animation in Activity
     }
 
-    private void hidepDialog(){
-        if(progressDialog.isShowing())
+    private void hidepDialog() {
+        if (progressDialog.isShowing())
             progressDialog.dismiss();
         //for dismissing the loading animation in Activity
     }

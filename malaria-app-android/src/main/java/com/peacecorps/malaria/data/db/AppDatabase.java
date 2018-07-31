@@ -10,7 +10,7 @@ import com.peacecorps.malaria.data.db.entities.*;
 
 @Database(entities = {AppSetting.class, Location.class, Packing.class, UserMedicine.class, AlarmTime.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase{
-    private static AppDatabase INSTANCE;
+    private static AppDatabase sIntance;
     private static final Object sLock = new Object();
 
     public abstract AppSettingDao appSettingDao();
@@ -21,14 +21,14 @@ public abstract class AppDatabase extends RoomDatabase{
 
     public static AppDatabase getAppDatabase(Context context) {
         synchronized (sLock) {
-            if (INSTANCE == null) {
-                INSTANCE =
+            if (sIntance == null) {
+                sIntance =
                         Room.databaseBuilder(context.getApplicationContext(),
                                 AppDatabase.class, "malaria-database")
                                 .fallbackToDestructiveMigration()
                                 .build();
             }
-            return INSTANCE;
+            return sIntance;
         }
 
     }
@@ -36,6 +36,6 @@ public abstract class AppDatabase extends RoomDatabase{
 
 
     public static void destroyInstance() {
-        INSTANCE = null;
+        sIntance = null;
     }
 }

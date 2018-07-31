@@ -19,7 +19,7 @@ import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.ui.base.BaseFragment;
 import com.peacecorps.malaria.ui.play.myth_vs_fact.MythFactContract.MythFactMvpView;
 import com.peacecorps.malaria.utils.InjectionClass;
-import com.peacecorps.malaria.utils.ToastLogUtil;
+import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -211,7 +211,7 @@ public class MythFactFragment extends BaseFragment implements MythFactMvpView {
                             }
                             break;
                         default:
-                            ToastLogUtil.showToast(context, "Wrong Drop!");
+                            ToastLogSnackBarUtil.showToast(context, "Wrong Drop!");
                     }
                     //enable the next button
                     nextButton.setClickable(true);
@@ -241,8 +241,12 @@ public class MythFactFragment extends BaseFragment implements MythFactMvpView {
         if (context instanceof OnMythFragmentListener) {
             listener = (OnMythFragmentListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnPlayFragmentListener");
+            // Show error Log for debugging & display snackbar to user
+            ToastLogSnackBarUtil.showErrorLog(context.toString() + " must implement OnMythFragmentListener");
+            if(getActivity()!=null) {
+                ToastLogSnackBarUtil.showSnackBar(context, getActivity().findViewById(android.R.id.content),
+                        "Something went wrong!");
+            }
         }
     }
 

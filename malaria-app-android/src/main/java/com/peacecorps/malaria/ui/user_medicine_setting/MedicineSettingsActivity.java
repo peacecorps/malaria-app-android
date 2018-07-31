@@ -4,14 +4,10 @@ package com.peacecorps.malaria.ui.user_medicine_setting;
  * Created by Anamika on 12/7/2018.
  */
 
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -26,8 +22,8 @@ import com.peacecorps.malaria.code.adapter.DrugArrayAdapter;
 import com.peacecorps.malaria.ui.base.BaseActivity;
 import com.peacecorps.malaria.utils.Constants;
 import com.peacecorps.malaria.utils.InjectionClass;
-
-import java.util.Calendar;
+import com.peacecorps.malaria.utils.TimePickerFragment;
+import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,17 +41,16 @@ public class MedicineSettingsActivity extends BaseActivity
     TextView mTimePickLabel;
     @BindView(R.id.if_forget_label)
     TextView mIfForgetLabel;
-
-    // need to make it static as TimePickerFragment class is static & it's using both buttons
-    private static Button mDoneButton;
-    private static TextView timePickButton;
-
     @BindView(R.id.drug_select_spinner)
     Spinner mDrugSelectSpinner;
 
+    // need to make it static as TimePickerFragment class is static & it's using both buttons
+    private Button mDoneButton;
+    private TextView timePickButton;
+
     private static int drugPickedNo;
-    private static int mHour;
-    private static int mMinute;
+    private int mHour;
+    private int mMinute;
 
     private MedicineSettingPresenter<MedicineSettingsActivity> presenter;
 
@@ -82,13 +77,12 @@ public class MedicineSettingsActivity extends BaseActivity
      */
     @OnClick(R.id.done_button)
     public void doneButtonListener(View view) {
-        if(mDoneButton.isEnabled()) {
+        if (mDoneButton.isEnabled()) {
             // saving alarm timings, setting user preference to true and saving drug picked in preferences
             presenter.setUserAndMedicationPreference(mHour, mMinute, drugPickedNo);
 
             startMainActivity();
-        }
-        else {
+        } else {
             Toast.makeText(MedicineSettingsActivity.this, "Select time first", Toast.LENGTH_SHORT).show();
         }
     }
@@ -134,8 +128,27 @@ public class MedicineSettingsActivity extends BaseActivity
     /*Method is for picking time for the Alarm Notifications*/
     @OnClick(R.id.time_pick_button)
     public void timePickButtonListener(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "User Medicine Setting Activity");
+        showTimePickerDialog();
+    }
+
+    private void showTimePickerDialog() {
+        TimePickerFragment timePickerFragment = new TimePickerFragment();
+        if (getFragmentManager() != null) {
+            timePickerFragment.show(getFragmentManager(), "Time Picker in MedicineSettingActivity");
+        } else {
+            ToastLogSnackBarUtil.showErrorLog("getFragmentManager is null in MedicineSettingActivity");
+        }
+
+        TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                presenter.convertToTwelveHours(hourOfDay, minute);
+            }
+        };
+        /*
+         * Set Call back to capture selected date
+         */
+        timePickerFragment.setCallBack(listener);
     }
 
     @Override
@@ -145,15 +158,19 @@ public class MedicineSettingsActivity extends BaseActivity
         finish();
     }
 
-
-    public static void setSelectedTime(String time) {
+    /**
+     * @param time : time selected in Picker in 12 hours format
+     */
+    @Override
+    public void setSelectedTime(String time) {
         timePickButton.setText(time);
     }
 
     /*Method to enable the done Button
      *Done button is enabled if the user have setup a time
      */
-    public static void enableDoneButton() {
+    @Override
+    public void enableDoneButton() {
         mDoneButton.setEnabled(true);
     }
 
@@ -169,69 +186,10 @@ public class MedicineSettingsActivity extends BaseActivity
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    /*Class to manage the Time Picker Widget*/
-
-    public static class TimePickerFragment extends DialogFragment implements
-            TimePickerDialog.OnTimeSetListener {
-
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar calendar = Calendar.getInstance();
-
-            int hour = calendar.get(Calendar.HOUR_OF_DAY);
-            int minute = calendar.get(Calendar.MINUTE);
-
-            TimePickerDialog view = new TimePickerDialog(getActivity(), R.style.MyTimePicker, this, hour, minute,
-                    DateFormat.is24HourFormat(getActivity()));
-
-            View v = getActivity().getLayoutInflater().inflate(R.layout.time_picker_style_setting, null);
-
-            view.setView(v);
-            return view;
-        }
-
-        public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
-
-            mHour = hourOfDay;
-            mMinute = minutes;
-            //updateTime(hourOfDay, minutes);
-            //updateTime(mHour, mMinute);
-            convertToTwelveHours(hourOfDay, minutes);
-        }
-
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         presenter.detachView();
         presenter = null;
     }
-
-    public static void convertToTwelveHours(int hours, int mins) {
-        String timeSet;
-        if (hours > 12) {
-            hours -= 12;
-            timeSet = "PM";
-        } else if (hours == 0) {
-            hours += 12;
-            timeSet = "AM";
-        } else if (hours == 12)
-            timeSet = "PM";
-        else
-            timeSet = "AM";
-
-        String minutes;
-        if (mins < 10)
-            minutes = "0" + mins;
-        else
-            minutes = String.valueOf(mins);
-
-        // Append the time to a stringBuilder
-        String theTime = String.valueOf(hours) + ':' + minutes + " " + timeSet;
-        setSelectedTime(theTime);
-        enableDoneButton();
-    }
-
 }

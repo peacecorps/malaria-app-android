@@ -9,12 +9,12 @@ public class Location {
     @PrimaryKey(autoGenerate = true)
     private int locationId;
 
-    private String location;
+    private String locationName;
 
     private int time;
 
-    public Location(String location, int time) {
-        this.location = location;
+    public Location(String locationName, int time) {
+        this.locationName = locationName;
         this.time = time;
     }
 
@@ -26,12 +26,12 @@ public class Location {
         this.locationId = locationId;
     }
 
-    public String getLocation() {
-        return location;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
     public int getTime() {

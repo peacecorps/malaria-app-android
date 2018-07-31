@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.ui.base.BaseFragment;
 import com.peacecorps.malaria.utils.InjectionClass;
+import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +48,7 @@ public class UserProfileFragment extends BaseFragment implements UserProfileCont
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_user_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
         context = getContext();
         // butterknife binding
         ButterKnife.bind(this, view);
@@ -84,8 +85,12 @@ public class UserProfileFragment extends BaseFragment implements UserProfileCont
         if (context instanceof OnUserFragmentListener) {
             mListener = (OnUserFragmentListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnUserFragmentListener");
+            // Show error Log for debugging & display snackbar to user
+            ToastLogSnackBarUtil.showErrorLog(context.toString() + " must implement OnUserFragmentListener");
+            if (getActivity() != null) {
+                ToastLogSnackBarUtil.showSnackBar(context, getActivity().findViewById(android.R.id.content),
+                        "Something went wrong!");
+            }
         }
     }
 
@@ -101,11 +106,11 @@ public class UserProfileFragment extends BaseFragment implements UserProfileCont
     // set initial details from shared preferences
     @Override
     public void setInitialValuesIfAvailable(String name, String email, int age, String medicine) {
-        if(!name.equals(""))
+        if (!name.equals(""))
             userName.setText(name);
-        if(!email.equals(""))
+        if (!email.equals(""))
             userEmail.setText(email);
-        if(age>0)
+        if (age > 0)
             userAge.setText(String.valueOf(age));
         userMedicationType.setText(medicine);
     }
@@ -143,9 +148,9 @@ public class UserProfileFragment extends BaseFragment implements UserProfileCont
     // checks if age is valid(it is not empty & age is >0 & <=100), returns true else set error & return false
     @Override
     public boolean checkAgeError() {
-        if(presenter.isAgeValid())
+        if (presenter.isAgeValid()) {
             return true;
-        else {
+        } else {
             userAge.setError(userAge.getHint());
             return false;
         }
@@ -154,7 +159,7 @@ public class UserProfileFragment extends BaseFragment implements UserProfileCont
     // if name is not empty, return true else false & Set error message
     @Override
     public boolean checkNameError() {
-        if(presenter.testIsEmpty(getUserName())) {
+        if (presenter.testIsEmpty(getUserName())) {
             userName.setError(userName.getHint());
             return false;
         }
@@ -164,9 +169,9 @@ public class UserProfileFragment extends BaseFragment implements UserProfileCont
     // checks email validity and return true else set error message
     @Override
     public boolean checkEmailError() {
-        if(presenter.isEmailValid())
+        if (presenter.isEmailValid()) {
             return true;
-        else {
+        } else {
             userEmail.setError(userEmail.getHint());
             return false;
         }
@@ -175,14 +180,16 @@ public class UserProfileFragment extends BaseFragment implements UserProfileCont
     // save button listener
     @OnClick(R.id.save_button)
     public void saveButtonListener(View view) {
-        if(presenter.checkError()){
+        if (presenter.checkError()) {
             // save value in preferences
             presenter.setNewDetails(getUserName(), getUserEmail(), Integer.parseInt(getUserAge()));
             Toast.makeText(context, "Values Saved!", Toast.LENGTH_SHORT).show();
             mListener.startHomeFragment();
+        } else {
+            Toast.makeText(context, "Enter details again!", Toast.LENGTH_SHORT).show();
         }
-        else Toast.makeText(context, "Enter details again!", Toast.LENGTH_SHORT).show();
     }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -22,7 +22,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:titleTextColor">@color/textColorPrimary</item>
+        <item name="android:titleTextColor" tools:targetApi="m">@color/textColorPrimary</item>
 
         <item name="android:actionBarStyle">@style/MyActionBar</item>
         <item name="android:datePickerStyle">@style/MyDatePicker</item>
@@ -48,36 +48,38 @@
         <item name="android:titleTextStyle">@style/AppTheme.ActionBar.TitleTextStyle</item>
     </style>
 
+    <!-- Time picker style -->
     <style name="MyTimePicker" parent="android:style/Theme.Holo.Light.Dialog">
-        <item name="android:divider">@color/text_color_primary</item>
+        <item name="android:divider">@color/textColorPrimary</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:editTextStyle">@style/AppTheme.TimePicker.EditTextStyle</item>
         <item name="android:borderlessButtonStyle">@style/AppTheme.DatePicker.Button.Borderless
         </item>
         <item name="android:buttonBarStyle">@style/AppTheme.ButtonBar.DatePicker</item>
     </style>
-
     <style name="AppTheme.TimePicker.EditTextStyle" parent="android:style/Widget.EditText">
-        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
 
     </style>
 
     <style name="AppTheme.TimePicker.PopUpStyle" parent="android:style/Widget.PopupWindow">
-        <item name="android:background">@color/cream</item>
+        <item name="android:background">@color/colorPrimary</item>
 
     </style>
 
     <style name="AppTheme.TimePicker.ADialogStyle" parent="android:style/Theme.Holo.Dialog">
-        <item name="android:background">@color/cream</item>
-        <item name="android:windowBackground">@color/cream</item>
-        <item name="android:windowFrame">@color/cream</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowFrame">@color/colorPrimary</item>
 
     </style>
 
     <style name="AppTheme.TimePicker.DialogPrefStyle" parent="android:style/Theme.Holo.Dialog">
-        <item name="android:background">@color/cream</item>
+        <item name="android:background">@color/colorPrimary</item>
 
     </style>
+
+    <!-- Date picker style -->
 
     <style name="MyDatePicker" parent="android:style/Theme.Holo.Light.Dialog.NoActionBar.MinWidth">
         <item name="android:divider">@color/text_color_primary</item>
@@ -95,16 +97,16 @@
     </style>
 
     <style name="AppTheme.ButtonBar.DatePicker" parent="@android:style/Holo.ButtonBar.AlertDialog">
-        <item name="android:background">@color/light_red</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.DatePicker.EditTextStyle" parent="android:style/Widget.EditText">
-        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
     </style>
 
 
     <style name="AppTheme.DatePicker.Button.Borderless" parent="@android:style/Widget.Holo.Button.Borderless">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
     </style>
 
     <style name="AppTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.StatusBar.Title">
@@ -114,13 +116,13 @@
 
     <style name="AppTheme.ButtonBar.AlertDialog" parent="@android:style/Holo.ButtonBar.AlertDialog">
 
-        <item name="android:background">@color/light_red</item>
+        <item name="android:background">@color/colorPrimary</item>
 
     </style>
 
 
     <style name="Widget.AppTheme.Button.Borderless" parent="@android:style/Widget.Holo.Button.Borderless">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 
@@ -152,6 +154,7 @@
         <item name="android:layout_height">@dimen/height_60dp</item>
         <item name="android:layout_marginTop">@dimen/margin_20dp</item>
         <item name="android:theme">@style/style_text_input</item>
+
     </style>
 
     <style name="style_text_input_edit_text">
@@ -165,6 +168,21 @@
         <item name="android:background">@drawable/button_background</item>
         <item name="android:textColor">@color/textColorPrimary</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="style_dialog_heading">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">@dimen/text_size_20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:padding">@dimen/padding_10dp</item>
+    </style>
+
+    <style name="style_image_badge_dialog">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
     </style>
 
 

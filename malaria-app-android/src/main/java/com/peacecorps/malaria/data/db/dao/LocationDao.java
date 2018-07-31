@@ -14,13 +14,13 @@ public interface LocationDao {
     @Insert
     void insertLocation(Location location);
 
-    @Query("SELECT * FROM Location WHERE location= :location")
+    @Query("SELECT * FROM Location WHERE locationName= :location")
     List<Location> getLocationListByLocation(String location);
 
-    @Query("SELECT * FROM Location ORDER BY locationId ASC")
-    List<Location> getLocationList();
+    @Query("SELECT locationName FROM Location ORDER BY locationId ASC")
+    List<String> getLocationList();
 
-    @Query("UPDATE Location SET time= :a WHERE location= :location ")
+    @Query("UPDATE Location SET time= :a WHERE locationName= :location ")
     void updateLocation(int a, String location);
 
     @Query("DELETE FROM Location")

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.ui.base.BaseFragment;
-import com.peacecorps.malaria.utils.ToastLogUtil;
+import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -30,7 +30,7 @@ public class PlayFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_play, container, false);
-        // butterknife binding
+        // butter knife binding
         ButterKnife.bind(this, view);
         return view;
     }
@@ -43,8 +43,7 @@ public class PlayFragment extends BaseFragment {
     // listener for badge button in play fragment
     @OnClick(R.id.btn_badge_screen)
     public void badgeScreenListener(View view) {
-        //Todo implement it in next PR
-        ToastLogUtil.showToast(getContext(), "badge screen clicked");
+        listener.replacePlayFragment(R.id.btn_badge_screen);
     }
 
     // listener for badge button in play fragment
@@ -86,8 +85,12 @@ public class PlayFragment extends BaseFragment {
         if (context instanceof OnPlayFragmentListener) {
             listener = (OnPlayFragmentListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnPlayFragmentListener");
+            // Show error Log for debugging & display snackbar to user
+            ToastLogSnackBarUtil.showErrorLog(context.toString() + " must implement OnPlayFragmentListener");
+            if (getActivity() != null) {
+                ToastLogSnackBarUtil.showSnackBar(context, getActivity().findViewById(android.R.id.content),
+                        "Something went wrong!");
+            }
         }
     }
 
@@ -97,5 +100,4 @@ public class PlayFragment extends BaseFragment {
         super.onDetach();
         listener = null;
     }
-
 }

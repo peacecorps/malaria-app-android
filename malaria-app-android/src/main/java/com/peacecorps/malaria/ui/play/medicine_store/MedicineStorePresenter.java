@@ -87,9 +87,11 @@ public class MedicineStorePresenter<V extends MedicineMvpView> extends BasePrese
     public String getMessageBodyForOrder() {
         int storeValue = getMedicineStoreValue();
         String flag;
-        if (getDataManager().isDosesWeekly())
+        if (getDataManager().isDosesWeekly()) {
             flag = "weeks";
-        else flag = "days";
+        } else {
+            flag = "days";
+        }
 
         return "My malaria pills will last for the coming  " + "<b>" + storeValue + "</b>" + " " +
                 flag + " only.<br> Send the following immediately: <br>" +
@@ -120,6 +122,4 @@ public class MedicineStorePresenter<V extends MedicineMvpView> extends BasePrese
     public void updateAlertReminder(int number) {
         getDataManager().setAlertNumberDaysOrWeeks(number);
     }
-
-
 }

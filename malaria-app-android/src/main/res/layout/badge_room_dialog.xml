@@ -1,124 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dialogReset"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/dialog_background">
+    android:background="@drawable/dialog_background"
+    android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/achievement_category"
+        style="@style/style_dialog_heading"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/heading_achievement_one" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="0.96"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/badge_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_220dp"
+            android:layout_margin="@dimen/margin_20dp"
+            android:gravity="center"
+            android:text="@string/label_achievement_one"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_15sp"
+            android:drawableBottom="@drawable/y_b3"
+            android:drawablePadding="@dimen/padding_2dp"
+            />
+
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginBottom="@dimen/margin_5dp"
+        android:layout_marginLeft="@dimen/margin_15dp"
+        android:layout_marginRight="@dimen/margin_15dp"
+        android:layout_marginTop="@dimen/margin_15dp"
+        android:gravity="center|bottom"
+        android:orientation="horizontal"
+        android:weightSum="5">
 
+        <ImageView
+            style="@style/style_image_badge_dialog"
+            android:background="@drawable/y_b1"
+            android:contentDescription="@string/description_badge_b1" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/lightest_brown"
-            android:orientation="horizontal">
+        <ImageView
+            style="@style/style_image_badge_dialog"
+            android:background="@drawable/y_b3"
+            android:contentDescription="@string/description_badge_b3" />
 
-            <TextView
-                android:id="@+id/achievement_category"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_10dp"
-                android:gravity="center"
-                android:text="Category"
-                android:textColor="@color/textColorPrimary"
-                android:textSize="@dimen/text_size_25sp" />
+        <ImageView
+            style="@style/style_image_badge_dialog"
+            android:background="@drawable/y_b5"
+            android:contentDescription="@string/description_badge_b5" />
 
-        </LinearLayout>
+        <ImageView
+            style="@style/style_image_badge_dialog"
+            android:background="@drawable/y_newbie"
+            android:contentDescription="@string/description_badge_newbie" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="0.96"
-            android:orientation="vertical">
+        <ImageView
+            android:background="@drawable/y_hat"
+            android:contentDescription="@string/description_badge_hat"
+            style="@style/style_image_badge_dialog" />
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/badge_text"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_20dp"
-                        android:layout_toRightOf="@+id/image"
-                        android:gravity="center"
-                        android:text="Achievement Text"
-                        android:textColor="@color/textColorPrimary" />
-
-                    <ImageView
-                        android:id="@+id/userBadge"
-                        android:layout_width="@dimen/size_120dp"
-                        android:layout_height="@dimen/size_120dp"
-                        android:contentDescription="@string/description_badge_awarded" />
-                </LinearLayout>
-            </ScrollView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/margin_5dp"
-            android:layout_marginLeft="@dimen/margin_15dp"
-            android:layout_marginRight="@dimen/margin_15dp"
-            android:layout_marginTop="@dimen/margin_15dp"
-            android:gravity="center|bottom"
-            android:orientation="horizontal"
-            android:weightSum="5">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/y_b1"
-                android:contentDescription="@string/description_badge_b1" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/y_b3"
-                android:contentDescription="@string/description_badge_b3" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/y_b5"
-                android:contentDescription="@string/description_badge_b5" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/y_newbie"
-                android:contentDescription="@string/description_badge_newbie" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/y_hat"
-                android:contentDescription="@string/description_badge_hat" />
-
-        </LinearLayout>
     </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

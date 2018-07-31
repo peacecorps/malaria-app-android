@@ -19,7 +19,7 @@
     <string name="alert_dialog_message">Have you taken your drug today ?</string>
     <string name="user_medicine_settings_fragment_activity_title">PC Malaria Prevention</string>
     <string name="info_hub_title_label">Info Hub</string>
-    <string name="plan_my_trip_label">Plan My Trip</string>
+    <string name="plan_my_trip_label">Plan Trip</string>
     <string name="peace_corps_policy">Peace Corps Policy</string>
     <string name="percentage_of_side_effects">Percentage of Side Effects</string>
     <string name="side_effects_reported_by_PCVs">Side Effects Reported by PCVs</string>
@@ -183,6 +183,27 @@
     <string name="description_order_no_medicine">Enter the number of medicines you want to order.</string>
     <string name="label_email">Email</string>
     <string name="label_message">Message</string>
+    <string name="heading_achievement_one">Medication Punctuality Rewards</string>
+    <string name="heading_achievement_two">Malaria Information Rewards</string>
+    <string name="label_achievement_one">Rookie</string>
+    <string name="label_achievement_two">Mr-Know-It-All</string>
+    <string name="label_achievement_room">Achievement Room</string>
+    <string name="label_first_achievement">Rookie  Taken your first medicine</string>
+    <string name="label_second_achievement">Mr Know-It-All  Answered first question correctly</string>
+    <string name="label_third_achievement">Explorer  Planned your first trip</string>
+    <string name="hint_trip_location">Enter Location</string>
+    <string name="hint_departure_date">Departure Date (DD/MM/YYYY)</string>
+    <string name="heading_previous_location">Previous Locations</string>
+    <string name="heading_no_location_history">No Location History Found</string>
+    <string name="et_trip_date">%d/%d/%d</string>
+    <string name="time_picker">%d:%s %s</string>
+    <string name="add_zero_beginning">0%d</string>
+    <string name="key_year">year</string>
+    <string name="key_month">month</string>
+    <string name="key_day">day</string>
+    <string name="key_hour">hour</string>
+    <string name="key_min">min</string>
+    <string name="heading_packing_item">Packing Items</string>
 
 
     <!-- arrays -->

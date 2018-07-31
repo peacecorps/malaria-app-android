@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.ui.base.BaseFragment;
-import com.peacecorps.malaria.utils.ToastLogUtil;
+import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
 import butterknife.ButterKnife;
 
@@ -77,7 +77,7 @@ public class InfoHubFragment extends BaseFragment implements InfoHubContract.Inf
             case R.id.btn_effectiveness:
                 break;
             default:
-                ToastLogUtil.showToast(context, "Wrong button click");
+                ToastLogSnackBarUtil.showToast(context, "Wrong button click");
         }
     }
 }

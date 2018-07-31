@@ -56,7 +56,7 @@ public class VolunteerAdherenceFragmentActivity extends FragmentActivity {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
-//mking authenticated json object Request
+        //making authenticated json object Request
         Log.i(TAGVA, "INSIDE VOLUNTEER ADHERENCE");
 
         mVolunteerAdherenceLabel.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/garreg.ttf"));
