@@ -15,16 +15,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.activities.RemainderToneActivity;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
-import com.peacecorps.malaria.ui.user_medicine_setting.MedicineSettingsActivity;
 import com.peacecorps.malaria.db.DatabaseSQLiteHelper;
 import com.peacecorps.malaria.services.AlarmService;
+import com.peacecorps.malaria.ui.user_medicine_setting.MedicineSettingsActivity;
 import com.peacecorps.malaria.utils.CalendarFunction;
+import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,16 +34,12 @@ import java.util.Locale;
 //Todo many preferences usage, need to look it in detail and then create function inside pref_file, skipped for now.
 public class HomeScreenFragment extends Fragment {
 
-    static final private int INIT_HOUR = 5;
-    static final private int INIT_MINUTE = 30;
-
     private Button mAcceptMedicationButton;
     private Button mRejectMedicationButton;
     private Button mSettingsButton;
     private Button mRemainderToneButton;
     private TextView mCurrentDateLabel;
     private TextView mCurrentDayOfweekLabel;
-    private LinearLayout warningView;
     private static CharSequence mGetCurrentDate;
     private static int mDrugAcceptedCount;
     private static int drugRejectedCount;
@@ -54,9 +50,9 @@ public class HomeScreenFragment extends Fragment {
     private static String TAGHSF = "HomeScreenFragment";
     private SharedPreferences sharedPreferences;
 
-    int checkDay = -1;
+    private int checkDay = -1;
 
-    static SharedPreferenceStore mSharedPreferenceStore;
+    private static SharedPreferenceStore mSharedPreferenceStore;
     private Dialog dialog = null;
 
 
@@ -187,19 +183,19 @@ public class HomeScreenFragment extends Fragment {
     public void createView() {
 
         mAcceptMedicationButton = (Button) rootView
-                .findViewById(R.id.fragment_home_screen_accept_medication_button);
+                .findViewById(R.id.btn_accept_medication);
         mRejectMedicationButton = (Button) rootView
-                .findViewById(R.id.fragment_home_screen__reject_medication_button);
+                .findViewById(R.id.btn_reject_medication);
         mSettingsButton = (Button) rootView
                 .findViewById(R.id.fragment_home_screen_settings_button);
         mRemainderToneButton=(Button) rootView
                 .findViewById(R.id.fragment_home_screen_set_tone_button);
         mCurrentDateLabel = (TextView) rootView
-                .findViewById(R.id.fragment_home_screen_current_date);
+                .findViewById(R.id.tv_current_date);
         mCurrentDayOfweekLabel = (TextView) rootView
-                .findViewById(R.id.fragment_home_screen_current_day_of_week);
+                .findViewById(R.id.tv_day_of_week);
         //yatna
-        warningView=(LinearLayout)rootView
+        TextView warningView = rootView
                 .findViewById(R.id.warningView);
         sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
         //get the limit set by user from shared preference
@@ -403,10 +399,8 @@ public class HomeScreenFragment extends Fragment {
     }
 
     public void decideDrugTakenUIBoolean(Boolean isWeekly, Boolean isTaken) {
-        if (isWeekly) {
-            if (checkDrugTakenTimeInterval("weeklyDate") > 1) {
-                changeWeeklyAlarmTime();
-            }
+        if (isWeekly && checkDrugTakenTimeInterval("weeklyDate") > 1) {
+            changeWeeklyAlarmTime();
         }
         saveUsersettings(isTaken, isWeekly);
         if (isTaken) {
@@ -463,7 +457,8 @@ public class HomeScreenFragment extends Fragment {
             case 7:
                 currentDayOfWeek = possibleDays[6];
                 break;
-
+            default:
+                ToastLogSnackBarUtil.showErrorLog("HomeScreenFragment: invalid option");
         }
         return currentDayOfWeek;
     }

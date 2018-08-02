@@ -1,15 +1,15 @@
 package com.peacecorps.malaria.ui.play.rapid_fire;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -26,6 +26,7 @@ import butterknife.OnClick;
 /**
  * Created by Anamika Tripathi on 19/7/18.
  */
+@SuppressWarnings("NonAtomicOperationOnVolatileField")
 public class RapidFireFragment extends BaseFragment implements RapidFireMvpView {
     // used for saving values in saveInstanceState
     private static final String COUNTER_MILLIS_LEFT = "COUNTER_MILLIS_LEFT";
@@ -38,7 +39,7 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
     Button optionTwo;
     @BindView(R.id.btn_rapid_option_three)
     Button optionThree;
-    // question textview
+    // question text view
     @BindView(R.id.tv_rapid_question)
     TextView tvQuestion;
     // displays game score
@@ -57,7 +58,7 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
     // saves game score
     private int gameScore;
     private RapidFireTimeCounter counter;
-    private long timercount;
+    private long timerCount;
     private OnRapidFragmentListener listener;
 
     @Nullable
@@ -96,12 +97,12 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
 
     // option one for game listener
     @OnClick(R.id.btn_rapid_option_one)
-    public void optionOneListener(View view) {
+    public void optionOneListener() {
         // stops counter
         counter.cancel();
         // checks if correct answers for the current quesNO is 1 or not
         if (presenter.getQuestionModel(quesNo).getAns() == 1) {
-            // increment gamescrore, set button background to green to display right answers
+            // increment game score, set button background to green to display right answers
             gameScore++;
             optionOne.setBackgroundColor(getResources().getColor(R.color.light_green));
         } else {
@@ -115,12 +116,12 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
 
     // option two for game listener
     @OnClick(R.id.btn_rapid_option_two)
-    public void optionTwoListener(View view) {
+    public void optionTwoListener() {
         // stops counter
         counter.cancel();
         // checks if correct answers for the current quesNO is 2 or not
         if (presenter.getQuestionModel(quesNo).getAns() == 2) {
-            // increment gamescrore, set button background to green to display right answers else red background
+            // increment game score, set button background to green to display right answers else red background
             gameScore++;
             optionTwo.setBackgroundColor(getResources().getColor(R.color.light_green));
         } else {
@@ -133,12 +134,12 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
 
     // option three for game listener
     @OnClick(R.id.btn_rapid_option_three)
-    public void optionThreeListener(View view) {
+    public void optionThreeListener() {
         // stops counter
         counter.cancel();
         // checks if correct answers for the current quesNO is 3 or not
         if (presenter.getQuestionModel(quesNo).getAns() == 3) {
-            // increment gamescrore, set button background to green to display right answers else red background
+            // increment game score, set button background to green to display right answers else red background
             gameScore++;
             optionThree.setBackgroundColor(getResources().getColor(R.color.light_green));
         } else {
@@ -151,40 +152,44 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
     }
 
     @OnClick(R.id.btn_rapid_fire_exit)
-    public void exitGameListener(View view) {
+    public void exitGameListener() {
         // stops counter
         counter.cancel();
-        // create a dialog with exit_game_dialog layout
-        final Dialog alertDialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
-        alertDialog.setContentView(R.layout.exit_game_dialog);
-        alertDialog.setCancelable(false);
+        // create a dialog with AlertDialog builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+        builder.setTitle(getString(R.string.label_exit_game));
+        builder.setMessage(getString(R.string.description_sure_exit_game));
 
-        // Setting Dialog Title
-        alertDialog.setTitle("Game Over!!");
-        // positive button listener for dialog
-        alertDialog.findViewById(R.id.exitGameDialogButtonOK).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // dismiss dialog, update sharedPrefernces with game score & go back to play fragment
-                alertDialog.dismiss();
-                presenter.updateGameScore(gameScore);
-                listener.goBackToPlayFragment();
-            }
-        });
-        // negative button listener for dialog
-        alertDialog.findViewById(R.id.exitGameDialogButtonCancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // dismiss dialog, start counter again
-                alertDialog.dismiss();
-                counter = new RapidFireTimeCounter(timercount, 1000);
-                counter.start();
-            }
-        });
+        String positiveText = getString(android.R.string.ok);
+        builder.setPositiveButton(positiveText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // dismiss alert dialog, update preferences with game score and restart play fragment
+                        presenter.updateGameScore(gameScore);
+                        listener.goBackToPlayFragment();
+                        dialog.dismiss();
+                    }
+                });
 
-        // Showing Alert Message
-        alertDialog.show();
-        doKeepDialog(alertDialog);
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // dismiss dialog, start counter again
+                        dialog.dismiss();
+                        counter = new RapidFireTimeCounter(timerCount);
+                        counter.start();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+
+        //Todo check do keep works or not
+        //  doKeepDialog(alertDialog);
     }
 
     // sets score value by appending to the string
@@ -225,7 +230,7 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
                         millisLeft = 6000;
                         prepareQuestionAndOptions();
                     } else {
-                        showDialog();
+                        showGameOverDialog();
                     }
                 }
             }
@@ -255,7 +260,7 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
         enableOptions(true);
         //checks that quesNo is within questionList size which is possible on orientation change
         if (quesNo != presenter.questionListSize()) {
-            counter = new RapidFireTimeCounter(millisLeft, 1000);
+            counter = new RapidFireTimeCounter(millisLeft);
             counter.start();
         }
     }
@@ -271,45 +276,49 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
         optionThree.setClickable(val);
     }
 
-    // updat timer
+    // update timer
     @Override
     public void updateTimer(long miliLeft) {
         timerView.setText(getString(R.string.blank_text, miliLeft / 1000));
     }
 
     // Dialog shown when game is over
-    public void showDialog() {
-        final Dialog alertDialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
-        alertDialog.setContentView(R.layout.game_over_dialog);
-        alertDialog.setCancelable(false);
+    private void showGameOverDialog() {
+        // create a dialog with AlertDialog builder, set appropriate title & message
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+        builder.setTitle(getString(R.string.label_game_over));
+        builder.setMessage(getString(R.string.description_wait_for_new_ques));
 
-        // Setting Dialog Title
-        Button ok = alertDialog.findViewById(R.id.gameOverDialogButtonOK);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // dismiss the dialog, update game score in prefernces, starts play fragment again
-                alertDialog.dismiss();
-                presenter.updateGameScore(gameScore);
-                listener.goBackToPlayFragment();
-            }
-        });
+        String positiveText = getString(android.R.string.ok);
+        builder.setPositiveButton(positiveText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // dismiss the dialog, update game score in preference, starts play fragment again
+                        dialog.dismiss();
+                        presenter.updateGameScore(gameScore);
+                        listener.goBackToPlayFragment();
+                    }
+                });
 
-        // Showing Alert Message
-        alertDialog.show();
-        doKeepDialog(alertDialog);
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+//        doKeepDialog(alertDialog);
     }
 
-    // attaches the dialog with WindowManager to avoid cancelling on orientation change
-    private static void doKeepDialog(Dialog dialog) {
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        if (dialog.getWindow() != null) {
-            lp.copyFrom(dialog.getWindow().getAttributes());
-            lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-            dialog.getWindow().setAttributes(lp);
-        }
-    }
+// --Commented out App crashes here:
+//    // attaches the dialog with WindowManager to avoid cancelling on orientation change
+//    private static void doKeepDialog(Dialog dialog) {
+//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//        if (dialog.getWindow() != null) {
+//            lp.copyFrom(dialog.getWindow().getAttributes());
+//            lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+//            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//            dialog.getWindow().setAttributes(lp);
+//        }
+//    }
+// --Commented out App crashes here
 
     // saving value in case of orientation changes
     @Override
@@ -330,14 +339,14 @@ public class RapidFireFragment extends BaseFragment implements RapidFireMvpView 
     }
 
     //Implementing the timer
-    public class RapidFireTimeCounter extends CountDownTimer {
-        RapidFireTimeCounter(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
+    class RapidFireTimeCounter extends CountDownTimer {
+        RapidFireTimeCounter(long millisInFuture) {
+            super(millisInFuture, 1000);
         }
 
         @Override
         public void onTick(long l) {
-            timercount = l;
+            timerCount = l;
             timerView.setText(getString(R.string.blank_text, l / 1000));
             millisLeft = l;
 

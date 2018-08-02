@@ -27,6 +27,7 @@ public class AppPreferencesHelper implements PreferencesHelper{
     private static final String PREF_KEY_IS_FIRST_RUN = "IS_FIRST_RUN";
     private static final String PREF_KEY_IS_DRUG_TAKEN = "com_peacecorps_malaria_is_drug_taken";
     private static final String PREF_KEY_ALERT_TIME = "NUMBER_ALERT_TIME";
+    private static final String PREF_KEY_TRIP_REMINDER = "view_upcoming_reminder";
 
     private final SharedPreferences mPrefs;
 
@@ -252,5 +253,15 @@ public class AppPreferencesHelper implements PreferencesHelper{
     @Override
     public void setAlertNumberDaysOrWeeks(int value) {
         mPrefs.edit().putInt(PREF_KEY_ALERT_TIME, value).apply();
+    }
+
+    @Override
+    public String getReminderMessageForTrip() {
+        return mPrefs.getString(PREF_KEY_TRIP_REMINDER, "");
+    }
+
+    @Override
+    public void setReminderMessageForTrip(String messageForTrip) {
+        mPrefs.edit().putString(PREF_KEY_TRIP_REMINDER, messageForTrip).apply();
     }
 }

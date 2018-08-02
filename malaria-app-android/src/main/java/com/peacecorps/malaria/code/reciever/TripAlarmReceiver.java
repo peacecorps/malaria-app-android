@@ -16,7 +16,6 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
 
 import com.peacecorps.malaria.services.TripAlarmService;
-import com.peacecorps.malaria.code.activities.TripIndicatorFragmentActivity;
 
 /**
  * On receiving the calarm call from Alarm Service,
@@ -29,8 +28,6 @@ public class TripAlarmReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         //this will update the UI with message
-        TripIndicatorFragmentActivity inst = TripIndicatorFragmentActivity.instance();
-
         PowerManager powerManager = (PowerManager) context
                 .getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(
@@ -64,7 +61,7 @@ public class TripAlarmReceiver extends WakefulBroadcastReceiver {
 
         startWakefulService(context, (intent.setComponent(comp)));
         setResultCode(Activity.RESULT_OK);
-
+        //Todo incorrect wakelock usage, check it
         wakeLock.release();
 
         Log.d("TripAlarmReceiver","Set the service");

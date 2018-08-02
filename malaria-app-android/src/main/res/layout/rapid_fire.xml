@@ -3,7 +3,6 @@
     android:id="@+id/relatively"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -16,14 +15,14 @@
 
         <TextView
             android:id="@+id/tv_score"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/margin_10dp"
             android:layout_marginRight="@dimen/margin_10dp"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:text="@string/label_rapid_fire_total_score"
+            android:layout_margin="@dimen/margin_5dp"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_20sp"
             android:textStyle="bold" />
@@ -32,11 +31,11 @@
             android:id="@+id/tv_timers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="end"
             android:layout_marginEnd="@dimen/margin_10dp"
             android:layout_marginRight="@dimen/margin_10dp"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="end"
+            android:layout_margin="@dimen/margin_5dp"
             android:text="@string/label_myth_fact_total_score"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_20sp"
@@ -47,14 +46,13 @@
         android:id="@+id/linearLayout12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.70"
         android:orientation="vertical"
         android:weightSum="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.40"
+            android:layout_marginBottom="@dimen/margin_30dp"
             android:gravity="center_vertical">
 
             <TextView
@@ -64,7 +62,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_5dp"
                 android:gravity="center"
-                android:text="15*2*1-1"
+                android:text="@string/description_rapid_fire_question"
                 android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/text_size_20sp"
                 android:textStyle="bold" />
@@ -73,7 +71,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.20"
+            android:layout_margin="@dimen/margin_20dp"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="@dimen/padding_5dp"
@@ -84,15 +82,16 @@
                 android:layout_width="@dimen/width_200dp"
                 android:layout_height="@dimen/height_50dp"
                 android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_5dp"
                 android:layout_marginTop="@dimen/margin_5dp"
                 android:background="@drawable/button_background"
                 android:clickable="true"
                 android:enabled="true"
                 android:focusable="true"
                 android:gravity="center"
-                android:text="30"
+                android:text="@string/description_rapid_fire_answer"
                 android:textColor="@color/textColorPrimary"
-                android:textSize="@dimen/text_size_15sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="bold" />
 
             <Button
@@ -100,15 +99,16 @@
                 android:layout_width="@dimen/width_200dp"
                 android:layout_height="@dimen/height_50dp"
                 android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_5dp"
                 android:layout_marginTop="@dimen/margin_5dp"
                 android:background="@drawable/button_background"
                 android:clickable="true"
                 android:enabled="true"
                 android:focusable="true"
                 android:gravity="center"
-                android:text="29"
+                android:text="@string/description_rapid_fire_answer"
                 android:textColor="@color/textColorPrimary"
-                android:textSize="@dimen/text_size_15sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="bold" />
 
             <Button
@@ -116,15 +116,16 @@
                 android:layout_width="@dimen/width_200dp"
                 android:layout_height="@dimen/height_50dp"
                 android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_5dp"
                 android:layout_marginTop="@dimen/margin_5dp"
                 android:background="@drawable/button_background"
                 android:clickable="true"
                 android:enabled="true"
                 android:focusable="true"
                 android:gravity="center"
-                android:text="32"
+                android:text="@string/description_rapid_fire_answer"
                 android:textColor="@color/textColorPrimary"
-                android:textSize="@dimen/text_size_15sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
@@ -135,11 +136,12 @@
         android:layout_height="@dimen/height_50dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_30dp"
         android:background="@drawable/button_background"
         android:paddingLeft="@dimen/padding_5dp"
         android:paddingRight="@dimen/padding_5dp"
         android:text="@string/label_exit"
         android:textColor="@color/textColorPrimary"
-        android:textSize="@dimen/text_size_15sp"
+        android:textSize="@dimen/text_size_16sp"
         android:textStyle="bold" />
 </LinearLayout>

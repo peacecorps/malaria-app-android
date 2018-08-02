@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/size_60dp"
         android:height="@dimen/size_60dp"
-        android:gravity="left|top"
+        android:gravity="start|top"
         android:orientation="horizontal">
 
 
@@ -20,12 +20,13 @@
             android:layout_height="fill_parent"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
             android:contentDescription="@string/description_prev_month"
             android:src="@drawable/calendar_left_arrow_selector" />
 
         <TextView
             android:id="@+id/currentMonth"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="@dimen/height_60dp"
             android:layout_weight="0.6"
             android:gravity="center"
@@ -39,6 +40,7 @@
             android:layout_width="@dimen/width_20dp"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/margin_10dp"
             android:layout_marginRight="@dimen/margin_10dp"
             android:contentDescription="@string/description_next_month"
             android:src="@drawable/calendar_right_arrow_selector" />

@@ -1,8 +1,5 @@
 package com.peacecorps.malaria.code.reciever;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -13,15 +10,18 @@ import android.os.PowerManager;
 import com.peacecorps.malaria.code.model.SharedPreferenceStore;
 import com.peacecorps.malaria.code.notification.DrugReminderNotification;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class AlarmHandlerClass extends BroadcastReceiver {
 
     /**Class is for Handling the Alarm**/
 
     public static Calendar mAlarmScheduleTime;
-    final int INTERVAL_WEEK = 604800000;
+    private final int INTERVAL_WEEK = 604800000;
     public static AlarmManager mAlarmManager;
 
-    static SharedPreferenceStore mSharedPreferenceStore;
+    private static SharedPreferenceStore mSharedPreferenceStore;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -35,6 +35,7 @@ public class AlarmHandlerClass extends BroadcastReceiver {
 
         /**Shows the notification with Taken, Snooze and Not Taken Button**/
         new DrugReminderNotification(context);
+        //Todo incorrect wakelock usage
         wakeLock.release();
     }
 
@@ -54,7 +55,7 @@ public class AlarmHandlerClass extends BroadcastReceiver {
         int minute = mSharedPreferenceStore.mPrefsStore.getInt(
                 "com.peacecorps.malaria.AlarmMinute", -1);
         if ((hour != -1) && (minute != -1)) {
-            AlarmTime(context, hour, minute);
+            alarmTime(context, hour, minute);
             /**Setting Alarm**/
             mAlarmManager = (AlarmManager) context
                     .getSystemService(Context.ALARM_SERVICE);
@@ -77,7 +78,7 @@ public class AlarmHandlerClass extends BroadcastReceiver {
         }
     }
 
-    public void AlarmTime(Context context, int hour, int minute) {
+    public void alarmTime(Context context, int hour, int minute) {
         /**Setting The Alarm Time **/
         Date date = new Date();
         mAlarmScheduleTime = Calendar.getInstance();

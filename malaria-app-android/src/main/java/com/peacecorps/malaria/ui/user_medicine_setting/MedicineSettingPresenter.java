@@ -12,7 +12,7 @@ import java.util.Date;
 
 import static com.peacecorps.malaria.ui.user_medicine_setting.MedicineSettingContract.*;
 
-public class MedicineSettingPresenter<V extends View> extends BasePresenter<V> implements Presenter<V> {
+public class MedicineSettingPresenter<V extends SettingMvpView> extends BasePresenter<V> implements Presenter<V> {
 
     MedicineSettingPresenter(AppDataManager manager, Context context) {
         super(manager, context);

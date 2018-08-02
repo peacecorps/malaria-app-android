@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.peacecorps.malaria.utils.CalendarFunction.getDateObject;
 import static com.peacecorps.malaria.utils.CalendarFunction.getHumanDateFormat;
@@ -251,7 +252,7 @@ public class AppDbHelper implements DbHelper {
             @Override
             public void run() {
                 String timeStamp = userMedicineDao.getFirstTimeTimeStamp();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                 Date comp_date = Calendar.getInstance().getTime();
                 try {
                     comp_date = sdf.parse(timeStamp);
@@ -362,7 +363,7 @@ public class AppDbHelper implements DbHelper {
             public void run() {
                 appSettingDao.deleteTableRows();
                 locationDao.deleteTableRows();
-                packingDao.deleteTableRows();
+                packingDao.deleteFullPackingList();
                 userMedicineDao.deleteTableRows();
             }
         };
@@ -370,7 +371,7 @@ public class AppDbHelper implements DbHelper {
     }
 
     /**
-     * Inseting the location for maintaining Location History
+     * Inserting the location for maintaining Location History
      **/
     @Override
     public void insertLocation(final String location) {
@@ -421,7 +422,7 @@ public class AppDbHelper implements DbHelper {
      * Inserting the Packing Item in DataBase when using Add Item Edit Text
      **/
     @Override
-    public void insertPackingItem(final String pItem, final int quantity, final String status) {
+    public void insertPackingItem(final String pItem, final int quantity, final boolean status) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -444,7 +445,7 @@ public class AppDbHelper implements DbHelper {
         Runnable packingRunnable = new Runnable() {
             @Override
             public void run() {
-                final List<Packing> packings = packingDao.getPackingItemChecked("yes");
+                final List<Packing> packings = packingDao.getPackingItemChecked(true);
                 appExecutors.mainThread().execute(new Runnable() {
                     @Override
                     public void run() {
@@ -484,7 +485,91 @@ public class AppDbHelper implements DbHelper {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                packingDao.refreshPackingItemStatus("no");
+                packingDao.refreshPackingItemStatus(true);
+            }
+        };
+        appExecutors.diskIO().execute(runnable);
+    }
+
+    /**
+     * @param id : deletes packing row where id is the row number
+     */
+    @Override
+    public void deletePackingById(final int id) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                packingDao.deletePackingById(id);
+                ToastLogSnackBarUtil.showDebugLog("deleting sqlite row " + id);
+            }
+        };
+        appExecutors.diskIO().execute(runnable);
+    }
+
+    /**
+     * @param status : defines the packing status, defined by checkbox status
+     * @param position : defines the row position in table
+     */
+    @Override
+    public void updatePackingStatus(final boolean status, final int position) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                ToastLogSnackBarUtil.showDebugLog("update pos status " + position);
+                packingDao.updatePackingStatus(status, position);
+            }
+        };
+        appExecutors.diskIO().execute(runnable);
+    }
+
+    /**
+     * @param callback : passes integer/size of the packing list using onDataLoaded(size)
+     */
+    @Override
+    public void getPackingListSize(final LoadIntegerCallback callback) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                final int size = packingDao.getPackingListSize();
+                appExecutors.mainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onDataLoaded(size);
+                    }
+                });
+            }
+        };
+        appExecutors.diskIO().execute(runnable);
+    }
+
+    @Override
+    public void updateMedicinePacking(final String name, final int quantity) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                packingDao.updateMedicinePacking(name, quantity, false);
+            }
+        };
+        appExecutors.diskIO().execute(runnable);
+    }
+
+    @Override
+    public void getPackedMedDetails(final LoadPackingCallback callback) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                final Packing packing = packingDao.getPackedMedicine();
+                if(packing!=null) {
+                    appExecutors.mainThread().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            callback.onDataLoaded(packing);
+                        }
+                    });
+                } else {
+                    ToastLogSnackBarUtil.showErrorLog("AppDbHelper/getPackedMedDetails: No packing exist");
+                }
+
             }
         };
         appExecutors.diskIO().execute(runnable);
@@ -541,7 +626,7 @@ public class AppDbHelper implements DbHelper {
                 List<String> timeStampList = userMedicineDao.getLastTaken("yes");
                 int count = 0;
                 for (String time : timeStampList) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                     Date curr = Calendar.getInstance().getTime();
                     try {
                         curr = sdf.parse(time);

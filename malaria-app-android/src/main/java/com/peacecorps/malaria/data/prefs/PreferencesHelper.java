@@ -45,5 +45,7 @@ public interface PreferencesHelper {
     void setDrugTaken(boolean value);
     int getAlertNumberDaysOrWeeks();
     void setAlertNumberDaysOrWeeks(int value);
+    String getReminderMessageForTrip();
+    void setReminderMessageForTrip(String messageForTrip);
 
 }

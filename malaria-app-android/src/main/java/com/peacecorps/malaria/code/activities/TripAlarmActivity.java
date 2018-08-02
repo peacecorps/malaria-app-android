@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +29,6 @@ import java.util.Date;
  * Created by Ankita on 8/17/2015.
  */
 public class TripAlarmActivity extends Activity {
-
-    private SimpleCursorAdapter dataAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,7 +129,7 @@ public class TripAlarmActivity extends Activity {
                             calender.getTimeInMillis(), pendingSnooze);
                     Ringtone ringtone= TripAlarmReceiver.ringtone;
                     ringtone.stop();
-                    Toast.makeText(getApplicationContext(),"Alarm Snoozed",Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(),"Alarm Snoozed",Toast.LENGTH_LONG).show();
 
                 }
                 finish();

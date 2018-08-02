@@ -32,6 +32,9 @@ public interface DbHelper {
         void onDataLoaded(List<Packing> packingList);
     }
 
+    interface LoadPackingCallback {
+        void onDataLoaded(Packing packing);
+    }
     interface LoadAlarmDataCallback {
         void onDataLoaded(AlarmTime time);
     }
@@ -62,13 +65,23 @@ public interface DbHelper {
 
     void getLocation(loadListStringCallBack callback);
 
-    void insertPackingItem(String pItem,int quantity, String status);
+    void insertPackingItem(String pItem,int quantity, boolean status);
 
     void getPackingItemChecked(LoadListPackingCallback callback);
 
     void getPackingItem(LoadListPackingCallback callback);
 
     void refreshPackingItemStatus();
+
+    void deletePackingById(int id);
+
+    void updatePackingStatus(boolean status, int position);
+
+    void getPackingListSize(LoadIntegerCallback callback);
+
+    void updateMedicinePacking(String name, int quantity);
+
+    void getPackedMedDetails(LoadPackingCallback callback);
 
     void getLastTaken(LoadStringCallback callback);
 

@@ -8,7 +8,7 @@
         android:id="@+id/firstMonthProgressLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="January"
+        android:text="@string/label_month_january"
         android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:textStyle="bold" />
@@ -23,11 +23,12 @@
         android:layout_alignStart="@+id/secondMonthProgressBar"
         android:layout_alignTop="@id/firstMonthProgressLabel"
         android:layout_marginBottom="@dimen/margin_2dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
         android:layout_marginRight="@dimen/margin_5dp"
         android:layout_marginTop="@dimen/margin_2dp"
         android:layout_toLeftOf="@+id/firstMonthProgressPercent"
+        android:layout_toStartOf="@+id/firstMonthProgressPercent"
         android:background="@drawable/progress_bg"
-        android:onClick="sendMonth"
         android:progress="100"
         android:progressDrawable="@drawable/saf_progress_bar" />
 
@@ -35,9 +36,10 @@
         android:id="@+id/firstMonthProgressPercent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:gravity="end"
-        android:text="100%"
+        android:text="@string/label_percentage"
         android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:textStyle="bold" />
@@ -47,8 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/firstMonthProgressLabel"
-        android:layout_weight="1"
-        android:text="February"
+        android:text="@string/label_month_january"
         android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:textStyle="bold" />
@@ -69,7 +70,6 @@
         android:layout_toRightOf="@id/secondMonthProgressLabel"
         android:layout_toStartOf="@+id/firstMonthProgressPercent"
         android:background="@drawable/progress_bg"
-        android:onClick="sendMonth"
         android:progress="60"
         android:progressDrawable="@drawable/saf_progress_bar" />
 
@@ -77,10 +77,11 @@
         android:id="@+id/secondMonthProgressPercent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/firstMonthProgressLabel"
         android:gravity="end"
-        android:text="60%"
+        android:text="@string/label_percentage"
         android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:textStyle="bold" />
@@ -90,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/secondMonthProgressLabel"
-        android:text="March"
+        android:text="@string/label_month_january"
         android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:textStyle="bold" />
@@ -110,7 +111,6 @@
         android:layout_marginBottom="@dimen/margin_2dp"
         android:layout_marginTop="@dimen/margin_2dp"
         android:background="@drawable/progress_bg"
-        android:onClick="sendMonth"
         android:progress="80"
         android:progressDrawable="@drawable/saf_progress_bar" />
 
@@ -118,10 +118,11 @@
         android:id="@+id/thirdMonthProgressPercent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/secondMonthProgressPercent"
         android:gravity="end"
-        android:text="80%"
+        android:text="@string/label_percentage"
         android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:textStyle="bold" />
@@ -131,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/thirdMonthProgressLabel"
-        android:text="April"
+        android:text="@string/label_month_january"
         android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:textStyle="bold" />
@@ -151,7 +152,6 @@
         android:layout_marginBottom="@dimen/margin_2dp"
         android:layout_marginTop="@dimen/margin_2dp"
         android:background="@drawable/progress_bg"
-        android:onClick="sendMonth"
         android:progress="80"
         android:progressDrawable="@drawable/saf_progress_bar" />
 
@@ -159,10 +159,11 @@
         android:id="@+id/fourthMonthProgressPercent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/thirdMonthProgressPercent"
         android:gravity="end"
-        android:text="80%"
+        android:text="@string/label_percentage"
         android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_20sp"
         android:textStyle="bold" />

@@ -2,8 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/pmt"
@@ -24,12 +23,13 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tvl_enter_location"
+        style="@style/style_text_input"
         android:layout_width="@dimen/width_300dp"
         android:layout_height="@dimen/height_50dp"
         android:layout_marginLeft="@dimen/margin_20dp"
         android:layout_marginStart="@dimen/margin_20dp"
-        android:layout_marginTop="@dimen/margin_15dp"
-        android:theme="@style/style_text_input"
+        android:layout_marginTop="@dimen/margin_16dp"
+        app:errorTextAppearance="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pmt">
 
@@ -38,20 +38,21 @@
             style="style_text_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableEnd="@drawable/btn_location_history"
             android:drawableRight="@drawable/btn_location_history"
             android:hint="@string/hint_trip_location"
-            android:drawableEnd="@drawable/btn_location_history"
-            android:inputType="text"/>
+            android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tvl_departure_date"
+        style="@style/style_text_input"
         android:layout_width="@dimen/width_300dp"
         android:layout_height="@dimen/height_50dp"
         android:layout_marginLeft="@dimen/margin_20dp"
         android:layout_marginStart="@dimen/margin_20dp"
-        android:layout_marginTop="@dimen/margin_15dp"
-        android:theme="@style/style_text_input"
+        android:layout_marginTop="@dimen/margin_16dp"
+        app:errorTextAppearance="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvl_enter_location">
 
@@ -60,20 +61,20 @@
             style="style_text_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/hint_departure_date"
-            android:drawableRight="@drawable/calendar"
             android:drawableEnd="@drawable/calendar"
-            android:inputType="date"/>
+            android:drawableRight="@drawable/calendar"
+            android:focusable="false"
+            android:hint="@string/hint_departure_date" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tvl_arrival_date"
+        style="@style/style_text_input"
         android:layout_width="@dimen/width_300dp"
         android:layout_height="@dimen/height_50dp"
         android:layout_marginLeft="@dimen/margin_20dp"
         android:layout_marginStart="@dimen/margin_20dp"
-        android:layout_marginTop="@dimen/margin_15dp"
-        android:theme="@style/style_text_input"
+        android:layout_marginTop="@dimen/margin_16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvl_departure_date">
 
@@ -82,39 +83,42 @@
             style="style_text_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Arrival Date (DD/MM/YYYY)"
+            android:drawableEnd="@drawable/calendar"
             android:drawableRight="@drawable/calendar"
-            android:drawableEnd="@drawable/calendar" />
+            android:focusable="false"
+            android:hint="@string/hint_trip_arrival_date" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tvl_packing_list"
+        style="@style/style_text_input"
         android:layout_width="@dimen/width_300dp"
         android:layout_height="@dimen/height_50dp"
         android:layout_marginLeft="@dimen/margin_20dp"
         android:layout_marginStart="@dimen/margin_20dp"
-        android:layout_marginTop="@dimen/margin_15dp"
-        android:theme="@style/style_text_input"
+        android:layout_marginTop="@dimen/margin_16dp"
+        app:errorTextAppearance="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvl_arrival_date">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/et_select_items"
-            android:focusable="false"
             style="style_text_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Select Items" />
+            android:focusable="false"
+            android:hint="@string/hint_trip_select_items" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tvl_reminder_time"
+        style="@style/style_text_input"
         android:layout_width="@dimen/width_300dp"
         android:layout_height="@dimen/height_50dp"
         android:layout_marginLeft="@dimen/margin_20dp"
         android:layout_marginStart="@dimen/margin_20dp"
-        android:layout_marginTop="@dimen/margin_15dp"
-        android:theme="@style/style_text_input"
+        android:layout_marginTop="@dimen/margin_16dp"
+        app:errorTextAppearance="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvl_packing_list">
 
@@ -123,8 +127,9 @@
             style="style_text_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Reminder (Hour/Minutes)"
-            android:drawableRight="@drawable/clock"/>
+            android:drawableEnd="@drawable/clock"
+            android:drawableRight="@drawable/clock"
+            android:hint="@string/hint_trip_reminder" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -133,7 +138,7 @@
         android:layout_height="@dimen/height_50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/dark_button_background"
-        android:text="Generate"
+        android:text="@string/label_generate"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

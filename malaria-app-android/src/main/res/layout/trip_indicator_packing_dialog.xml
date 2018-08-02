@@ -3,28 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialog_background"
     android:orientation="vertical"
     tools:context=".code.activities.TripIndicatorFragmentActivity">
 
-
-    <LinearLayout
+    <TextView
+        style="@style/HeadingTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
-
-        <TextView
-            style="@style/HeadingTextAppearance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_10dp"
-            android:layout_marginTop="@dimen/margin_10dp"
-            android:gravity="center"
-            android:padding="@dimen/padding_10dp"
-            android:text="@string/heading_packing_item" />
-
-
-    </LinearLayout>
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:gravity="center"
+        android:padding="@dimen/padding_10dp"
+        android:text="@string/heading_packing_item" />
 
 
     <RelativeLayout
@@ -50,11 +40,12 @@
             android:layout_alignBottom="@+id/quantity"
             android:layout_centerHorizontal="true"
             android:clickable="true"
-            android:text="Select Pill"
+            android:focusable="true"
+            android:text="@string/label_select_pill"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_20sp"
             android:textStyle="bold"
-            android:focusable="true" />
+            tools:ignore="RelativeOverlap" />
 
         <TextView
             android:id="@+id/quantity"
@@ -66,11 +57,11 @@
             android:layout_marginEnd="@dimen/margin_20dp"
             android:layout_marginLeft="@dimen/margin_50dp"
             android:layout_marginRight="@dimen/margin_5dp"
+            android:layout_marginStart="@dimen/margin_50dp"
             android:background="@drawable/button_background"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15sp"
-            android:textStyle="bold"
-            android:layout_marginStart="@dimen/margin_50dp" />
+            android:textSize="@dimen/text_size_16sp"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>
@@ -98,21 +89,23 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
-            android:text="Cash"
+            android:text="@string/label_cash"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
 
         <EditText
             android:id="@+id/cash_et"
             android:layout_width="@dimen/size_40dp"
             android:layout_height="@dimen/size_40dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginEnd="@dimen/margin_20dp"
             android:layout_marginRight="@dimen/margin_5dp"
             android:layout_marginTop="@dimen/margin_10dp"
             android:background="@drawable/button_background"
-            android:hint="$"
+            android:hint="@string/hint_money"
             android:inputType="number"
             android:padding="@dimen/padding_5dp"
             android:textColorHint="@color/lightgray" />
@@ -138,8 +131,10 @@
             android:id="@+id/packing_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_15dp"
-            android:hint="Add Items"
+            android:layout_marginLeft="@dimen/margin_16dp"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:hint="@string/hint_add_items"
+            android:inputType="text"
             android:maxWidth="@dimen/width_110dp"
             android:textColor="@color/textColorPrimary" />
 
@@ -172,14 +167,15 @@
 
     </LinearLayout>
 
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="@dimen/height_140dp">
 
         <ListView
             android:id="@+id/listV"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@color/light_green"
             android:divider="#ff988455"
             android:dividerHeight="@dimen/height_1dp"

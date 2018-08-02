@@ -8,18 +8,16 @@
         android:id="@+id/locationListItemNumber"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/cream"
         android:padding="@dimen/padding_5dp"
         android:textColor="@color/textColorPrimary"
-        android:textSize="@dimen/text_size_15sp" />
+        android:textSize="@dimen/text_size_16sp" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/locationListItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/cream"
         android:padding="@dimen/padding_5dp"
         android:textColor="@color/textColorPrimary"
-        android:textSize="@dimen/text_size_15sp" />
+        android:textSize="@dimen/text_size_16sp" />
 
 </RelativeLayout>

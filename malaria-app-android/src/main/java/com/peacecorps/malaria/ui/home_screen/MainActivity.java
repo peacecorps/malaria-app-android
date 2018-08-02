@@ -2,42 +2,47 @@ package com.peacecorps.malaria.ui.home_screen;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
-
-import com.peacecorps.malaria.R;
-
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
+import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.code.fragment.HomeScreenFragment;
 import com.peacecorps.malaria.data.AppDataManager;
+import com.peacecorps.malaria.data.db.entities.Packing;
 import com.peacecorps.malaria.ui.base.BaseActivity;
 import com.peacecorps.malaria.ui.home_screen.HomeContract.IHomeView;
-import com.peacecorps.malaria.ui.play.PlayFragment.OnPlayFragmentListener;
+import com.peacecorps.malaria.ui.info_hub.InfoHubFragment;
 import com.peacecorps.malaria.ui.play.PlayFragment;
+import com.peacecorps.malaria.ui.play.PlayFragment.OnPlayFragmentListener;
 import com.peacecorps.malaria.ui.play.badge_screen.BadgeScreenFragment;
 import com.peacecorps.malaria.ui.play.medicine_store.MedicineStoreFragment;
 import com.peacecorps.malaria.ui.play.myth_vs_fact.MythFactFragment;
 import com.peacecorps.malaria.ui.play.rapid_fire.RapidFireFragment;
 import com.peacecorps.malaria.ui.play.rapid_fire.RapidFireFragment.OnRapidFragmentListener;
 import com.peacecorps.malaria.ui.trip_reminder.PlanTripFragment;
-import com.peacecorps.malaria.ui.trip_reminder.trip_select_item.SelectItemFragment;
+import com.peacecorps.malaria.ui.trip_reminder.PlanTripFragment.OnPlanFragmentListener;
+import com.peacecorps.malaria.ui.trip_reminder.trip_select_item.ItemDialogFragment;
+import com.peacecorps.malaria.ui.trip_reminder.trip_select_item.ItemDialogFragment.OnSaveDialogListener;
+import com.peacecorps.malaria.ui.user_medicine_setting.MedicineSettingsActivity;
 import com.peacecorps.malaria.ui.user_profile.UserProfileFragment;
 import com.peacecorps.malaria.ui.user_profile.UserProfileFragment.OnUserFragmentListener;
 import com.peacecorps.malaria.utils.BottomNavigationViewHelper;
 import com.peacecorps.malaria.utils.InjectionClass;
 import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
-import static com.peacecorps.malaria.ui.play.myth_vs_fact.MythFactFragment.*;
+import static com.peacecorps.malaria.ui.play.myth_vs_fact.MythFactFragment.OnMythFragmentListener;
 
 public class MainActivity extends BaseActivity implements IHomeView, OnUserFragmentListener,
-        OnPlayFragmentListener, OnMythFragmentListener, OnRapidFragmentListener, PlanTripFragment.OnPlanFragmentListener {
+        OnPlayFragmentListener, OnMythFragmentListener, OnRapidFragmentListener, OnPlanFragmentListener,OnSaveDialogListener {
 
     private HomePresenter<MainActivity> presenter;
     private BottomNavigationView bottomNavigationView;
@@ -56,6 +61,9 @@ public class MainActivity extends BaseActivity implements IHomeView, OnUserFragm
         presenter = new HomePresenter<>(dataManager, this);
         presenter.attachView(this);
 
+        Toolbar mToolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(mToolbar);
         // adding ic_launcher icon to the Toolbar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -102,7 +110,8 @@ public class MainActivity extends BaseActivity implements IHomeView, OnUserFragm
                         break;
 
                     case R.id.bnv_info_button:
-                        Toast.makeText(MainActivity.this, "info button", Toast.LENGTH_SHORT).show();
+                        fragment = new InfoHubFragment();
+                        loadFragment(fragment);
                         break;
 
                     case R.id.bnv_play_button:
@@ -129,7 +138,8 @@ public class MainActivity extends BaseActivity implements IHomeView, OnUserFragm
     private void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, fragment);
+        transaction.replace(R.id.frame_container, fragment, "");
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -148,6 +158,7 @@ public class MainActivity extends BaseActivity implements IHomeView, OnUserFragm
             dialog.findViewById(R.id.btn_dialog_reset_okay).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     dialog.dismiss();
 
                 }
@@ -211,7 +222,32 @@ public class MainActivity extends BaseActivity implements IHomeView, OnUserFragm
 
     // replaces trip fragment with select item fragment
     @Override
-    public void startSelectItemFragment() {
-        loadFragment(new SelectItemFragment());
+    public void startSelectItemFragment(long quantity) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ItemDialogFragment newFragment = ItemDialogFragment.newInstance(quantity);
+
+        // using a large layout, so show the fragment as a dialog
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        // For a little polish, specify a transition animation
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.add(android.R.id.content, newFragment)
+                .addToBackStack(null).commit();
+
+    }
+
+    @Override
+    public void passMedicineSelected(Packing packing) {
+        Fragment fragmentInFrame = getSupportFragmentManager()
+                .findFragmentById(R.id.frame_container);
+        if(fragmentInFrame instanceof PlanTripFragment) {
+            PlanTripFragment tripFragment = (PlanTripFragment) fragmentInFrame;
+            tripFragment.updateSelectItemText(packing.getPackingItem() + ":" + packing.getPackingQuantity());
+        }
+    }
+
+    @Override
+    public void startMedicineSettingActivity() {
+        Intent intent = new Intent(this, MedicineSettingsActivity.class);
+        startActivity(intent);
     }
 }

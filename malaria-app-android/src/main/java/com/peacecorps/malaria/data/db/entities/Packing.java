@@ -9,9 +9,9 @@ public class Packing {
     private int packingId;
     private String packingItem;
     private int packingQuantity;
-    private String packingStatus;
+    private boolean packingStatus;
 
-    public Packing(String packingItem, int packingQuantity, String packingStatus) {
+    public Packing(String packingItem, int packingQuantity, boolean packingStatus) {
         this.packingItem = packingItem;
         this.packingQuantity = packingQuantity;
         this.packingStatus = packingStatus;
@@ -41,11 +41,11 @@ public class Packing {
         this.packingQuantity = packingQuantity;
     }
 
-    public String getPackingStatus() {
+    public boolean getPackingStatus() {
         return packingStatus;
     }
 
-    public void setPackingStatus(String packingStatus) {
+    public void setPackingStatus(boolean packingStatus) {
         this.packingStatus = packingStatus;
     }
 }

@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_2dp"
-    android:background="@drawable/background">
+    android:layout_margin="@dimen/margin_2dp">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/textView_info"
         android:layout_weight="1"
         android:textColor="@color/black"
         android:paddingLeft="@dimen/padding_5dp"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:paddingStart="@dimen/padding_5dp"
+        tools:ignore="RtlSymmetry" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

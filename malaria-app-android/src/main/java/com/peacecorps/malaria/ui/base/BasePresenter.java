@@ -21,7 +21,6 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
         this.manager = manager;
     }
 
-
     @Override
     public void attachView(V view) {
         mvpView = view;
@@ -37,7 +36,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
      *
      * @return true if attached
      */
-    boolean isViewAttached() {
+    public boolean isViewAttached() {
         return mvpView != null;
     }
 
@@ -52,16 +51,4 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
     public Context getContext() {
         return context;
     }
-
-    public void checkViewAttached() {
-        if (!isViewAttached()) throw new MvpViewNotAttachedException();
-    }
-
-    public static class MvpViewNotAttachedException extends RuntimeException {
-        public MvpViewNotAttachedException() {
-            super("Please call Presenter.onAttach(MvpView) before" +
-                    " requesting data to the Presenter");
-        }
-    }
-
 }

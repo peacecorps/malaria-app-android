@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/background"
     android:orientation="vertical"
     android:paddingTop="@dimen/padding_15dp"
     tools:context=".ui.user_medicine_setting.MedicineSettingsActivity">

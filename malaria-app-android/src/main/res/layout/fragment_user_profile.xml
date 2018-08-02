@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView"
@@ -16,23 +15,23 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
-        android:text="User Profile"
+        android:text="@string/heading_user_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/layout_user_name"
+        style="@style/style_text_input_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        style="@style/style_text_input_layout">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_text_user_name"
+            style="@style/style_text_input_edit_text"
             android:hint="@string/hint_user_name"
-            android:inputType="text"
-            style="@style/style_text_input_edit_text" />
+            android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -52,15 +51,15 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/layout_user_age"
         style="@style/style_text_input_layout"
-        app:layout_constraintStart_toStartOf="@id/layout_user_email"
         app:layout_constraintEnd_toEndOf="@id/layout_user_email"
+        app:layout_constraintStart_toStartOf="@id/layout_user_email"
         app:layout_constraintTop_toBottomOf="@+id/layout_user_email">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_text_user_age"
+            style="@style/style_text_input_edit_text"
             android:hint="@string/hint_user_age"
-            android:inputType="number"
-            style="@style/style_text_input_edit_text"/>
+            android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -72,16 +71,16 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_text_user_medicine_type"
+            style="@style/style_text_input_edit_text"
             android:hint="@string/hint_user_medicine_type"
-            android:inputType="none"
-            style="@style/style_text_input_edit_text"/>
+            android:inputType="none" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/save_button"
         android:layout_width="@dimen/width_150dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/button_background"
         android:text="@string/label_save"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -26,34 +26,25 @@ public class PlanTripPresenter<V extends PlanTripMvpView> extends BasePresenter<
         super(manager, context);
     }
 
+    // get location history from db & calls createSelectLocationDialog if location is available else shows snack bar
     @Override
-    public void attachView(V view) {
-        super.attachView(view);
-    }
-
-    @Override
-    public void detachView() {
-        super.detachView();
-    }
-
-    @Override
-    public void getLocationHistory() {
+    public void setUpLocationDialog() {
         getDataManager().getLocation(new DbHelper.loadListStringCallBack() {
             @Override
             public void onDataLoaded(List<String> data) {
-                getView().createSelectLocationDialog(data);
+                if(data.size()>0) {
+                    getView().createSelectLocationDialog(data);
+                } else {
+                    getView().showCustomSnackBar("No location history available");
+                }
+
             }
         });
     }
 
-    @Override
-    public void addLocationToDataBase(String location) {
-        getDataManager().insertLocation(location);
-    }
-
     /**
-     * @param hr : hour selected in @TimePickerFragment (24 hour format)
-     * @param mins  : min selected in Fragment
+     * @param hr   : hour selected in @TimePickerFragment (24 hour format)
+     * @param mins : min selected in Fragment
      */
     @Override
     public String convertToTwelveHours(int hr, int mins) {
@@ -93,19 +84,19 @@ public class PlanTripPresenter<V extends PlanTripMvpView> extends BasePresenter<
      */
     @Override
     public Date getDateObj(String s) {
-        Date dobj = null;
+        Date dateObj = null;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         try {
-            dobj = sdf.parse(s);
+            dateObj = sdf.parse(s);
         } catch (ParseException e) {
             ToastLogSnackBarUtil.showErrorLog(s + "PlanTripPresenter: Parsing error in SimpleDateFormat");
         }
-        return dobj;
+        return dateObj;
     }
 
     /**
      * @param date : date is converted to time using toTime()
-     * @return : toTime() give long time in milis
+     * @return : toTime() give long time in mili
      */
     @Override
     public long convertDateToTime(Date date) {
@@ -124,14 +115,14 @@ public class PlanTripPresenter<V extends PlanTripMvpView> extends BasePresenter<
             ToastLogSnackBarUtil.showToast(getContext(), "Select Arrival date first");
         } else {
             String currDateString = new SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(new Date());
-            Date currdate = getDateObj(currDateString);
+            Date currDate = getDateObj(currDateString);
             Date deptDate = getDateObj(dateDepart);
             Date arrDate = getDateObj(dateArr);
 
-            if (currdate != null && deptDate != null && arrDate != null) {
+            if (currDate != null && deptDate != null && arrDate != null) {
                 long arrLong = convertDateToTime(arrDate);
                 long dptrLong = convertDateToTime(deptDate);
-                long currLong = convertDateToTime(currdate);
+                long currLong = convertDateToTime(currDate);
 
                 if (dptrLong < currLong) {
                     ToastLogSnackBarUtil.showToast(getContext(), getContext().getResources().getString(R.string.departuredate_currentdate));
@@ -155,5 +146,47 @@ public class PlanTripPresenter<V extends PlanTripMvpView> extends BasePresenter<
         int oneDay = 24 * 60 * 60 * 1000;
 
         return (a - d) / oneDay + 1;
+    }
+
+    /**
+     * reminderMessage : saved in preferences
+     * location selected/added : added in database (if old location selected, time: gets increased (no of time trip planned)
+     */
+    @Override
+    public void saveTripDetails() {
+        String reminderMessage = "Trip to " + getView().getLocationText() +
+                " is scheduled for " + getView().getDepartureTimeText()
+                + ".\n" + "Stay safe, don't forget to take your pills.";
+        getDataManager().setReminderMessageForTrip(reminderMessage);
+        getDataManager().insertLocation(getView().getLocationText());
+        ToastLogSnackBarUtil.showToast(getContext(), "Trip Saved");
+    }
+
+    /**
+     * validates all edit text, if all returns true, calls saveTripDetails()
+     */
+    @Override
+    public void validationGenerateButton() {
+        if (!getView().validateTripLocation()) {
+            return;
+        }
+
+        if (!getView().validateDepartureDate()) {
+            return;
+        }
+
+        if (!getView().validateArrivalDate()) {
+            return;
+        }
+
+        if (!getView().validateSelectItem()) {
+            return;
+        }
+
+        if (!getView().validateReminderTime()) {
+            return;
+        }
+
+        saveTripDetails();
     }
 }
