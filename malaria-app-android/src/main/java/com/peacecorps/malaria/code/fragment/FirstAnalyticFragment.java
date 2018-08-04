@@ -26,15 +26,14 @@ import java.util.Date;
 public class FirstAnalyticFragment extends Fragment {
 
 
-    static SharedPreferenceStore mSharedPreferenceStore;
-    static View rootView;
+    private static SharedPreferenceStore mSharedPreferenceStore;
+    private static View rootView;
     public static TextView checkMediLastTakenTime = null;
     public static TextView doses = null;
     public static TextView adherence = null;
     private Button mSettingsButton;
     private String TAGFAF = "FirstAnalyticFragment";
     private Dialog dialog = null;
-    private TextView mlt,dinr,atm;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,12 +47,11 @@ public class FirstAnalyticFragment extends Fragment {
         doses = (TextView) rootView.findViewById(R.id.doses);
         adherence = (TextView) rootView.findViewById(R.id.adherence);
         updateUI();
-        mlt=(TextView)rootView.findViewById(R.id.mlt);
-        dinr=(TextView)rootView.findViewById(R.id.dinr);
-        atm=(TextView)rootView.findViewById(R.id.atm);
+        TextView mlt = (TextView) rootView.findViewById(R.id.mlt);
+        TextView dinr = (TextView) rootView.findViewById(R.id.dinr);
+        TextView atm = (TextView) rootView.findViewById(R.id.atm);
         //setting fonts
         Typeface cf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/garreg.ttf");
-        Typeface cfb = Typeface.createFromAsset(getActivity().getAssets(), "fonts/garbold.ttf");
         mlt.setTypeface(cf);
         dinr.setTypeface(cf);
         atm.setTypeface(cf);
@@ -191,8 +189,6 @@ public class FirstAnalyticFragment extends Fragment {
         DatabaseSQLiteHelper sqLite = new DatabaseSQLiteHelper(getActivity());
         String  lastTaken= sqLite.getLastTaken();
       checkMediLastTakenTime.setText(lastTaken);
-        Log.d("LastTaken-------------------------: ",lastTaken);
-
     }
 
     public void addDialog()

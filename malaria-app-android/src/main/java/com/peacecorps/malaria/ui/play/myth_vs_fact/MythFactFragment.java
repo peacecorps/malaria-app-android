@@ -1,12 +1,13 @@
 package com.peacecorps.malaria.ui.play.myth_vs_fact;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -92,31 +93,33 @@ public class MythFactFragment extends BaseFragment implements MythFactMvpView {
     }
 
     @OnClick(R.id.btn_next)
-    public void nextButtonListener(View view) {
+    public void nextButtonListener() {
         i = i + 1;
         if (i < questions.size()) {
             tvQuestion.setText(questions.get(i));
             setUpButton();
         } else {
-            final Dialog alertDialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
-            alertDialog.setContentView(R.layout.game_over_dialog);
-            alertDialog.setCancelable(false);
+            // create a dialog with AlertDialog builder, set appropriate title & message
+            AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+            builder.setTitle(getString(R.string.label_game_over));
+            builder.setMessage(getString(R.string.description_wait_for_new_ques));
 
-            // Setting Dialog Title
-            alertDialog.setTitle("Game Over!!");
-            alertDialog.findViewById(R.id.gameOverDialogButtonOK).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // dismiss dialog and start play fragment instead
-                    alertDialog.dismiss();
-                    listener.goBackToPlayFragment();
-                }
-            });
+            String positiveText = getString(android.R.string.ok);
+            builder.setPositiveButton(positiveText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // dismiss the dialog, update game score in preference, starts play fragment again
+                            // update game score to preferences
+                            presenter.updateGameScore(points);
+                            dialog.dismiss();
+                            listener.goBackToPlayFragment();
+                        }
+                    });
 
-            // update game score to preferences
-            presenter.updateGameScore(points);
-            // Showing Alert Message
-            alertDialog.show();
+            AlertDialog dialog = builder.create();
+            // display dialog
+            dialog.show();
         }
     }
 
@@ -132,31 +135,37 @@ public class MythFactFragment extends BaseFragment implements MythFactMvpView {
     }
 
     @OnClick(R.id.btn_exit)
-    public void exitButtonListener(View view) {
-        final Dialog alertDialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
-        alertDialog.setContentView(R.layout.exit_game_dialog);
-        alertDialog.setCancelable(false);
+    public void exitButtonListener() {
 
-        // Setting Dialog Title
-        alertDialog.setTitle(getString(R.string.label_game_over));
-        alertDialog.findViewById(R.id.exitGameDialogButtonOK).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // dismiss alert dialog, update preferences with game score and restart play fragment
-                presenter.updateGameScore(points);
-                alertDialog.dismiss();
-                listener.goBackToPlayFragment();
-            }
-        });
-        alertDialog.findViewById(R.id.exitGameDialogButtonCancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.dismiss();
-            }
-        });
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+        builder.setTitle(getString(R.string.label_exit_game));
+        builder.setMessage(getString(R.string.description_sure_exit_game));
 
-        // Showing Alert Message
-        alertDialog.show();
+        String positiveText = getString(android.R.string.ok);
+        builder.setPositiveButton(positiveText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // dismiss alert dialog, update preferences with game score and restart play fragment
+                        presenter.updateGameScore(points);
+                        dialog.dismiss();
+                        listener.goBackToPlayFragment();
+                    }
+                });
+
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        // negative button logic
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
     }
 
     private class ChoiceTouchListener implements View.OnTouchListener {
@@ -243,7 +252,7 @@ public class MythFactFragment extends BaseFragment implements MythFactMvpView {
         } else {
             // Show error Log for debugging & display snackbar to user
             ToastLogSnackBarUtil.showErrorLog(context.toString() + " must implement OnMythFragmentListener");
-            if(getActivity()!=null) {
+            if (getActivity() != null) {
                 ToastLogSnackBarUtil.showSnackBar(context, getActivity().findViewById(android.R.id.content),
                         "Something went wrong!");
             }

@@ -28,7 +28,7 @@
             android:gravity="center"
             android:text="@string/label_achievement_one"
             android:textColor="@color/textColorPrimary"
-            android:textSize="@dimen/text_size_15sp"
+            android:textSize="@dimen/text_size_16sp"
             android:drawableBottom="@drawable/y_b3"
             android:drawablePadding="@dimen/padding_2dp"
             />
@@ -39,9 +39,9 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginBottom="@dimen/margin_5dp"
-        android:layout_marginLeft="@dimen/margin_15dp"
-        android:layout_marginRight="@dimen/margin_15dp"
-        android:layout_marginTop="@dimen/margin_15dp"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
         android:gravity="center|bottom"
         android:orientation="horizontal"
         android:weightSum="5">

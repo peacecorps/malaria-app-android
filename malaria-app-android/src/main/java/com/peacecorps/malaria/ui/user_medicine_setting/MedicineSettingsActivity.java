@@ -31,7 +31,7 @@ import butterknife.OnClick;
 
 
 public class MedicineSettingsActivity extends BaseActivity
-        implements AdapterView.OnItemSelectedListener, MedicineSettingContract.View {
+        implements AdapterView.OnItemSelectedListener, MedicineSettingContract.SettingMvpView {
 
     @BindView(R.id.setup_label)
     TextView mSetupLabel;
@@ -61,8 +61,8 @@ public class MedicineSettingsActivity extends BaseActivity
 
         setContentView(R.layout.fragment_user_medicine_settings);
 
-        // set up title of activity
-        this.setTitle(R.string.user_medicine_settings_fragment_activity_title);
+//        // set up title of activity
+//        this.setTitle(R.string.user_medicine_settings_fragment_activity_title);
         ButterKnife.bind(this);
 
         // setting up presenter and views

@@ -1,74 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dialog_background"
-    tools:context=".code.activities.TripIndicatorFragmentActivity"
-    android:id="@+id/relativeLayout1">
+    tools:context=".code.activities.TripIndicatorFragmentActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout2">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Trip Checklist Reminder"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="@dimen/text_size_25sp"
-            android:gravity="center"
             android:background="@color/lightest_brown"
+            android:gravity="center"
             android:padding="@dimen/padding_10dp"
-            />
+            android:text="@string/heading_trip_checklist_reminder"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_25sp" />
 
         <TextView
+            android:id="@+id/tripRemindingItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tripRemindingItems"
+            android:text="@string/label_sample_text"
             android:textColor="@color/textColorPrimary"
-            android:textSize="@dimen/text_size_20sp"
-            android:text="hi"
-            />
+            android:textSize="@dimen/text_size_20sp" />
 
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:id="@+id/relativeLayout"
-        android:layout_gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_background"
-            android:text="Clear"
             android:id="@+id/reminderOK"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:textColor="@color/white"
-            android:layout_marginLeft="@dimen/size_20dp"
-            android:layout_marginTop="@dimen/size_20dp"
-            android:layout_marginBottom="@dimen/margin_20dp" />
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/margin_20dp"
+            android:layout_marginLeft="@dimen/size_20dp"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_20dp"
             android:background="@drawable/button_background"
-            android:text="Snooze"
+            android:text="@string/label_clear"
+            android:textColor="@color/white"
+            tools:ignore="RelativeOverlap" />
+
+        <Button
+            android:id="@+id/reminderCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:id="@+id/reminderCancel"
-            android:textColor="@color/white"
-            android:padding="@dimen/padding_5dp"
+            android:layout_marginBottom="@dimen/margin_20dp"
+            android:layout_marginEnd="@dimen/margin_20dp"
             android:layout_marginRight="@dimen/margin_20dp"
             android:layout_marginTop="@dimen/margin_20dp"
-            android:layout_marginBottom="@dimen/margin_20dp" />
+            android:background="@drawable/button_background"
+            android:padding="@dimen/padding_5dp"
+            android:text="@string/drug_reminder_notification_action_snooze"
+            android:textColor="@color/white"
+            tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
 
@@ -76,10 +79,10 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/height_220dp"
-        android:headerDividersEnabled="true"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_below="@+id/linearLayout2"
         android:divider="#ff988455"
         android:dividerHeight="@dimen/height_1dp"
-        android:layout_above="@+id/relativeLayout"
-        android:layout_below="@+id/linearLayout2" />
+        android:headerDividersEnabled="true" />
 
 </RelativeLayout>

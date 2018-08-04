@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,18 +7,15 @@
     android:orientation="vertical"
     android:padding="@dimen/padding_10dp">
 
-
     <TextView
         android:id="@+id/eam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Effectiveness Against Malaria"
+        android:text="@string/heading_effective_againt_malaria"
         android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_25sp"
-        android:textStyle="bold"
-
-        />
+        android:textStyle="bold" />
 
     <View
         android:layout_width="match_parent"

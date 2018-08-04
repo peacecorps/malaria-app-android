@@ -7,30 +7,28 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
 
+        android:name=".utils.VolleyApplication"
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name=".utils.VolleyApplication">
-        <!--Todo changed theme from AppTheme to Theme.Appcompat.Light, check error issues, not able to resolve-->
-        <service android:name=".services.AlarmService" >
-        </service>
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <service android:name=".services.AlarmService" />
 
-        <receiver android:name=".code.reciever.AlarmAutoStart" >
+        <receiver android:name=".code.reciever.AlarmAutoStart">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" >
-                </action>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
         <receiver
             android:name=".code.reciever.AlarmHandlerClass"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.peacecorps.malaria.START_ALARM" />
 
@@ -39,19 +37,17 @@
 
         <receiver
             android:name=".code.reciever.DrugReminderReceiver"
-            android:exported="false"
-            android:enabled="true">
-        </receiver>
+            android:enabled="true"
+            android:exported="false" />
 
         <receiver
             android:name=".code.reciever.DrugReminderCallerReceiver"
-            android:exported="false"
-            android:enabled="true">
-        </receiver>
+            android:enabled="true"
+            android:exported="false" />
 
         <activity
             android:name=".ui.user_medicine_setting.MedicineSettingsActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,62 +56,58 @@
         </activity>
         <activity
             android:name=".ui.home_screen.MainActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
+        <activity android:name=".code.activities.InfoHubFragmentActivity" />
         <activity
-            android:name=".activities.AlertCallerFragmentActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="com.example.viewpagertest.demoActivity" >
-                </action>
-            </intent-filter>
-        </activity>
-        <activity android:name=".code.activities.InfoHubFragmentActivity"/>
-        <activity android:name=".code.activities.PeaceCorpsPolicyFragmentActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name=".code.activities.PercentSideEffectsFragmentActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name=".code.activities.SideEffectsPCVFragmentActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name=".code.activities.SideEffectsNPCVFragmentActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name=".code.activities.VolunteerAdherenceFragmentActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name=".code.activities.EffectivenessFragmentActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name=".code.fragment.ThirdAnalyticFragment"/>
-        <activity android:name=".code.activities.DayFragmentActivity"/>
-        <activity android:name=".code.activities.TripIndicatorFragmentActivity"
-                  android:launchMode="singleTask"
-                  />
+            android:name=".code.activities.PeaceCorpsPolicyFragmentActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".code.activities.PercentSideEffectsFragmentActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".code.activities.SideEffectsPCVFragmentActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".code.activities.SideEffectsNPCVFragmentActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".code.activities.VolunteerAdherenceFragmentActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".code.activities.EffectivenessFragmentActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".code.fragment.ThirdAnalyticFragment" />
+        <activity android:name=".code.activities.DayFragmentActivity" />
 
-        <activity android:name=".code.activities.TripIndicatorDialogActivity"
-            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
-        <activity android:name=".code.activities.RemainderToneActivity"
-            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
-        <activity android:name=".code.activities.TripIndicatorPackingActivity"
-            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"/>
+        <activity
+            android:name=".code.activities.RemainderToneActivity"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
 
-        <activity android:name=".code.activities.TripAlarmActivity" android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".code.activities.TripAlarmActivity"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
 
         <service
             android:name=".services.TripAlarmService"
             android:enabled="true" />
+
         <receiver android:name=".code.reciever.TripAlarmReceiver" />
 
-        <receiver android:name=".code.widget.TripAppWidgetProvider" >
+        <receiver android:name=".code.widget.TripAppWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/appwidget_info" />
         </receiver>
-        <receiver android:name=".code.widget.MedicineStatusWidgetProvider" >
+        <receiver android:name=".code.widget.MedicineStatusWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/statusappwidget_info" />
         </receiver>
 

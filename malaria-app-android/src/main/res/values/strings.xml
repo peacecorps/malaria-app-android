@@ -33,7 +33,7 @@
     <string name="remind_label">Remind Me On:</string>
     <string name="trip_button_label">Generate</string>
     <string name="location_spinner_label">Choose Location</string>
-    <string name="medication_spinner_label">Choose Drug</string>
+    <string name="label_medicine_selector">Choose Drug</string>
     <string name="items_spinner_label">Pick Items</string>
     <string name="trip_select_string">Add Packing Items</string>
     <string name="dump_test">Fetching...</string>
@@ -143,7 +143,7 @@
     <string name="label_cancel">Cancel</string>
     <string name="label_enter_medicine_dose">Enter the doses of medicines you want to add in store.</string>
     <string name="label_settings">Settings</string>
-    <string name="label_sample_text">This is sample text. This is sample text</string>
+    <string name="label_sample_text">This is sample text</string>
     <string name="label_set">Set</string>
     <string name="label_myth_fact_total_score">%d</string>
     <string name="label_exit">Exit</string>
@@ -204,6 +204,39 @@
     <string name="key_hour">hour</string>
     <string name="key_min">min</string>
     <string name="heading_packing_item">Packing Items</string>
+    <string name="label_medicine_ending">You may be running out of medicines soon!</string>
+    <string name="heading_medicine_consumption">Medicine Consumption</string>
+    <string name="label_change_entry">Change Entry!</string>
+    <string name="heading_effective_againt_malaria">Effectiveness Against Malaria</string>
+    <string name="label_drug">Drug:</string>
+    <string name="label_triple_dots">...</string>
+    <string name="label_taken">Taken:</string>
+    <string name="label_dd_mm">15/07</string>
+    <string name="hint_trip_arrival_date">Arrival Date (DD/MM/YYYY)</string>
+    <string name="hint_trip_select_items">Select Items</string>
+    <string name="hint_trip_reminder">Reminder (Hour/Minutes)</string>
+    <string name="label_generate">Generate</string>
+    <string name="label_month_january">January</string>
+    <string name="label_percentage">100%</string>
+    <string name="heading_user_profile">User Profile</string>
+    <string name="description_help_game">This text will get replaced automatically in the NewHomeActivity.</string>
+    <string name="label_store_no_of_days">7 Days</string>
+    <string name="heading_peace_corps_policy">Peace Corps Policy</string>
+    <string name="description_rapid_fire_question">Question Here</string>
+    <string name="description_rapid_fire_answer">Option here</string>
+    <string name="heading_set_reminder_tone">SET REMINDER TONE</string>
+    <string name="hint_specify_file_path">Specify file path</string>
+    <string name="heading_non_pcvs_reported_side_effects">Non PCVs Reported Side Effects</string>
+    <string name="heading_side_effects_reported_by_pcvs">Side Effects Reported by PCVs</string>
+    <string name="heading_percentage_side_effects">Percentage Side Effects</string>
+    <string name="heading_trip_checklist_reminder">Trip Checklist Reminder</string>
+    <string name="label_clear">Clear</string>
+    <string name="label_select_pill">Select Pill</string>
+    <string name="label_cash">Cash</string>
+    <string name="hint_money">$</string>
+    <string name="hint_add_items">Add Items</string>
+    <string name="heading_volunteer_adherence_rates">Volunteer Adherence Rates</string>
+    <string name="hint_med_quantity">0</string>
 
 
     <!-- arrays -->

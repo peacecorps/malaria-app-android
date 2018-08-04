@@ -96,7 +96,7 @@
             android:paddingLeft="@dimen/padding_5dp"
             android:paddingTop="@dimen/padding_10dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15sp" />
+            android:textSize="@dimen/text_size_16sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,7 +122,8 @@
             android:paddingLeft="@dimen/padding_5dp"
             android:paddingTop="@dimen/padding_10dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15sp" />
+            android:textSize="@dimen/text_size_16sp"
+            android:focusable="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -143,12 +144,12 @@
             android:background="@drawable/trip_cash_editext"
             android:clickable="true"
             android:hint="YY"
-            android:onClick="showDatePickerDialogDeparture"
             android:paddingBottom="@dimen/padding_5dp"
             android:paddingLeft="@dimen/padding_5dp"
             android:paddingTop="@dimen/padding_10dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15sp" />
+            android:textSize="@dimen/text_size_16sp"
+            android:focusable="true" />
 
 
     </LinearLayout>
@@ -186,7 +187,7 @@
             android:paddingLeft="@dimen/padding_5dp"
             android:paddingTop="@dimen/padding_10dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15sp" />
+            android:textSize="@dimen/text_size_16sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -212,7 +213,8 @@
             android:paddingLeft="@dimen/padding_5dp"
             android:paddingTop="@dimen/padding_10dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15sp" />
+            android:textSize="@dimen/text_size_16sp"
+            android:focusable="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -233,12 +235,12 @@
             android:background="@drawable/trip_cash_editext"
             android:clickable="true"
             android:hint="YY"
-            android:onClick="showDatePickerDialogArrival"
             android:paddingBottom="@dimen/padding_5dp"
             android:paddingLeft="@dimen/padding_5dp"
             android:paddingTop="@dimen/padding_10dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15sp" />
+            android:textSize="@dimen/text_size_16sp"
+            android:focusable="true" />
 
     </LinearLayout>
 
@@ -277,10 +279,9 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:hint="Add Items"
-                android:onClick="onClick"
                 android:padding="@dimen/padding_5dp"
                 android:textColor="@color/cream"
-                android:textSize="@dimen/text_size_15sp"
+                android:textSize="@dimen/text_size_16sp"
 
                 />
 
@@ -292,7 +293,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_15dp"
+        android:layout_marginBottom="@dimen/margin_16dp"
         android:orientation="horizontal">
 
         <TextView
@@ -318,12 +319,11 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:hint="Trip Time"
-            android:onClick="showTimePickerDialogDeparture"
             android:paddingBottom="@dimen/padding_5dp"
             android:paddingLeft="@dimen/padding_5dp"
             android:paddingTop="@dimen/padding_10dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15sp" />
+            android:textSize="@dimen/text_size_16sp" />
 
 
     </LinearLayout>

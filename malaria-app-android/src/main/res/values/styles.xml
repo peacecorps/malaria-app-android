@@ -6,39 +6,30 @@
 
 
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-
-
-
-        -->
-    </style>
-
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:titleTextColor" tools:targetApi="m">@color/textColorPrimary</item>
-
-        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <!--<item name="android:actionBarStyle">@style/MyActionBar</item>-->
         <item name="android:datePickerStyle">@style/MyDatePicker</item>
         <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
 
     </style>
 
 
-    <style name="MyAlertDialog" parent="@android:style/Theme.Holo.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
-        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
-        <item name="android:borderlessButtonStyle">@style/Widget.AppTheme.Button.Borderless</item>
-        <item name="android:buttonBarStyle">@style/AppTheme.ButtonBar.AlertDialog</item>
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--buttons color-->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--title and message color-->
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <!--dialog background-->
+        <item name="android:windowBackground">@drawable/dialog_background</item>
 
     </style>
 
@@ -57,6 +48,7 @@
         </item>
         <item name="android:buttonBarStyle">@style/AppTheme.ButtonBar.DatePicker</item>
     </style>
+
     <style name="AppTheme.TimePicker.EditTextStyle" parent="android:style/Widget.EditText">
         <item name="android:textColor">@color/textColorPrimary</item>
 
@@ -110,7 +102,7 @@
     </style>
 
     <style name="AppTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.StatusBar.Title">
-        <item name="android:textColor">@color/cream</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
@@ -142,7 +134,7 @@
     <style name="style_text_input" parent="TextAppearance.AppCompat">
         <!-- Hint color and label color in FALSE state -->
         <item name="android:textColorHint">@color/colorSecondary</item>
-        <item name="android:textSize">@dimen/text_size_15sp</item>
+        <item name="android:textSize">@dimen/text_size_16sp</item>
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">@color/textColorPrimary</item>
@@ -185,5 +177,57 @@
         <item name="android:layout_weight">1</item>
     </style>
 
+    <style name="style_btn_info_hub">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">@dimen/margin_16dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_16dp</item>
+        <item name="android:layout_marginTop">@dimen/margin_10dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:padding">@dimen/padding_5dp</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="MyFullScreenDialogTheme" parent="android:Theme">
+        <!--&lt;!&ndash;buttons color&ndash;&gt;-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <!--&lt;!&ndash;title and message color&ndash;&gt;-->
+        <!--<item name="android:textColorPrimary">@color/textColorPrimary</item>-->
+        <!--&lt;!&ndash;dialog background&ndash;&gt;-->
+        <!--<item name="android:windowBackground">@drawable/dialog_background</item>-->
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:background">@color/cream</item>
+
+    </style>
+
+    <!-- My tool bar -->
+
+    <style name="ToolbarTextAppearance">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:shadowColor">?colorAccent</item>
+    </style>
+
+    <style name="ToolbarTextAppearance.Title">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="MyToolbar">
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:elevation" tools:targetApi="lollipop">4dp</item>
+    </style>
+
+    <!-- My checkbox -->
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+    </style>
 
 </resources>

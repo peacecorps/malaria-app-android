@@ -84,7 +84,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void insertPackingItem(String pItem, int quantity, String status) {
+    public void insertPackingItem(String pItem, int quantity, boolean status) {
         dbHelper.insertPackingItem(pItem, quantity, status);
     }
 
@@ -101,6 +101,31 @@ public class AppDataManager implements DataManager {
     @Override
     public void refreshPackingItemStatus() {
         dbHelper.refreshPackingItemStatus();
+    }
+
+    @Override
+    public void deletePackingById(int id) {
+        dbHelper.deletePackingById(id);
+    }
+
+    @Override
+    public void updatePackingStatus(boolean status, int position) {
+        dbHelper.updatePackingStatus(status, position);
+    }
+
+    @Override
+    public void getPackingListSize(LoadIntegerCallback callback) {
+        dbHelper.getPackingListSize(callback);
+    }
+
+    @Override
+    public void updateMedicinePacking(String name, int quantity) {
+        dbHelper.updateMedicinePacking(name, quantity);
+    }
+
+    @Override
+    public void getPackedMedDetails(LoadPackingCallback callback) {
+        dbHelper.getPackedMedDetails(callback);
     }
 
     @Override
@@ -346,5 +371,15 @@ public class AppDataManager implements DataManager {
     @Override
     public void setAlertNumberDaysOrWeeks(int value) {
         preferencesHelper.setAlertNumberDaysOrWeeks(value);
+    }
+
+    @Override
+    public String getReminderMessageForTrip() {
+        return preferencesHelper.getReminderMessageForTrip();
+    }
+
+    @Override
+    public void setReminderMessageForTrip(String messageForTrip) {
+        preferencesHelper.setReminderMessageForTrip(messageForTrip);
     }
 }
