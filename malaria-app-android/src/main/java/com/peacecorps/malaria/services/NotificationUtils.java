@@ -11,7 +11,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
 import com.peacecorps.malaria.R;
-import com.peacecorps.malaria.ui.home_screen.MainActivity;
+import com.peacecorps.malaria.ui.main.MainActivity;
 
 public class NotificationUtils {
     private static final int PENDING_INTENT_ID = 245;
@@ -31,20 +31,19 @@ public class NotificationUtils {
             }
         }
 
-//        //Todo can still add large icon, small icon & style
+        //Todo can still add large icon, style
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
                 .setColor(ContextCompat.getColor(context, R.color.lightest_brown))
                 .setContentTitle(context.getString(R.string.drug_reminder_notification_title))
                 .setContentText(context.getString(R.string.drug_reminder_notification_message))
                 .setContentIntent(contentIntent(context))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
+                .setSmallIcon(R.drawable.app_icon)
                 .setAutoCancel(true);
 
         if (manager != null) {
             manager.notify(NOTICATION_MANAGER_ID, notificationBuilder.build());
         }
-
-
     }
 
     // returns a pending intent for main activity

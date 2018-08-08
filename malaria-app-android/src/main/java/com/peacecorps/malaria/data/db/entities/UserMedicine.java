@@ -7,7 +7,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class UserMedicine {
     @PrimaryKey(autoGenerate = true)
     private int userMedicineId;
-    private int drug;
+    private String drug;
     private String choice;
     private int month;
     private int year;
@@ -16,7 +16,8 @@ public class UserMedicine {
     private double percentage;
     private String timeStamp;
 
-    public UserMedicine(int drug, String choice, int month, int year, int date, String status, double percentage, String timeStamp) {
+    public UserMedicine(String drug, String choice, int month, int year, int date, String status,
+                        double percentage, String timeStamp) {
         this.drug = drug;
         this.choice = choice;
         this.month = month;
@@ -67,11 +68,11 @@ public class UserMedicine {
         this.timeStamp = timeStamp;
     }
 
-    public int getDrug() {
+    public String getDrug() {
         return drug;
     }
 
-    public void setDrug(int drug) {
+    public void setDrug(String drug) {
         this.drug = drug;
     }
 

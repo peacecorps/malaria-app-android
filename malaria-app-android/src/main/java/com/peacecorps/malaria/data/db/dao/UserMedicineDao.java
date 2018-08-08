@@ -36,7 +36,7 @@ public interface UserMedicineDao {
     String getStatus(int date,int month,int year);
 
     @Query("SELECT * FROM UserMedicine ORDER BY timeStamp DESC")
-    List<UserMedicine> getDosesInaRowWeekly();
+    List<UserMedicine> getDosesInaRow();
 
     @Query("DELETE FROM UserMedicine")
     void deleteTableRows();

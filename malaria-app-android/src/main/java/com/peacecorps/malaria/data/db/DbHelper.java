@@ -41,7 +41,7 @@ public interface DbHelper {
 
     void getCountForProgressBar( int month, int year, String status, String choice, LoadIntegerCallback callback);
 
-    void setUserMedicineSelection(int drug, String choice, Date date, String status, Double percentage);
+    void setUserMedicineSelection(String drug, String choice, Date date, String status, Double percentage);
 
     void insertAppSettings(String drug, String choice, long date);
 
@@ -49,15 +49,17 @@ public interface DbHelper {
 
     void updateMedicationEntry(int date, int month, int year, String entry,double percentage);
 
-    void insertOrUpdateMissedMedicationEntry(int drug, String ch, int date, int month, int year,double percentage);
+    void insertOrUpdateMissedMedicationEntry(String drug, String ch, int date, int month, int year,double percentage);
 
     void isEntered(int date,int month, int year, LoadIntegerCallback callback);
 
-    void getFirstTimeTimeStamp(LoadLongCallback callback);
+    void getFirstTimeByTimeStamp(LoadLongCallback callback);
 
     void getStatus(int date,int month,int year, LoadStringCallback callback);
 
     void getDosesInaRowWeekly(LoadIntegerCallback callback);
+
+    void getDosesInaRowDaily(LoadIntegerCallback callback);
 
     void resetDatabase();
 
@@ -92,4 +94,6 @@ public interface DbHelper {
     void getAlarmData(LoadAlarmDataCallback callback);
 
     void insertAlarmData(AlarmTime time);
+
+    void updateAlarmTime(int hour, int min);
 }

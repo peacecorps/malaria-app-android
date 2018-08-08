@@ -1,4 +1,4 @@
-package com.peacecorps.malaria.ui.user_profile;
+package com.peacecorps.malaria.ui.user_profile.edit_profile;
 
 /*
  * Created by Anamika Tripathi on 13/7/18.
@@ -106,9 +106,9 @@ public class UserProfileFragment extends BaseFragment implements UserProfileCont
     // set initial details from shared preferences
     @Override
     public void setInitialValuesIfAvailable(String name, String email, int age, String medicine) {
-        if (!name.equals(""))
+        if (!"".equals(name))
             userName.setText(name);
-        if (!email.equals(""))
+        if (!"".equals(email))
             userEmail.setText(email);
         if (age > 0)
             userAge.setText(String.valueOf(age));

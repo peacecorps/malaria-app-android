@@ -62,7 +62,7 @@ public class ThirdAnalyticFragment extends Activity implements OnClickListener {
 
         /** Added by Ankita for getting specific month **/
         Intent intent = getIntent();
-        String mon= intent.getStringExtra(SecondAnalyticFragment.MONTH_REQ);
+        String mon= intent.getStringExtra("sendMonth");
         Calendar cal; int intmon=0; Date dat;
         try{
             dat = new SimpleDateFormat("MMMM").parse(mon);

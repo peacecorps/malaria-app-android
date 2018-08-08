@@ -237,6 +237,7 @@
     <string name="hint_add_items">Add Items</string>
     <string name="heading_volunteer_adherence_rates">Volunteer Adherence Rates</string>
     <string name="hint_med_quantity">0</string>
+    <string name="label_edit_profile">Edit Profile</string>
 
 
     <!-- arrays -->

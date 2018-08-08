@@ -7,16 +7,21 @@
 
     <TextView
         android:id="@+id/textView"
-        style="@style/HeadingTextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:contentDescription="@string/description_peace_corps_logo"
+        android:drawableTop="@drawable/peacecorps_small"
         android:text="@string/heading_user_profile"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/text_size_16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,11 +83,16 @@
 
     <Button
         android:id="@+id/save_button"
-        android:layout_width="@dimen/width_150dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background"
+        android:layout_width="@dimen/width_300dp"
+        android:layout_height="@dimen/height_50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/dark_button_background"
         android:text="@string/label_save"
-        android:textColor="@color/colorPrimaryDark"
+
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/layout_medication_type"
         app:layout_constraintStart_toStartOf="@+id/layout_medication_type"

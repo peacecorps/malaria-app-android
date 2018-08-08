@@ -23,15 +23,22 @@
         <TextView
             android:id="@+id/badge_text"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_220dp"
+            android:layout_height="@dimen/size_24dp"
             android:layout_margin="@dimen/margin_20dp"
             android:gravity="center"
             android:text="@string/label_achievement_one"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_16sp"
-            android:drawableBottom="@drawable/y_b3"
             android:drawablePadding="@dimen/padding_2dp"
             />
+        <ImageView
+            android:id="@+id/badge_image"
+            android:layout_width="@dimen/size_140dp"
+            android:layout_height="@dimen/size_140dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_badge_awarded"
+            android:src="@drawable/y_b1"/>
+        
 
     </LinearLayout>
 

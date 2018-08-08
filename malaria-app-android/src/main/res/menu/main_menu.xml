@@ -5,5 +5,6 @@
         android:id="@+id/btn_menu_reset"
         android:icon="@drawable/btn_reset"
         android:title="@string/reset"
+        android:orderInCategory="2"
         app:showAsAction="ifRoom" />
 </menu>

@@ -14,7 +14,7 @@
         android:drawableTop="@drawable/peacecorps_small"
         android:text="@string/plan_my_trip_label"
         android:textColor="@color/textColorPrimary"
-        android:textSize="@dimen/text_size_25sp"
+        android:textSize="@dimen/text_size_16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,13 +23,14 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tvl_enter_location"
-        style="@style/style_text_input"
         android:layout_width="@dimen/width_300dp"
         android:layout_height="@dimen/height_50dp"
         android:layout_marginLeft="@dimen/margin_20dp"
-        android:layout_marginStart="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
         android:layout_marginTop="@dimen/margin_16dp"
+        android:theme="@style/style_text_input"
         app:errorTextAppearance="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pmt">
 
@@ -46,13 +47,14 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tvl_departure_date"
-        style="@style/style_text_input"
         android:layout_width="@dimen/width_300dp"
         android:layout_height="@dimen/height_50dp"
         android:layout_marginLeft="@dimen/margin_20dp"
-        android:layout_marginStart="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
         android:layout_marginTop="@dimen/margin_16dp"
+        android:theme="@style/style_text_input"
         app:errorTextAppearance="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvl_enter_location">
 
@@ -69,12 +71,13 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tvl_arrival_date"
-        style="@style/style_text_input"
         android:layout_width="@dimen/width_300dp"
         android:layout_height="@dimen/height_50dp"
         android:layout_marginLeft="@dimen/margin_20dp"
-        android:layout_marginStart="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
         android:layout_marginTop="@dimen/margin_16dp"
+        android:theme="@style/style_text_input"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvl_departure_date">
 
@@ -91,13 +94,14 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tvl_packing_list"
-        style="@style/style_text_input"
         android:layout_width="@dimen/width_300dp"
         android:layout_height="@dimen/height_50dp"
         android:layout_marginLeft="@dimen/margin_20dp"
-        android:layout_marginStart="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
         android:layout_marginTop="@dimen/margin_16dp"
+        android:theme="@style/style_text_input"
         app:errorTextAppearance="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvl_arrival_date">
 
@@ -112,13 +116,14 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/tvl_reminder_time"
-        style="@style/style_text_input"
         android:layout_width="@dimen/width_300dp"
         android:layout_height="@dimen/height_50dp"
         android:layout_marginLeft="@dimen/margin_20dp"
-        android:layout_marginStart="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
         android:layout_marginTop="@dimen/margin_16dp"
+        android:theme="@style/style_text_input"
         app:errorTextAppearance="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvl_packing_list">
 
@@ -134,14 +139,19 @@
 
     <Button
         android:id="@+id/btn_trip_generate"
-        android:layout_width="@dimen/width_110dp"
+        android:layout_width="@dimen/width_300dp"
         android:layout_height="@dimen/height_50dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginRight="@dimen/margin_20dp"
         android:background="@drawable/dark_button_background"
         android:text="@string/label_generate"
         android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvl_reminder_time" />
+        app:layout_constraintTop_toBottomOf="@id/tvl_reminder_time"
+        app:layout_constraintVertical_bias="0.094" />
 
 </android.support.constraint.ConstraintLayout>
