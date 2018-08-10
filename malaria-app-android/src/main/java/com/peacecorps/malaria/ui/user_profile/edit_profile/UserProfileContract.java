@@ -1,4 +1,4 @@
-package com.peacecorps.malaria.ui.user_profile;
+package com.peacecorps.malaria.ui.user_profile.edit_profile;
 
 import com.peacecorps.malaria.ui.base.MvpPresenter;
 import com.peacecorps.malaria.ui.base.MvpView;

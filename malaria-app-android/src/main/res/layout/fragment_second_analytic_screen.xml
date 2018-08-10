@@ -3,19 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/background"
     android:orientation="vertical"
     android:padding="@dimen/padding_2dp" >
-
-    <Button
-        android:id="@+id/fragment_second_screen_settings_button"
-        android:layout_width="@dimen/size_24dp"
-        android:layout_height="@dimen/size_24dp"
-        android:layout_gravity="end"
-        android:layout_margin="@dimen/margin_5dp"
-        android:adjustViewBounds="true"
-        android:background="@drawable/settings_normal"
-        android:scaleType="fitCenter" />
 
     <include layout="@layout/fragment_second_analytic_screen_progress" />
 

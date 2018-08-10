@@ -87,10 +87,10 @@ public class AppDbHelper implements DbHelper {
      * Used in Home Screen Fragment for updating the current status through tick marks
      **/
     @Override
-    public void setUserMedicineSelection(int drug, String choice, Date date, String status, Double percentage) {
+    public void setUserMedicineSelection(String drug, String choice, Date date, String status, Double percentage) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        String ts = "";
+        String ts;
         if ((cal.get(Calendar.DATE)) >= 10) {
             ts = "" + cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + cal.get(Calendar.DATE);
         } else {
@@ -174,7 +174,7 @@ public class AppDbHelper implements DbHelper {
     /*If No Entry will be found it will enter in the database, so that it can be later updated.
      * Usage is in Day Fragment Activity **/
     @Override
-    public void insertOrUpdateMissedMedicationEntry(final int drug, final String ch, final int date, final int month, final int year, final double percentage) {
+    public void insertOrUpdateMissedMedicationEntry(final String drug, final String ch, final int date, final int month, final int year, final double percentage) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -187,9 +187,9 @@ public class AppDbHelper implements DbHelper {
                 }
                 int flag = 0;
                 List<String> statusList = userMedicineDao.getStatusListByDateMonthYear(date, month, year);
-                for (String status : statusList) {
+                if (statusList.size() > 0)
                     flag = 1;
-                }
+
                 if (flag == 0) {
                     UserMedicine userMedicine = new UserMedicine(drug, ch, month, year, date, "", percentage, ts);
                     userMedicineDao.setUserMedicineSelection(userMedicine);
@@ -247,17 +247,17 @@ public class AppDbHelper implements DbHelper {
      * Getting the oldest registered entry of Pill
      **/
     @Override
-    public void getFirstTimeTimeStamp(final LoadLongCallback callback) {
+    public void getFirstTimeByTimeStamp(final LoadLongCallback callback) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 String timeStamp = userMedicineDao.getFirstTimeTimeStamp();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 Date comp_date = Calendar.getInstance().getTime();
                 try {
                     comp_date = sdf.parse(timeStamp);
                 } catch (Exception e) {
-                    ToastLogSnackBarUtil.showErrorLog("AppDbHelper: Exception in parsing date");
+                    ToastLogSnackBarUtil.showErrorLog("AppDbHelper: Exception in parsing date " + timeStamp);
                 }
                 final Calendar cal = Calendar.getInstance();
                 cal.setTime(comp_date);
@@ -310,13 +310,16 @@ public class AppDbHelper implements DbHelper {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                List<UserMedicine> userMedicines = userMedicineDao.getDosesInaRowWeekly();
-                int dosesInaRow = 1, aMonth = 0, pMonth = 0;
+                List<UserMedicine> userMedicines = userMedicineDao.getDosesInaRow();
+                int dosesInaRow = 1;
+                int aMonth;
+                int pMonth;
                 Date ado, pdo;
-                int pPara = 0;
-                long aPara = 0;
-                int numDays = 0;
-                String ats = "", pts = "";
+                int pPara;
+                long aPara;
+                int numDays;
+                String ats;
+                String pts;
                 if (userMedicines != null) {
                     ats = userMedicines.get(0).getTimeStamp();
                     aMonth = userMedicines.get(0).getMonth() + 1;
@@ -337,12 +340,81 @@ public class AppDbHelper implements DbHelper {
                         } else {
                             break;
                         }
-                        ats = pts;
                         ado = pdo;
                     }
 
 
                 }
+                final int finalDosesInaRow = dosesInaRow;
+                appExecutors.mainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onDataLoaded(finalDosesInaRow);
+                    }
+                });
+            }
+        };
+        appExecutors.diskIO().execute(runnable);
+    }
+
+    @Override
+    public void getDosesInaRowDaily(final LoadIntegerCallback callback) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                List<UserMedicine> userMedicines = userMedicineDao.getDosesInaRow();
+                int dosesInaRow = 0;
+                int prevDate = 0;
+                int currDate;
+                int currDateMonth;
+                int prevDateMonth = 0;
+                int currDateYear;
+
+                String ts;
+                /**One Iteration is done before entering the while loop for updating the previous and current date**/
+                if (userMedicines.size() > 0) {
+                    ts = userMedicines.get(0).getTimeStamp();
+                    currDate = userMedicines.get(0).getDate();
+                    ToastLogSnackBarUtil.showDebugLog("curr date 1->" + ts);
+
+                    if (userMedicines.get(0).getStatus() != null && (userMedicines.get(0).getStatus().compareTo("yes") == 0)) {
+                        prevDate = userMedicines.get(0).getDate();
+                        prevDateMonth = userMedicines.get(0).getMonth();
+                        if (Math.abs(currDate - prevDate) <= 1)
+                            dosesInaRow++;
+                    }
+
+                    /**Since Previous and Current Date our Updated,
+                     * Now backwards scan is done till we receive consecutive previous and current date **/
+                    for (UserMedicine medicine : userMedicines) {
+                        currDate = medicine.getDate();
+                        currDateMonth = medicine.getMonth();
+                        currDateYear = medicine.getYear();
+                        ts = medicine.getTimeStamp();
+                        ToastLogSnackBarUtil.showDebugLog("curr date -> " + ts);
+
+                        int parameter = Math.abs(currDate - prevDate);
+                        if (medicine.getStatus() != null) {
+                            if (currDateMonth == prevDateMonth) {
+                                if (medicine.getStatus().compareTo("yes") == 0 && parameter == 1) {
+                                    dosesInaRow++;
+                                } else
+                                    break;
+                            } else {
+                                parameter = Math.abs(currDate - prevDate) %
+                                        (CalendarFunction.getNumberOfDaysInMonth(currDateMonth, currDateYear) - 1);
+                                if (medicine.getStatus().compareTo("yes") == 0 && parameter <= 1) {
+                                    dosesInaRow++;
+                                } else
+                                    break;
+                            }
+                        }
+                        prevDate = currDate;
+                        prevDateMonth = currDateMonth;
+                        ToastLogSnackBarUtil.showDebugLog("Doses in Row-> " + dosesInaRow);
+                    }
+                }
+                ToastLogSnackBarUtil.showDebugLog("Final doses in row-> " + dosesInaRow);
                 final int finalDosesInaRow = dosesInaRow;
                 appExecutors.mainThread().execute(new Runnable() {
                     @Override
@@ -507,7 +579,7 @@ public class AppDbHelper implements DbHelper {
     }
 
     /**
-     * @param status : defines the packing status, defined by checkbox status
+     * @param status   : defines the packing status, defined by checkbox status
      * @param position : defines the row position in table
      */
     @Override
@@ -559,7 +631,7 @@ public class AppDbHelper implements DbHelper {
             @Override
             public void run() {
                 final Packing packing = packingDao.getPackedMedicine();
-                if(packing!=null) {
+                if (packing != null) {
                     appExecutors.mainThread().execute(new Runnable() {
                         @Override
                         public void run() {
@@ -587,7 +659,8 @@ public class AppDbHelper implements DbHelper {
                 appExecutors.mainThread().execute(new Runnable() {
                     @Override
                     public void run() {
-                        callback.onDataLoaded(medicines.get(medicines.size() - 1));
+                        if (medicines.size() > 0)
+                            callback.onDataLoaded(medicines.get(medicines.size() - 1));
                     }
                 });
             }
@@ -626,12 +699,12 @@ public class AppDbHelper implements DbHelper {
                 List<String> timeStampList = userMedicineDao.getLastTaken("yes");
                 int count = 0;
                 for (String time : timeStampList) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                     Date curr = Calendar.getInstance().getTime();
                     try {
                         curr = sdf.parse(time);
                     } catch (ParseException e1) {
-                        ToastLogSnackBarUtil.showErrorLog("AppDbHelper: Parse Exception during parsing timestamp from database " + time);
+                        ToastLogSnackBarUtil.showErrorLog("AppDbHelper/getCountTakenBetween: Parse Exception " + time);
                     }
                     long currt = curr.getTime();
                     long endt = e.getTime();
@@ -691,5 +764,16 @@ public class AppDbHelper implements DbHelper {
         };
         appExecutors.diskIO().execute(runnable);
 
+    }
+
+    @Override
+    public void updateAlarmTime(final int hour, final int min) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                alarmDao.updateTime(hour, min);
+            }
+        };
+        appExecutors.diskIO().execute(runnable);
     }
 }

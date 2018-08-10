@@ -17,7 +17,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.peacecorps.malaria.R;
-import com.peacecorps.malaria.ui.home_screen.MainActivity;
+import com.peacecorps.malaria.ui.main.MainActivity;
 import com.peacecorps.malaria.code.adapter.DrugArrayAdapter;
 import com.peacecorps.malaria.ui.base.BaseActivity;
 import com.peacecorps.malaria.utils.Constants;

@@ -13,8 +13,9 @@
         <!--<item name="android:actionBarStyle">@style/MyActionBar</item>-->
         <item name="android:datePickerStyle">@style/MyDatePicker</item>
         <item name="android:textColorPrimary">@color/text_color_primary</item>
-        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:windowBackground">@color/cream</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:typeface">serif</item>
     </style>
 
     <!-- Application theme. -->
@@ -125,12 +126,6 @@
         <item name="android:textSize">25sp</item>
     </style>
 
-    <style name="HeadingTextAppearance">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/text_size_25sp</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-    </style>
-
     <style name="style_text_input" parent="TextAppearance.AppCompat">
         <!-- Hint color and label color in FALSE state -->
         <item name="android:textColorHint">@color/colorSecondary</item>
@@ -143,7 +138,7 @@
 
     <style name="style_text_input_layout">
         <item name="android:layout_width">@dimen/width_300dp</item>
-        <item name="android:layout_height">@dimen/height_60dp</item>
+        <item name="android:layout_height">@dimen/height_50dp</item>
         <item name="android:layout_marginTop">@dimen/margin_20dp</item>
         <item name="android:theme">@style/style_text_input</item>
 
@@ -165,7 +160,7 @@
     <style name="style_dialog_heading">
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/textColorPrimary</item>
-        <item name="android:textSize">@dimen/text_size_20sp</item>
+        <item name="android:textSize">@dimen/text_size_16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:padding">@dimen/padding_10dp</item>
@@ -211,7 +206,6 @@
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">2</item>
-        <item name="android:shadowColor">?colorAccent</item>
     </style>
 
     <style name="ToolbarTextAppearance.Title">
@@ -221,7 +215,7 @@
     <style name="MyToolbar">
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="android:background">?colorPrimary</item>
-        <item name="android:elevation" tools:targetApi="lollipop">4dp</item>
+        <!--<item name="android:elevation" tools:targetApi="lollipop">4dp</item>-->
     </style>
 
     <!-- My checkbox -->

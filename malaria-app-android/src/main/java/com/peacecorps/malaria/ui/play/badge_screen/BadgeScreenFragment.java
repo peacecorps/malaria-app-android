@@ -10,12 +10,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.ui.base.BaseFragment;
 import com.peacecorps.malaria.utils.InjectionClass;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -28,8 +30,11 @@ public class BadgeScreenFragment extends BaseFragment implements BadgeMvpView {
 
     private Dialog achievementDialog;
     private Context context;
+
     private TextView badgeText;
-    private TextView achievementCatTv;
+    private ImageView badgeImage;
+    @BindView(R.id.btn_achievement_medicine)
+    TextView achievementCatTv;
     private BadgeScreenPresenter<BadgeScreenFragment> presenter;
 
     @Nullable
@@ -46,6 +51,7 @@ public class BadgeScreenFragment extends BaseFragment implements BadgeMvpView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        init();
     }
 
     @Override
@@ -63,6 +69,7 @@ public class BadgeScreenFragment extends BaseFragment implements BadgeMvpView {
         achievementDialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
         achievementDialog.setContentView(R.layout.badge_room_dialog);
         badgeText = achievementDialog.findViewById(R.id.badge_text);
+        badgeImage = achievementDialog.findViewById(R.id.badge_image);
         achievementCatTv = achievementDialog.findViewById(R.id.achievement_category);
     }
 
@@ -89,15 +96,15 @@ public class BadgeScreenFragment extends BaseFragment implements BadgeMvpView {
     @Override
     public void startCategoryMedicineDialog(Drawable badgeDrawable) {
         achievementCatTv.setText(R.string.heading_achievement_one);
-        badgeText.setCompoundDrawables(null, null, null, badgeDrawable);
-        badgeText.setText(R.string.label_achievement_one);
+        badgeText.setText(R.string.label_first_achievement);
+        badgeImage.setImageDrawable(badgeDrawable);
         achievementDialog.show();
     }
 
     @Override
     public void startCategoryQADialog(Drawable badgeDrawable) {
         achievementCatTv.setText(R.string.heading_achievement_two);
-        badgeText.setCompoundDrawables(null, null, null, badgeDrawable);
+        badgeImage.setImageDrawable(badgeDrawable);
         badgeText.setText(R.string.label_achievement_two);
         achievementDialog.show();
     }

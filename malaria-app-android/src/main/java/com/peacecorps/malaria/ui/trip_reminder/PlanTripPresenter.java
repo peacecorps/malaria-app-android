@@ -49,20 +49,22 @@ public class PlanTripPresenter<V extends PlanTripMvpView> extends BasePresenter<
     @Override
     public String convertToTwelveHours(int hr, int mins) {
         String timeSet;
-        String minutes;
         int hour = 0;
         if (hr > 12) {
-            hour -= 12;
+            hour = hr -12;
             timeSet = "PM";
         } else if (hr == 0) {
             hour += 12;
             timeSet = "AM";
         } else if (hr == 12) {
             timeSet = "PM";
+            hour = hr;
         } else {
             timeSet = "AM";
+            hour = hr;
         }
 
+        String minutes;
         if (mins < 10) {
             minutes = getContext().getResources().getString(R.string.add_zero_beginning, mins);
         } else {

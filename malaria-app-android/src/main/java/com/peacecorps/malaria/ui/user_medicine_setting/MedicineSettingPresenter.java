@@ -6,6 +6,7 @@ import com.peacecorps.malaria.R;
 import com.peacecorps.malaria.data.AppDataManager;
 import com.peacecorps.malaria.data.db.entities.AlarmTime;
 import com.peacecorps.malaria.ui.base.BasePresenter;
+import com.peacecorps.malaria.utils.ToastLogSnackBarUtil;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -56,19 +57,19 @@ public class MedicineSettingPresenter<V extends SettingMvpView> extends BasePres
 
         switch (mDrugPicked) {
             case 0:
-                getDataManager().setDoesWeekly(false);
+                getDataManager().setDoseWeekly(false);
                 getDataManager().setDrugPicked(getContext().getString(R.string.med_option_one));
                 break;
             case 1:
-                getDataManager().setDoesWeekly(false);
+                getDataManager().setDoseWeekly(false);
                 getDataManager().setDrugPicked(getContext().getString(R.string.med_option_two));
                 break;
             case 2:
-                getDataManager().setDoesWeekly(true);
+                getDataManager().setDoseWeekly(true);
                 getDataManager().setDrugPicked(getContext().getString(R.string.med_option_three));
                 break;
             default:
-                getDataManager().setDoesWeekly(false);
+                getDataManager().setDoseWeekly(false);
                 getDataManager().setDrugPicked(getContext().getString(R.string.med_option_one));
         }
         if (getDataManager().isFirstRun()) {
@@ -88,18 +89,21 @@ public class MedicineSettingPresenter<V extends SettingMvpView> extends BasePres
      */
     @Override
     public void convertToTwelveHours(int hr, int mins) {
+        ToastLogSnackBarUtil.showDebugLog("" + hr + mins);
         String timeSet;
         int hour = 0;
         if (hr > 12) {
-            hour -= 12;
+            hour = hr -12;
             timeSet = "PM";
         } else if (hr == 0) {
             hour += 12;
             timeSet = "AM";
         } else if (hr == 12) {
             timeSet = "PM";
+            hour = hr;
         } else {
             timeSet = "AM";
+            hour = hr;
         }
 
         String minutes;

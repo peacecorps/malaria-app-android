@@ -40,7 +40,7 @@ public class BadgeScreenPresenter<V extends BadgeMvpView> extends BasePresenter<
     //get badge based on medication  score
     @Override
     public void selectUserBadge() {
-        Drawable badgeDrawable= null;
+        Drawable badgeDrawable;
         int userScore = getDataManager().getUserScore();
         //set badge according to score
         if(userScore<2){
@@ -64,7 +64,7 @@ public class BadgeScreenPresenter<V extends BadgeMvpView> extends BasePresenter<
     @Override
     public void selectGameBadge() {
         int gameScore = getDataManager().getGameScore();
-        Drawable badgeDrawable= null;
+        Drawable badgeDrawable;
         //set badge according to score
         if(gameScore<2){
             badgeDrawable=getContext().getResources().getDrawable(R.drawable.y_b1);

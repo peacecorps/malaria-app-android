@@ -11,6 +11,9 @@ public interface AlarmDao {
     @Insert
     void insertAlarmData(AlarmTime data);
 
-    @Query("SELECT * FROM alarmtime")
+    @Query("SELECT * FROM alarmtime WHERE id = 1")
     AlarmTime getAlarmData();
+
+    @Query("UPDATE alarmtime SET hour= :hour , minute= :minute")
+    void updateTime(int hour, int minute);
 }

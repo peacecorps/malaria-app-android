@@ -14,9 +14,11 @@ public interface PreferencesHelper {
     int getDrugAcceptedCount();
     void setDrugAcceptedCount(int value);
     boolean isDosesWeekly();
-    void setDoesWeekly(boolean value);
+    void setDoseWeekly(boolean value);
     int checkDosesDaily();
+    int getDayWeekly();
     void setDosesDaily(int value);
+    void setDayWeekly(int value);
     int checkDosesWeekly();
     void setDosesWeekly(int value);
     int getMedicineStoreValue();
@@ -47,5 +49,15 @@ public interface PreferencesHelper {
     void setAlertNumberDaysOrWeeks(int value);
     String getReminderMessageForTrip();
     void setReminderMessageForTrip(String messageForTrip);
+    void setLongWeeklyDate(long value);
+    long getLongWeeklyDate();
+    void setDateDrugTaken(long value);
+    long getDateDrug();
+    void setWeeklyDrugTaken(boolean value);
+    boolean isWeeklyDrugTaken();
+    void setDailyDrugTaken(boolean value);
+    boolean isDailyDrugTaken();
+    int getDrugRejectedCount();
+    void setDrugRejectedCount(int value);
 
 }

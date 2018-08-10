@@ -159,7 +159,7 @@ public class PlanTripFragment extends BaseFragment implements PlanTripMvpView {
 
                 if (event.getAction() == MotionEvent.ACTION_UP &&
                         (event.getRawX() >= (etReminderTime.getRight() - etReminderTime.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()))) {
-                    checkDepartureOrArrivalEt = false;
+                    checkDepartureOrArrivalEt = true;
                     // creating show date picker dialog
                     showTimePicker();
                     return true;
@@ -169,6 +169,18 @@ public class PlanTripFragment extends BaseFragment implements PlanTripMvpView {
 
 
         });
+    }
+
+    @OnClick(R.id.et_departure_date)
+    public void departureDateListener() {
+        checkDepartureOrArrivalEt = true;
+        showDatePicker();
+    }
+
+    @OnClick(R.id.et_arrival_date)
+    public void arrivalDateListener() {
+        checkDepartureOrArrivalEt = false;
+        showDatePicker();
     }
 
     private void showDatePicker() {

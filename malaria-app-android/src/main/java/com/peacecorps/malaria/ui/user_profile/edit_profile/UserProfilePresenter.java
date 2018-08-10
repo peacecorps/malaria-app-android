@@ -1,12 +1,12 @@
-package com.peacecorps.malaria.ui.user_profile;
+package com.peacecorps.malaria.ui.user_profile.edit_profile;
 
 import android.content.Context;
 import android.text.TextUtils;
 
 import com.peacecorps.malaria.data.AppDataManager;
 import com.peacecorps.malaria.ui.base.BasePresenter;
-import com.peacecorps.malaria.ui.user_profile.UserProfileContract.UserProfileMvpPresenter;
-import com.peacecorps.malaria.ui.user_profile.UserProfileContract.UserProfileMvpView;
+import com.peacecorps.malaria.ui.user_profile.edit_profile.UserProfileContract.UserProfileMvpPresenter;
+import com.peacecorps.malaria.ui.user_profile.edit_profile.UserProfileContract.UserProfileMvpView;
 
 /**
  * Created by Anamika Tripathi on 13/7/18.
