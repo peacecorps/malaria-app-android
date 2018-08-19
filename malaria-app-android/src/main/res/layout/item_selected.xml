@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_60dp">
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/packing_item_check_box"
+        android:layout_width="@dimen/size_40dp"
+        android:layout_height="@dimen/size_40dp"
+        android:layout_margin="@dimen/margin_10dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_packing_item"
+        android:layout_width="@dimen/width_200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="@dimen/margin_40dp"
+        android:text="@string/hint_add_items"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/text_size_16sp"
+        app:layout_constraintBottom_toBottomOf="@id/packing_item_check_box"
+        app:layout_constraintLeft_toRightOf="@id/packing_item_check_box"
+        app:layout_constraintTop_toTopOf="@id/packing_item_check_box"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/img_delete_row"
+        android:layout_width="@dimen/size_20dp"
+        android:layout_height="@dimen/size_20dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:contentDescription="@string/description_delete_item"
+        app:layout_constraintBottom_toBottomOf="@id/tv_packing_item"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_packing_item"
+        app:srcCompat="@drawable/ic_cancel"
+        tools:layout_editor_absoluteX="323dp"
+        tools:layout_editor_absoluteY="13dp" />
+
+</android.support.constraint.ConstraintLayout>

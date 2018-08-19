@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-        mavenCentral()
         jcenter()
         google()
     }
@@ -12,8 +11,8 @@ buildscript {
 allprojects {
     repositories {
         maven { url "http://dl.bintray.com/populov/maven" }
-        mavenCentral()
         google()
+        jcenter()
     }
 }
 
@@ -26,6 +25,9 @@ ext {
     buildToolsVersion = '26.0.2'
 
     // App dependencies
-    supportLibraryVersion = '27.0.0'
+    supportLibraryVersion = '27.1.1'
     viewPagerIndicatorVersion = '2.4.1@aar'
+    constraintLayoutVersion= '1.1.2'
+    lifecycle_version = '1.1.1'
+    room_version = '1.1.1'
 }

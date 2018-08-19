@@ -8,13 +8,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.peacecorps.malaria.model.SharedPreferenceStore;
+import com.peacecorps.malaria.code.model.SharedPreferenceStore;
+import com.peacecorps.malaria.utils.CalendarFunction;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import static com.peacecorps.malaria.utils.CalendarFunction.getDateObject;
+import static com.peacecorps.malaria.utils.CalendarFunction.getHumanDateFormat;
 
 /**
  * Created by Chimdi on 7/18/14.
@@ -22,26 +25,27 @@ import java.util.Date;
  **/
 public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
+    // database name and table names
     private static final String DATABASE_NAME = "MalariaDatabase";
     private static final String userMedicationChoiceTable = "userSettings";
     private static final String appSettingTable = "appSettings";
     private static final String locationTable = "locationSettings";
     private static final String packingTable = "packingSettings";
+
+    // tag
     private static final String TAGDSH= "DatabaseSQLiteHelper";
+
     public static final String LOCATION = "Location";
     public static final String PACKING_ITEM = "PackingItem";
     public static final String KEY_ROW_ID = "_id";
     public static final String QUANTITY = "Quantity";
 
-    private final int[] daysOfMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30,
-            31, 30, 31 };
-    private final int[] daysOfMonthLeap = { 31, 29, 31, 30, 31, 30, 31, 31, 30,
-            31, 30, 31 };
-
+    // constructor
     public DatabaseSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
+    // creating tables
     @Override
     public void onCreate(SQLiteDatabase database) {
         /**Creating Tables**/
@@ -61,6 +65,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     public static ArrayList<Integer> date;
 
     /**Method to Update the Progress Bars**/
+    // only returning count value
     public int getData(int month, int year, String choice) {
 
         percentage = new ArrayList<Double>();
@@ -69,7 +74,8 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         String column[] = {"_id", "Date", "Percentage"};
         String args[] = {"" + month, "" + year, "yes", choice};
-        Cursor cursor = sqLiteDatabase.query(userMedicationChoiceTable, column, "Month =? AND Year =? AND Status =? AND Choice =?", args, null, null,"Date ASC");
+        Cursor cursor = sqLiteDatabase.query(userMedicationChoiceTable, column, "Month =? AND Year =? AND Status =? AND Choice =?", args,
+                null, null,"Date ASC");
         boolean isDataFound = false;
         while (cursor.moveToNext()) {
             isDataFound = true;
@@ -205,23 +211,28 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase sqDB = getReadableDatabase();
         ContentValues values = new ContentValues(2);
+
         values.put("Status", entry);
         values.put("Percentage", percentage);
+
         String[] args = new String[]{String.valueOf(date), String.valueOf(month),String.valueOf(year)};
         String[] column = {"Percentage"};
-        /**Update is used instead of Insert, because the entry already exist**/
+
+        // Update is used instead of Insert, because the entry already exist**/
         sqDB.update(userMedicationChoiceTable, values, "Date=? AND Month=? AND YEAR=?", args);
-        Cursor cursor=sqDB.query(userMedicationChoiceTable,column,null,null,null,null,null);
-        while(cursor.moveToNext())
-        {
-         Log.d(TAGDSH, "Percentage:" + cursor.getDouble(0));
-        }
+        //Cursor cursor=sqDB.query(userMedicationChoiceTable,column,null,null,null,null,null);
+//        while(cursor.moveToNext())
+//        {
+//         Log.d(TAGDSH, "Percentage:" + cursor.getDouble(0));
+//        }
         sqDB.close();
 
     }
 
     /*If No Entry will be found it will enter in the database, so that it can be later updated.
      * Usage is in Day Fragment Activity **/
+    // take drug value too from prefernces, hence in param
+    // send preference value too in parameters Is Weekly -- calculation of Choice
     public void insertOrUpdateMissedMedicationEntry(int date, int month, int year,double percentage)
     {
         SQLiteDatabase sqDB = this.getWritableDatabase();
@@ -231,6 +242,8 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             Choice="weekly";
         else
             Choice="daily";
+
+        // calculation of timestamp
         if(date>=10)
             ts=""+year+"-"+month+"-"+date;
         else
@@ -238,10 +251,13 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
         String []columns={"Status"};
         String []selArgs= {""+date,""+month,""+year};
-        Cursor cursor = sqDB.query(userMedicationChoiceTable, columns, "Date=? AND Month =? AND Year =?", selArgs, null, null, null, null);
+        Cursor cursor = sqDB.query(userMedicationChoiceTable, columns, "Date=? AND Month =? AND Year =?", selArgs,
+                null, null, null, null);
+
         int idx0; String st=""; int flag=0;
         while(cursor.moveToNext())
         {
+            // st is status where date, month and year given is same in database & if such value exists, put flag = 1
             idx0=cursor.getColumnIndex("Status");
             st=cursor.getString(idx0);
             flag=1;
@@ -361,7 +377,8 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqDB = getWritableDatabase();
         String []column = {"Status"};
         String []selArgs = {""+date,""+month,""+year};
-        Cursor cursor= sqDB.query(userMedicationChoiceTable,column,"Date =? AND Month =? AND Year =?",selArgs,null,null,null,null);
+        Cursor cursor= sqDB.query(userMedicationChoiceTable,column,"Date =? AND Month =? AND Year =?",
+                selArgs,null,null,null,null);
 
         while(cursor.moveToNext())
         {
@@ -410,6 +427,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
                     currDateMonth = cursor.getInt(3);
                     currDateYear = cursor.getInt(4);
                     ts = cursor.getString(cursor.getColumnIndex("Timestamp"));
+
                     Log.d(TAGDSH, "curr date ->" + ts);
                     int parameter = Math.abs(currDate - prevDate);
                     if ((cursor.getString(0)) != null) {
@@ -419,7 +437,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
                             else
                                 break;
                         } else {
-                            parameter = Math.abs(currDate - prevDate) % (getNumberofDaysinMonth(currDateMonth, currDateYear) - 1);
+                            parameter = Math.abs(currDate - prevDate) % (CalendarFunction.getNumberOfDaysInMonth(currDateMonth, currDateYear) - 1);
                             if (cursor.getString(0).compareTo("yes") == 0 && parameter <= 1)
                                 dosesInaRow++;
                             else
@@ -438,23 +456,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         return dosesInaRow;
     }
 
-    /**Method to give no. of days in month. */
-    private int getNumberofDaysinMonth(int month,int year)
-    {
-        if(isLeapYear(year))
-        {
-            return daysOfMonthLeap[month];
-        }
-        else
-            return daysOfMonth[month];
-    }
-
-    /**Check whether it is a leap layer**/
-    private static boolean isLeapYear(int year) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, year);
-        return cal.getActualMaximum(Calendar.DAY_OF_YEAR) > 365;
-    }
 
     /**From the Last Time Pill was Taken it Calculates the maximum weeks in a row medication was taken
      * Need at Home Screen, First Analytic Scrren, Second Analytic Scrren, Day Fragment Screen
@@ -463,7 +464,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase sqDB = getWritableDatabase();
         String []column={"Status","Timestamp","Date","Month","Year"};
-
         Cursor cursor= sqDB.query(userMedicationChoiceTable,column,null,null,null,null,"Timestamp DESC");
         int dosesInaRow=1,aMonth=0,pMonth=0;
         Date ado,pdo;
@@ -474,7 +474,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         if(cursor!=null) {
             cursor.moveToNext();
             if(cursor!=null) {
-
                 try {
                     ats = cursor.getString(1);
                 }
@@ -482,7 +481,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
                 {
                     return 0;
                 }
-
                 aMonth = cursor.getInt(3) + 1;
                 ats = getHumanDateFormat(ats, aMonth);
                 ado = getDateObject(ats);
@@ -491,9 +489,9 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
                     pMonth = cursor.getInt(3) + 1;
                     pts = getHumanDateFormat(pts, pMonth);
                     pdo = getDateObject(pts);
-                    numDays = getDayofWeek(pdo);
+                    numDays = CalendarFunction.getDayofWeek(pdo);
                     pPara = 7 - numDays + 7;
-                    aPara = getNumberOfDays(pdo, ado);
+                    aPara = CalendarFunction.getNumberOfDays(pdo, ado);
                     if (aPara <= pPara)
                         dosesInaRow++;
                     else
@@ -508,60 +506,13 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-    /*Getting the Date Object from the String**/
-    public Date getDateObject(String s)
-    {
-        Date dobj=null;
-
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            dobj= sdf.parse(s);
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-
-        return dobj;
-    }
-
-    /*Getting the Day of Week from the String**/
-    private int getDayofWeek(Date d)
-    {
-        Calendar cal=Calendar.getInstance();
-        cal.setTime(d);
-        int day=cal.get(Calendar.DAY_OF_WEEK);
-        return day;
-    }
-
-    /*Getting no. of Days between two interval**/
-    private long getNumberOfDays(Date d1,Date d2) {
-        long interval = 0;
-        Calendar c= Calendar.getInstance();
-        c.setTime(d1);
-        long ld1 = c.getTimeInMillis();
-        c.setTime(d2);
-        long ld2=c.getTimeInMillis();
-        long oneDay = 1000 * 60 * 60 * 24;
-        interval = (ld2-ld1) / oneDay;
-        return interval;
-    }
-
-    /*Setting the Date Object to Human Readable Format**/
-    private String getHumanDateFormat(String ats,int aMonth)
-    {
-        String aYear=ats.substring(0, 4);
-        String aDate=ats.substring(Math.max(ats.length() - 2, 0));
-        ats=aYear+"-"+aMonth+"-"+aDate;
-        return ats;
-    }
-
     public String getMediLastTakenTime()
     {
         SQLiteDatabase sqDB=getWritableDatabase();
         String [] column={"Date","Month","Year"};
         String recentDate="";
-        Cursor cursor = sqDB.query(userMedicationChoiceTable, column, null, null, null, null, "Timestamp DESC LIMIT 1");
+        Cursor cursor = sqDB.query(userMedicationChoiceTable, column, null, null,
+                null, null, "Timestamp DESC LIMIT 1");
         if(cursor!=null)
         { cursor.moveToNext();
             try
@@ -619,7 +570,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     /**Fetching the Location**/
     public Cursor getLocation()
     {
-
         SQLiteDatabase sqDB = getWritableDatabase();
         String []column={"_id","Location"};
 
@@ -644,7 +594,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
         while (cursor.moveToNext())
         {
-           q= cursor.getInt(1);
+            q= cursor.getInt(1);
             flag++;
             Log.d(TAGDSH,"Flag: "+flag);
         }
@@ -717,12 +667,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             {
                 break;
             }
-
-
-
         }
-
-
     }
 
 
@@ -738,7 +683,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             while (cursor.moveToNext())
             {
                 try {
-                    if (cursor.getString(0).equalsIgnoreCase("yes") == true) {
+                    if (cursor.getString(0).equalsIgnoreCase("yes")) {
                         lastDate=cursor.getString(1);
                     }
                 }
@@ -761,7 +706,8 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase sqDB = getWritableDatabase();
         String []column={"Status","Timestamp","Date","Month","Year","Choice"};
-        Cursor cursor= sqDB.query(userMedicationChoiceTable,column,null,null,null,null,"Timestamp ASC");
+        Cursor cursor= sqDB.query(userMedicationChoiceTable,column,null,null,null,
+                null,"Timestamp ASC");
         int count=0;
         if(cursor!=null)
         {
@@ -787,63 +733,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-
-    /**Finding the No. of weekly days between two dates for calculating Adherence**/
-    public int getIntervalWeekly(Date s, Date e, int weekday)
-    {
-        Calendar startCal;
-        Calendar endCal;
-        startCal = Calendar.getInstance();
-        startCal.setTime(s);
-        endCal = Calendar.getInstance();
-        endCal.setTime(e);
-        int medDays = 0,flag=0;
-        //If working dates are same,then checking what is the day on that date.
-        if (startCal.getTimeInMillis() == endCal.getTimeInMillis()) {
-            if (startCal.get(Calendar.DAY_OF_WEEK) == weekday)
-            {
-                ++medDays;
-                return medDays;
-            }
-        }
-        /*If start date is coming after end date, Then shuffling Dates and storing dates
-        by incrementing upto end date in do-while part.*/
-        if (startCal.getTimeInMillis() > endCal.getTimeInMillis()) {
-            startCal.setTime(e);
-            endCal.setTime(s);
-        }
-
-        do {
-
-            if (startCal.get(Calendar.DAY_OF_WEEK)==weekday) {
-                ++medDays;
-            }
-            startCal.add(Calendar.DAY_OF_MONTH, 1);
-        } while (startCal.getTimeInMillis() <= endCal.getTimeInMillis());
-
-        if(startCal.get(Calendar.DAY_OF_WEEK)==endCal.get(Calendar.DAY_OF_WEEK) && (startCal.get(Calendar.DAY_OF_WEEK)==weekday))
-            ++medDays;
-
-        return medDays;
-    }
-
-    /**Finding the No. of days between two dates for calculating adherence of daily drugs**/
-    public int getIntervalDaily(Date s,Date e)
-    {
-        long sLong=s.getTime();
-        long eLong=e.getTime();
-
-        long oneDay=24*60*60*1000;
-
-        long interval=(eLong-sLong)/oneDay;
-
-        int interv=(int)interval+1;
-
-        return interv;
-
-    }
-
-    /**Finding the Drugs between two dates for updaing Adherence in Day Fragment Activity of any selected date**/
+    /**Finding the Drugs between two dates for updating Adherence in Day Fragment Activity of any selected date**/
     public int getCountTakenBetween(Date s,Date e)
     {
         SQLiteDatabase sqDB = getWritableDatabase();
@@ -855,8 +745,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         {
             while (cursor.moveToNext())
             {
-                try {
-
                     String d= cursor.getString(1);
                     Log.d(TAGDSH,"Curr Time:"+d);
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -883,21 +771,14 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
                     Log.d(TAGDSH,"End Long:"+endt);
                     Log.d(TAGDSH,"Start Long:"+strt);
 
-                    if (cursor.getString(0).equalsIgnoreCase("yes") == true) {
+                    if (cursor.getString(0).equalsIgnoreCase("yes")) {
 
-                        if(currt>=strt && currt<=endt)
+                        if (currt >= strt && currt <= endt)
                             count++;
-                        else if(strt==endt)
-                        {
+                        else if (strt == endt) {
                             count++;
                         }
                     }
-                }
-                catch(NullPointerException npe)
-                {
-                    return 0;
-
-                }
             }
         }
         sqDB.close();

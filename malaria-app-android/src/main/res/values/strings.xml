@@ -19,7 +19,7 @@
     <string name="alert_dialog_message">Have you taken your drug today ?</string>
     <string name="user_medicine_settings_fragment_activity_title">PC Malaria Prevention</string>
     <string name="info_hub_title_label">Info Hub</string>
-    <string name="plan_my_trip_label">Plan My Trip</string>
+    <string name="plan_my_trip_label">Plan Trip</string>
     <string name="peace_corps_policy">Peace Corps Policy</string>
     <string name="percentage_of_side_effects">Percentage of Side Effects</string>
     <string name="side_effects_reported_by_PCVs">Side Effects Reported by PCVs</string>
@@ -33,7 +33,7 @@
     <string name="remind_label">Remind Me On:</string>
     <string name="trip_button_label">Generate</string>
     <string name="location_spinner_label">Choose Location</string>
-    <string name="medication_spinner_label">Choose Drug</string>
+    <string name="label_medicine_selector">Choose Drug</string>
     <string name="items_spinner_label">Pick Items</string>
     <string name="trip_select_string">Add Packing Items</string>
     <string name="dump_test">Fetching...</string>
@@ -58,40 +58,25 @@
         -> For every correct answer, a point is awarded.\n
         -> Click \"Next\" to go to next question, and \"Exit\" to exit the game.\n
     </string>
-    <string name="shared_prefs_myth_fact_game">showHelpMythFactGame</string>
-    <string name="shared_prefs_rapid_fire_game">showHelpRapidFireGame</string>
+    <string name="help_rapid_fire_question_title">Every question is given with 3 options</string>
+    <string name="help_rapid_fire_question_description">Read the question carefully, and quickly select one of the 3 options.</string>
+    <string name="help_rapid_fire_score_title">For every correct option, a point is awarded</string>
+    <string name="help_rapid_fire_timer_title">Timer shows seconds left for each question</string>
+    <string name="help_rapid_fire_timer_description">The questions have to be answered under 5 seconds.</string>
+    <string name="help_rapid_fire_exit_title">Exit the game by clicking here</string>
+
+    <string name="help_myth_fact_question_title">Read the statement carefully</string>
+    <string name="help_myth_fact_chest_title">If it is a fact, drag it to the chest</string>
+    <string name="help_myth_fact_bin_title">If it is a myth, drag it to the trash bin</string>
+    <string name="help_myth_fact_question_description">Decide whether it is a myth or a fact.</string>
+    <string name="help_myth_fact_score_title">For every correct option, a point is awarded</string>
+    <string name="help_myth_fact_exit_title">Exit the game by clicking here</string>
+    <string name="help_myth_fact_next_title">Click \"Next\" to go to next question</string>
+    <string name="help_myth_fact_next_description">For every question, it is disabled. You can not skip a question.</string>
+
     <string name="departuredate_currentdate">"Departure date cannot be less than current date"</string>
     <string name="arrivaldate_departuredate">"Arrival date cannot be before the Departure date"</string>
-    <string name="mal_description">
-        -Interferes with growth of parasites in red blood cells\n
-        -Take the medicine everyday at the same time with food\n
-        -Start using 1-2 days before entering the area\n
-        -Continue using through out the stay,and at least 7 days after leave\n
-        -Take missed doses as soon as possible, but skip them if it is almost time for next dose\n
-        -Consult your doctor if you have liver or kidney disease, or malaria complications\n
-        -Some side effects of drug: stomach pain, headache, diarrhea, fever, weakness\n
-        -Visit http://www.drugs.com/malarone.html for more information\n
-    </string>
-    <string name="doxy_description">
-        -Tetracycline antibiotic that helps to fight bacteria in the body\n
-        -Take the medicine everyday at the same time with food\n
-        -Start using 1-2 days before entering the area\n
-        -Continue using through out the stay,and at least 28 days after leave\n
-        -Take missed doses as soon as possible, but skip them if it is almost time for next dose\n
-        -Consult your doctor if you have liver or kidney disease, or are taking supplements and other medicines\n
-        -Some side effects of drug: stomach pain, headache, diarrhea, fever, weakness\n
-        -Visit http://www.drugs.com/doxycycline.html for more information\n
-    </string>
-    <string name="mef_description">
-        -Antimalarial agent that kills sensitive malaria parasites\n
-        -Take the medicine once a week after your main meal (NOT ON AN EMPTY STOMACH)\n
-        -Start using 1 week before entering the area\n
-        -Continue using through out the stay,and at least 4 weeks after leave\n
-        -Take missed doses as soon as possible, but skip them if it is almost time for next dose\n
-        -Consult your doctor if you have allergies, mental illnesses, seizures, or are taking similar medicines\n
-        -Some side effects of drug: stomach pain, headache, muscle ache, tiredness, vomiting\n
-        -Visit http://www.drugs.com/cdi/mefloquine.html for more information\n
-    </string>
+
 
     <!--Notification string-->
     <string name="drug_reminder_notification_title">Malaria Prevention</string>
@@ -103,6 +88,7 @@
     <string name="notification_action_code_taken">2</string>
     <string name="notification_action_code_snooze">1</string>
 
+    <!--Todo delete them once everything is completed -->
     <!--shared preferences-->
     <string name="shared_preferences_alarm_hour">com.peacecorps.malaria.AlarmHour</string>
     <string name="shared_preferences_alarm_minute">com.peacecorps.malaria.AlarmMinute</string>
@@ -113,6 +99,8 @@
     <string name="shared_preferences_drug_rejected_count">com.peacecorps.malaria.drugRejectedCount</string>
     <string name="shared_preferences_drug_accepted_count">com.peacecorps.malaria.drugAcceptedCount</string>
     <string name="shared_preferences_store_time_picked">com.peacecorps.malaria.storeTimePicked</string>
+    <string name="shared_prefs_myth_fact_game">showHelpMythFactGame</string>
+    <string name="shared_prefs_rapid_fire_game">showHelpRapidFireGame</string>
 
     <!-- ContentDescription strings -->
     <string name="description_drugs">Drugs</string>
@@ -146,13 +134,169 @@
     <string name="description_badge_hat">Hat badge</string>
     <string name="description_"></string>
 
+    <string name="med_option_one">Malarone</string>
+    <string name="med_option_two">Doxycycline</string>
+    <string name="med_option_three">Mefloquine</string>
+
+    <!-- labels -->
+    <string name="label_medication_type">Medication Type</string>
+    <string name="label_user_age">Age</string>
+    <string name="label_user_email">Email</string>
+    <string name="label_user_name">Name</string>
+    <string name="label_user_profile">User Profile</string>
+    <string name="label_save">SAVE</string>
+    <string name="label_home">Home</string>
+    <string name="label_trip">Trip</string>
+    <string name="label_info_hub">InfoHub</string>
+    <string name="label_game">Game</string>
+    <string name="label_profile">Profile</string>
+    <string name="label_badge_room">Badge Room</string>
+    <string name="label_rapid_fire">Rapid Fire</string>
+    <string name="label_myth_vs_fact">Myth Vs Fact</string>
+    <string name="label_medicine_store">Medicine Store</string>
+    <string name="label_add_medicine_to_store">Add Medicine to Store</string>
+    <string name="label_add">Add</string>
+    <string name="label_cancel">Cancel</string>
+    <string name="label_enter_medicine_dose">Enter the doses of medicines you want to add in store.</string>
+    <string name="label_settings">Settings</string>
+    <string name="label_sample_text">This is sample text</string>
+    <string name="label_set">Set</string>
+    <string name="label_myth_fact_total_score">%d</string>
+    <string name="label_exit">Exit</string>
+    <string name="label_exit_game">Exit Game</string>
+    <string name="label_next">Next</string>
+    <string name="label_question">Question Here</string>
+
+
+    <!-- hint text -->
+    <string name="hint_user_medicine_type">Enter the medicine you take</string>
+    <string name="hint_user_age">Age in years</string>
+    <string name="hint_email_address">Enter Your Email Address</string>
+    <string name="hint_user_name">Enter Your Name</string>
+    <string name="reset">Reset</string>
+    <string name="hint_eg_7">Eg 7</string>
+
+
+    <string name="warning_reminder_weeks">How many weeks before your medicine ends, do you want to get the reminder?</string>
+    <string name="warning_reminder_days">How many days before your medicine ends, do you want to get the reminder?</string>
+    <string name="error_store_alert_reminder">Entry Valid Number, Max 30</string>
+    <string name="wrong">Wrong</string>
+    <string name="myth">myth</string>
+    <string name="fact">fact</string>
+    <string name="label_rapid_fire_total_score">Score : %1$d</string>
+    <string name="blank_text">%d</string>
+    <string name="label_correct">Correct   +1</string>
+    <string name="label_no">NO</string>
+    <string name="label_yes">YES</string>
+    <string name="description_reset_app_settings">Do you want to reset app settings? It will delete all data.</string>
+    <string name="label_reset_data">Reset Data</string>
+    <string name="label_ok">OK</string>
+    <string name="description_wait_for_new_ques">Wait until new questions are added to the game.</string>
+    <string name="label_game_over">Game Over</string>
+    <string name="description_sure_exit_game">Are you sure you want to exit the Game? Your current game points will be converted and added to your main score.</string>
+    <string name="label_order_medicines">Order Medicines</string>
+    <string name="label_place_order">Place Order</string>
+    <string name="description_order_no_medicine">Enter the number of medicines you want to order.</string>
+    <string name="label_email">Email</string>
+    <string name="label_message">Message</string>
+    <string name="heading_achievement_one">Medication Punctuality Rewards</string>
+    <string name="heading_achievement_two">Malaria Information Rewards</string>
+    <string name="label_achievement_one">Rookie</string>
+    <string name="label_achievement_two">Mr-Know-It-All</string>
+    <string name="label_achievement_room">Achievement Room</string>
+    <string name="label_first_achievement">Rookie  Taken your first medicine</string>
+    <string name="label_second_achievement">Mr Know-It-All  Answered first question correctly</string>
+    <string name="label_third_achievement">Explorer  Planned your first trip</string>
+    <string name="hint_trip_location">Enter Location</string>
+    <string name="hint_departure_date">Departure Date (DD/MM/YYYY)</string>
+    <string name="heading_previous_location">Previous Locations</string>
+    <string name="heading_no_location_history">No Location History Found</string>
+    <string name="et_trip_date">%d/%d/%d</string>
+    <string name="time_picker">%d:%s %s</string>
+    <string name="add_zero_beginning">0%d</string>
+    <string name="key_year">year</string>
+    <string name="key_month">month</string>
+    <string name="key_day">day</string>
+    <string name="key_hour">hour</string>
+    <string name="key_min">min</string>
+    <string name="heading_packing_item">Packing Items</string>
+    <string name="label_medicine_ending">You may be running out of medicines soon!</string>
+    <string name="heading_medicine_consumption">Medicine Consumption</string>
+    <string name="label_change_entry">Change Entry!</string>
+    <string name="heading_effective_againt_malaria">Effectiveness Against Malaria</string>
+    <string name="label_drug">Drug:</string>
+    <string name="label_triple_dots">...</string>
+    <string name="label_taken">Taken:</string>
+    <string name="label_dd_mm">11/08</string>
+    <string name="hint_trip_arrival_date">Arrival Date (DD/MM/YYYY)</string>
+    <string name="hint_trip_select_items">Select Items</string>
+    <string name="hint_trip_reminder">Reminder (Hour/Minutes)</string>
+    <string name="label_generate">Generate</string>
+    <string name="label_month_january">January</string>
+    <string name="label_percentage">100%</string>
+    <string name="heading_user_profile">User Profile</string>
+    <string name="description_help_game">This text will get replaced automatically in the NewHomeActivity.</string>
+    <string name="label_store_no_of_days">7 Days</string>
+    <string name="heading_peace_corps_policy">Peace Corps Policy</string>
+    <string name="description_rapid_fire_question">Melfoquine should be taken</string>
+    <string name="description_rapid_fire_answer">Option here</string>
+    <string name="heading_set_reminder_tone">SET REMINDER TONE</string>
+    <string name="hint_specify_file_path">Specify file path</string>
+    <string name="heading_non_pcvs_reported_side_effects">Non PCVs Reported Side Effects</string>
+    <string name="heading_side_effects_reported_by_pcvs">Side Effects Reported by PCVs</string>
+    <string name="heading_percentage_side_effects">Percentage Side Effects</string>
+    <string name="heading_trip_checklist_reminder">Trip Checklist Reminder</string>
+    <string name="label_clear">Clear</string>
+    <string name="label_select_pill">Select Pill</string>
+    <string name="label_cash">Cash</string>
+    <string name="hint_money">$</string>
+    <string name="hint_add_items">Add Items</string>
+    <string name="heading_volunteer_adherence_rates">Volunteer Adherence Rates</string>
+    <string name="hint_med_quantity">0</string>
+    <string name="label_edit_profile">Edit Profile</string>
+
+
+    <!-- arrays -->
+    <string-array name="array_medicine_description">
+        <item>
+            -Interferes with growth of parasites in red blood cells\n
+            -Take the medicine everyday at the same time with food\n
+            -Start using 1-2 days before entering the area\n
+            -Continue using through out the stay,and at least 7 days after leave\n
+            -Take missed doses as soon as possible, but skip them if it is almost time for next dose\n
+            -Consult your doctor if you have liver or kidney disease, or malaria complications\n
+            -Some side effects of drug: stomach pain, headache, diarrhea, fever, weakness\n
+            -Visit http://www.drugs.com/malarone.html for more information\n
+        </item>
+        <item>
+            -Tetracycline antibiotic that helps to fight bacteria in the body\n
+            -Take the medicine everyday at the same time with food\n
+            -Start using 1-2 days before entering the area\n
+            -Continue using through out the stay,and at least 28 days after leave\n
+            -Take missed doses as soon as possible, but skip them if it is almost time for next dose\n
+            -Consult your doctor if you have liver or kidney disease, or are taking supplements and other medicines\n
+            -Some side effects of drug: stomach pain, headache, diarrhea, fever, weakness\n
+            -Visit http://www.drugs.com/doxycycline.html for more information\n
+        </item>
+        <item>
+            -Antimalarial agent that kills sensitive malaria parasites\n
+            -Take the medicine once a week after your main meal (NOT ON AN EMPTY STOMACH)\n
+            -Start using 1 week before entering the area\n
+            -Continue using through out the stay,and at least 4 weeks after leave\n
+            -Take missed doses as soon as possible, but skip them if it is almost time for next dose\n
+            -Consult your doctor if you have allergies, mental illnesses, seizures, or are taking similar medicines\n
+            -Some side effects of drug: stomach pain, headache, muscle ache, tiredness, vomiting\n
+            -Visit http://www.drugs.com/cdi/mefloquine.html for more information\n
+        </item>
+    </string-array>
+
     <string-array name="user_medicine_settings_activity_drug_array">
         <item>Malarone (Daily)</item>
         <item>Doxycycline (Daily)</item>
         <item>Mefloquine (Weekly)</item>
     </string-array>
 
-    <string-array name="month">
+    <string-array name="array_month">
         <item>January</item>
         <item>February</item>
         <item>March</item>
@@ -167,14 +311,13 @@
         <item>December</item>
     </string-array>
 
-
-    <string-array name="drug_array">
+    <string-array name="array_drugs">
         <item>Malarone</item>
         <item>Doxycycline</item>
         <item>Mefloquine</item>
     </string-array>
 
-    <string-array name="location_array">
+    <string-array name="array_location">
         <item>Benin</item>
         <item>Botswana</item>
         <item>Burkina Faso</item>
@@ -200,11 +343,26 @@
         <item>Zambia</item>
     </string-array>
 
-
     <string-array name="item_array">
         <item>Medication</item>
         <item>Ointment</item>
         <item>Mosquito Net</item>
+    </string-array>
+
+    <string-array name="array_myth_vs_fact_questions">
+        <item>Once you get malaria you will be immune from it for the rest of your life</item>
+        <item>Malaria is a life-threatening disease</item>
+        <item>You don’t have to worry about malaria in the dry season</item>
+        <item>Nearly half of the world's population is at risk of malaria</item>
+        <item>There is a vaccine for malaria</item>
+    </string-array>
+
+    <string-array name="array_myth_vs_fact_answers">
+        <item>myth</item>
+        <item>fact</item>
+        <item>myth</item>
+        <item>fact</item>
+        <item>myth</item>
     </string-array>
 
 </resources>

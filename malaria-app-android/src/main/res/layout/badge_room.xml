@@ -1,87 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:padding="7sp"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_5dp"
     android:weightSum="3.0">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-    </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_weight="0.3"
         android:clickable="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp">
+        android:focusable="true">
+
         <Button
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/shareButton"
-            android:background="@drawable/share_icon"/>
+            android:id="@+id/btn_share_button"
+            android:layout_width="@dimen/size_30dp"
+            android:layout_height="@dimen/size_30dp"
+            android:background="@drawable/btn_share" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Achievement Room"
-            android:textColor="@color/golden_brown"
-            android:textSize="22dp"
-            android:paddingRight="32dp"/>
+            android:paddingEnd="@dimen/padding_30dp"
+            android:paddingRight="@dimen/padding_30dp"
+            android:text="@string/label_achievement_room"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_25sp"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
 
     </LinearLayout>
-    <LinearLayout
+
+    <Button
+        android:id="@+id/btn_achievement_medicine"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/cat1_layout"
+        android:layout_margin="@dimen/margin_10dp"
         android:layout_weight="0.7"
-        android:layout_margin="10dp"
-        android:gravity="center"
         android:background="@drawable/achievement_button"
-        android:clickable="true">>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cat1_tv"
-            android:text="              Rookie \nTaken your first medicine"
-            android:textStyle="bold"
-            android:textSize="15sp" />
-    </LinearLayout>
-    <LinearLayout
+        android:gravity="center"
+        android:text="@string/label_first_achievement"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_size_16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_achievement_qa"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/cat2_layout"
+        android:layout_margin="@dimen/margin_10dp"
         android:layout_weight="0.7"
-        android:layout_margin="10dp"
-        android:gravity="center"
         android:background="@drawable/achievement_button"
-        android:clickable="true">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cat2_tv"
-            android:text="               Mr Know-It-All \nAnswered first question correctly"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-    </LinearLayout>
-    <LinearLayout
+        android:gravity="center"
+        android:text="@string/label_second_achievement"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_size_16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_achievement_trip"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/cat3_layout"
+        android:layout_margin="@dimen/margin_10dp"
         android:layout_weight="0.7"
-        android:layout_margin="10dp"
+        android:background="@drawable/achievement_button"
         android:gravity="center"
-        android:background="@drawable/achievement_button">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cat3_tv"
-            android:text="            Explorer \nPlanned your first trip"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-    </LinearLayout>
-
-
+        android:text="@string/label_third_achievement"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_size_16sp"
+        android:textStyle="bold" />
 </LinearLayout>

@@ -1,122 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogRemainderTone"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_background"
-    android:id="@+id/dialogRemainderTone">
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/heading_day_dialog_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/dayDialogTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10dp"
+            android:gravity="center"
+            android:text="@string/heading_set_reminder_tone"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.96"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/tone_path"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_50dp"
+            android:layout_marginBottom="@dimen/margin_20dp"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginStart="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_weight="10"
+            android:hint="@string/hint_specify_file_path"
+            android:inputType="textUri"
+            android:textColor="@color/textColorPrimary"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/text_size_16sp" />
+
+        <Button
+            android:id="@+id/browse"
+            android:layout_width="@dimen/width_20dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_20dp"
+            android:layout_weight="1"
+            android:background="@drawable/graph_bg"
+            android:text="@string/label_triple_dots"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:layout_marginBottom="@dimen/margin_5dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
 
-
-        <LinearLayout
-            android:id="@+id/heading_day_dialog_title"
-            android:layout_width="fill_parent"
+        <Button
+            android:id="@+id/dialogButtonOKReminder"
+            style="?android:buttonBarButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/lightest_brown">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginRight="@dimen/margin_20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:text="@string/label_yes"
+            android:textColor="@color/textColorPrimary" />
 
-            <TextView
-                android:id="@+id/dayDialogTitle"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/golden_brown"
-                android:text="SET REMINDER TONE"
-                android:textSize="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                >
-            </TextView>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/dialogButtonCancelReminder"
+            style="?android:buttonBarButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="0.96">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginRight="@dimen/margin_20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:text="@string/label_no"
+            android:textColor="@color/textColorPrimary" />
 
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:id="@+id/tone_path"
-                android:hint="Specify file path"
-                android:textColorHint="@color/gray"
-                android:textColor="@color/golden_brown"
-                android:textSize="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="10"
-                />
-
-            <Button
-                android:id="@+id/browse"
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:background="@drawable/graph_bg"
-                android:text="..."
-                android:layout_weight="1"
-                android:layout_margin="20dp" />
-
-        </LinearLayout>
-
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|bottom"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="15dp">
-
-            <Button
-                android:id="@+id/dialogButtonOKReminder"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="YES"
-                android:background="@drawable/info_hub_button"
-                android:textColor="@color/white"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
-                android:layout_columnSpan="8"
-                android:layout_marginLeft="20dp"
-                android:layout_alignTop="@+id/dialogButtonCancel"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginRight="20dp"/>
-
-            <Button
-                android:id="@+id/dialogButtonCancelReminder"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="NO"
-                android:background="@drawable/info_hub_button"
-                android:textColor="@color/white"
-                android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-        </LinearLayout>
     </LinearLayout>
 
-
-</RelativeLayout>
+</LinearLayout>
