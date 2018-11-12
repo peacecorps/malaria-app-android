@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogRemainderTone"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/heading_day_dialog_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/dayDialogTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10dp"
+            android:gravity="center"
+            android:text="@string/heading_set_reminder_tone"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.96"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/tone_path"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_50dp"
+            android:layout_marginBottom="@dimen/margin_20dp"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginStart="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_weight="10"
+            android:hint="@string/hint_specify_file_path"
+            android:inputType="textUri"
+            android:textColor="@color/textColorPrimary"
+            android:textColorHint="@color/gray"
+            android:textSize="@dimen/text_size_16sp" />
+
+        <Button
+            android:id="@+id/browse"
+            android:layout_width="@dimen/width_20dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_20dp"
+            android:layout_weight="1"
+            android:background="@drawable/graph_bg"
+            android:text="@string/label_triple_dots"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_5dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialogButtonOKReminder"
+            style="?android:buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginRight="@dimen/margin_20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:text="@string/label_yes"
+            android:textColor="@color/textColorPrimary" />
+
+        <Button
+            android:id="@+id/dialogButtonCancelReminder"
+            style="?android:buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginRight="@dimen/margin_20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:text="@string/label_no"
+            android:textColor="@color/textColorPrimary" />
+
+    </LinearLayout>
+
+</LinearLayout>

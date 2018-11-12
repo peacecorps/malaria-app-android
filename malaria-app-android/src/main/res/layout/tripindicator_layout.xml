@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/pmt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:contentDescription="@string/description_peace_corps_logo"
+        android:drawableTop="@drawable/peacecorps_small"
+        android:text="@string/plan_my_trip_label"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/text_size_25sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginStart="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:text="@string/location_label"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_height="@dimen/size_40dp"
+            android:layout_width="match_parent"
+            android:paddingBottom="@dimen/padding_5dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Enter Location"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/img_location_history"
+            android:layout_width="@dimen/size_30dp"
+            android:layout_height="@dimen/size_30dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:background="@drawable/btn_location_history"
+            android:clickable="true"
+            android:contentDescription="@string/description_previous_locations"
+            android:focusable="true" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:text="Departure Date:"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_trip_month_departure"
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_marginEnd="@dimen/margin_2dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_2dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:background="@drawable/trip_cash_editext"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="MM"
+            android:onClick="showDatePickerDialogDeparture"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingTop="@dimen/padding_10dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="/"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/trip_date_departure"
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_marginLeft="@dimen/margin_2dp"
+            android:layout_marginRight="@dimen/margin_2dp"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:background="@drawable/trip_cash_editext"
+            android:clickable="true"
+            android:hint="DD"
+            android:onClick="showDatePickerDialogDeparture"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingTop="@dimen/padding_10dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16sp"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="/"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/trip_year_departure"
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_marginLeft="@dimen/margin_2dp"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:background="@drawable/trip_cash_editext"
+            android:clickable="true"
+            android:hint="YY"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingTop="@dimen/padding_10dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16sp"
+            android:focusable="true" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:text="Arrival Date:"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_arrival_month"
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_2dp"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:background="@drawable/trip_cash_editext"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="MM"
+            android:onClick="showDatePickerDialogArrival"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingTop="@dimen/padding_10dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="/"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/trip_date"
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_marginLeft="@dimen/margin_2dp"
+            android:layout_marginRight="@dimen/margin_2dp"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:background="@drawable/trip_cash_editext"
+            android:clickable="true"
+            android:hint="DD"
+            android:onClick="showDatePickerDialogArrival"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingTop="@dimen/padding_10dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16sp"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="/"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/trip_year"
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_marginLeft="@dimen/margin_2dp"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:background="@drawable/trip_cash_editext"
+            android:clickable="true"
+            android:hint="YY"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingTop="@dimen/padding_10dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16sp"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tripItemSelector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:text="@string/pack_label"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_40dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:layout_weight="1"
+            android:background="@drawable/trip_cash_editext">
+
+            <TextView
+                android:id="@+id/tv_trip_select_item"
+                android:layout_width="@dimen/width_120dp"
+                android:layout_height="@dimen/height_30dp"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="Add Items"
+                android:padding="@dimen/padding_5dp"
+                android:textColor="@color/cream"
+                android:textSize="@dimen/text_size_16sp"
+
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:text="Remind me at:"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_trip_time"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_40dp"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:layout_weight="1"
+            android:background="@drawable/trip_cash_editext"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="Trip Time"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingTop="@dimen/padding_10dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16sp" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_generate"
+        android:layout_width="@dimen/width_150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scrollSegmentTrip"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/margin_20dp"
+        android:background="@drawable/button_background"
+        android:text="@string/trip_button_label"
+        android:textColor="@color/white" />
+
+</LinearLayout>

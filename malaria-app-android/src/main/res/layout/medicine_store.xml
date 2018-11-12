@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relatively"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_10dp"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.10"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/btn_add_medicine"
+            android:layout_width="@dimen/size_64dp"
+            android:layout_height="@dimen/size_64dp"
+            android:layout_margin="@dimen/margin_5dp"
+            android:background="@drawable/btn_add_medicine" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/btn_dialog_setting"
+                android:layout_width="@dimen/size_64dp"
+                android:layout_height="@dimen/size_64dp"
+                android:layout_margin="@dimen/margin_5dp"
+                android:background="@drawable/btn_medicine_reminder"
+                android:shadowRadius="8"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.75"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tv_medicine_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_30dp"
+            android:gravity="center"
+            android:text="@string/med_option_one"
+            android:textColor="@color/text_color_primary"
+            android:textSize="@dimen/text_size_25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_days_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:text="@string/label_store_no_of_days"
+            android:textColor="@color/text_color_primary"
+            android:textSize="@dimen/text_size_50sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_order_medicine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10dp"
+        android:background="@drawable/button_background"
+        android:gravity="center"
+        android:text="@string/label_order_medicines"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/text_size_16sp" />
+
+
+</LinearLayout>

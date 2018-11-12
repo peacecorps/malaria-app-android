@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/popuplistitem"
+    android:background="@color/light_green"
+    android:textColor="@color/cream"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:textSize="@dimen/text_size_16sp"
+    android:padding="@dimen/padding_15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

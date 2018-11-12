@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_2dp">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_24dp"
+        android:padding="@dimen/padding_5dp">
+
+        <ImageView
+            android:layout_width="@dimen/width_70dp"
+            android:layout_height="@dimen/height_60dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/medication_last_normal"
+            android:contentDescription="@string/description_med_last_taken"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/mlt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_3dp"
+            android:paddingRight="@dimen/padding_3dp"
+            android:text="@string/first_analytic_screen_medicine_last_taken_text"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp" />
+
+        <TextView
+            android:id="@+id/tv_check_last_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/button_background"
+            android:text="@string/label_dd_mm"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_5dp">
+
+        <ImageView
+            android:layout_width="@dimen/width_70dp"
+            android:layout_height="@dimen/height_60dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/doses_missing_image_normal"
+            android:contentDescription="@string/description_med_doses"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/dinr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_3dp"
+            android:paddingRight="@dimen/padding_3dp"
+            android:text="@string/first_analytic_screen_doses_missing_text"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp" />
+
+        <TextView
+            android:id="@+id/tv_doses_in_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/button_background"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_5dp">
+
+        <ImageView
+            android:layout_width="@dimen/width_70dp"
+            android:layout_height="@dimen/height_60dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/medicine_adhere_normal"
+            android:contentDescription="@string/description_med_adherence"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/atm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_3dp"
+            android:paddingRight="@dimen/padding_3dp"
+            android:text="@string/first_analytic_screen_medicine_adherence_to_medicine_text"
+            android:textColor="@color/text_color_primary"
+            android:textSize="@dimen/text_size_20sp" />
+
+        <TextView
+            android:id="@+id/tv_adherence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/button_background"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20sp" />
+
+    </LinearLayout>
+</LinearLayout>

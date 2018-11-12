@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_rapid_fire"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_120dp"
+        android:layout_margin="@dimen/margin_10dp"
+        android:background="@drawable/achievement_button"
+        android:text="@string/label_rapid_fire"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/text_size_16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_myth_vs_fact"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_120dp"
+        android:layout_marginBottom="@dimen/margin_30dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:background="@drawable/achievement_button"
+        android:text="@string/label_myth_vs_fact"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/text_size_16sp"
+        android:textStyle="bold" />
+</LinearLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/pcp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.94"
+            android:gravity="center"
+            android:text="@string/heading_peace_corps_policy"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/ttsButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_25dp"
+            android:layout_weight="0.06"
+            android:background="@drawable/ic_action_volume_on" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/black" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/peaceCorpsPolicyLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_5dp"
+                android:text="@string/dump_test"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

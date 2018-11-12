@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogReset"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/achievement_category"
+        style="@style/style_dialog_heading"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/heading_achievement_one" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="0.96"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/badge_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_24dp"
+            android:layout_margin="@dimen/margin_20dp"
+            android:gravity="center"
+            android:text="@string/label_achievement_one"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_16sp"
+            android:drawablePadding="@dimen/padding_2dp"
+            />
+        <ImageView
+            android:id="@+id/badge_image"
+            android:layout_width="@dimen/size_140dp"
+            android:layout_height="@dimen/size_140dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_badge_awarded"
+            android:src="@drawable/y_b1"/>
+        
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginBottom="@dimen/margin_5dp"
+        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginRight="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:gravity="center|bottom"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <ImageView
+            style="@style/style_image_badge_dialog"
+            android:background="@drawable/y_b1"
+            android:contentDescription="@string/description_badge_b1" />
+
+        <ImageView
+            style="@style/style_image_badge_dialog"
+            android:background="@drawable/y_b3"
+            android:contentDescription="@string/description_badge_b3" />
+
+        <ImageView
+            style="@style/style_image_badge_dialog"
+            android:background="@drawable/y_b5"
+            android:contentDescription="@string/description_badge_b5" />
+
+        <ImageView
+            style="@style/style_image_badge_dialog"
+            android:background="@drawable/y_newbie"
+            android:contentDescription="@string/description_badge_newbie" />
+
+        <ImageView
+            android:background="@drawable/y_hat"
+            android:contentDescription="@string/description_badge_hat"
+            style="@style/style_image_badge_dialog" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_day"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/heading_day"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/size_60dp"
+        android:gravity="left|top"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/dayDB"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_60dp"
+            android:layout_weight="0.6"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_25sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/width_70dp"
+            android:layout_height="@dimen/height_60dp"
+            android:layout_margin="@dimen/margin_10dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/drug_normal"
+            android:contentDescription="@string/description_drug_name"
+            android:padding="@dimen/padding_5dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/margin_10dp"
+            android:padding="@dimen/padding_5dp"
+            android:text="@string/label_drug"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/drugID"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/margin_16dp"
+            android:background="@drawable/button_background"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingTop="@dimen/padding_5dp"
+            android:text="@string/label_triple_dots"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/width_70dp"
+            android:layout_height="@dimen/height_60dp"
+            android:layout_margin="@dimen/margin_10dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/doses_missing_image_normal"
+            android:contentDescription="@string/description_drug_taken"
+            android:padding="@dimen/padding_5dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:paddingLeft="@dimen/padding_15dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_15dp"
+            android:text="@string/label_taken"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/medi_indicator"
+            android:layout_width="@dimen/size_60dp"
+            android:layout_height="@dimen/size_60dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:background="@drawable/accept_medi_grayscale"
+            android:contentDescription="@string/description_accept" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.29"
+        android:gravity="center|bottom"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btnChangeData"
+            android:layout_width="@dimen/size_60dp"
+            android:layout_height="@dimen/size_60dp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_20dp"
+            android:layout_marginRight="@dimen/margin_20dp"
+            android:background="@drawable/roundedbutton"
+            android:contentDescription="@string/description_change_data"
+            android:src="@drawable/edit_pure_white" />
+
+    </LinearLayout>
+</LinearLayout>
